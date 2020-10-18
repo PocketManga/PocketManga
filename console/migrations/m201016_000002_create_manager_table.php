@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%manager}}`.
  */
-class m201016_2_create_manager_table extends Migration
+class m201016_000002_create_manager_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,14 @@ class m201016_2_create_manager_table extends Migration
         }
 
         $this->createTable('{{%manager}}', [
-            'id' => $this->primaryKey(),
+            'IdManager' => $this->primaryKey(),
+            'Permission' => "ENUM('1','2','3') NOT NULL",
+            'Language' => $this->string(10)->notNull()->defaultValue('En_us'),
+            'Theme' => $this->boolean()->notNull()->defaultValue(0),
+            'User_Id' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
+
+        $this->addForeignKey('fk_manager_user', 'manager', 'User_Id', 'user', 'IdUser');
     }
 
     /**

@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m201016_141315_init_rbac
  */
-class m201016_141315_init_rbac extends Migration
+class m201016_000001_init_rbac extends Migration
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class m201016_141315_init_rbac extends Migration
         return false;
     }
 
-    public function up()
+    /*public function up()
     {
         $auth = Yii::$app->authManager;
 
@@ -62,5 +62,5 @@ class m201016_141315_init_rbac extends Migration
         $auth = Yii::$app->authManager;
 
         $auth->removeAll();
-    }
+    }*/
 }

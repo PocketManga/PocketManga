@@ -2,7 +2,7 @@
 
 use \yii\db\Migration;
 
-class m201016_2_add_verification_token_column_to_user_table extends Migration
+class m201016_000002_add_verification_token_column_to_user_table extends Migration
 {
     public function up()
     {

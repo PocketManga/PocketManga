@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%like}}`.
  */
-class m201016_5_create_like_table extends Migration
+class m201016_000006_create_like_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,14 @@ class m201016_5_create_like_table extends Migration
         }
 
         $this->createTable('{{%like}}', [
-            'id' => $this->primaryKey(),
+            'User_Id' => $this->integer()->notNull(),
+            'Comment_Id' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->addForeignKey('fk_like_user', 'like', 'User_Id', 'user', 'IdUser');
+        $this->addForeignKey('fk_like_comment', 'like', 'Comment_Id', 'comment', 'IdComment');
+        
+        $this->addPrimaryKey('pk_like', 'like', ['User_Id', 'Comment_Id']);
     }
 
     /**

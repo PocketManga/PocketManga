@@ -1,0 +1,4 @@
+To update database:
+(ps: all saved data will be lost if use this code)
+
+./yii migrate/fresh --migrationPath=@yii/rbac/migrations --interactive=0 ; ./yii  migrate --interactive=0

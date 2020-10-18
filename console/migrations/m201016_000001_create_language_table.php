@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%language}}`.
  */
-class m201016_1_create_language_table extends Migration
+class m201016_000001_create_language_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,16 @@ class m201016_1_create_language_table extends Migration
         }
 
         $this->createTable('{{%language}}', [
-            'id' => $this->primaryKey(),
+            'IdLanguage' => $this->primaryKey(),
+            'Name' => $this->string(10)->notNull()->unique(),
+            'Language' => $this->string(10)->notNull()->unique(),
         ], $tableOptions);
+
+        
+        $this->insert('{{%language}}', [
+            'Name' => 'English',
+            'Language' => 'En_us',
+        ]);
     }
 
     /**

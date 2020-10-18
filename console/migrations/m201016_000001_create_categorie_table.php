@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%categorie}}`.
  */
-class m201016_1_create_categorie_table extends Migration
+class m201016_000001_create_categorie_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,10 @@ class m201016_1_create_categorie_table extends Migration
         }
 
         $this->createTable('{{%categorie}}', [
-            'id' => $this->primaryKey(),
+            'IdCategorie' => $this->primaryKey(),
+            'Name' => $this->string(20)->notNull()->unique(),
+            'Language' => $this->string(20)->notNull()->defaultValue('En_us'),
+            'Slug' => $this->string(20)->notNull(),
         ], $tableOptions);
     }
 

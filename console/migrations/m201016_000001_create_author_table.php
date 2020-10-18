@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%list}}`.
+ * Handles the creation of table `{{%author}}`.
  */
-class m201016_1_create_list_table extends Migration
+class m201016_000001_create_author_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,11 @@ class m201016_1_create_list_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%list}}', [
-            'id' => $this->primaryKey(),
+        $this->createTable('{{%author}}', [
+            'IdAuthor' => $this->primaryKey(),
+            'FirstName' => $this->string(20)->notNull(),
+            'LastName' => $this->string(20)->notNull(),
+            'Slug' => $this->string(50)->notNull(),
         ], $tableOptions);
     }
 
@@ -27,6 +30,6 @@ class m201016_1_create_list_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%list}}');
+        $this->dropTable('{{%author}}');
     }
 }

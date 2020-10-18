@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => 'PocketManga',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -36,14 +37,21 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'home' => 'site/index',
+                'index' => 'site/index',
+                'reset' => 'site/request-password-reset',
+                'about' => 'site/about',
+                'contact' => 'site/contact',
+                'logout' => 'site/logout',
+                'signup' => 'site/signup',
+                'login' => 'site/login',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

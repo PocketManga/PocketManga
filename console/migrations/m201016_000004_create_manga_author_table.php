@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%manga_author}}`.
  */
-class m201016_4_create_manga_author_table extends Migration
+class m201016_000004_create_manga_author_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,14 @@ class m201016_4_create_manga_author_table extends Migration
         }
 
         $this->createTable('{{%manga_author}}', [
-            'id' => $this->primaryKey(),
+            'Author_Id' => $this->integer()->notNull(),
+            'Manga_Id' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->addForeignKey('fk_manga_author_author', 'manga_author', 'Author_Id', 'author', 'IdAuthor');
+        $this->addForeignKey('fk_manga_author_manga', 'manga_author', 'Manga_Id', 'manga', 'IdManga');
+        
+        $this->addPrimaryKey('pk_manga_author', 'manga_author', ['Author_Id', 'Manga_Id']);
     }
 
     /**

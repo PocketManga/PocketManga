@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%chapter_readed}}`.
  */
-class m201016_4_create_chapter_readed_table extends Migration
+class m201016_000005_create_chapter_readed_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,14 @@ class m201016_4_create_chapter_readed_table extends Migration
         }
 
         $this->createTable('{{%chapter_readed}}', [
-            'id' => $this->primaryKey(),
+            'Leitor_Id' => $this->integer()->notNull(),
+            'Chapter_Id' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->addForeignKey('fk_chapter_readed_author', 'chapter_readed', 'Leitor_Id', 'leitor', 'IdLeitor');
+        $this->addForeignKey('fk_chapter_readed_chapter', 'chapter_readed', 'Chapter_Id', 'chapter', 'IdChapter');
+        
+        $this->addPrimaryKey('pk_chapter_readed', 'chapter_readed', ['Leitor_Id', 'Chapter_Id']);
     }
 
     /**
