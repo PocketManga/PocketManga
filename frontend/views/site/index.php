@@ -1,9 +1,34 @@
 <?php
 
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'PocketManga';
 ?>
+<ul class="nav nav-pills nav-justified">
+    <li class="nav-item">
+        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'active'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['latest']?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/about') echo 'active'?>" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/contact') echo 'active'?>" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['ongoing']?></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/contact') echo 'active'?>" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['completed']?></a>
+    </li>
+    <?php if (Yii::$app->user->isGuest) { ?>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="<?=Url::to('signup')?>"><?=Yii::$app->params['Dictionary']['library']?></a>
+    </li>
+    <?php } else { ?>
+    <li class="nav-item">
+        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Url::to('signup')?>"><?=Yii::$app->params['Dictionary']['library']?></a>
+    </li>
+    <?php } ?>
+</ul><br>
+
 <div class="site-index">
 
     <div class="jumbotron">

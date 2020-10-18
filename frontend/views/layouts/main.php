@@ -20,6 +20,8 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -36,59 +38,36 @@ AppAsset::register($this);
             <!-- Links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'active'?>" href="<?=Url::to('home')?>">Home</a>
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control border-secondary py-2" type="search" value="search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/about') echo 'active'?>" href="<?=Url::to('about')?>">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/contact') echo 'active'?>" href="<?=Url::to('contact')?>">Contact</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><?=Yii::$app->params['Dictionary']['more']?></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['about']?></a>
+                        <a class="dropdown-item" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['contact']?></a>
+                    </div>
                 </li>
                 <?php if (Yii::$app->user->isGuest) { ?>
                 <li class="nav-item">
-                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Url::to('signup')?>">Signup</a>
+                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Url::to('signup')?>"><?=Yii::$app->params['Dictionary']['signup']?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'login'?>" href="<?=Url::to('login')?>">Login</a>
+                    <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'login'?>" href="<?=Url::to('login')?>"><?=Yii::$app->params['Dictionary']['login']?></a>
                 </li>
                 <?php } ?>
-
-                <!-- Dropdown -->
-                <!--<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Dropdown link
-                </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Link 1</a>
-                        <a class="dropdown-item" href="#">Link 2</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
-                    </div>
-                </li>-->
             </ul>
         </div>
     </nav>
     <div class="container">
-        <ul class="nav nav-pills nav-justified">
-            <li class="nav-item">
-                <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'active'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>">Latest</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php if(Yii::$app->controller->route == 'site/about') echo 'active'?>" href="<?=Url::to('about')?>">All Manga</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php if(Yii::$app->controller->route == 'site/contact') echo 'active'?>" href="<?=Url::to('contact')?>">Completed</a>
-            </li>
-            <?php if (Yii::$app->user->isGuest) { ?>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="<?=Url::to('signup')?>">Library</a>
-            </li>
-            <?php } else { ?>
-            <li class="nav-item">
-                <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Url::to('signup')?>">Library</a>
-            </li>
-            <?php } ?>
-        </ul><br>
-
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
