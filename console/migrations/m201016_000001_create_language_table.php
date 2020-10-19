@@ -21,6 +21,7 @@ class m201016_000001_create_language_table extends Migration
             'IdLanguage' => $this->primaryKey(),
             'Name' => $this->string(10)->notNull()->unique(),
             'Language' => $this->string(10)->notNull()->unique(),
+            //'Dictionary' => $this->text()->notNull(),
         ], $tableOptions);
 
         

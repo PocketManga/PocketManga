@@ -7,16 +7,16 @@ $this->title = 'PocketManga';
 ?>
 <ul class="nav nav-pills nav-justified">
     <li class="nav-item">
-        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'active'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['latest']?></a>
+        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['latest']?></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/about') echo 'active'?>" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
+        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/about') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/contact') echo 'active'?>" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['ongoing']?></a>
+        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/contact') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['ongoing']?></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/contact') echo 'active'?>" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['completed']?></a>
+        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/contact') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['completed']?></a>
     </li>
     <?php if (Yii::$app->user->isGuest) { ?>
     <li class="nav-item">
@@ -24,14 +24,14 @@ $this->title = 'PocketManga';
     </li>
     <?php } else { ?>
     <li class="nav-item">
-        <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Url::to('signup')?>"><?=Yii::$app->params['Dictionary']['library']?></a>
+        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/signup') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('signup')?>"><?=Yii::$app->params['Dictionary']['library']?></a>
     </li>
     <?php } ?>
-</ul><br>
+</ul>
 
-<div class="site-index">
+<div class="site-container background-color2">
 
-    <div class="jumbotron">
+    <div class="jumbotron background-color2">
         <h1>Congratulations!</h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>

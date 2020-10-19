@@ -26,7 +26,8 @@ class DictionaryController extends Controller
             'contact' => 'Contact',
             'signup' => 'Signup',
             'login' => 'Login',
-            'logout' => 'Logout'
+            'logout' => 'Logout',
+            'search' => 'Search',
         ];
         return $Dictionary;
     }
