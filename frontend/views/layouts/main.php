@@ -23,7 +23,7 @@ AppAsset::register($this);
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
             integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/pocketmanga.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/pocketmanga2.css" />
 
         <?php if(Yii::$app->user->isGuest){ ?>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />

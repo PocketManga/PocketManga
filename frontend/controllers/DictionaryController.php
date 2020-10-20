@@ -16,7 +16,7 @@ class DictionaryController extends Controller
     {
         $Dictionary = null;
         $Dictionary = [
-            'latest' => 'Latest',
+            'home' => 'Home',
             'all_manga' => 'All Manga',
             'ongoing' => 'Ongoing',
             'completed' => 'Completed',

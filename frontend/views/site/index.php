@@ -7,7 +7,7 @@ $this->title = 'PocketManga';
 ?>
 <ul class="nav nav-pills nav-justified">
     <li class="nav-item">
-        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['latest']?></a>
+        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['home']?></a>
     </li>
     <li class="nav-item">
         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/about') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
@@ -29,50 +29,41 @@ $this->title = 'PocketManga';
     <?php } ?>
 </ul>
 
-<div class="site-container background-color2">
+<div class="site-container background-color2 radi-tr-15 radi-b-15">
 
-    <div class="jumbotron background-color2">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+    <div class="container-fluid pb-4 pr-4 pl-4">
+        <!-- Page Heading -->
+        <div class="mb-4">
+                <h4 class="pt-4">Latest Updates</h4>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <!-- Approach -->
+            <div class="background-color3 radi-all-15">
+                <div class="card-body">
+                    <div class="table-responsive p-1">
+                        <table class="table table-bordered table-striped" id="table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Tipo</th>
+                                    <th>Ano académico</th>
+                                    <th style="max-width:120px; min-width:120px;">Núm. de fases</th>
+                                    <th style="max-width:80px; min-width:80px;">Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>teste</td>
+                                    <td>teste</td>
+                                    <td>teste</td>
+                                    <td>teste</td>
+                                    <td class="text-center align-middle">
+                                        <a href="#" class="btn btn-sm btn-outline-success" title="Selecionar"><i class="fas fa-check"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
     </div>
 </div>

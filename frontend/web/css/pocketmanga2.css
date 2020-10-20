@@ -1,0 +1,52 @@
+html, body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.nav-link{
+    border-radius: 15px 15px 0px 0px !important;
+}
+/*
+.site-container{
+    border-radius: 0px 0px 15px 15px;
+}/**/
+
+.radi-tl-15{
+    border-top-left-radius: 15px;
+}
+
+.radi-tr-15{
+    border-top-right-radius: 15px;
+}
+
+.radi-t-15{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.radi-bl-15{
+    border-bottom-left-radius: 15px;
+}
+
+.radi-br-15{
+    border-bottom-right-radius: 15px;
+}
+
+.radi-b-15{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.radi-all-15{
+    border-radius: 15px;
+}
