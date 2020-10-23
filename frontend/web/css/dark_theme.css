@@ -9,11 +9,17 @@
 .text-color3{
     color: white !important;
 }
+
 .text-color4{
     color: #E35201 !important;
 }
+
 .text-color5{
     color: #3C8900 !important;
+}
+
+.text-color6{
+    color: #333333 !important;
 }
 
 .background-color1{
@@ -27,9 +33,12 @@
 .background-color3{
     background-color: #333333 !important;
 }
+
 .background-color4{
     background-color: #E35201 !important;
 }
+
 .background-color5{
     background-color: #3C8900 !important;
 }
+

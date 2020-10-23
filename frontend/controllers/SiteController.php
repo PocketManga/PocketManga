@@ -14,7 +14,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use frontend\controllers\DictionaryController;
+use frontend\models\Manga;
 
 /**
  * Site controller
@@ -75,11 +75,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-        /*$Dictionary = DictionaryController::getDictionary_En_us();
+        $Mangas = Manga::find()->all();
         return $this->render('index', [
-            'Dictionary' => $Dictionary,
-        ]);*/
+            'Mangas' => $Mangas,
+        ]);
     }
 
     /**

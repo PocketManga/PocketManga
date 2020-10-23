@@ -37,33 +37,8 @@ $this->title = 'PocketManga';
                 <h4 class="pt-4">Latest Updates</h4>
             </div>
             <!-- Approach -->
-            <div class="background-color3 radi-all-15">
-                <div class="card-body">
-                    <div class="table-responsive p-1">
-                        <table class="table table-bordered table-striped" id="table" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Descrição</th>
-                                    <th>Tipo</th>
-                                    <th>Ano académico</th>
-                                    <th style="max-width:120px; min-width:120px;">Núm. de fases</th>
-                                    <th style="max-width:80px; min-width:80px;">Opções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>teste</td>
-                                    <td>teste</td>
-                                    <td>teste</td>
-                                    <td>teste</td>
-                                    <td class="text-center align-middle">
-                                        <a href="#" class="btn btn-sm btn-outline-success" title="Selecionar"><i class="fas fa-check"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="background-color3 radi-all-15 p-4">
+                <?php echo $this->render('partials/view_type1', ['Mangas' => $Mangas]); ?>
             </div>
     </div>
 </div>

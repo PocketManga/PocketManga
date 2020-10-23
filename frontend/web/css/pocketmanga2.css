@@ -16,10 +16,6 @@ html, body {
 .nav-link{
     border-radius: 15px 15px 0px 0px !important;
 }
-/*
-.site-container{
-    border-radius: 0px 0px 15px 15px;
-}/**/
 
 .radi-tl-15{
     border-top-left-radius: 15px;
@@ -49,4 +45,8 @@ html, body {
 
 .radi-all-15{
     border-radius: 15px;
+}
+
+.pad-n{
+    padding: 0px 0px !important;
 }
