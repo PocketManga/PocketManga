@@ -90,7 +90,7 @@ AppAsset::register($this);
 
         <footer class="footer background-color3">
             <div class="container">
-                <p class="text-color1">Projet Developed By: <span class="text-color2">Edgar Oliveira Cordeiro => Nº2180640</span></p>
+                <p class="text-color1 m-0">Projet Developed By: <span class="text-color2">Edgar Oliveira Cordeiro => Nº2180640</span></p>
             </div>
         </footer>
 

@@ -14,7 +14,10 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+
+// I started here!!
 use frontend\models\Manga;
+use frontend\models\Category;
 
 /**
  * Site controller
@@ -76,8 +79,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $Mangas = Manga::find()->all();
+        $Categories = Category::find()->all();
         return $this->render('index', [
             'Mangas' => $Mangas,
+            'Categories' => $Categories,
         ]);
     }
 

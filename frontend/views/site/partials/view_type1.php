@@ -18,6 +18,7 @@
     <div class="col">
         <p class="text-color2"> There are no manga </p>
     </div>
+    <?php } ?>
     <div class="col-md-12">
         <ul class="pagination justify-content-end mb-0">
             <li class="page-item disabled"><a class="page-link background-color1 text-color6 border-0" href="#">Previous</a></li>
@@ -27,5 +28,4 @@
             <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#">Next</a></li>
         </ul>
     </div>
-    <?php } ?>
 </div>

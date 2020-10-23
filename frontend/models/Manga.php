@@ -15,6 +15,7 @@ use Yii;
  * @property int $OneShot
  * @property int $R18
  * @property string|null $Language
+ * @property string|null $Image_src
  * @property string $ReleaseDate
  * @property string $Updated
  * @property string $Description
@@ -32,8 +33,8 @@ use Yii;
  * @property Manager $manager
  * @property MangaAuthor[] $mangaAuthors
  * @property Author[] $authors
- * @property MangaCategorie[] $mangaCategories
- * @property Categorie[] $categories
+ * @property MangaCategory[] $mangaCategories
+ * @property Category[] $categories
  * @property MangaReaded[] $mangaReadeds
  * @property Leitor[] $leitors1
  * @property Rating[] $ratings
@@ -62,7 +63,7 @@ class Manga extends \yii\db\ActiveRecord
             [['Description'], 'string'],
             [['Title', 'AlternativeTitle', 'OriginalTitle'], 'string', 'max' => 100],
             [['Language'], 'string', 'max' => 10],
-            [['Slug'], 'string', 'max' => 50],
+            [['Image_src', 'Slug'], 'string', 'max' => 50],
             [['Manager_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['Manager_Id' => 'IdManager']],
         ];
     }
@@ -81,6 +82,7 @@ class Manga extends \yii\db\ActiveRecord
             'OneShot' => 'One Shot',
             'R18' => 'R18',
             'Language' => 'Language',
+            'Image_src' => 'Image Src',
             'ReleaseDate' => 'Release Date',
             'Updated' => 'Updated',
             'Description' => 'Description',
@@ -206,7 +208,7 @@ class Manga extends \yii\db\ActiveRecord
      */
     public function getMangaCategories()
     {
-        return $this->hasMany(MangaCategorie::className(), ['Manga_Id' => 'IdManga']);
+        return $this->hasMany(MangaCategory::className(), ['Manga_Id' => 'IdManga']);
     }
 
     /**
@@ -216,7 +218,7 @@ class Manga extends \yii\db\ActiveRecord
      */
     public function getCategories()
     {
-        return $this->hasMany(Categorie::className(), ['IdCategorie' => 'Categorie_Id'])->viaTable('manga_categorie', ['Manga_Id' => 'IdManga']);
+        return $this->hasMany(Category::className(), ['IdCategory' => 'Category_Id'])->viaTable('manga_category', ['Manga_Id' => 'IdManga']);
     }
 
     /**

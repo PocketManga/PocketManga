@@ -12,7 +12,14 @@ class m201016_000007_add_data extends Migration
      */
     public function safeUp()
     {
-        
+        $this->insert('{{%category}}', [
+            'Name' => 'Action',
+            'Slug' => 'Action',
+        ]);
+        $this->insert('{{%category}}', [
+            'Name' => 'Romance',
+            'Slug' => 'Romance',
+        ]);
     }
 
     /**

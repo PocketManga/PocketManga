@@ -23,7 +23,7 @@ use Yii;
  * @property Chapter[] $chapters
  * @property Favorite[] $favorites
  * @property Manga[] $mangas
- * @property List $primaryList
+ * @property LibraryList $primaryList
  * @property User $user
  * @property Library[] $libraries
  * @property Manga[] $mangas0
@@ -53,7 +53,7 @@ class Leitor extends \yii\db\ActiveRecord
             [['LastVisit'], 'safe'],
             [['Language', 'MangaLanguage'], 'string', 'max' => 10],
             [['User_Id'], 'unique'],
-            [['PrimaryList_Id'], 'exist', 'skipOnError' => true, 'targetClass' => List::className(), 'targetAttribute' => ['PrimaryList_Id' => 'IdList']],
+            [['PrimaryList_Id'], 'exist', 'skipOnError' => true, 'targetClass' => LibraryList::className(), 'targetAttribute' => ['PrimaryList_Id' => 'IdList']],
             [['User_Id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['User_Id' => 'IdUser']],
         ];
     }
@@ -134,7 +134,7 @@ class Leitor extends \yii\db\ActiveRecord
      */
     public function getPrimaryList()
     {
-        return $this->hasOne(List::className(), ['IdList' => 'PrimaryList_Id']);
+        return $this->hasOne(LibraryList::className(), ['IdList' => 'PrimaryList_Id']);
     }
 
     /**

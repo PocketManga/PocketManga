@@ -30,7 +30,7 @@ class m201016_000002_create_leitor_table extends Migration
             'User_Id' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_leitor_list', 'leitor', 'PrimaryList_Id', 'list', 'IdList');
+        $this->addForeignKey('fk_leitor_library_list', 'leitor', 'PrimaryList_Id', 'library_list', 'IdList');
         $this->addForeignKey('fk_leitor_user', 'leitor', 'User_Id', 'user', 'IdUser');
     }
 

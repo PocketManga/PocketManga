@@ -50,3 +50,12 @@ html, body {
 .pad-n{
     padding: 0px 0px !important;
 }
+
+.br-word{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bold{
+    font-weight: bold;
+}

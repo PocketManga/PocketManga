@@ -5,24 +5,24 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "categorie".
+ * This is the model class for table "category".
  *
- * @property int $IdCategorie
+ * @property int $IdCategory
  * @property string $Name
  * @property string $Language
  * @property string $Slug
  *
- * @property MangaCategorie[] $mangaCategories
+ * @property MangaCategory[] $mangaCategories
  * @property Manga[] $mangas
  */
-class Categorie extends \yii\db\ActiveRecord
+class Category extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'categorie';
+        return 'category';
     }
 
     /**
@@ -43,7 +43,7 @@ class Categorie extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'IdCategorie' => 'Id Categorie',
+            'IdCategory' => 'Id Category',
             'Name' => 'Name',
             'Language' => 'Language',
             'Slug' => 'Slug',
@@ -57,7 +57,7 @@ class Categorie extends \yii\db\ActiveRecord
      */
     public function getMangaCategories()
     {
-        return $this->hasMany(MangaCategorie::className(), ['Categorie_Id' => 'IdCategorie']);
+        return $this->hasMany(MangaCategory::className(), ['Category_Id' => 'IdCategory']);
     }
 
     /**
@@ -67,6 +67,6 @@ class Categorie extends \yii\db\ActiveRecord
      */
     public function getMangas()
     {
-        return $this->hasMany(Manga::className(), ['IdManga' => 'Manga_Id'])->viaTable('manga_categorie', ['Categorie_Id' => 'IdCategorie']);
+        return $this->hasMany(Manga::className(), ['IdManga' => 'Manga_Id'])->viaTable('manga_category', ['Category_Id' => 'IdCategory']);
     }
 }

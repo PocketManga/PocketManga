@@ -5,22 +5,22 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "manga_categorie".
+ * This is the model class for table "manga_category".
  *
- * @property int $Categorie_Id
+ * @property int $Category_Id
  * @property int $Manga_Id
  *
- * @property Categorie $categorie
+ * @property Category $category
  * @property Manga $manga
  */
-class MangaCategorie extends \yii\db\ActiveRecord
+class MangaCategory extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'manga_categorie';
+        return 'manga_category';
     }
 
     /**
@@ -29,10 +29,10 @@ class MangaCategorie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Categorie_Id', 'Manga_Id'], 'required'],
-            [['Categorie_Id', 'Manga_Id'], 'integer'],
-            [['Categorie_Id', 'Manga_Id'], 'unique', 'targetAttribute' => ['Categorie_Id', 'Manga_Id']],
-            [['Categorie_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorie::className(), 'targetAttribute' => ['Categorie_Id' => 'IdCategorie']],
+            [['Category_Id', 'Manga_Id'], 'required'],
+            [['Category_Id', 'Manga_Id'], 'integer'],
+            [['Category_Id', 'Manga_Id'], 'unique', 'targetAttribute' => ['Category_Id', 'Manga_Id']],
+            [['Category_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['Category_Id' => 'IdCategory']],
             [['Manga_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manga::className(), 'targetAttribute' => ['Manga_Id' => 'IdManga']],
         ];
     }
@@ -43,19 +43,19 @@ class MangaCategorie extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Categorie_Id' => 'Categorie ID',
+            'Category_Id' => 'Category ID',
             'Manga_Id' => 'Manga ID',
         ];
     }
 
     /**
-     * Gets query for [[Categorie]].
+     * Gets query for [[Category]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCategorie()
+    public function getCategory()
     {
-        return $this->hasOne(Categorie::className(), ['IdCategorie' => 'Categorie_Id']);
+        return $this->hasOne(Category::className(), ['IdCategory' => 'Category_Id']);
     }
 
     /**

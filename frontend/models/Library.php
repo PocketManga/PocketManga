@@ -12,7 +12,7 @@ use Yii;
  * @property int|null $List_Id
  *
  * @property Leitor $leitor
- * @property List $list
+ * @property LibraryList $list
  * @property Manga $manga
  */
 class Library extends \yii\db\ActiveRecord
@@ -35,7 +35,7 @@ class Library extends \yii\db\ActiveRecord
             [['Leitor_Id', 'Manga_Id', 'List_Id'], 'integer'],
             [['Leitor_Id', 'Manga_Id'], 'unique', 'targetAttribute' => ['Leitor_Id', 'Manga_Id']],
             [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
-            [['List_Id'], 'exist', 'skipOnError' => true, 'targetClass' => List::className(), 'targetAttribute' => ['List_Id' => 'IdList']],
+            [['List_Id'], 'exist', 'skipOnError' => true, 'targetClass' => LibraryList::className(), 'targetAttribute' => ['List_Id' => 'IdList']],
             [['Manga_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manga::className(), 'targetAttribute' => ['Manga_Id' => 'IdManga']],
         ];
     }
@@ -69,7 +69,7 @@ class Library extends \yii\db\ActiveRecord
      */
     public function getList()
     {
-        return $this->hasOne(List::className(), ['IdList' => 'List_Id']);
+        return $this->hasOne(LibraryList::className(), ['IdList' => 'List_Id']);
     }
 
     /**
