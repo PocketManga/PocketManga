@@ -17,14 +17,14 @@ class m201016_000001_create_user_table extends Migration
             'Email' => $this->string(100)->notNull()->unique(),
             'Genre' => "ENUM('F','M','D') NOT NULL",
             'BirthDate' => $this->date()->notNull(),
-            'SrcPhoto' => $this->string(50)->notNull(),
+            'SrcPhoto' => $this->string(50),
             'Created' => 'DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',
             'Updated' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',
             'Slug' => $this->string(50)->notNull(),
             'SoftDelete' => $this->boolean()->notNull()->defaultValue(0),
 
 
-            'auth_key' => $this->string(32)->notNull(),
+            'auth_key' => $this->string(100)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),

@@ -39,7 +39,7 @@ $this->title = 'PocketManga';
                 </div>
                 <!-- Approach -->
                 <div class="background-color3 radi-all-15 p-4">
-                    <?php echo $this->render('partials/view_type1', ['Mangas' => $Mangas]); ?>
+                    <?php echo $this->render('partials/view_type1', ['Mangas' => $Mangas,'PaginaAtual' => $PaginaAtual,'NumPaginas' => $NumPaginas,]); ?>
                 </div>
             </div>
             <div class="col-md-3 mt-4">

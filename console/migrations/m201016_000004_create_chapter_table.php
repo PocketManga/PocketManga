@@ -25,7 +25,7 @@ class m201016_000004_create_chapter_table extends Migration
             'Updated' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',
             'Season' => $this->integer(),
             'OneShot' => $this->boolean()->notNull()->defaultValue(0),
-            'SrcFolder' => $this->string(50)->notNull(),
+            'SrcFolder' => $this->string(50),
             'Slug' => $this->string(50)->notNull(),
             'Manga_Id' => $this->integer()->notNull(),
             'Manager_Id' => $this->integer()->notNull(),

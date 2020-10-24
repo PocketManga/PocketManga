@@ -15,7 +15,7 @@ use Yii;
  * @property int $OneShot
  * @property int $R18
  * @property string|null $Language
- * @property string|null $Image_src
+ * @property string|null $SrcImage
  * @property string $ReleaseDate
  * @property string $Updated
  * @property string $Description
@@ -63,7 +63,7 @@ class Manga extends \yii\db\ActiveRecord
             [['Description'], 'string'],
             [['Title', 'AlternativeTitle', 'OriginalTitle'], 'string', 'max' => 100],
             [['Language'], 'string', 'max' => 10],
-            [['Image_src', 'Slug'], 'string', 'max' => 50],
+            [['SrcImage', 'Slug'], 'string', 'max' => 50],
             [['Manager_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['Manager_Id' => 'IdManager']],
         ];
     }
@@ -82,7 +82,7 @@ class Manga extends \yii\db\ActiveRecord
             'OneShot' => 'One Shot',
             'R18' => 'R18',
             'Language' => 'Language',
-            'Image_src' => 'Image Src',
+            'SrcImage' => 'Image Src',
             'ReleaseDate' => 'Release Date',
             'Updated' => 'Updated',
             'Description' => 'Description',

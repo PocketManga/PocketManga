@@ -80,9 +80,14 @@ class SiteController extends Controller
     {
         $Mangas = Manga::find()->all();
         $Categories = Category::find()->all();
+        $PaginaAtual = 1;
+        $NumPaginas = 10;
+
         return $this->render('index', [
             'Mangas' => $Mangas,
             'Categories' => $Categories,
+            'PaginaAtual' => $PaginaAtual,
+            'NumPaginas' => $NumPaginas,
         ]);
     }
 
