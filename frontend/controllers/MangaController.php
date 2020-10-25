@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use frontend\models\Category;
+
 /**
  * MangaController implements the CRUD actions for Manga model.
  */
@@ -52,8 +54,18 @@ class MangaController extends Controller
      */
     public function actionView($id)
     {
+        $Categories = Category::find()->all();
+        $Manga = $this->findModel($id);
+        $Authors = $Manga->getAuthors()->all();
+        $Chapters = $Manga->getChapters()->all();
+        $Genres = $Manga->getCategories()->all();
+        
         return $this->render('view', [
-            'Manga' => $this->findModel($id),
+            'Manga' => $Manga,
+            'Authors' => $Authors,
+            'Genres' => $Genres,
+            'Chapters' => $Chapters,
+            'Categories' => $Categories,
         ]);
     }
 

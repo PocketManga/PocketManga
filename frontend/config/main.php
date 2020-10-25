@@ -52,6 +52,7 @@ return [
                 'login' => 'site/login',
 
                 'manga/<id:\d+>' => 'manga/view',
+                'manga/chapter/<id:\d+>' => 'chapter/view',
 
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

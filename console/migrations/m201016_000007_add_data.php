@@ -40,6 +40,12 @@ class m201016_000007_add_data extends Migration
             'Permission' => '1',
             'User_Id' => 1,
         ]);
+        
+        //-----------------------------------------------------------------------------------------Author------------------------// 
+        $this->insert('{{%author}}', [
+            'FirstName' => 'Nildgar',
+            'Slug' => 'Nildgar',
+        ]);
 
         //-----------------------------------------------------------------------------------------Manga+Chapter-----------------// 
         $this->insert('{{%manga}}', [
@@ -53,16 +59,163 @@ class m201016_000007_add_data extends Migration
             'Manager_Id' => 1,
             'Slug' => '1 X 1/2',
         ]);
-        for($i = 1; $i <= 17; $i++){
-            $this->insert('{{%chapter}}', [
-                'Number' => $i,
-                'Season' => 1,
-                'SrcFolder' => '/manga/1/'.$i,
-                'Manga_Id' => 1,
-                'Manager_Id' => 1,
-                'Slug' => '1-Chapter '.$i,
-            ]);
-        }
+        $this->insert('{{%chapter}}', [
+            'Number' => 1,
+            'Season' => 1,
+            'PagesNumber' => 6,
+            'SrcFolder' => '/mangas/1/1',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 1',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 2,
+            'Season' => 1,
+            'PagesNumber' => 19,
+            'SrcFolder' => '/mangas/1/2',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 2',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 3,
+            'Season' => 1,
+            'PagesNumber' => 11,
+            'SrcFolder' => '/mangas/1/3',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 3',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 4,
+            'Season' => 1,
+            'PagesNumber' => 19,
+            'SrcFolder' => '/mangas/1/4',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 4',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 5,
+            'Season' => 1,
+            'PagesNumber' => 4,
+            'SrcFolder' => '/mangas/1/5',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 5',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 6,
+            'Season' => 1,
+            'PagesNumber' => 18,
+            'SrcFolder' => '/mangas/1/6',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 6',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 7,
+            'Season' => 1,
+            'PagesNumber' => 6,
+            'SrcFolder' => '/mangas/1/7',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 7',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 8,
+            'Season' => 1,
+            'PagesNumber' => 33,
+            'SrcFolder' => '/mangas/1/8',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 8',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 9,
+            'Season' => 1,
+            'PagesNumber' => 27,
+            'SrcFolder' => '/mangas/1/9',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 9',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 10,
+            'Season' => 1,
+            'PagesNumber' => 9,
+            'SrcFolder' => '/mangas/1/10',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 10',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 11,
+            'Season' => 1,
+            'PagesNumber' => 27,
+            'SrcFolder' => '/mangas/1/11',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 11',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 12,
+            'Season' => 1,
+            'PagesNumber' => 34,
+            'SrcFolder' => '/mangas/1/12',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 12',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 13,
+            'Season' => 1,
+            'PagesNumber' => 8,
+            'SrcFolder' => '/mangas/1/13',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 13',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 14,
+            'Season' => 1,
+            'PagesNumber' => 12,
+            'SrcFolder' => '/mangas/1/14',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 14',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 15,
+            'Season' => 1,
+            'PagesNumber' => 6,
+            'SrcFolder' => '/mangas/1/15',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 15',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 16,
+            'Season' => 1,
+            'PagesNumber' => 26,
+            'SrcFolder' => '/mangas/1/16',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 16',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 17,
+            'Season' => 1,
+            'PagesNumber' => 26,
+            'SrcFolder' => '/mangas/1/17',
+            'Manga_Id' => 1,
+            'Manager_Id' => 1,
+            'Slug' => '1-Chapter 17',
+        ]);
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 1,
+        ]);
 
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -79,10 +232,15 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%chapter}}', [
             'Number' => 24,
             'Season' => 1,
-            'SrcFolder' => '/manga/2/24',
+            'PagesNumber' => 17,
+            'SrcFolder' => '/mangas/2/24',
             'Manga_Id' => 2,
             'Manager_Id' => 1,
             'Slug' => '2-Chapter 24',
+        ]);
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 2,
         ]);
         
         //___________________________________//
@@ -101,12 +259,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/3/'.$i,
+                'PagesNumber' => 19,
+                'SrcFolder' => '/mangas/3/'.$i,
                 'Manga_Id' => 3,
                 'Manager_Id' => 1,
                 'Slug' => '3-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 3,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -124,12 +287,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/4/'.$i,
+                'PagesNumber' => 10,
+                'SrcFolder' => '/mangas/4/'.$i,
                 'Manga_Id' => 4,
                 'Manager_Id' => 1,
                 'Slug' => '4-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 4,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -147,12 +315,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/5/'.$i,
+                'PagesNumber' => 29,
+                'SrcFolder' => '/mangas/5/'.$i,
                 'Manga_Id' => 5,
                 'Manager_Id' => 1,
                 'Slug' => '5-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 5,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -170,12 +343,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/6/'.$i,
+                'PagesNumber' => 10,
+                'SrcFolder' => '/mangas/6/'.$i,
                 'Manga_Id' => 6,
                 'Manager_Id' => 1,
                 'Slug' => '6-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 6,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -193,12 +371,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/7/'.$i,
+                'PagesNumber' => 10,
+                'SrcFolder' => '/mangas/7/'.$i,
                 'Manga_Id' => 7,
                 'Manager_Id' => 1,
                 'Slug' => '7-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 7,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -216,12 +399,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/8/'.$i,
+                'PagesNumber' => 7,
+                'SrcFolder' => '/mangas/8/'.$i,
                 'Manga_Id' => 8,
                 'Manager_Id' => 1,
                 'Slug' => '8-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 8,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -239,12 +427,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/9/'.$i,
+                'PagesNumber' => 7,
+                'SrcFolder' => '/mangas/9/'.$i,
                 'Manga_Id' => 9,
                 'Manager_Id' => 1,
                 'Slug' => '9-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 9,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -258,16 +451,28 @@ class m201016_000007_add_data extends Migration
             'Manager_Id' => 1,
             'Slug' => 'Honzuki No Gekokujou',
         ]);
-        for($i = 14; $i <= 15; $i++){
-            $this->insert('{{%chapter}}', [
-                'Number' => $i,
-                'Season' => 1,
-                'SrcFolder' => '/manga/10/'.$i,
-                'Manga_Id' => 10,
-                'Manager_Id' => 1,
-                'Slug' => '10-Chapter '.$i,
-            ]);
-        }
+        $this->insert('{{%chapter}}', [
+            'Number' => 14,
+            'Season' => 1,
+            'PagesNumber' => 37,
+            'SrcFolder' => '/mangas/10/14',
+            'Manga_Id' => 10,
+            'Manager_Id' => 1,
+            'Slug' => '10-Chapter 14',
+        ]);
+        $this->insert('{{%chapter}}', [
+            'Number' => 15,
+            'Season' => 1,
+            'PagesNumber' => 15,
+            'SrcFolder' => '/mangas/10/15',
+            'Manga_Id' => 10,
+            'Manager_Id' => 1,
+            'Slug' => '10-Chapter 15',
+        ]);
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 10,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -285,12 +490,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/11/'.$i,
+                'PagesNumber' => 10,
+                'SrcFolder' => '/mangas/11/'.$i,
                 'Manga_Id' => 11,
                 'Manager_Id' => 1,
                 'Slug' => '11-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 11,
+        ]);
         
         //___________________________________//
         $this->insert('{{%manga}}', [
@@ -308,12 +518,17 @@ class m201016_000007_add_data extends Migration
             $this->insert('{{%chapter}}', [
                 'Number' => $i,
                 'Season' => 1,
-                'SrcFolder' => '/manga/12/'.$i,
+                'PagesNumber' => 10,
+                'SrcFolder' => '/mangas/12/'.$i,
                 'Manga_Id' => 12,
                 'Manager_Id' => 1,
                 'Slug' => '12-Chapter '.$i,
             ]);
         }
+        $this->insert('{{%manga_author}}', [
+            'Author_Id' => 1,
+            'Manga_Id' => 12,
+        ]);
 
         /**/
     }

@@ -20,7 +20,7 @@ $this->title = 'PocketManga';
                 </div>
             </div>
             <div class="col-md-3 mt-4">
-                <?php echo $this->render('layouts/genre_list', ['Categories' => $Categories]); ?>
+                <?php echo $this->render('//layouts/genre_list', ['Categories' => $Categories]); ?>
             </div>
         </div>
     </div>

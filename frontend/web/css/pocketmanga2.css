@@ -59,3 +59,21 @@ html, body {
 .bold{
     font-weight: bold;
 }
+
+.remove-bullet{
+    list-style-type: none;
+}
+
+.chapter-list{
+    list-style:none;
+    max-height:500px;
+    margin:0;
+    overflow:auto;
+    padding:0;
+    text-indent:10px;
+}
+
+.chapter-image{
+    min-width: 100%;
+    max-width: 100%;
+}

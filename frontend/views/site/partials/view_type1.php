@@ -7,11 +7,11 @@
         <div class="d-flex justify-content-center">
             <a class="text-center" href="<?=Url::to('manga/'.$Manga->IdManga)?>">
                 <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@webroot').'/img'.$Manga->SrcImage)){ ?>
-                <img class="" src="<?php echo Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage?>" height="200" width="150">
+                <img src="<?php echo Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage?>" height="200" width="150">
                 <?php }else{ ?>
-                <img class="" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
                 <?php }}else{ ?>
-                <img class="" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
                 <?php } ?>
                 <p class="text-color2"> <?=$Manga->Title?> </p>
             </a>
