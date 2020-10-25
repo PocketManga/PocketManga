@@ -1,15 +1,16 @@
+<?php
+    use yii\helpers\Url;
+?>
 <div class="row">
     <?php if($Mangas){ foreach($Mangas as $Manga){ ?>
-    <div class="col-md-3">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
         <div class="d-flex justify-content-center">
-            <a class="text-center" href="#">
-                <?php if($Manga->SrcImage){ if (file_exists(Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage)){ ?>
+            <a class="text-center" href="<?=Url::to('manga/'.$Manga->IdManga)?>">
+                <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@webroot').'/img'.$Manga->SrcImage)){ ?>
                 <img class="" src="<?php echo Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage?>" height="200" width="150">
-                <?php }else{ if (file_exists($Manga->SrcImage)){ ?>
-                <img class="" src="E:/PocketManga/mangas/1/cover_image_1.jpg" height="200" width="150">
                 <?php }else{ ?>
                 <img class="" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
-                <?php }}}else{ ?>
+                <?php }}else{ ?>
                 <img class="" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
                 <?php } ?>
                 <p class="text-color2"> <?=$Manga->Title?> </p>
@@ -22,7 +23,7 @@
     </div>
     <?php } ?>
 
-    <div class="col-md-12">
+    <div class="col-12">
         <ul class="pagination justify-content-end mb-0">
 
             <?php if ($PaginaAtual == 1) { ?>

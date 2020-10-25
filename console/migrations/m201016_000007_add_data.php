@@ -45,7 +45,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => '1 X 1/2',
             'OriginalTitle' => '1 X 1/2',
-            'SrcImage' => 'file:///E:/PocketManga/mangas/1/cover_image_1.jpg',
+            'SrcImage' => '/mangas/1/cover_image_1.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -68,7 +68,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Ane Naru Mono',
             'OriginalTitle' => 'Ane Naru Mono',
-            'SrcImage' => '/mangas/2/cover_image_2.png',
+            'SrcImage' => '/mangas/2/cover_image_2.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/24/2009')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -89,7 +89,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Asagao To Kase-san',
             'OriginalTitle' => 'Asagao To Kase-san',
-            'SrcImage' => '/mangas/3/cover_image_3.png',
+            'SrcImage' => '/mangas/3/cover_image_3.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -112,7 +112,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Asa Made Jugyou Chu',
             'OriginalTitle' => 'Asa Made Jugyou Chu',
-            'SrcImage' => '/mangas/4/cover_image_4.png',
+            'SrcImage' => '/mangas/4/cover_image_4.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -135,7 +135,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Berserk Of Gluttony',
             'OriginalTitle' => 'Berserk Of Gluttony',
-            'SrcImage' => '/mangas/5/cover_image_5.png',
+            'SrcImage' => '/mangas/5/cover_image_5.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -158,7 +158,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Bocchi Na Bokura No Renai Jijou',
             'OriginalTitle' => 'Bocchi Na Bokura No Renai Jijou',
-            'SrcImage' => '/mangas/6/cover_image_6.png',
+            'SrcImage' => '/mangas/6/cover_image_6.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -181,7 +181,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Hana-kun To Koisuru Watashi',
             'OriginalTitle' => 'Hana-kun To Koisuru Watashi',
-            'SrcImage' => '/mangas/7/cover_image_7.png',
+            'SrcImage' => '/mangas/7/cover_image_7.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -202,15 +202,15 @@ class m201016_000007_add_data extends Migration
         
         //___________________________________//
         $this->insert('{{%manga}}', [
-            'Title' => 'Handson And Cute',
-            'OriginalTitle' => 'Handson And Cute',
-            'SrcImage' => '/mangas/8/cover_image_8.png',
+            'Title' => 'Handsome And Cute',
+            'OriginalTitle' => 'Handsome And Cute',
+            'SrcImage' => '/mangas/8/cover_image_8.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Handson And Cute',
+            'Slug' => 'Handsome And Cute',
         ]);
         for($i = 11; $i <= 12; $i++){
             $this->insert('{{%chapter}}', [
@@ -225,15 +225,15 @@ class m201016_000007_add_data extends Migration
         
         //___________________________________//
         $this->insert('{{%manga}}', [
-            'Title' => 'Her Shim Cheong',
-            'OriginalTitle' => 'Her Shim Cheong',
-            'SrcImage' => '/mangas/9/cover_image_9.png',
+            'Title' => 'Her Shim-Cheong',
+            'OriginalTitle' => 'Her Shim-Cheong',
+            'SrcImage' => '/mangas/9/cover_image_9.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Her Shim Cheong',
+            'Slug' => 'Her Shim-Cheong',
         ]);
         for($i = 52; $i <= 54; $i++){
             $this->insert('{{%chapter}}', [
@@ -250,7 +250,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Honzuki No Gekokujou',
             'OriginalTitle' => 'Honzuki No Gekokujou',
-            'SrcImage' => '/mangas/10/cover_image_10.png',
+            'SrcImage' => '/mangas/10/cover_image_10.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -271,15 +271,15 @@ class m201016_000007_add_data extends Migration
         
         //___________________________________//
         $this->insert('{{%manga}}', [
-            'Title' => 'Isekai De Kuro No Iyashi Te Tte Yobarate Imasu',
-            'OriginalTitle' => 'Isekai De Kuro No Iyashi Te Tte Yobarate Imasu',
-            'SrcImage' => '/mangas/11/cover_image_11.png',
+            'Title' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
+            'OriginalTitle' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
+            'SrcImage' => '/mangas/11/cover_image_11.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Isekai De Kuro No Iyashi Te Tte Yobarate Imasu',
+            'Slug' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
         ]);
         for($i = 1; $i <= 11; $i++){
             $this->insert('{{%chapter}}', [
@@ -296,7 +296,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Its My Life',
             'OriginalTitle' => 'Its My Life',
-            'SrcImage' => '/mangas/12/cover_image_12.png',
+            'SrcImage' => '/mangas/12/cover_image_12.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
