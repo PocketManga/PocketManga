@@ -82,11 +82,14 @@ class SiteController extends Controller
         $Categories = Category::find()->all();
         $PaginaAtual = 1;
         $NumPaginas = 10;
+        $Option = 'latest-updates';
+
         return $this->render('index', [
             'Mangas' => $Mangas,
             'Categories' => $Categories,
             'PaginaAtual' => $PaginaAtual,
             'NumPaginas' => $NumPaginas,
+            'Option' => $Option,
         ]);
     }
 

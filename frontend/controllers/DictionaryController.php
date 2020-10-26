@@ -28,6 +28,9 @@ class DictionaryController extends Controller
             'login' => 'Login',
             'logout' => 'Logout',
             'search' => 'Search',
+            'latest-updates' => 'Latest Updates',
+            'ranking' => 'Ranking',
+            'popular' => 'Popular',
         ];
         return $Dictionary;
     }

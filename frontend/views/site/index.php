@@ -7,12 +7,17 @@ $this->title = 'PocketManga';
 ?>
 
 <div class="background-color2 radi-tr-15 radi-b-15">
-    <div class="container-fluid pb-4 pr-4 pl-4">
+    <div class="container-fluid pb-4 px-4">
         <div class="row">
             <div class="col">
                 <!-- Page Heading -->
                 <div class="mb-4">
                     <h4 class="pt-4">Latest Updates</h4>
+                    <select>
+                        <option <?php echo ('latest-updates' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
+                        <option <?php echo ('ranking' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['ranking']?></option>
+                        <option <?php echo ('popular' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['popular']?></option>
+                    </select>
                 </div>
                 <!-- Approach -->
                 <div class="background-color3 radi-all-15 p-4">
