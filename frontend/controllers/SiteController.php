@@ -18,6 +18,7 @@ use frontend\models\ContactForm;
 // I started here!!
 use frontend\models\Manga;
 use frontend\models\Category;
+use yii\data\ArrayDataProvider;
 
 /**
  * Site controller
@@ -80,15 +81,47 @@ class SiteController extends Controller
     {
         $Mangas = Manga::find()->all();
         $Categories = Category::find()->all();
-        $PaginaAtual = 1;
-        $NumPaginas = 10;
+        $NumberPerPage = 50;
+        $PageNumber = 1;
+        $NumOfPages = 1;
+
+        if($Mangas){
+            $floatNum = count($Mangas) / $NumberPerPage;
+            $intNum = round($floatNum);
+            if($intNum<$floatNum){
+                $intNum++;
+            }
+            $NumOfPages = $intNum;
+        }
+
         $Option = 'latest-updates';
 
         return $this->render('index', [
             'Mangas' => $Mangas,
             'Categories' => $Categories,
-            'PaginaAtual' => $PaginaAtual,
-            'NumPaginas' => $NumPaginas,
+            'PageNumber' => $PageNumber,
+            'NumOfPages' => $NumOfPages,
+            'Option' => $Option,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionHome($Option, $NumberPerPage, $PageNumber)
+    {
+        $Mangas = Manga::find()->all();
+        $Categories = Category::find()->all();
+        
+        $NumOfPages = 10;
+
+        return $this->render('index', [
+            'Mangas' => $Mangas,
+            'Categories' => $Categories,
+            'PageNumber' => $PageNumber,
+            'NumOfPages' => $NumOfPages,
             'Option' => $Option,
         ]);
     }

@@ -53,6 +53,7 @@ return [
 
                 'manga/<id:\d+>' => 'manga/view',
                 'manga/chapter/<id:\d+>' => 'chapter/view',
+                //'home/<controller:\w+>/chapter/<id:\d+>' => 'chapter/view',
 
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

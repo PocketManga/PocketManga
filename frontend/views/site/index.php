@@ -13,7 +13,7 @@ $this->title = 'PocketManga';
                 <!-- Page Heading -->
                 <div class="mb-4">
                     <h4 class="pt-4">Latest Updates</h4>
-                    <select>
+                    <select id="replyNumber" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'.Url::to('about')?>')">
                         <option <?php echo ('latest-updates' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
                         <option <?php echo ('ranking' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['ranking']?></option>
                         <option <?php echo ('popular' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['popular']?></option>
@@ -30,3 +30,9 @@ $this->title = 'PocketManga';
         </div>
     </div>
 </div>
+<script>
+    function changePage(url) {
+        var val = document.getElementById("replyNumber").value;
+        document.location.href=url;
+    }
+</script>
