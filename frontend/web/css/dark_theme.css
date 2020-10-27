@@ -49,3 +49,12 @@
 .scroll-type1 {
     scrollbar-color: #1D88AA #333333 !important; /* red is for the thumb and yellow is for the track */
 }
+
+.select-color1{
+    background: #1D88AA;
+    border:0px;
+}
+
+.option-color1{
+    background: #1D88AA;
+}

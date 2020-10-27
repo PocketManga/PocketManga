@@ -43,17 +43,15 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'home' => 'site/index',
-                'index' => 'site/index',
                 'reset' => 'site/request-password-reset',
                 'about' => 'site/about',
-                'contact' => 'site/contact',
                 'logout' => 'site/logout',
                 'signup' => 'site/signup',
                 'login' => 'site/login',
 
                 'manga/<id:\d+>' => 'manga/view',
                 'manga/chapter/<id:\d+>' => 'chapter/view',
-                //'home/<controller:\w+>/chapter/<id:\d+>' => 'chapter/view',
+                'home_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/index2',
 
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

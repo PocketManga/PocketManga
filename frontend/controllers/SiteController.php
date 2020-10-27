@@ -100,6 +100,7 @@ class SiteController extends Controller
             'Mangas' => $Mangas,
             'Categories' => $Categories,
             'PageNumber' => $PageNumber,
+            'NumberPerPage' => $NumberPerPage,
             'NumOfPages' => $NumOfPages,
             'Option' => $Option,
         ]);
@@ -110,7 +111,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionHome($Option, $NumberPerPage, $PageNumber)
+    public function actionIndex2($Option, $NumberPerPage, $PageNumber)
     {
         $Mangas = Manga::find()->all();
         $Categories = Category::find()->all();
@@ -121,6 +122,7 @@ class SiteController extends Controller
             'Mangas' => $Mangas,
             'Categories' => $Categories,
             'PageNumber' => $PageNumber,
+            'NumberPerPage' => $NumberPerPage,
             'NumOfPages' => $NumOfPages,
             'Option' => $Option,
         ]);

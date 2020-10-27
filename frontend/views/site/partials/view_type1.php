@@ -26,30 +26,30 @@
     <div class="col-12">
         <ul class="pagination justify-content-end mb-0">
 
-            <?php if ($PaginaAtual == 1) { ?>
+            <?php if ($PageNumber == 1) { ?>
             <li class="page-item disabled"><a class="page-link background-color1 text-color6 border-0" href="#">Previous</a></li>
-            <?php if ($NumPaginas > 3) { ?>
-            <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$PaginaAtual?></a></li>
-            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PaginaAtual+1?></a></li>
-            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PaginaAtual+2?></a></li>
+            <?php if ($NumOfPages > 3) { ?>
+            <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$PageNumber?></a></li>
+            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PageNumber+1?></a></li>
+            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PageNumber+2?></a></li>
             <?php }}else{ ?>
             <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#">Previous</a></li>
             <?php } ?>
             
-            <?php if($NumPaginas < 3 && ($PaginaAtual == 1 || $PaginaAtual == 2)){ for ($Pag = 1; $Pag <= $NumPaginas; $Pag++) { if($Pag == $PaginaAtual){ ?>
+            <?php if($NumOfPages < 3 && ($PageNumber == 1 || $PageNumber == 2)){ for ($Pag = 1; $Pag <= $NumOfPages; $Pag++) { if($Pag == $PageNumber){ ?>
             <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$Pag?></a></li>
             <?php }else{ ?>
             <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$Pag?></a></li>
-            <?php }}}else{ if($PaginaAtual != $NumPaginas && $PaginaAtual != 1){ ?>
-            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PaginaAtual-1?></a></li>
-            <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$PaginaAtual?></a></li>
-            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PaginaAtual+1?></a></li>
+            <?php }}}else{ if($PageNumber != $NumOfPages && $PageNumber != 1){ ?>
+            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PageNumber-1?></a></li>
+            <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$PageNumber?></a></li>
+            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PageNumber+1?></a></li>
             <?php }} ?>
             
-            <?php if ($PaginaAtual == $NumPaginas) { if($NumPaginas >= 3){  ?>
-            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PaginaAtual-2?></a></li>
-            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PaginaAtual-1?></a></li>
-            <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$PaginaAtual?></a></li>
+            <?php if ($PageNumber == $NumOfPages) { if($NumOfPages >= 3){  ?>
+            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PageNumber-2?></a></li>
+            <li class="page-item"><a class="page-link background-color1 text-color2 border-0" href="#"><?=$PageNumber-1?></a></li>
+            <li class="page-item active"><a class="page-link background-color2 text-color1 border-0" href="#"><?=$PageNumber?></a></li>
             <?php } ?>
             <li class="page-item disabled"><a class="page-link background-color1 text-color6 border-0" href="#">Next</a></li>
             <?php }else{ ?>

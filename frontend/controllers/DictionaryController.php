@@ -31,6 +31,9 @@ class DictionaryController extends Controller
             'latest-updates' => 'Latest Updates',
             'ranking' => 'Ranking',
             'popular' => 'Popular',
+            'show-25' => 'Show mangas: 25 per page',
+            'show-50' => 'Show mangas: 50 per page',
+            'show-100' => 'Show mangas: 100 per page',
         ];
         return $Dictionary;
     }
