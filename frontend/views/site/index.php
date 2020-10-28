@@ -12,20 +12,20 @@ $this->title = 'PocketManga';
             <div class="col">
                 <!-- Page Heading -->
                 <div class="mb-4">
-                    <select class="select-color1 mt-4" id="order-by" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'.Url::to('latest-updates_numero-paginas=50_pagina=2')?>')">
-                        <option class="option-color1" <?php echo ('latest-updates' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
-                        <option class="option-color1" <?php echo ('ranking' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['ranking']?></option>
-                        <option class="option-color1" <?php echo ('popular' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['popular']?></option>
+                    <select class="select-color1 mt-4" id="order-by" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'?>',<?=$PageNumber?>)">
+                        <option class="option-color1" value="latest-updates" <?php echo ('latest-updates' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
+                        <option class="option-color1" value="ranking" <?php echo ('ranking' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['ranking']?></option>
+                        <option class="option-color1" value="popular" <?php echo ('popular' == $Option) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['popular']?></option>
                     </select>
-                    <select class="float-right select-color1 mt-4" id="order-by" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'.Url::to('latest-updates_numero-paginas=50_pagina=2')?>')">
-                        <option class="option-color1" <?php echo (25 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-25']?></option>
-                        <option class="option-color1" <?php echo (50 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-50']?></option>
-                        <option class="option-color1" <?php echo (100 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-100']?></option>
+                    <select class="float-right select-color1 mt-4" id="show-per-page" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'?>',<?=$PageNumber?>)">
+                        <option class="option-color1" value="25" <?php echo (25 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-25']?></option>
+                        <option class="option-color1" value="50" <?php echo (50 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-50']?></option>
+                        <option class="option-color1" value="100" <?php echo (100 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-100']?></option>
                     </select>
                 </div>
                 <!-- Approach -->
                 <div class="background-color3 radi-all-15 p-4">
-                    <?php echo $this->render('partials/view_type1', ['Mangas' => $Mangas,'PageNumber' => $PageNumber,'NumOfPages' => $NumOfPages,]); ?>
+                    <?php echo $this->render('partials/view_type1', ['Option' => $Option, 'Mangas' => $Mangas,'PageNumber' => $PageNumber,'NumOfPages' => $NumOfPages,'NumberPerPage' => $NumberPerPage]); ?>
                 </div>
             </div>
             <div class="col-md-3 mt-4">

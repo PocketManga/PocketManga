@@ -79,12 +79,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $Mangas = Manga::find()->all();
+        $Mangas = Manga::find()
+            ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
+            ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+            ->all();
         $Categories = Category::find()->all();
+        $Option = 'latest-updates';
         $NumberPerPage = 50;
         $PageNumber = 1;
         $NumOfPages = 1;
-
+        
         if($Mangas){
             $floatNum = count($Mangas) / $NumberPerPage;
             $intNum = round($floatNum);
@@ -93,8 +97,6 @@ class SiteController extends Controller
             }
             $NumOfPages = $intNum;
         }
-
-        $Option = 'latest-updates';
 
         return $this->render('index', [
             'Mangas' => $Mangas,
@@ -113,10 +115,35 @@ class SiteController extends Controller
      */
     public function actionIndex2($Option, $NumberPerPage, $PageNumber)
     {
-        $Mangas = Manga::find()->all();
+        $Mangas = null;
+        switch($Option){
+            case 'latest-updates':
+                $Mangas = Manga::find()
+                    ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
+                    ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+                    ->all();
+            break;
+            case 'ranking':
+                $Mangas = Manga::find()
+                ->orderBy(['Ranking' => SORT_DESC])
+                ->all();
+            break;
+            case 'popular':
+                $Mangas = Manga::find()->all();
+            break;
+        }
         $Categories = Category::find()->all();
         
-        $NumOfPages = 10;
+        $NumOfPages = 1;
+        
+        if($Mangas){
+            $floatNum = count($Mangas) / $NumberPerPage;
+            $intNum = round($floatNum);
+            if($intNum<$floatNum){
+                $intNum++;
+            }
+            $NumOfPages = $intNum;
+        }
 
         return $this->render('index', [
             'Mangas' => $Mangas,

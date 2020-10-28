@@ -82,7 +82,7 @@ AppAsset::register($this);
             <div class="container">
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['home']?></a>
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index' || Yii::$app->controller->route == 'site/index2') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('home')?>" href="<?=Url::to('home')?>"><?=Yii::$app->params['Dictionary']['home']?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/about') ? 'active background-color2 text-color3' : 'text-color2'?>" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
