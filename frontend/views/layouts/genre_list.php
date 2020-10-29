@@ -10,7 +10,7 @@
             <span class="m-0 py-3 font-italic text-color2">Genres</span>
         </div>
     </div>
-    <div class="pt-3"> 
+    <div class="py-3"> 
         <?php if($Categories) { foreach($Categories as $Category) { ?>
             <a href="#"><p class="text-color1 mb-0 ml-4 mr-4 br-word bold"><?=$Category->Name?> (<?=count($Category->getMangas()->all())?>)</p></a>
         <?php }} ?>

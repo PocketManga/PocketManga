@@ -52,6 +52,9 @@ return [
                 'manga/<id:\d+>' => 'manga/view',
                 'manga/chapter/<id:\d+>' => 'chapter/view',
                 'home_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/index2',
+                'ongoing_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/ongoing',
+                'completed_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/completed',
+                'search=<Search>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/search',
 
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

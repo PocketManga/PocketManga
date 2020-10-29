@@ -6,7 +6,7 @@ use yii\helpers\Url;
 $this->title = 'PocketManga';
 ?>
 
-<div class="background-color2 radi-tr-15 radi-b-15">
+<div class="background-color2 radi-all-15">
     <div class="container-fluid pb-4 px-4">
         <div class="row">
             <div class="col">

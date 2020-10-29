@@ -156,6 +156,145 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionOngoing($Option, $NumberPerPage, $PageNumber)
+    {
+        $Mangas = null;
+        switch($Option){
+            case 'latest-updates':
+                $Mangas = Manga::find()
+                    ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
+                    ->where('manga.Status = 0')
+                    ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+                    ->all();
+            break;
+            case 'ranking':
+                $Mangas = Manga::find()
+                ->where('manga.Status = 0')
+                ->orderBy(['Ranking' => SORT_DESC])
+                ->all();
+            break;
+            case 'popular':
+                $Mangas = Manga::find()
+                ->where('manga.Status = 0')
+                ->all();
+            break;
+        }
+        $Categories = Category::find()->all();
+        
+        $NumOfPages = 1;
+        
+        if($Mangas){
+            $floatNum = count($Mangas) / $NumberPerPage;
+            $intNum = round($floatNum);
+            if($intNum<$floatNum){
+                $intNum++;
+            }
+            $NumOfPages = $intNum;
+        }
+
+        return $this->render('ongoing', [
+            'Mangas' => $Mangas,
+            'Categories' => $Categories,
+            'PageNumber' => $PageNumber,
+            'NumberPerPage' => $NumberPerPage,
+            'NumOfPages' => $NumOfPages,
+            'Option' => $Option,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionCompleted($Option, $NumberPerPage, $PageNumber)
+    {
+        $Mangas = null;
+        switch($Option){
+            case 'latest-updates':
+                $Mangas = Manga::find()
+                    ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
+                    ->where('manga.Status = 1')
+                    ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+                    ->all();
+            break;
+            case 'ranking':
+                $Mangas = Manga::find()
+                ->where('manga.Status = 1')
+                ->orderBy(['Ranking' => SORT_DESC])
+                ->all();
+            break;
+            case 'popular':
+                $Mangas = Manga::find()
+                ->where('manga.Status = 1')
+                ->all();
+            break;
+        }
+        $Categories = Category::find()->all();
+        
+        $NumOfPages = 1;
+        
+        if($Mangas){
+            $floatNum = count($Mangas) / $NumberPerPage;
+            $intNum = round($floatNum);
+            if($intNum<$floatNum){
+                $intNum++;
+            }
+            $NumOfPages = $intNum;
+        }
+
+        return $this->render('completed', [
+            'Mangas' => $Mangas,
+            'Categories' => $Categories,
+            'PageNumber' => $PageNumber,
+            'NumberPerPage' => $NumberPerPage,
+            'NumOfPages' => $NumOfPages,
+            'Option' => $Option,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionSearch($Search, $NumberPerPage, $PageNumber)
+    {
+        $Search = str_replace("_"," ",$Search);
+        $Mangas = Manga::find()
+                    ->where('Title LIKE CONCAT("%", "'.$Search.'", "%")')
+                    ->orWhere('AlternativeTitle LIKE CONCAT("%", "'.$Search.'", "%")')
+                    ->orWhere('OriginalTitle LIKE CONCAT("%", "'.$Search.'", "%")')
+                    ->orderBy(['Title' => SORT_ASC])
+                    ->all();
+        $Categories = Category::find()->all();
+        
+        $NumOfPages = 1;
+        
+        if($Mangas){
+            $floatNum = count($Mangas) / $NumberPerPage;
+            $intNum = round($floatNum);
+            if($intNum<$floatNum){
+                $intNum++;
+            }
+            $NumOfPages = $intNum;
+        }
+
+        return $this->render('search', [
+            'Mangas' => $Mangas,
+            'Categories' => $Categories,
+            'PageNumber' => $PageNumber,
+            'NumberPerPage' => $NumberPerPage,
+            'NumOfPages' => $NumOfPages,
+            'Search' => $Search,
+        ]);
+    }
+    
+    /**
      * Logs in a user.
      *
      * @return mixed

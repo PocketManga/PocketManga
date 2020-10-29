@@ -22,11 +22,7 @@
                             </a>
                         </div>
                     </div>
-    <?php $numberOnPage++; } $numberOfManga++;}}} else{ ?>
-    <div class="col">
-        <p class="text-color2"> There are no manga </p>
-    </div>
-    <?php } ?>
+    <?php $numberOnPage++; } $numberOfManga++;}} ?>
 
     <div class="col-12">
         <ul class="pagination justify-content-end mb-0">
@@ -72,4 +68,9 @@
 
         </ul>
     </div>
+    <?php } else{ ?>
+    <div class="col">
+        <p class="text-color2"> There are no manga </p>
+    </div>
+    <?php } ?>
 </div>

@@ -31,20 +31,6 @@ class MangaController extends Controller
         ];
     }
 
-    /**
-     * Lists all Manga models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Manga::find(),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
     /**
      * Displays a single Manga model.
