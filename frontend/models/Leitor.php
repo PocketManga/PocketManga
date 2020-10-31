@@ -4,6 +4,17 @@ namespace frontend\models;
 
 use Yii;
 
+use frontend\models\App;
+use frontend\models\ChapterReaded;
+use frontend\models\Chapter;
+use frontend\models\Favorite;
+use frontend\models\Manga;
+use frontend\models\LibraryList;
+use common\models\User;
+use frontend\models\Library;
+use frontend\models\MangaReaded;
+use frontend\models\Report;
+
 /**
  * This is the model class for table "leitor".
  *

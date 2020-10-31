@@ -24,7 +24,44 @@
                     </div>
     <?php $numberOnPage++; } $numberOfManga++;}} ?>
 
+    <?php if ($NumOfPages > 1) { ?>
     <div class="col-12">
+        <ul class="pagination justify-content-end mb-0">
+            <li class="page-item <?php echo($PageNumber == 1)? 'disabled':''?>">
+                <a class="page-link background-color1 border-0 <?php echo($PageNumber == 1)? 'text-color6':'text-color2'?>" 
+                    href="<?php echo($PageNumber == 1) ? '#':Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber-1))?>">Previous</a>
+            </li>
+            <li class="page-item <?php echo($PageNumber == 1)? 'active disabled':''?>">
+                <a class="page-link border-0 <?php echo($PageNumber == 1)? 'background-color2 text-color1':'background-color1 text-color2'?>" 
+                    href="<?php echo($PageNumber == 1) ? '#':(($PageNumber != $NumOfPages || $NumOfPages == 2)?
+                    Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber-1)):
+                    Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber-2)))?>">
+                    <?php echo($PageNumber == 1) ? 1:(($PageNumber != $NumOfPages || $NumOfPages == 2)?($PageNumber-1):($PageNumber-2))?></a>
+            </li>
+            <li class="page-item <?php echo($PageNumber == 2 || ($PageNumber != 1 && $PageNumber != $NumOfPages))? 'active disabled':''?>">
+                <a class="page-link border-0 <?php echo($PageNumber == 2 || ($PageNumber != 1 && $PageNumber != $NumOfPages))? 'background-color2 text-color1':'background-color1 text-color2'?>" 
+                    href="<?php echo($PageNumber == 2 || ($PageNumber != 1 && $PageNumber != $NumOfPages)) ? '#':(($PageNumber == 1)?
+                    Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber+1)):
+                    Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber-1)))?>">
+                    <?php echo($PageNumber == 1) ? 2:(($PageNumber != $NumOfPages) ? $PageNumber:($PageNumber-1))?></a>
+            </li>
+            <?php if ($NumOfPages >= 3) { ?>
+            <li class="page-item <?php echo($PageNumber == $NumOfPages)? 'active disabled':''?>">
+                <a class="page-link border-0 <?php echo($PageNumber == $NumOfPages)? 'background-color2 text-color1':'background-color1 text-color2'?>" 
+                    href="<?php echo($PageNumber == $NumOfPages) ? '#':(($PageNumber == 1)?
+                    Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber+2)):
+                    Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber+1)))?>">
+                    <?php echo($PageNumber == 1) ? 3:(($PageNumber == $NumOfPages) ? $PageNumber:($PageNumber+1))?></a>
+            </li>
+            <?php } ?>
+            <li class="page-item <?php echo($PageNumber == $NumOfPages)? 'disabled':''?>">
+                <a class="page-link background-color1 border-0 <?php echo($PageNumber == $NumOfPages)? 'text-color6':'text-color2'?>" 
+                    href="<?php echo($PageNumber == $NumOfPages) ? '#':Url::to('home_order-by='.$Option.'_manga-per-page='.$NumberPerPage.'_page='.($PageNumber+1))?>">Next</a>
+            </li>
+        </ul>
+
+        <?php /***********************************      Code Page Number Tipo 2      ************************************//* ?>
+
         <ul class="pagination justify-content-end mb-0">
 
             <?php if ($PageNumber == 1) { ?>
@@ -67,8 +104,10 @@
             <?php } ?>
 
         </ul>
+        
+        <?php /**/ ?>
     </div>
-    <?php } else{ ?>
+    <?php }} else{ ?>
     <div class="col">
         <p class="text-color2"> There are no manga </p>
     </div>

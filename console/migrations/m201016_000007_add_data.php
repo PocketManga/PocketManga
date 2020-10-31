@@ -32,12 +32,19 @@ class m201016_000007_add_data extends Migration
             'BirthDate' => date('Y-m-d',strtotime('12/17/1997')),
             'Slug' => 'Nildgar',
             'auth_key' => $password,
-            'password_hash' => strtoupper(Yii::$app->security->generateRandomString(5)),
+            'password_hash' => Yii::$app->security->generatePasswordHash('admin'),//strtoupper(Yii::$app->security->generateRandomString(5)),
         ]);
         
         //-----------------------------------------------------------------------------------------Manager-----------------------// 
         $this->insert('{{%manager}}', [
             'Permission' => '1',
+            'User_Id' => 1,
+        ]);
+        
+        //-----------------------------------------------------------------------------------------Leitor------------------------// 
+        $this->insert('{{%leitor}}', [
+            'MangaShow' => '1',
+            'LibraryShow' => '1',
             'User_Id' => 1,
         ]);
         

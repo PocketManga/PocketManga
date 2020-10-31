@@ -17,6 +17,7 @@ use frontend\models\ContactForm;
 
 // I started here!!
 use frontend\models\Manga;
+use frontend\models\LibraryList;
 use frontend\models\Category;
 use yii\data\ArrayDataProvider;
 
@@ -291,6 +292,88 @@ class SiteController extends Controller
             'NumberPerPage' => $NumberPerPage,
             'NumOfPages' => $NumOfPages,
             'Search' => $Search,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionSearch2($Genre, $NumberPerPage, $PageNumber)
+    {
+        $Category = Category::find($Gente);
+        $Mangas = $Category->mangas;
+        $Categories = Category::find()->all();
+        
+        $NumOfPages = 1;
+        
+        if($Mangas){
+            $floatNum = count($Mangas) / $NumberPerPage;
+            $intNum = round($floatNum);
+            if($intNum<$floatNum){
+                $intNum++;
+            }
+            $NumOfPages = $intNum;
+        }
+
+        return $this->render('search', [
+            'Mangas' => $Mangas,
+            'Categories' => $Categories,
+            'PageNumber' => $PageNumber,
+            'NumberPerPage' => $NumberPerPage,
+            'NumOfPages' => $NumOfPages,
+            'Search' => $Category->Name,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionAllmanga()
+    {
+        return $this->render('all_manga');
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionLibrary()
+    {
+        $List = Yii::$app->params['Dictionary']['uncategorized'];
+        $Lists = null;
+        $Libraries = Yii::$app->user->identity->leitor->libraries;
+
+        if($Libraries){
+            foreach($Libraries as $Library){
+                $List[] = $Library->list;
+            }
+        }
+        /*
+        $Lists = LibraryList::find()
+            ->innerJoin('leitor', 'leitor.PrimaryList_Id = library_list.IdList')
+            ->where('leitor.IdLeitor', '=', Yii::$app->user->identity->leitor->IdLeitor)
+            ->all();
+        */
+        return $this->render('library',[
+            'List' => $List,
+            'Lists' => $Lists,
+        ]);
+    }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionLibrary2($List)
+    {
+        return $this->render('library',[
+            'List' => $List,
         ]);
     }
     

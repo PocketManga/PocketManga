@@ -52,9 +52,13 @@ return [
                 'manga/<id:\d+>' => 'manga/view',
                 'manga/chapter/<id:\d+>' => 'chapter/view',
                 'home_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/index2',
+                'all-manga' => 'site/allmanga',
                 'ongoing_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/ongoing',
                 'completed_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/completed',
+                'library' => 'site/library',
+                'library/<List>' => 'site/library2',
                 'search=<Search>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/search',
+                'search-for=<Genre:\d+>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/search2',
 
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

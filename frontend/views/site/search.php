@@ -11,13 +11,17 @@ $this->title = 'PocketManga';
         <div class="row">
             <div class="col">
                 <!-- Page Heading -->
-                <div class="mb-4">
-                    <h4 class="mt-4" width="75%">Search for: <?=$Search?></h4>
-                    <select class="float-right select-color1 mt-4" id="show-per-page" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'?>',<?=$PageNumber?>)">
-                        <option class="option-color1" value="25" <?php echo (25 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-25']?></option>
-                        <option class="option-color1" value="50" <?php echo (50 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-50']?></option>
-                        <option class="option-color1" value="100" <?php echo (100 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-100']?></option>
-                    </select>
+                <div class="mb-4 row">
+                    <div class="col">
+                        <h4 class="mt-4">Search for: <?=$Search?></h4>
+                    </div>
+                    <div class="col-auto">
+                        <select class="float-right select-color1 mt-4" id="show-per-page" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'?>',<?=$PageNumber?>)">
+                            <option class="option-color1" value="25" <?php echo (25 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-25']?></option>
+                            <option class="option-color1" value="50" <?php echo (50 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-50']?></option>
+                            <option class="option-color1" value="100" <?php echo (100 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-100']?></option>
+                        </select>
+                    </div>
                 </div>
                 <!-- Approach -->
                 <div class="background-color3 radi-all-15 p-4">

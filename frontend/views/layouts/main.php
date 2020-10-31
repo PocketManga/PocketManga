@@ -27,7 +27,7 @@ AppAsset::register($this);
 
         <?php if(Yii::$app->user->isGuest){ ?>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
-        <?php }else{ if(Yii::$app->user->leitor->Theme){ ?>
+        <?php }else{ if(Yii::$app->user->identity->leitor->Theme){ ?>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
         <?php }else{ ?>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/light_theme.css" />
@@ -75,6 +75,10 @@ AppAsset::register($this);
                         <li class="nav-item">
                             <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'login'?>" href="<?=Url::to('login')?>"><?=Yii::$app->params['Dictionary']['login']?></a>
                         </li>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'logout'?>" href="<?=Url::to('logout')?>"><?=Yii::$app->params['Dictionary']['logout']?></a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -86,7 +90,7 @@ AppAsset::register($this);
                             href="<?=Url::to('home_order-by=latest-updates_manga-per-page=50_page=1')?>"><?=Yii::$app->params['Dictionary']['home']?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/about') ? 'active background-color2 text-color3' : 'text-color2'?>" 
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/allmanga') ? 'active background-color2 text-color3' : 'text-color2'?>" 
                             href="<?=Url::to('all-manga')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
                     </li>
                     <li class="nav-item">
@@ -103,7 +107,7 @@ AppAsset::register($this);
                     </li>
                     <?php } else { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'library/index') ? 'active background-color2 text-color3' : 'text-color2'?>" 
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/library' || Yii::$app->controller->route == 'site/library2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
                             href="<?=Url::to('library')?>"><?=Yii::$app->params['Dictionary']['library']?></a>
                     </li>
                     <?php } ?>
