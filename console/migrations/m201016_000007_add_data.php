@@ -34,6 +34,17 @@ class m201016_000007_add_data extends Migration
             'auth_key' => $password,
             'password_hash' => Yii::$app->security->generatePasswordHash('admin'),//strtoupper(Yii::$app->security->generateRandomString(5)),
         ]);
+
+        $password = Yii::$app->getSecurity()->generatePasswordHash('admin');
+        $this->insert('{{%user}}', [
+            'Username' => 'Popcorn',
+            'Email' => 'nex543@hotmail.com',
+            'Genre' => 'F',
+            'BirthDate' => date('Y-m-d',strtotime('10/30/1999')),
+            'Slug' => 'Popcorn',
+            'auth_key' => $password,
+            'password_hash' => Yii::$app->security->generatePasswordHash('admin'),//strtoupper(Yii::$app->security->generateRandomString(5)),
+        ]);
         
         //-----------------------------------------------------------------------------------------Manager-----------------------// 
         $this->insert('{{%manager}}', [
@@ -47,7 +58,13 @@ class m201016_000007_add_data extends Migration
             'LibraryShow' => '1',
             'User_Id' => 1,
         ]);
-        
+
+        $this->insert('{{%leitor}}', [
+            'MangaShow' => '1',
+            'LibraryShow' => '1',
+            'User_Id' => 2,
+        ]);
+
         //-----------------------------------------------------------------------------------------Author------------------------// 
         $this->insert('{{%author}}', [
             'FirstName' => 'Nildgar',
@@ -535,6 +552,74 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga_author}}', [
             'Author_Id' => 1,
             'Manga_Id' => 12,
+        ]);
+        
+        //-----------------------------------------------------------------------------------------Rating------------------------// 
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 1,
+            'User_Id' => 1,
+            'Stars' => 5,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 1,
+            'User_Id' => 2,
+            'Stars' => 4,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 3,
+            'User_Id' => 2,
+            'Stars' => 3,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 5,
+            'User_Id' => 1,
+            'Stars' => 5,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 3,
+            'User_Id' => 1,
+            'Stars' => 4,
+        ]);
+        
+        //-----------------------------------------------------------------------------------------Favorite-----------------------// 
+        $this->insert('{{%favorite}}', [
+            'Manga_Id' => 1,
+            'Leitor_Id' => 1,
+        ]);
+
+        $this->insert('{{%favorite}}', [
+            'Manga_Id' => 1,
+            'Leitor_Id' => 2,
+        ]);
+
+        $this->insert('{{%favorite}}', [
+            'Manga_Id' => 3,
+            'Leitor_Id' => 2,
+        ]);
+
+        $this->insert('{{%favorite}}', [
+            'Manga_Id' => 5,
+            'Leitor_Id' => 1,
+        ]);
+
+        $this->insert('{{%favorite}}', [
+            'Manga_Id' => 3,
+            'Leitor_Id' => 1,
+        ]);
+        
+        //-----------------------------------------------------------------------------------------Manga-Category-------------------// 
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 1,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 3,
+            'Category_Id' => 1,
         ]);
 
         /**/
