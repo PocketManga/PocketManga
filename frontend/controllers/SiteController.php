@@ -302,7 +302,7 @@ class SiteController extends Controller
      */
     public function actionSearch2($Genre, $NumberPerPage, $PageNumber)
     {
-        $Category = Category::find($Gente);
+        $Category = Category::find($Genre)->one();
         $Mangas = $Category->mangas;
         $Categories = Category::find()->all();
         

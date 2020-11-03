@@ -1,3 +1,6 @@
+<?php
+    use yii\helpers\Url;
+?>
 <div class="h-100 radi-all-15 background-color3">
     <div class="background-color1 radi-t-15">
         <p class="m-0 py-3 text-center text-color2">More Manga</p>
