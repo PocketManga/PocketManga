@@ -3,13 +3,13 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Manga;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use frontend\models\Category;
+use common\models\Manga;
+use common\models\Category;
 
 /**
  * MangaController implements the CRUD actions for Manga model.

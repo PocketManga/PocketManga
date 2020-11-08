@@ -45,19 +45,24 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+                '/' => 'site/index',
+                'home' => 'site/index',
+                'index' => 'site/index',
+                'logout' => 'site/logout',
+                'login' => 'site/login',
                 
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/manga',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET total' => 'total',
-                        'GET {id}/morada' => 'morada',
-                        'GET {id}/nome' => 'nome',
+                        'GET allmanga/{filters}' => 'allmanga',
+                        'GET library/{filters}' => 'library',
                     ],
                     'tokens' => [
-                        '{id}' => '<id:\\d+>',
+                        '{filters}' => '<filters:\\w+>',
                     ],
                 ],
             ],

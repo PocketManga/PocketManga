@@ -16,9 +16,9 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
 // I started here!!
-use frontend\models\Manga;
+use common\models\Manga;
 use frontend\models\LibraryList;
-use frontend\models\Category;
+use common\models\Category;
 use yii\data\ArrayDataProvider;
 
 /**
@@ -80,10 +80,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $Mangas = Manga::find()
-            ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
-            ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
-            ->all();
+        /*$Mangas = Manga::find()
+                        ->innerJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->where("ca.Name like 'isekai'")
+                        ->groupBy('manga.IdManga')
+                        ->orderBy('max(ch.ReleaseDate), manga.Title asc')
+                        ->all();
+                 
+        var_dump($Mangas);
+        return 'true';*/
+        
+        $Mangas = $Mangas = Manga::find()
+                    ->leftJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
+                    ->groupBy('manga.IdManga')
+                    ->orderBy('max(ch.ReleaseDate) desc, manga.Title asc')
+                    ->all();
         $Categories = Category::find()->all();
         $Option = 'latest-updates';
         $NumberPerPage = 50;
@@ -120,17 +133,24 @@ class SiteController extends Controller
         switch($Option){
             case 'latest-updates':
                 $Mangas = Manga::find()
-                    ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
-                    ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+                    ->leftJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
+                    ->groupBy('manga.IdManga')
+                    ->orderBy('max(ch.ReleaseDate) desc, manga.Title asc')
                     ->all();
             break;
             case 'ranking':
                 $Mangas = Manga::find()
-                ->orderBy(['Ranking' => SORT_DESC])
+                ->leftJoin('rating r', $on='manga.IdManga = r.Manga_Id')
+                ->groupBy('manga.IdManga')
+                ->orderBy('avg(r.Stars) desc, manga.Title asc')
                 ->all();
             break;
             case 'popular':
-                $Mangas = Manga::find()->all();
+                $Mangas = Manga::find()
+                ->leftJoin('favorite f', $on='manga.IdManga = f.Manga_Id')
+                ->groupBy('manga.IdManga')
+                ->orderBy('count(f.Manga_Id) desc, manga.Title asc')
+                ->all();
             break;
         }
         $Categories = Category::find()->all();
@@ -167,20 +187,26 @@ class SiteController extends Controller
         switch($Option){
             case 'latest-updates':
                 $Mangas = Manga::find()
-                    ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
+                    ->leftJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
                     ->where('manga.Status = 0')
-                    ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+                    ->groupBy('manga.IdManga')
+                    ->orderBy('max(ch.ReleaseDate) desc, manga.Title asc')
                     ->all();
             break;
             case 'ranking':
                 $Mangas = Manga::find()
+                ->leftJoin('rating r', $on='manga.IdManga = r.Manga_Id')
                 ->where('manga.Status = 0')
-                ->orderBy(['Ranking' => SORT_DESC])
+                ->groupBy('manga.IdManga')
+                ->orderBy('avg(r.Stars) desc, manga.Title asc')
                 ->all();
             break;
             case 'popular':
                 $Mangas = Manga::find()
+                ->leftJoin('favorite f', $on='manga.IdManga = f.Manga_Id')
                 ->where('manga.Status = 0')
+                ->groupBy('manga.IdManga')
+                ->orderBy('count(f.Manga_Id) desc, manga.Title asc')
                 ->all();
             break;
         }
@@ -218,20 +244,26 @@ class SiteController extends Controller
         switch($Option){
             case 'latest-updates':
                 $Mangas = Manga::find()
-                    ->innerJoin('chapter', 'manga.IdManga = chapter.Manga_Id')
+                    ->leftJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
                     ->where('manga.Status = 1')
-                    ->orderBy(['chapter.ReleaseDate' => SORT_DESC])
+                    ->groupBy('manga.IdManga')
+                    ->orderBy('max(ch.ReleaseDate) desc, manga.Title asc')
                     ->all();
             break;
             case 'ranking':
                 $Mangas = Manga::find()
+                ->leftJoin('rating r', $on='manga.IdManga = r.Manga_Id')
                 ->where('manga.Status = 1')
-                ->orderBy(['Ranking' => SORT_DESC])
+                ->groupBy('manga.IdManga')
+                ->orderBy('avg(r.Stars) desc, manga.Title asc')
                 ->all();
             break;
             case 'popular':
                 $Mangas = Manga::find()
+                ->leftJoin('favorite f', $on='manga.IdManga = f.Manga_Id')
                 ->where('manga.Status = 1')
+                ->groupBy('manga.IdManga')
+                ->orderBy('count(f.Manga_Id) desc, manga.Title asc')
                 ->all();
             break;
         }

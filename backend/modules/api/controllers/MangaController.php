@@ -3,142 +3,188 @@
 namespace backend\modules\api\controllers;
 
 use yii\rest\ActiveController;
-use common\models\Manga;
+//use common\models\Manga;
+use common\models\User;
+use DateTime;
 
 class MangaController extends ActiveController
 {
-    public function actionMorada($id) //problemas a apanhar o id
-    {
-        $usersmodel = new $this->modelClass;
-        $user = $usersmodel::find()->where("idutilizador=".$id)->one();
-        if($user){
-            if($user->Morada){
-                return ['id' => $id, 'morada' => $user->Morada];
-            }else{
-                return ['id' => $id, 'morada' => 'null'];
-            }
-        }
-        return ['id' => $id, 'user' => "não existente"];
-    }
-    public function GetManga($filters){
-        $ExistingFilters = Category::find()->all();
-        $Options = ['latest-updates', 'popular', 'ranking'];
-        $where=null;
-        $orderby=null;
-        
+    public $modelClass = 'common\models\Manga';
 
-    }
-    public function Find($filtros)
+    public function actionAllmanga($filters)
     {
-        $filtros_existentes = ['fumador','mobilado','internet','cozinha','parking','animais','casais','genero','numquartos','tipoapart','numwc','order','premin','premax','distrito'];
-        $filtros_replace = str_replace("__","+",$filtros);
-        $filtros_split = explode('+', strtolower($filtros_replace));
-        $filtro=null;
-        $apartmodel = new $this->modelClass;
-        $apartamentos = null;
+        $filters_split = explode('__', strtolower(preg_replace('~([a-z])([A-Z])~', '\\1 \\2',  $filters)));
+        
+        if(count($filters_split)>=5){
+            $User_Id = $filters_split[0];
+            $Otpion = str_replace(' ','-',$filters_split[1]);
+            $Status = ($filters_split[2] == '0' || $filters_split[2] == '1')?$filters_split[2]:null;
+            $Genres = ($filters_split[3] != 'all' && $filters_split[3] != 'none')?$filters_split[3]:null;
+            $NotGenres = ($filters_split[4] != 'all' && $filters_split[4] != 'none')?$filters_split[4]:null;
+            $R18 = false;
+
+            if($User_Id != '0'){
+                $User = User::find($User_Id)->one();
+
+                $BirthDate = new DateTime($User->BirthDate);
+                $TodayDate = new DateTime(date('Y-m-d', strtotime('now')));
+                $diff = date_diff($BirthDate, $TodayDate);
+                
+                $R18 = ($diff->y >= 18) ? true:false;
+            }
+
+            $Mangas = $this->GetManga($Otpion, $Status, $R18, $Genres, $NotGenres);
+            return ['Mangas' => $Mangas];
+        }
+        return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
+    }
+
+    public function actionLibrary($filters)
+    {
+        $filters_split = explode('__', strtolower(preg_replace('~([a-z])([A-Z])~', '\\1 \\2',  $filters)));
+        
+        if(count($filters_split)>=2){
+            $User_Id = $filters_split[0];
+            $List = $filters_split[1];
+            $MangaModel = new $this->modelClass;
+
+            $User = User::find($User_Id)->one();
+            $where = 'l.Leitor_Id = '.$User->leitor->IdLeitor;
+
+            if($List == 'null'){
+                $where = $where.' and l.List_Id is null';
+            }
+
+            if($List != 'null' && $List != 'all'){
+                $where = $where.' and l.List_Id ='.$List;
+            }
+            
+            $Mangas = $MangaModel::find()
+                        ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
+                        ->leftJoin('manga_readed mr', $on='manga.IdManga = mr.Manga_Id')
+                        ->where($where)
+                        ->orderBy('mr.Leitor_Id, manga.Title asc')
+                        ->all();
+            
+            return ['Mangas' => $Mangas];
+        }
+        return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
+    }
+
+    public function GetManga($Otpion, $Status, $R18, $Genres, $NotGenres){
+        $MangaModel = new $this->modelClass;
         $where=null;
         $orderby=null;
-        foreach($filtros_split as $filtro_split){
-            $split = explode('_', $filtro_split);
-            $filtro[$split[0]] = $split[1];
+        $Mangas = null;
+
+
+        if($Status != null){
+            $where = "manga.Status = ".$Status;
         }
-        foreach($filtros_existentes as $fil)
-        {
-            if (array_key_exists($fil,$filtro)){
-                if($fil=='fumador'||$fil=='mobilado'||$fil=='internet'||$fil=='cozinha'||$fil=='parking'||$fil=='animais'||$fil=='casais'||$fil=='genero'||$fil=='distrito'){
-                    if($filtro[$fil]!='indiferente'){
-                        if($where!=null){
-                            $where = $where." and ".$fil." LIKE '".$filtro[$fil]."'";
-                        }else{
-                            $where = $fil." LIKE '".$filtro[$fil]."'";
-                        }
-                    }
-                }
-                if($fil == 'numquartos' || $fil == 'numwc'){
-                    if($filtro[$fil]!='1m'){
-                        $wherenum = null;
-                        if($filtro[$fil]=='2m'||$filtro[$fil]=='3m'||$filtro[$fil]=='4m'){
-                            $filtro[$fil]= str_replace("m","",$filtro[$fil]);
-                            $wherenum = $fil." >= ".$filtro[$fil];
-                        }else{
-                            $wherenum = $fil." = ".$filtro[$fil];
-                        }
-                        if($where!=null){
-                            $where = $where." and ".$wherenum;
-                        }else{
-                            $where = $wherenum;
-                        }
-                    }
-                }
-                if($fil == 'tipoapart'){
-                    if($filtro['tipoapart']!='t0m'){
-                        $wheretipo=null;
-                        if($filtro['tipoapart']=='t1m'||$filtro['tipoapart']=='t2m'||$filtro['tipoapart']=='t3m'){
-                            switch($filtro['tipoapart']){
-                                case 't1m':
-                                    $wheretipo = "TipoApart NOT LIKE 'T0'";
-                                    break;
-                                case 't2m':
-                                    $wheretipo = "TipoApart NOT LIKE 'T0' AND TipoApart NOT LIKE 'T1'";
-                                    break;
-                                case 't3m':
-                                    $wheretipo = "TipoApart NOT LIKE 'T0' AND TipoApart NOT LIKE 'T1' AND TipoApart NOT LIKE 'T2'";
-                                    break;
-                            }
-                        }else{
-                            $wheretipo = "TipoApart LIKE '".$filtro['tipoapart']."'";
-                        }
-                        if($where!=null){
-                            $where = $where." and ".$wheretipo;
-                        }else{
-                            $where = $wheretipo;
-                        }
-                    }
-                }
-                if($fil == 'premin'){
-                    if($filtro['premin']!='null'){
-                        $where = $where." and Preco >= ".$filtro['premin'];
-                    }
-                }
-                if($fil == 'premax'){
-                    if($filtro['premin']!='null'){
-                        $where = $where." and Preco <= ".$filtro['premin'];
-                    }
-                }
-                if($fil == 'order'){
-                    if($filtro['order']!='null'){
-                        switch($filtro['order']){
-                            case 'recentes':
-                                $orderby = "DataAnuncio ASC";
-                                break;
-                            case 'antigos':
-                                $orderby = "DataAnuncio DESC";
-                                break;
-                            case 'asc':
-                                $orderby = "Preco ASC";
-                                break;
-                            case 'desc':
-                                $orderby = "Preco DESC";
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-        if($where){
-            if($orderby){
-                $apartamentos = $apartmodel::find()->where($where)->orderBy($orderby)->all();
+
+        if(!$R18){
+            if($where){
+                $where = $where." and manga.R18 = 0";
             }else{
-                $apartamentos = $apartmodel::find()->where($where)->all();
+                $where = "manga.R18 = 0";
             }
         }
-        else{
-            if($orderby){
-                $apartamentos = $apartmodel::find()->orderBy($orderby)->all();
-            }else{
-                $apartamentos = $apartmodel::find()->all();
+        if($Genres){
+            $SplitGenres = explode('_', strtolower($Genres));
+            foreach($SplitGenres as $Genre){
+                if($where){
+                    $where = $where." and ca.Name like '".$Genre."'";
+                }else{
+                    $where = "ca.Name like '".$Genre."'";
+                }
             }
         }
-        return $apartamentos;
+
+        if($NotGenres){
+            $SplitNotGenres = explode('_', strtolower($NotGenres));
+            foreach($SplitNotGenres as $Genre){
+                if($where){
+                    $where = $where." and ca.Name not like '".$Genre."'";
+                }else{
+                    $where = "ca.Name not like '".$Genre."'";
+                }
+            }
+        }
+
+        switch ($Otpion){
+            case 'latest-updates':
+                $orderby="max(ch.ReleaseDate) desc, manga.Title asc";
+                if($where){
+                    $Mangas = $MangaModel::find()
+                        ->innerJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->where($where)
+                        ->groupBy('manga.IdManga')
+                        ->orderBy($orderby)
+                        ->all();
+                }else{
+                    $Mangas = $MangaModel::find()
+                        ->innerJoin('chapter ch', $on='manga.IdManga = ch.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->groupBy('manga.IdManga')
+                        ->orderBy($orderby)
+                        ->all();
+                }
+            break;
+            case 'popular':
+                $orderby="count(f.Manga_Id) desc, manga.Title asc";
+                if($where){
+                    $Mangas = $MangaModel::find()
+                        ->leftJoin('favorite f', $on='manga.IdManga = f.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->where($where)
+                        ->groupBy('manga.IdManga')
+                        ->orderBy($orderby)
+                        ->all();
+                }else{
+                    $Mangas = $MangaModel::find()
+                        ->leftJoin('favorite f', $on='manga.IdManga = f.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->groupBy('manga.IdManga')
+                        ->orderBy($orderby)
+                        ->all();
+                }
+            break;
+            case 'ranking':
+                $orderby="avg(r.Stars) desc, manga.Title asc";
+                if($where){
+                    $Mangas = $MangaModel::find()
+                        ->leftJoin('rating r', $on='manga.IdManga = r.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->where($where)
+                        ->groupBy('manga.IdManga')
+                        ->orderBy($orderby)
+                        ->all();
+                }else{
+                    $Mangas = $MangaModel::find()
+                        ->leftJoin('rating r', $on='manga.IdManga = r.Manga_Id')
+                        ->innerJoin('manga_category mc', $on='manga.IdManga = mc.Manga_Id')
+                        ->innerJoin('category ca', $on='ca.IdCategory = mc.Category_Id')
+                        ->groupBy('manga.IdManga')
+                        ->orderBy($orderby)
+                        ->all();
+                }
+            break;
+            case 'asc':
+            case 'desc':
+                $orderby="Title ".$Otpion;
+                if($where){
+                    $Mangas = $MangaModel::find()->where($where)->orderBy($orderby)->all();
+                }else{
+                    $Mangas = $MangaModel::find()->orderBy($orderby)->all();
+                }
+            break;
+        }
+        return $Mangas;
     }
 }

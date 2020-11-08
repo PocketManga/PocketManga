@@ -18,9 +18,30 @@ class m201016_000007_add_data extends Migration
             'Name' => 'Action',
             'Slug' => 'Action',
         ]);
+
         $this->insert('{{%category}}', [
             'Name' => 'Romance',
             'Slug' => 'Romance',
+        ]);
+
+        $this->insert('{{%category}}', [
+            'Name' => 'Yuri',
+            'Slug' => 'Yuri',
+        ]);
+
+        $this->insert('{{%category}}', [
+            'Name' => 'Adventure',
+            'Slug' => 'Adventure',
+        ]);
+
+        $this->insert('{{%category}}', [
+            'Name' => 'Isekai',
+            'Slug' => 'Isekai',
+        ]);
+
+        $this->insert('{{%category}}', [
+            'Name' => 'Fantasy',
+            'Slug' => 'Fantasy',
         ]);
         
         //-----------------------------------------------------------------------------------------User--------------------------// 
@@ -70,11 +91,23 @@ class m201016_000007_add_data extends Migration
             'FirstName' => 'Nildgar',
             'Slug' => 'Nildgar',
         ]);
+        
+        $this->insert('{{%author}}', [
+            'FirstName' => 'Mikoto',
+            'Slug' => 'Mikoto',
+        ]);
+
+        $this->insert('{{%author}}', [
+            'FirstName' => 'Mashiro',
+            'LastName' => 'Shiro',
+            'Slug' => 'Mashiro',
+        ]);
 
         //-----------------------------------------------------------------------------------------Manga+Chapter-----------------// 
         $this->insert('{{%manga}}', [
             'Title' => '1 X 1/2',
             'OriginalTitle' => '1 X 1/2',
+            'R18' => true,
             'SrcImage' => '/mangas/1/cover_image_1.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -237,7 +270,7 @@ class m201016_000007_add_data extends Migration
             'Slug' => '1-Chapter 17',
         ]);
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 3,
             'Manga_Id' => 1,
         ]);
 
@@ -245,6 +278,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Ane Naru Mono',
             'OriginalTitle' => 'Ane Naru Mono',
+            'R18' => true,
             'SrcImage' => '/mangas/2/cover_image_2.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/24/2009')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -263,7 +297,7 @@ class m201016_000007_add_data extends Migration
             'Slug' => '2-Chapter 24',
         ]);
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 2,
             'Manga_Id' => 2,
         ]);
         
@@ -291,7 +325,7 @@ class m201016_000007_add_data extends Migration
             ]);
         }
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 3,
             'Manga_Id' => 3,
         ]);
         
@@ -299,6 +333,8 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Asa Made Jugyou Chu',
             'OriginalTitle' => 'Asa Made Jugyou Chu',
+            'R18' => true,
+            'Status' => true,
             'SrcImage' => '/mangas/4/cover_image_4.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -327,6 +363,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Berserk Of Gluttony',
             'OriginalTitle' => 'Berserk Of Gluttony',
+            'Status' => true,
             'SrcImage' => '/mangas/5/cover_image_5.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -347,7 +384,7 @@ class m201016_000007_add_data extends Migration
             ]);
         }
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 2,
             'Manga_Id' => 5,
         ]);
         
@@ -431,7 +468,7 @@ class m201016_000007_add_data extends Migration
             ]);
         }
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 3,
             'Manga_Id' => 8,
         ]);
         
@@ -439,6 +476,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Her Shim-Cheong',
             'OriginalTitle' => 'Her Shim-Cheong',
+            'Status' => true,
             'SrcImage' => '/mangas/9/cover_image_9.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -494,7 +532,7 @@ class m201016_000007_add_data extends Migration
             'Slug' => '10-Chapter 15',
         ]);
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 3,
             'Manga_Id' => 10,
         ]);
         
@@ -502,6 +540,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%manga}}', [
             'Title' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
             'OriginalTitle' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
+            'Status' => true,
             'SrcImage' => '/mangas/11/cover_image_11.jpg',
             'ReleaseDate' => date('Y-m-d',strtotime('10/16/2003')),
             'Description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -522,7 +561,7 @@ class m201016_000007_add_data extends Migration
             ]);
         }
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 2,
             'Manga_Id' => 11,
         ]);
         
@@ -550,7 +589,7 @@ class m201016_000007_add_data extends Migration
             ]);
         }
         $this->insert('{{%manga_author}}', [
-            'Author_Id' => 1,
+            'Author_Id' => 3,
             'Manga_Id' => 12,
         ]);
         
@@ -581,6 +620,36 @@ class m201016_000007_add_data extends Migration
 
         $this->insert('{{%rating}}', [
             'Manga_Id' => 3,
+            'User_Id' => 1,
+            'Stars' => 4,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 6,
+            'User_Id' => 2,
+            'Stars' => 4,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 6,
+            'User_Id' => 1,
+            'Stars' => 2,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 7,
+            'User_Id' => 1,
+            'Stars' => 5,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 7,
+            'User_Id' => 2,
+            'Stars' => 5,
+        ]);
+
+        $this->insert('{{%rating}}', [
+            'Manga_Id' => 8,
             'User_Id' => 1,
             'Stars' => 4,
         ]);
@@ -618,8 +687,208 @@ class m201016_000007_add_data extends Migration
         ]);
 
         $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 1,
+            'Category_Id' => 3,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 2,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 2,
+            'Category_Id' => 6,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
             'Manga_Id' => 3,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 3,
+            'Category_Id' => 3,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 4,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 5,
             'Category_Id' => 1,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 5,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 5,
+            'Category_Id' => 4,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 5,
+            'Category_Id' => 6,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 6,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 7,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 8,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 9,
+            'Category_Id' => 4,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 10,
+            'Category_Id' => 1,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 10,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 10,
+            'Category_Id' => 5,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 11,
+            'Category_Id' => 2,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 11,
+            'Category_Id' => 4,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 11,
+            'Category_Id' => 5,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 12,
+            'Category_Id' => 4,
+        ]);
+
+        $this->insert('{{%manga_category}}', [
+            'Manga_Id' => 12,
+            'Category_Id' => 6,
+        ]);
+        
+        //-----------------------------------------------------------------------------------------Library-List---------------------// 
+        $this->insert('{{%library_list}}', [
+            'Name' => 'Wish',
+        ]);
+
+        $this->insert('{{%library_list}}', [
+            'Name' => 'Reading',
+        ]);
+
+        $this->insert('{{%library_list}}', [
+            'Name' => 'Following',
+        ]);
+        
+        //-----------------------------------------------------------------------------------------Library--------------------------// 
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 1,
+            'List_Id' => 3,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 2,
+            'List_Id' => 2,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 3,
+            'List_Id' => 3,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 4,
+            'List_Id' => 3,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 5,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 6,
+            'List_Id' => 1,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 7,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 8,
+            'List_Id' => 2,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 9,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 10,
+            'List_Id' => 1,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 11,
+            'List_Id' => 2,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 1,
+            'Manga_Id' => 12,
+            'List_Id' => 2,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 2,
+            'Manga_Id' => 1,
+            'List_Id' => 1,
+        ]);
+
+        $this->insert('{{%library}}', [
+            'Leitor_Id' => 2,
+            'Manga_Id' => 2,
+            'List_Id' => 1,
         ]);
 
         /**/

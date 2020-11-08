@@ -1,26 +1,26 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
 
 /**
- * This is the model class for table "favorite".
+ * This is the model class for table "manga_author".
  *
- * @property int $Leitor_Id
+ * @property int $Author_Id
  * @property int $Manga_Id
  *
- * @property Leitor $leitor
+ * @property Author $author
  * @property Manga $manga
  */
-class Favorite extends \yii\db\ActiveRecord
+class MangaAuthor extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'favorite';
+        return 'manga_author';
     }
 
     /**
@@ -29,10 +29,10 @@ class Favorite extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Leitor_Id', 'Manga_Id'], 'required'],
-            [['Leitor_Id', 'Manga_Id'], 'integer'],
-            [['Leitor_Id', 'Manga_Id'], 'unique', 'targetAttribute' => ['Leitor_Id', 'Manga_Id']],
-            [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
+            [['Author_Id', 'Manga_Id'], 'required'],
+            [['Author_Id', 'Manga_Id'], 'integer'],
+            [['Author_Id', 'Manga_Id'], 'unique', 'targetAttribute' => ['Author_Id', 'Manga_Id']],
+            [['Author_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['Author_Id' => 'IdAuthor']],
             [['Manga_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manga::className(), 'targetAttribute' => ['Manga_Id' => 'IdManga']],
         ];
     }
@@ -43,19 +43,19 @@ class Favorite extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Leitor_Id' => 'Leitor ID',
+            'Author_Id' => 'Author ID',
             'Manga_Id' => 'Manga ID',
         ];
     }
 
     /**
-     * Gets query for [[Leitor]].
+     * Gets query for [[Author]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLeitor()
+    public function getAuthor()
     {
-        return $this->hasOne(Leitor::className(), ['IdLeitor' => 'Leitor_Id']);
+        return $this->hasOne(Author::className(), ['IdAuthor' => 'Author_Id']);
     }
 
     /**

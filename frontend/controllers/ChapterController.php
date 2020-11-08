@@ -3,11 +3,12 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Chapter;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use common\models\Chapter;
 
 /**
  * ChapterController implements the CRUD actions for Chapter model.
