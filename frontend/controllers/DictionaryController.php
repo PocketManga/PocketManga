@@ -35,6 +35,9 @@ class DictionaryController extends Controller
             'show-50' => 'Show mangas: 50 per page',
             'show-100' => 'Show mangas: 100 per page',
             'uncategorized' => 'Uncategorized',
+            'asc' => 'Alfabetic Asc',
+            'desc' => 'Alfabetic Desc',
+            'both_c_o' => 'Completed and Ongoing',
         ];
         return $Dictionary;
     }

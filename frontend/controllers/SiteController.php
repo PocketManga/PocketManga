@@ -334,7 +334,7 @@ class SiteController extends Controller
      */
     public function actionSearch2($Genre, $NumberPerPage, $PageNumber)
     {
-        $Category = Category::find($Genre)->one();
+        $Category = Category::find()->where('IdCategory = '.$Genre)->one();
         $Mangas = $Category->mangas;
         $Categories = Category::find()->all();
         
@@ -366,7 +366,10 @@ class SiteController extends Controller
      */
     public function actionAllmanga()
     {
-        return $this->render('all_manga');
+        $Categories = Category::find()->all();
+        return $this->render('all_manga', [
+            'Categories' => $Categories,
+        ]);
     }
 
     /**

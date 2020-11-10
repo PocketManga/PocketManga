@@ -2,7 +2,7 @@
     use yii\helpers\Url;
 ?>
 
-<div class="background-color2 radi-b-15">
+<div class="background-color2 radi-all-15">
     <div class="container-fluid pb-4 pr-4 pl-4">
         <div class="row">
             <div class="col">
@@ -33,11 +33,15 @@
                             <p class="text-color1">OneShot: <span class="text-color2"><?php echo ($Manga->OneShot) ? 'Yes':'No'?></span></p>
                             <p class="text-color1">ReleaseDate: <span class="text-color2"><?=date_format(date_create($Manga->ReleaseDate),"d/m/Y")?></span></p>
                             <p class="text-color1">Status: <span class="text-color2"><?php echo ($Manga->Status) ? 'Completed':'Ongoing'?></span></p>
-                            <p class="text-color1">Genres: 
+                            <div class="row">
+                                <div class="col-auto">
+                                    <p class="text-color1 mb-0">Genres: </p>
+                                </div>
+                                
                                 <?php if($Genres) { foreach($Genres as $Genre) { ?>
-                                <div class="background-color2 "><span class="text-color1"><?=$Genre->Name?></span></div>
+                                <div class="col-auto background-color2 radi-all-15 my-n1 py-1 mr-2"><span class="text-color1"><?=$Genre->Name?></span></div>
                                 <?php }} ?>
-                            </p>
+                            </div>
                         </div>
                         <div class="col-12 mt-4">
                             <p class="text-color1">Description:  <span class="text-color2"><?=$Manga->Description?></span></p>

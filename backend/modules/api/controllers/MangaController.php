@@ -34,7 +34,7 @@ class MangaController extends ActiveController
             }
 
             $Mangas = $this->GetManga($Otpion, $Status, $R18, $Genres, $NotGenres);
-            return ['Mangas' => $Mangas];
+            return ['mangas' => $Mangas];
         }
         return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
     }
