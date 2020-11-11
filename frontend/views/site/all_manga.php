@@ -29,7 +29,8 @@ $this->title = 'PocketManga';
                                 <div class="row p-3 mx-0" id="filters_genres">
                                     <?php foreach($Categories as $Category){ ?>
                                     <div class="col-3 pb-2 div-genre-button">
-                                        <button class="background-color2 border-0 w-100 mt-2 radi-all-15 py-1 mx-n2 text-center" onclick="PressGenreButton($(this).closest('.div-genre-button'));">
+                                        <button class="background-color2 border-0 w-100 mt-2 radi-all-15 py-1 mx-n2 text-center" 
+                                            onclick="PressGenreButton($(this).closest('.div-genre-button'),<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>);">
                                             <span class="text-color1"><?=$Category->Name?></span>
                                             <input type="checkbox" class="radio add-genres" value="<?=$Category->Name?>" name="<?='check-'.$Category->Name?>">
                                             <input type="checkbox" class="radio remove-genres" value="<?=$Category->Name?>" name="<?='check-'.$Category->Name?>">
@@ -41,7 +42,8 @@ $this->title = 'PocketManga';
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-4">
-                                                <select class="select-color1 radi-all-15 w-100 p-2 ml-n2" id="filter_order">
+                                                <select class="select-color1 radi-all-15 w-100 p-2 ml-n2" id="filter_order" 
+                                                    onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>))">
                                                     <option class="option-color1" value="latestUpdates" selected="selected"><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
                                                     <option class="option-color1" value="ranking"><?=Yii::$app->params['Dictionary']['ranking']?></option>
                                                     <option class="option-color1" value="popular"><?=Yii::$app->params['Dictionary']['popular']?></option>
@@ -50,14 +52,16 @@ $this->title = 'PocketManga';
                                                 </select>
                                             </div>
                                             <div class="col-4">
-                                                <select class="select-color1 radi-all-15 w-100 p-2" id="filter_status">
+                                                <select class="select-color1 radi-all-15 w-100 p-2" id="filter_status"
+                                                    onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>))">
                                                     <option class="option-color1" value="1"><?=Yii::$app->params['Dictionary']['completed']?></option>
                                                     <option class="option-color1" value="0"><?=Yii::$app->params['Dictionary']['ongoing']?></option>
                                                     <option class="option-color1" value="all" selected="selected"><?=Yii::$app->params['Dictionary']['both_c_o']?></option>
                                                 </select>
                                             </div>
                                             <div class="col-4">
-                                                <button class="text-color2 background-color3 border-0 radi-all-15 w-100 py-2 ml-2"><?=Yii::$app->params['Dictionary']['search']?></button>
+                                                <button class="text-color2 background-color3 border-0 radi-all-15 w-100 py-2 ml-2" id="button-search"
+                                                    onclick="(ReloadMangas(<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>))"><?=Yii::$app->params['Dictionary']['search']?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -93,23 +97,8 @@ $this->title = 'PocketManga';
     var btnClassName = btnClass.className;
     btnClass.className = btnClassName.replace("radi-t-15", "radi-all-15");
     
-    //changeNumbButton();
+    ChangeButtonSearch();
     ReloadMangas(0);
-
-    /*$(".checkfiltro").on('click', function() {
-        changeNumbButton();
-    });/**/
-
-    /*function changeNumbButton(){
-        var filtros = "http://localhost/cesa/backend/web/v1/apart/totalfils/" + GetFiltros();
-        $.ajax({
-            method:"GET",
-            url:filtros
-        })
-        .done(function(response){
-            document.getElementById("aplicafiltros").value = "Aplicar Filtros ("+response['total']+")";
-        })
-    }*/
     
     function PressFilterButton(){
         var div = document.getElementById("filters");
@@ -124,32 +113,49 @@ $this->title = 'PocketManga';
         }
     }
     
-    function PressGenreButton(GenreDiv){
+    function PressGenreButton(GenreDiv, user_id){
         var GenreButton = GenreDiv.find('button').first();
         var GenreAddInput = GenreDiv.find('.add-genres').first();
-        var GenreRemoveInput = GenreDiv.find('.add-genres').first();
+        var GenreRemoveInput = GenreDiv.find('.remove-genres').first();
 
         var btnClassName = GenreButton.className;
-        if(!GenreAddInput.checked && !GenreRemoveInput.checked){
-            GenreAddInput.checked = true;
-            GenreRemoveInput.checked = false;
-            GenreButton.className = btnClassName.replace("background-color2", "background-color5");
-            GenreButton.className = btnClassName.replace("background-color4", "background-color5");
+        if(GenreAddInput.is(':checked') == false && GenreRemoveInput.is(':checked') == false){
+            var classButton = GenreButton.attr("class").replace( "background-color2", "background-color5").replace( "background-color6", "background-color5");
+            GenreAddInput.prop('checked', true);
+            GenreRemoveInput.prop('checked', false);
+            GenreButton.attr('class', classButton);
         }else{
-            if(GenreAddInput.checked && !GenreRemoveInput.checked){
-                GenreAddInput.checked = false;
-                GenreRemoveInput.checked = true;
-                GenreButton.className = btnClassName.replace("background-color2", "background-color4");
-                GenreButton.className = btnClassName.replace("background-color5", "background-color4");
+            if(GenreAddInput.is(':checked') == true && GenreRemoveInput.is(':checked') == false){
+                var classButton = GenreButton.attr("class").replace( "background-color2", "background-color6").replace( "background-color5", "background-color6");
+                GenreAddInput.prop('checked', false);
+                GenreRemoveInput.prop('checked', true);
+                GenreButton.attr('class', classButton);
             }else{
-                GenreAddInput.checked = false;
-                GenreRemoveInput.checked = false;
-                GenreButton.className = btnClassName.replace("background-color4", "background-color2");
-                GenreButton.className = btnClassName.replace("background-color5", "background-color2");
+                var classButton = GenreButton.attr("class").replace( "background-color6", "background-color2").replace( "background-color5", "background-color2");
+                GenreAddInput.prop('checked', false);
+                GenreRemoveInput.prop('checked', false);
+                GenreButton.attr('class', classButton);
             }
         }
+        ChangeButtonSearch(user_id);
     }
 
+    function ChangeButtonSearch(user_id){
+        var link = "http://localhost/PocketManga/backend/web/api/manga/allmanga/total/" + GetFilters(user_id);
+        
+        $.ajax({
+            method:"GET",
+            url:link
+        })
+        .done(function(response){
+            if(response.total){
+                $('#button-search').text('Search ('+response.total+')');
+            }else{
+                $('#button-search').text('Search (0)');
+            }
+        })
+    }
+    
 
     function ReloadMangas(user_id){
         $('.manga-list').html('');
@@ -174,7 +180,33 @@ $this->title = 'PocketManga';
             }else{
                 document.getElementById("no-manga").style.display = "block";
             }
-        })/**/
+        })
+    }
+
+    function ChangeMangaList(Filters){
+        $('.manga-list').html('');
+
+        var link = "http://localhost/PocketManga/backend/web/api/manga/allmanga/" + Filters;
+        $.ajax({
+            method:"GET",
+            url:link
+        })
+        .done(function(response){
+            if(response.mangas){
+                document.getElementById("no-manga").style.display = "none";
+                for (i=0; i<response.mangas.length; i++) {
+                    var manga_clone = clone.clone();
+                    if(response.mangas[i].SrcImage != null){	
+                        $('#image', manga_clone).attr('src','http://localhost/PocketManga/frontend/web/img/'+response.mangas[i].SrcImage);
+                    }
+                    $('#title', manga_clone).text(response.mangas[i].Title);
+                    $("#link", manga_clone).attr("href", 'http://localhost/PocketManga/frontend/web/manga/'+response.mangas[i].IdManga);
+                    $('.manga-list').append(manga_clone);
+                }
+            }else{
+                document.getElementById("no-manga").style.display = "block";
+            }
+        })
     }
     
     function GetFilters(user_id){
@@ -183,41 +215,54 @@ $this->title = 'PocketManga';
         var Option = SelectOption.options[SelectOption.selectedIndex].value;
         var Status = SelectStatus.options[SelectStatus.selectedIndex].value;
         var Filters = user_id+'__'+Option+'__'+Status;
+        var AddFilters = null;
+        var RemoveFilters = null;
         
         var AddGenres = new Array();
         var RemoveGenres = new Array();
-        var AddGenres = document.querySelectorAll('input[class="add-genres"]:checked');
-        var RemoveGenres = document.querySelectorAll('input[class="remove-genres"]:checked');
-
+        var AddGenres = document.getElementsByClassName("add-genres");
+        var RemoveGenres = document.getElementsByClassName("remove-genres");
         if(AddGenres.length != 0){
+            var num = 0;
             for (i = 0; i < AddGenres.length; i++) {
-                if(i == 0){
-                    Filters = Filters+'__'+AddGenres[i].value + "_";
-                }else{
-                    Filters = Filters+AddGenres[i].value;
-                    if(i < (AddGenres.length-1)){
-                        Filters = Filters+"_";
+                if(AddGenres[i].checked){
+                    if(num != 0 && i < (AddGenres.length-1)){
+                        AddFilters = AddFilters+"_";
+                    }
+                    if(num == 0){
+                        AddFilters = AddGenres[i].value;
+                        num++;
+                    }else{
+                        AddFilters = AddFilters+AddGenres[i].value;
                     }
                 }
             }
-        }else{
-            Filters = Filters+"__all";
+        }
+        if(AddFilters == null){
+            AddFilters = 'all';
         }
 
         if(RemoveGenres.length != 0){
+            var num = 0;
             for (i = 0; i < RemoveGenres.length; i++) {
-                if(i == 0){
-                    Filters = Filters+'__'+RemoveGenres[i].value+"_";
-                }else{
-                    Filters = Filters+RemoveGenres[i].value;
-                    if(i < (RemoveGenres.length-1)){
-                        Filters = Filters+"_";
+                if(RemoveGenres[i].checked){
+                    if(num != 0 && i < (RemoveGenres.length-1)){
+                        RemoveFilters = RemoveFilters+"_";
+                    }
+                    if(num == 0){
+                        RemoveFilters = RemoveGenres[i].value;
+                        num++;
+                    }else{
+                        RemoveFilters = RemoveFilters+RemoveGenres[i].value;
                     }
                 }
             }
-        }else{
-            Filters = Filters+"__none";
         }
+        if(RemoveFilters == null){
+            RemoveFilters = 'none';
+        }
+        
+        Filters = Filters+'__'+AddFilters+'__'+RemoveFilters;
         return Filters;
     }
 </script>

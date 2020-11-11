@@ -381,19 +381,13 @@ class SiteController extends Controller
     {
         $List = Yii::$app->params['Dictionary']['uncategorized'];
         $Lists = null;
-        $Libraries = Yii::$app->user->identity->leitor->libraries;
-
-        if($Libraries){
-            foreach($Libraries as $Library){
-                $List[] = $Library->list;
-            }
-        }
-        /*
+        
         $Lists = LibraryList::find()
-            ->innerJoin('leitor', 'leitor.PrimaryList_Id = library_list.IdList')
-            ->where('leitor.IdLeitor', '=', Yii::$app->user->identity->leitor->IdLeitor)
+            ->leftJoin('library li', $on='li.List_Id = library_list.IdList')
+            ->leftJoin('leitor le', $on='le.IdLeitor = li.Leitor_Id')
+            ->where('le.IdLeitor ='.Yii::$app->user->identity->leitor->IdLeitor)
             ->all();
-        */
+            
         return $this->render('library',[
             'List' => $List,
             'Lists' => $Lists,

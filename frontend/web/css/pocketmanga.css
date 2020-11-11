@@ -82,6 +82,6 @@ button:hover, button:focus {
     outline: none !important;
 }
 
-/*.add-genres, .remove-genres{
+.add-genres, .remove-genres{
     display: none;
-}*/
+}

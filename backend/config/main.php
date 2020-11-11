@@ -59,6 +59,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET allmanga/{filters}' => 'allmanga',
+                        'GET allmanga/total/{filters}' => 'totalmanga',
                         'GET library/{filters}' => 'library',
                     ],
                     'tokens' => [
