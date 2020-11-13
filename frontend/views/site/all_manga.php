@@ -72,7 +72,7 @@ $this->title = 'PocketManga';
                     <div class="row manga-list mt-4">
                         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 to-clone">
                             <div class="d-flex justify-content-center">
-                                <a class="text-center tag-a" id="link" href="<?=Url::to('manga/')?>">
+                                <a class="text-center tag-a" id="link" href="">
                                     <img class="tag-img" id="image" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
                                     <p class="text-color2 tag-p" id="title"> Title </p>
                                 </a>
@@ -171,36 +171,10 @@ $this->title = 'PocketManga';
                 for (i=0; i<response.mangas.length; i++) {
                     var manga_clone = clone.clone();
                     if(response.mangas[i].SrcImage != null){	
-                        $('#image', manga_clone).attr('src','http://localhost/PocketManga/frontend/web/img/'+response.mangas[i].SrcImage);
+                        $('#image', manga_clone).attr('src','<?=Yii::$app->request->baseUrl.'/'.'img/'?>'+response.mangas[i].SrcImage);
                     }
                     $('#title', manga_clone).text(response.mangas[i].Title);
-                    $("#link", manga_clone).attr("href", 'http://localhost/PocketManga/frontend/web/manga/'+response.mangas[i].IdManga);
-                    $('.manga-list').append(manga_clone);
-                }
-            }else{
-                document.getElementById("no-manga").style.display = "block";
-            }
-        })
-    }
-
-    function ChangeMangaList(Filters){
-        $('.manga-list').html('');
-
-        var link = "http://localhost/PocketManga/backend/web/api/manga/allmanga/" + Filters;
-        $.ajax({
-            method:"GET",
-            url:link
-        })
-        .done(function(response){
-            if(response.mangas){
-                document.getElementById("no-manga").style.display = "none";
-                for (i=0; i<response.mangas.length; i++) {
-                    var manga_clone = clone.clone();
-                    if(response.mangas[i].SrcImage != null){	
-                        $('#image', manga_clone).attr('src','http://localhost/PocketManga/frontend/web/img/'+response.mangas[i].SrcImage);
-                    }
-                    $('#title', manga_clone).text(response.mangas[i].Title);
-                    $("#link", manga_clone).attr("href", 'http://localhost/PocketManga/frontend/web/manga/'+response.mangas[i].IdManga);
+                    $("#link", manga_clone).attr("href", '<?=Yii::$app->request->baseUrl.'/'.'manga/'?>'+response.mangas[i].IdManga);
                     $('.manga-list').append(manga_clone);
                 }
             }else{

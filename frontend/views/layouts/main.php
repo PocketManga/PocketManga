@@ -65,20 +65,20 @@ AppAsset::register($this);
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"><?=Yii::$app->params['Dictionary']['more']?></a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=Url::to('about')?>"><?=Yii::$app->params['Dictionary']['about']?></a>
-                                <a class="dropdown-item" href="<?=Url::to('contact')?>"><?=Yii::$app->params['Dictionary']['contact']?></a>
+                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/about'?>"><?=Yii::$app->params['Dictionary']['about']?></a>
+                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/contact'?>"><?=Yii::$app->params['Dictionary']['contact']?></a>
                             </div>
                         </li>
                         <?php if (Yii::$app->user->isGuest) { ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Url::to('signup')?>"><?=Yii::$app->params['Dictionary']['signup']?></a>
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/signup'?>"><?=Yii::$app->params['Dictionary']['signup']?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'login'?>" href="<?=Url::to('login')?>"><?=Yii::$app->params['Dictionary']['login']?></a>
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'login'?>" href="<?=Yii::$app->request->baseUrl.'/login'?>"><?=Yii::$app->params['Dictionary']['login']?></a>
                         </li>
                         <?php }else{ ?>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'logout'?>" href="<?=Url::to('logout')?>"><?=Yii::$app->params['Dictionary']['logout']?></a>
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'logout'?>" href="<?=Yii::$app->request->baseUrl.'/logout'?>"><?=Yii::$app->params['Dictionary']['logout']?></a>
                         </li>
                         <?php } ?>
                     </ul>
@@ -88,19 +88,19 @@ AppAsset::register($this);
                 <ul class="nav nav-pills nav-justified">
                     <li class="nav-item">
                         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index' || Yii::$app->controller->route == 'site/index2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Url::to('home_order-by=latest-updates_manga-per-page=50_page=1')?>"><?=Yii::$app->params['Dictionary']['home']?></a>
+                            href="<?=Yii::$app->request->baseUrl.'/home_order-by=latest-updates_manga-per-page=50_page=1'?>"><?=Yii::$app->params['Dictionary']['home']?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/allmanga') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Url::to('all-manga')?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
+                            href="<?=Yii::$app->request->baseUrl.'/all-manga'?>"><?=Yii::$app->params['Dictionary']['all_manga']?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/ongoing') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Url::to('ongoing_order-by=latest-updates_manga-per-page=50_page=1')?>"><?=Yii::$app->params['Dictionary']['ongoing']?></a>
+                            href="<?=Yii::$app->request->baseUrl.'/ongoing_order-by=latest-updates_manga-per-page=50_page=1'?>"><?=Yii::$app->params['Dictionary']['ongoing']?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/completed') ? 'active background-color2 text-color3' : 'text-color2'?>"
-                            href="<?=Url::to('completed_order-by=latest-updates_manga-per-page=50_page=1')?>"><?=Yii::$app->params['Dictionary']['completed']?></a>
+                            href="<?=Yii::$app->request->baseUrl.'/completed_order-by=latest-updates_manga-per-page=50_page=1'?>"><?=Yii::$app->params['Dictionary']['completed']?></a>
                     </li>
                     <?php if (Yii::$app->user->isGuest) { ?>
                     <li class="nav-item">
@@ -109,7 +109,7 @@ AppAsset::register($this);
                     <?php } else { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/library' || Yii::$app->controller->route == 'site/library2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Url::to('library')?>"><?=Yii::$app->params['Dictionary']['library']?></a>
+                            href="<?=Yii::$app->request->baseUrl.'/'.'library'?>"><?=Yii::$app->params['Dictionary']['library']?></a>
                     </li>
                     <?php } ?>
                 </ul>

@@ -324,6 +324,7 @@ class SiteController extends Controller
             'NumberPerPage' => $NumberPerPage,
             'NumOfPages' => $NumOfPages,
             'Search' => $Search,
+            'SearchId' => null,
         ]);
     }
 
@@ -356,6 +357,7 @@ class SiteController extends Controller
             'NumberPerPage' => $NumberPerPage,
             'NumOfPages' => $NumOfPages,
             'Search' => $Category->Name,
+            'SearchId' => $Category->IdCategory,
         ]);
     }
 
@@ -379,7 +381,17 @@ class SiteController extends Controller
      */
     public function actionLibrary()
     {
-        $List = Yii::$app->params['Dictionary']['uncategorized'];
+        $primaryList = Yii::$app->user->identity->leitor->PrimaryList_Id;
+        $List = null;
+        if($primaryList){
+            $List = $primaryList;
+        }
+        if($primaryList == null){
+            $List = Yii::$app->params['Dictionary']['uncategorized'];
+        }
+        if($primaryList == 1){
+            $List = Yii::$app->params['Dictionary']['all_manga'];
+        }
         $Lists = null;
         
         $Lists = LibraryList::find()
@@ -387,10 +399,20 @@ class SiteController extends Controller
             ->leftJoin('leitor le', $on='le.IdLeitor = li.Leitor_Id')
             ->where('le.IdLeitor ='.Yii::$app->user->identity->leitor->IdLeitor)
             ->all();
+
             
+        
+        $CountAllMangas = count(Manga::find()->all());
+        $CountUncatMangas = count(Manga::find()
+                                    ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
+                                    ->where('l.Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor.' and l.List_Id is null')
+                                    ->all());
+
         return $this->render('library',[
             'List' => $List,
             'Lists' => $Lists,
+            'CountAM' => $CountAllMangas,
+            'CountUM' => $CountUncatMangas,
         ]);
     }
 

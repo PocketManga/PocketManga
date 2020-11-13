@@ -813,25 +813,25 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 1,
-            'List_Id' => 3,
+            'List_Id' => 4,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 2,
-            'List_Id' => 2,
+            'List_Id' => 3,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 3,
-            'List_Id' => 3,
+            'List_Id' => 4,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 4,
-            'List_Id' => 3,
+            'List_Id' => 4,
         ]);
 
         $this->insert('{{%library}}', [
@@ -842,7 +842,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 6,
-            'List_Id' => 1,
+            'List_Id' => 2,
         ]);
 
         $this->insert('{{%library}}', [
@@ -853,7 +853,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 8,
-            'List_Id' => 2,
+            'List_Id' => 3,
         ]);
 
         $this->insert('{{%library}}', [
@@ -864,31 +864,31 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 10,
-            'List_Id' => 1,
+            'List_Id' => 2,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 11,
-            'List_Id' => 2,
+            'List_Id' => 3,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 12,
-            'List_Id' => 2,
+            'List_Id' => 3,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 2,
             'Manga_Id' => 1,
-            'List_Id' => 1,
+            'List_Id' => 2,
         ]);
 
         $this->insert('{{%library}}', [
             'Leitor_Id' => 2,
             'Manga_Id' => 2,
-            'List_Id' => 1,
+            'List_Id' => 2,
         ]);
 
         /**/

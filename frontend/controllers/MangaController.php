@@ -31,7 +31,6 @@ class MangaController extends Controller
         ];
     }
 
-
     /**
      * Displays a single Manga model.
      * @param integer $id

@@ -1,5 +1,9 @@
 <?php
-    use yii\helpers\Url;
+
+use yii\helpers\Url;
+/* @var $this yii\web\View */
+
+$this->title = $Manga->Title;
 ?>
 
 <div class="background-color2 radi-all-15">
@@ -55,7 +59,7 @@
                             </div>
                             <ul class="p-0 mt-2 remove-bullet chapter-list scroll-type1">
                                 <?php foreach($Chapters as $Chapter) { ?>
-                                <a href="<?=Url::to('chapter/'.$Chapter->IdChapter)?>">
+                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>">
                                     <li class="pb-2 mr-3">
                                         <span class="text-color2">Chapter <?=$Chapter->Number?><?php echo ($Chapter->Name) ? ' - '.$Chapter->Name:''?></span>
                                         <span class="float-right text-color2"><?=date_format(date_create($Chapter->ReleaseDate),"d/m/Y")?></span>

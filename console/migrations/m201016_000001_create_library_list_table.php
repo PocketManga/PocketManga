@@ -21,6 +21,10 @@ class m201016_000001_create_library_list_table extends Migration
             'IdList' => $this->primaryKey(),
             'Name' => $this->string(20)->notNull()->unique(),
         ], $tableOptions);
+
+        $this->insert('{{%library_list}}', [
+            'Name' => 'Uncategorized',
+        ]);
     }
 
     /**

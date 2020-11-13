@@ -8,10 +8,16 @@
         </svg>
     </div>
     <div class="py-3 float-right w-100"> 
-        <a href="#"><p class="text-color1 mb-0 ml-4 mr-4 br-word bold"><?=Yii::$app->params['Dictionary']['uncategorized']?></p></a>
-        <a href="#"><p class="text-color1 mb-0 ml-4 mr-4 br-word bold"><?=Yii::$app->params['Dictionary']['all_manga']?></p></a>
+        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(1);">
+            <p class="text-color1 mb-0 br-word bold"><?=Yii::$app->params['Dictionary']['uncategorized']?> (<?=$CountUM?>)</p>
+        </button>
+        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(null);">
+            <p class="text-color1 mb-0 br-word bold"><?=Yii::$app->params['Dictionary']['all_manga']?> (<?=$CountAM?>)</p>
+        </button>
         <?php if($Lists) { foreach($Lists as $list) { ?>
-            <a href="#"><p class="text-color1 mb-0 ml-4 mr-4 br-word bold"><?=$list->Name?> (<?=count($list->libraries)?>)</p></a>
+        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(<?=$list->IdList?>);">
+            <p class="text-color1 mb-0 br-word bold"><?=$list->Name?> (<?=count($list->GetLibraries()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->all())?>)</p>
+        </button>
         <?php }} ?>
     </div>
 </div>

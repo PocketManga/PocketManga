@@ -15,7 +15,7 @@
     </div>
     <div class="py-3"> 
         <?php if($Categories) { foreach($Categories as $Category) { ?>
-            <a href="<?=Url::to('search-for='.$Category->IdCategory.'_manga-per-page=50_page=1')?>"><p class="text-color1 mb-0 ml-4 mr-4 br-word bold"><?=$Category->Name?> (<?=count($Category->getMangas()->all())?>)</p></a>
+            <a href="<?=Yii::$app->request->baseUrl.'/search-for='.$Category->IdCategory.'_manga-per-page=50_page=1'?>"><p class="text-color1 mb-0 ml-4 mr-4 br-word bold"><?=$Category->Name?> (<?=count($Category->getMangas()->all())?>)</p></a>
         <?php }} ?>
     </div>
 </div>

@@ -26,7 +26,7 @@ class m201016_000002_create_leitor_table extends Migration
             'LastVisit' => 'DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',
             'Language' => $this->string(10)->notNull()->defaultValue('En_us'),
             'MangaLanguage' => $this->string(10)->notNull()->defaultValue('En_us'),
-            'PrimaryList_Id' => $this->integer(),
+            'PrimaryList_Id' => $this->integer()->defaultValue(1),
             'User_Id' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
 

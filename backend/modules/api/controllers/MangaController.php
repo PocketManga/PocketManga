@@ -70,12 +70,13 @@ class MangaController extends ActiveController
 
     public function actionLibrary($filters)
     {
-        $filters_split = explode('__', strtolower(preg_replace('~([a-z])([A-Z])~', '\\1 \\2',  $filters)));
+        $filters_split = explode('_', $filters);
         
         if(count($filters_split)>=2){
             $User_Id = $filters_split[0];
             $List = $filters_split[1];
             $MangaModel = new $this->modelClass;
+            $mangas = null;
 
             $User = User::find($User_Id)->one();
             $where = 'l.Leitor_Id = '.$User->leitor->IdLeitor;
@@ -92,14 +93,54 @@ class MangaController extends ActiveController
                         ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
                         ->leftJoin('manga_readed mr', $on='manga.IdManga = mr.Manga_Id')
                         ->where($where)
-                        ->orderBy('mr.Leitor_Id, manga.Title asc')
+                        ->orderBy('mr.Leitor_Id asc, manga.Title asc')
                         ->all();
             
-            return ['Mangas' => $Mangas];
+            foreach($Mangas as $Manga){
+                $MangaReaded = $Manga->getMangaReadeds()->where('Leitor_Id = '.$User_Id)->one();
+                $Library = $Manga->getLibraries()->where('Leitor_Id = '.$User_Id)->one();
+                $manga = [
+                    'IdManga' => $Manga->IdManga,
+                    'Title' => $Manga->Title,
+                    'Status' => ($Manga->Status)?true:false,
+                    'List' => ($Library->list)?$Library->list->Name:'Uncategorized',
+                    'Readed' => ($MangaReaded)?true:false,
+                ];
+                $mangas[] = $manga;
+            }
+            
+            return ['mangas' => $Mangas];
         }
         return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
     }
 
+    public function actionReaded($filters)
+    {
+        $filters_split = explode('_', $filters);
+        
+        if(count($filters_split)>=2){
+            $Leitor_Id = $filters_split[0];
+            $Manga_Id = $filters_split[1];
+            $MangaModel = new $this->modelClass;
+            
+            $Manga = $this->findModel($id);
+            $Readed = $Manga->getMangaReadeds()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->one();
+            
+            if($Readed){
+                $Readed->delete();
+            }else{
+                $Readed = new MangaReaded;
+                $Readed->Leitor_Id = Yii::$app->user->identity->leitor->IdLeitor;
+                $Readed->Manga_Id = $id;
+                $Readed->save();
+            }
+
+            return ['mangas' => $Mangas];
+        }
+        return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
+    }
+
+    
     public function GetManga($Otpion, $Status, $R18, $Genres, $NotGenres){
         $MangaModel = new $this->modelClass;
         $where=null;
@@ -118,7 +159,7 @@ class MangaController extends ActiveController
                 $where = "manga.R18 = 0";
             }
         }
-        //exists (select * from category ca inner join manga_category mc on mc.Category_Id = ca.IdCategory where mc.Manga_Id=M.IdManga AND ca.Name like 'Romance')
+        
         if($Genres){
             $SplitGenres = explode('_', strtolower($Genres));
             if($where){

@@ -50,7 +50,7 @@ return [
                 'login' => 'site/login',
 
                 'manga/<id:\d+>' => 'manga/view',
-                'manga/chapter/<id:\d+>' => 'chapter/view',
+                'manga/<idManga:\d+>/chapter/<id:\d+>' => 'chapter/view',
                 'home_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/index2',
                 'all-manga' => 'site/allmanga',
                 'ongoing_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/ongoing',

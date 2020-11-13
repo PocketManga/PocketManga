@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use common\models\Chapter;
+use common\models\Manga;
 
 /**
  * ChapterController implements the CRUD actions for Chapter model.
@@ -37,12 +38,14 @@ class ChapterController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idManga, $id)
     {
+        $Manga = Manga::find()->where('IdManga = '.$idManga)->one();
         $Chapter = $this->findModel($id);
 
         return $this->render('view', [
             'Chapter' => $Chapter,
+            'Manga' => $Manga,
         ]);
     }
 
