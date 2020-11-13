@@ -5,6 +5,7 @@ namespace backend\modules\api\controllers;
 use yii\rest\ActiveController;
 //use common\models\Manga;
 use common\models\User;
+use common\models\MangaReaded;
 use DateTime;
 
 class MangaController extends ActiveController
@@ -109,7 +110,7 @@ class MangaController extends ActiveController
                 $mangas[] = $manga;
             }
             
-            return ['mangas' => $Mangas];
+            return ['mangas' => $mangas];
         }
         return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
     }
@@ -122,20 +123,21 @@ class MangaController extends ActiveController
             $Leitor_Id = $filters_split[0];
             $Manga_Id = $filters_split[1];
             $MangaModel = new $this->modelClass;
-            
-            $Manga = $this->findModel($id);
-            $Readed = $Manga->getMangaReadeds()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->one();
+
+            $Manga = $MangaModel->find()->where('IdManga = '.$Manga_Id)->one();
+            $Readed = $Manga->getMangaReadeds()->where('Leitor_Id = '.$Leitor_Id)->one();
             
             if($Readed){
                 $Readed->delete();
+                return ['Readed' => 'Deleted'];
             }else{
                 $Readed = new MangaReaded;
-                $Readed->Leitor_Id = Yii::$app->user->identity->leitor->IdLeitor;
-                $Readed->Manga_Id = $id;
+                $Readed->Leitor_Id = $Leitor_Id;
+                $Readed->Manga_Id = $Manga_Id;
                 $Readed->save();
+                return ['Readed' => 'Created'];
             }
 
-            return ['mangas' => $Mangas];
         }
         return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
     }

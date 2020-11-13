@@ -4,13 +4,6 @@
     use yii\helpers\Html;
 ?>
 <div class="row">
-    <?php $form = ActiveForm::begin(['action' => ['manga/readed']]); ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
     <div class="col-12 my-n3 pr-0 background-color1 radi-all-15">
         <div class="border-b-1px-solid-color1 py-2 mr-0 row">
             <div class="col-sm-6 col-md-6 col-lg-5 col-xl-5"><span class="text-color4 mb-1 pt-1">Manga Title</span></div>

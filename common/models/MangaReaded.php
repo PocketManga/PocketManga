@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 
+use frontend\models\Leitor;
+
 /**
  * This is the model class for table "manga_readed".
  *

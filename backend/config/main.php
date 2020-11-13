@@ -61,6 +61,7 @@ return [
                         'GET allmanga/{filters}' => 'allmanga',
                         'GET allmanga/total/{filters}' => 'totalmanga',
                         'GET library/{filters}' => 'library',
+                        'GET manga/readed/{filters}' => 'readed',
                     ],
                     'tokens' => [
                         '{filters}' => '<filters:\\w+>',

@@ -72,6 +72,7 @@ $this->title = 'PocketManga';
                         $('#status', manga_clone).text('Completed');
                         $('#status', manga_clone).attr('class', 'text-color3');
                     }
+                    alert(response.mangas[i].Readed);
                     if(response.mangas[i].Readed == true){
                         $('#readed', manga_clone).text('Readed');
                         $('#readed', manga_clone).attr('class', 'text-color5');
