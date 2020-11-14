@@ -8,16 +8,16 @@
         </svg>
     </div>
     <div class="py-3 float-right w-100"> 
-        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(1);">
-            <p class="text-color1 mb-0 br-word bold"><?=Yii::$app->params['Dictionary']['uncategorized']?> (<?=$CountUM?>)</p>
+        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(<?=$UncatList->IdList?>);">
+            <p class="text-color1 mb-0 br-word bold"><?=$UncatList->Name?> (<?=count($UncatList->GetLibraries()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->all())?>)</p>
         </button>
         <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(null);">
             <p class="text-color1 mb-0 br-word bold"><?=Yii::$app->params['Dictionary']['all_manga']?> (<?=$CountAM?>)</p>
         </button>
-        <?php if($Lists) { foreach($Lists as $list) { ?>
-        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(<?=$list->IdList?>);">
-            <p class="text-color1 mb-0 br-word bold"><?=$list->Name?> (<?=count($list->GetLibraries()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->all())?>)</p>
-        </button>
-        <?php }} ?>
+        <?php if($Lists) { foreach($Lists as $list) { if($list->IdList!=1){?>
+            <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(<?=$list->IdList?>);">
+                <p class="text-color1 mb-0 br-word bold"><?=$list->Name?> (<?=count($list->GetLibraries()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->all())?>)</p>
+            </button>
+        <?php }}} ?>
     </div>
 </div>

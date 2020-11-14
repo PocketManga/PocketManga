@@ -11,7 +11,7 @@ $this->title = 'PocketManga';
     <div class="container-fluid pb-4 px-4">
         <div class="row">
             <div class="col-md-3 mt-4">
-                <?php echo $this->render('//layouts/list_library_lists',['List' => $List,'Lists' => $Lists, 'CountAM' => $CountAM,'CountUM' => $CountUM]); ?>
+                <?php echo $this->render('//layouts/list_library_lists',['List' => $List,'Lists' => $Lists, 'CountAM' => $CountAM,'UncatList' => $UncatList]); ?>
             </div>
             <div class="col">                
                 <div class="mb-4">
@@ -44,7 +44,7 @@ $this->title = 'PocketManga';
         }
     }
     function ReloadMangas(list_id){
-        var user_id = <?=Yii::$app->user->identity->IdUser?>;
+        var leitor_id = <?=Yii::$app->user->identity->leitor->IdLeitor?>;
         $('.manga-list').html('');
         var list = null;
         if(list_id){
@@ -53,11 +53,8 @@ $this->title = 'PocketManga';
         if(list_id == null){
             list = 'all';
         }
-        if(list_id == 1){
-            list = 'null';
-        }
 
-        var link = "http://localhost/PocketManga/backend/web/api/manga/library/" + user_id + '_' + list;
+        var link = "http://localhost/PocketManga/backend/web/api/manga/library/" + leitor_id + '_' + list;
         
         $.ajax({
             method:"GET",
@@ -72,14 +69,52 @@ $this->title = 'PocketManga';
                         $('#status', manga_clone).text('Completed');
                         $('#status', manga_clone).attr('class', 'text-color3');
                     }
-                    alert(response.mangas[i].Readed);
                     if(response.mangas[i].Readed == true){
                         $('#readed', manga_clone).text('Readed');
                         $('#readed', manga_clone).attr('class', 'text-color5');
                     }
+                    $('#button-readed', manga_clone).attr('onclick', 'Readed_Unreaded($(this).closest(".to-clone"),'+response.mangas[i].IdManga+')');
+                    $('#select-list', manga_clone).attr('onchange', 'ChangeList($(this).closest(".to-clone"),'+response.mangas[i].IdManga+',"'+response.mangas[i].List+'")');
                     $('#option-'+response.mangas[i].List, manga_clone).prop('selected', true);
                     $("#link", manga_clone).attr("href", "<?=Yii::$app->request->baseUrl.'/'.'manga/'?>"+response.mangas[i].IdManga);
                     $('.manga-list').append(manga_clone);
+                }
+            }
+        })
+    }
+    function Readed_Unreaded(clone, manga_id){
+        var leitor_id = <?=Yii::$app->user->identity->leitor->IdLeitor?>;
+        var link = "http://localhost/PocketManga/backend/web/api/manga/readed/" + leitor_id + '_' + manga_id;
+        var spanReaded = clone.find('#readed').first();
+        $.ajax({
+            method:"GET",
+            url:link
+        })
+        .done(function(response){
+            if(response.Readed != null){
+                if(response.Readed == true){
+                    spanReaded.text('Readed');
+                    spanReaded.attr('class', 'text-color5');
+                }else{
+                    spanReaded.text('Uneaded');
+                    spanReaded.attr('class', 'text-color4');
+                }
+            }
+        })
+    }
+    function ChangeList(clone, manga_id){
+        var leitor_id = <?=Yii::$app->user->identity->leitor->IdLeitor?>;
+        var list_name = clone.find('.class-select-list').first().val();
+        var link = "http://localhost/PocketManga/backend/web/api/manga/changelist/" + leitor_id + '__' + manga_id+'__'+ list_name;
+        alert(link);
+        $.ajax({
+            method:"GET",
+            url:link
+        })
+        .done(function(response){
+            if(response.Changed != null){
+                if(response.Changed == true){
+                    clone.remove();
                 }
             }
         })

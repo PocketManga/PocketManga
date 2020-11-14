@@ -17,7 +17,7 @@ use frontend\models\ContactForm;
 
 // I started here!!
 use common\models\Manga;
-use frontend\models\LibraryList;
+use common\models\LibraryList;
 use common\models\Category;
 use yii\data\ArrayDataProvider;
 
@@ -401,18 +401,19 @@ class SiteController extends Controller
             ->all();
 
             
+        $UncatList = LibraryList::find()->where('IdList = 1')->one();
         
         $CountAllMangas = count(Manga::find()->all());
-        $CountUncatMangas = count(Manga::find()
+        /*$CountUncatMangas = count(Manga::find()
                                     ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
                                     ->where('l.Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor.' and l.List_Id is null')
-                                    ->all());
+                                    ->all());*/
 
         return $this->render('library',[
             'List' => $List,
             'Lists' => $Lists,
             'CountAM' => $CountAllMangas,
-            'CountUM' => $CountUncatMangas,
+            'UncatList' => $UncatList,
         ]);
     }
 

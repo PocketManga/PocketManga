@@ -6,6 +6,8 @@ use yii\rest\ActiveController;
 //use common\models\Manga;
 use common\models\User;
 use common\models\MangaReaded;
+use common\models\LibraryList;
+use common\models\Library;
 use DateTime;
 
 class MangaController extends ActiveController
@@ -80,11 +82,8 @@ class MangaController extends ActiveController
             $mangas = null;
 
             $User = User::find($User_Id)->one();
-            $where = 'l.Leitor_Id = '.$User->leitor->IdLeitor;
-
-            if($List == 'null'){
-                $where = $where.' and l.List_Id is null';
-            }
+            $Leitor = $User->leitor;
+            $where = 'l.Leitor_Id = '.$Leitor->IdLeitor;
 
             if($List != 'null' && $List != 'all'){
                 $where = $where.' and l.List_Id ='.$List;
@@ -98,8 +97,8 @@ class MangaController extends ActiveController
                         ->all();
             
             foreach($Mangas as $Manga){
-                $MangaReaded = $Manga->getMangaReadeds()->where('Leitor_Id = '.$User_Id)->one();
-                $Library = $Manga->getLibraries()->where('Leitor_Id = '.$User_Id)->one();
+                $MangaReaded = $Manga->getMangaReadeds()->where('Leitor_Id = '.$Leitor->IdLeitor)->one();
+                $Library = $Manga->getLibraries()->where('Leitor_Id = '.$Leitor->IdLeitor)->one();
                 $manga = [
                     'IdManga' => $Manga->IdManga,
                     'Title' => $Manga->Title,
@@ -129,14 +128,47 @@ class MangaController extends ActiveController
             
             if($Readed){
                 $Readed->delete();
-                return ['Readed' => 'Deleted'];
+                return ['Readed' => false];
             }else{
                 $Readed = new MangaReaded;
                 $Readed->Leitor_Id = $Leitor_Id;
                 $Readed->Manga_Id = $Manga_Id;
                 $Readed->save();
-                return ['Readed' => 'Created'];
+                return ['Readed' => true];
             }
+
+        }
+        return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
+    }
+
+    public function actionChangelist($filters)
+    {
+        $filters_split = explode('__', $filters);
+        
+        if(count($filters_split)>=3){
+            $Leitor_Id = $filters_split[0];
+            $Manga_Id = $filters_split[1];
+            $ListName = $filters_split[2];
+            $MangaModel = new $this->modelClass;
+
+            $Manga = $MangaModel->find()->where('IdManga = '.$Manga_Id)->one();
+            $List = LibraryList::find()->where('Name like "'.$ListName.'"')->one();
+            $Library = $Manga->getLibraries()->where('Leitor_Id = '.$Leitor_Id)->one();
+
+            if(!$List){
+                $List = new LibraryList;
+                $List->Name = $ListName;
+                $List->save();
+            }
+            
+            if(!$Library){
+                $Library = new Library;
+                $Library->Leitor_Id = $Leitor_Id;
+                $Library->Manga_Id = $Manga_Id;
+            }
+            $Library->List_Id = $List->IdList;
+            $Library->save();
+            return ['Changed' => true];
 
         }
         return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];

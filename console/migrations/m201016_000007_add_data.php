@@ -837,6 +837,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 5,
+            'List_Id' => 1,
         ]);
 
         $this->insert('{{%library}}', [
@@ -848,6 +849,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 7,
+            'List_Id' => 1,
         ]);
 
         $this->insert('{{%library}}', [
@@ -859,6 +861,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%library}}', [
             'Leitor_Id' => 1,
             'Manga_Id' => 9,
+            'List_Id' => 1,
         ]);
 
         $this->insert('{{%library}}', [

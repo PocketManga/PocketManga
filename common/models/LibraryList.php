@@ -1,8 +1,9 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
+use frontend\models\Leitor;
 
 /**
  * This is the model class for table "library_list".

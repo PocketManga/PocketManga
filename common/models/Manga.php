@@ -42,7 +42,6 @@ use Yii;
  * @property Report[] $reports
  */
 
-use frontend\models\Library;
 
 class Manga extends \yii\db\ActiveRecord
 {

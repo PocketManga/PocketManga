@@ -19,12 +19,12 @@
                 <div class="col-sm-6 col-md-6 col-lg-2 col-xl-2 text-center"><span class="text-color2" id="status">Ongoing</span></div>
                 <div class="col-sm-6 col-md-6 col-lg-2 col-xl-2 text-center">
                 
-                    <button class="border-0 background-color1">
+                    <button class="border-0 background-color1" id="button-readed">
                         <span class="text-color4" id="readed">Unreaded</span>
                     </button>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                    <select class="select-color2 text-color2" id="order-by" onchange="changePage()">
+                    <select class="select-color2 text-color2 class-select-list" id="select-list">
                         <option class="option-color1 text-color2" id="option-Uncategorized" value="Uncategorized"><?=Yii::$app->params['Dictionary']['uncategorized']?></option>
                         <?php if($Lists){ foreach($Lists as $list){ ?>
                         <option class="option-color1 text-color2" id="option-<?=$list->Name?>" value="<?=$list->Name?>"><?=$list->Name?></option>

@@ -1,11 +1,9 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
 use frontend\models\Leitor;
-use frontend\models\LibraryList;
-use frontend\models\Manga;
 
 /**
  * This is the model class for table "library".
