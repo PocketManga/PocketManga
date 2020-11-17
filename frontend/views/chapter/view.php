@@ -2,7 +2,7 @@
     use yii\helpers\Url;
 ?>
 
-<div class="background-color2 radi-b-15">
+<div class="background-color2 radi-all-15">
     <div class="container-fluid p-4">
         <div class="background-color3 radi-all-15 pt-4 px-4 pb-2">
             <ul class="remove-bullet pl-0">
