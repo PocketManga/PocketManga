@@ -22,7 +22,7 @@ class m201016_000005_create_chapter_readed_table extends Migration
             'Chapter_Id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_chapter_readed_author', 'chapter_readed', 'Leitor_Id', 'leitor', 'IdLeitor');
+        $this->addForeignKey('fk_chapter_readed_leitor', 'chapter_readed', 'Leitor_Id', 'leitor', 'IdLeitor');
         $this->addForeignKey('fk_chapter_readed_chapter', 'chapter_readed', 'Chapter_Id', 'chapter', 'IdChapter');
         
         $this->addPrimaryKey('pk_chapter_readed', 'chapter_readed', ['Leitor_Id', 'Chapter_Id']);

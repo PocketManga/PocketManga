@@ -58,11 +58,20 @@ $this->title = $Manga->Title;
                                 <p class="text-color4 mb-1 pt-1 ml-2 pl-1">Chapter Name<span class="float-right mr-2 pr-1">Updated</span></p>
                             </div>
                             <ul class="p-0 mt-2 remove-bullet chapter-list scroll-type1">
-                                <?php foreach($Chapters as $Chapter) { ?>
+                                <?php foreach($Chapters as $Chapter) { 
+                                    $exist = false;
+                                    if($ChapterReadeds){
+                                        foreach($ChapterReadeds as $ChapRead) { 
+                                            if($ChapRead->chapter == $Chapter){
+                                                $exist = true;
+                                            }
+                                        }
+                                    }
+                                ?>
                                 <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>">
                                     <li class="pb-2 mr-3">
-                                        <span class="text-color2">Chapter <?=$Chapter->Number?><?php echo ($Chapter->Name) ? ' - '.$Chapter->Name:''?></span>
-                                        <span class="float-right text-color2"><?=date_format(date_create($Chapter->ReleaseDate),"d/m/Y")?></span>
+                                        <span class="<?=($exist)?'text-color5':'text-color2'?>">Chapter <?=$Chapter->Number?><?php echo ($Chapter->Name) ? ' - '.$Chapter->Name:''?></span>
+                                        <span class="float-right <?=($exist)?'text-color5':'text-color2'?>"><?=date_format(date_create($Chapter->ReleaseDate),"d/m/Y")?></span>
                                     </li>
                                 </a>
                                 <?php } ?>

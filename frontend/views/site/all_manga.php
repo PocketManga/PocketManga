@@ -30,7 +30,7 @@ $this->title = 'PocketManga';
                                     <?php foreach($Categories as $Category){ ?>
                                     <div class="col-3 pb-2 div-genre-button">
                                         <button class="background-color2 border-0 w-100 mt-2 radi-all-15 py-1 mx-n2 text-center" 
-                                            onclick="PressGenreButton($(this).closest('.div-genre-button'),<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>);">
+                                            onclick="PressGenreButton($(this).closest('.div-genre-button'),<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>);">
                                             <span class="text-color1"><?=$Category->Name?></span>
                                             <input type="checkbox" class="radio add-genres" value="<?=$Category->Name?>" name="<?='check-'.$Category->Name?>">
                                             <input type="checkbox" class="radio remove-genres" value="<?=$Category->Name?>" name="<?='check-'.$Category->Name?>">
@@ -43,7 +43,7 @@ $this->title = 'PocketManga';
                                         <div class="row">
                                             <div class="col-4">
                                                 <select class="select-color1 radi-all-15 w-100 p-2 ml-n2" id="filter_order" 
-                                                    onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>))">
+                                                    onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))">
                                                     <option class="option-color1" value="latestUpdates" selected="selected"><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
                                                     <option class="option-color1" value="ranking"><?=Yii::$app->params['Dictionary']['ranking']?></option>
                                                     <option class="option-color1" value="popular"><?=Yii::$app->params['Dictionary']['popular']?></option>
@@ -53,7 +53,7 @@ $this->title = 'PocketManga';
                                             </div>
                                             <div class="col-4">
                                                 <select class="select-color1 radi-all-15 w-100 p-2" id="filter_status"
-                                                    onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>))">
+                                                    onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))">
                                                     <option class="option-color1" value="1"><?=Yii::$app->params['Dictionary']['completed']?></option>
                                                     <option class="option-color1" value="0"><?=Yii::$app->params['Dictionary']['ongoing']?></option>
                                                     <option class="option-color1" value="all" selected="selected"><?=Yii::$app->params['Dictionary']['both_c_o']?></option>
@@ -61,7 +61,7 @@ $this->title = 'PocketManga';
                                             </div>
                                             <div class="col-4">
                                                 <button class="text-color2 background-color3 border-0 radi-all-15 w-100 py-2 ml-2" id="button-search"
-                                                    onclick="(ReloadMangas(<?=(Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:0?>))"><?=Yii::$app->params['Dictionary']['search']?></button>
+                                                    onclick="(ReloadMangas(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))"><?=Yii::$app->params['Dictionary']['search']?></button>
                                             </div>
                                         </div>
                                     </div>

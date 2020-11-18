@@ -23,7 +23,6 @@ class m201016_000003_create_app_table extends Migration
             'MangaShow' => $this->boolean()->notNull()->defaultValue(0),
             'ChapterShow' => $this->boolean()->notNull()->defaultValue(1),
             'Language' => $this->string(10)->notNull()->defaultValue('En_us'),
-            'MangaLanguage' => $this->string(10)->notNull()->defaultValue('En_us'),
             'Leitor_Id' => $this->integer()->notNull(),
         ], $tableOptions);
 

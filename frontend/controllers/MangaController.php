@@ -44,6 +44,10 @@ class MangaController extends Controller
         $Authors = $Manga->getAuthors()->all();
         $Chapters = $Manga->getChapters()->all();
         $Genres = $Manga->getCategories()->all();
+        $ChapterReadeds = null;
+        if(!Yii::$app->user->isGuest){
+            $ChapterReadeds = Yii::$app->user->identity->leitor->chapterReadeds;
+        }
         
         return $this->render('view', [
             'Manga' => $Manga,
@@ -51,6 +55,7 @@ class MangaController extends Controller
             'Genres' => $Genres,
             'Chapters' => $Chapters,
             'Categories' => $Categories,
+            'ChapterReadeds' => $ChapterReadeds,
         ]);
     }
 
