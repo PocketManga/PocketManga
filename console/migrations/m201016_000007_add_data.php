@@ -69,20 +69,19 @@ class m201016_000007_add_data extends Migration
         
         //-----------------------------------------------------------------------------------------Manager-----------------------// 
         $this->insert('{{%manager}}', [
-            'Permission' => '1',
             'User_Id' => 1,
         ]);
         
         //-----------------------------------------------------------------------------------------Leitor------------------------// 
         $this->insert('{{%leitor}}', [
             'MangaShow' => '1',
-            'LibraryShow' => '1',
+            //'LibraryShow' => '1',
             'User_Id' => 1,
         ]);
 
         $this->insert('{{%leitor}}', [
             'MangaShow' => '1',
-            'LibraryShow' => '1',
+            //'LibraryShow' => '1',
             'User_Id' => 2,
         ]);
 
