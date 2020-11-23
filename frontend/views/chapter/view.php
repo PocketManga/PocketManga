@@ -1,5 +1,6 @@
 <?php
     use yii\helpers\Url;
+    $this->title = $Manga->Title.' - Chapter '.$Chapter->Number;
 ?>
 
 <div class="background-color2 radi-all-15">

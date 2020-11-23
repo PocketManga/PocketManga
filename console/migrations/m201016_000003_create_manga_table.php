@@ -28,7 +28,6 @@ class m201016_000003_create_manga_table extends Migration
             'Language' => $this->string(10)->defaultValue('En_us'),
             'SrcImage' => $this->string(50),
             'ReleaseDate' => $this->date()->notNull(),
-            'Ranking' => $this->decimal(18,2),
             'Updated' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',
             'Description' => $this->text()->notNull(),
             'Slug' => $this->string(50)->notNull(),
