@@ -18,33 +18,33 @@ html, body {
 }
 
 .radi-tl-15{
-    border-top-left-radius: 15px;
+    border-top-left-radius: 15px !important;
 }
 
 .radi-tr-15{
-    border-top-right-radius: 15px;
+    border-top-right-radius: 15px !important;
 }
 
 .radi-t-15{
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
 }
 
 .radi-bl-15{
-    border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 15px !important;
 }
 
 .radi-br-15{
-    border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 15px !important;
 }
 
 .radi-b-15{
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
 }
 
 .radi-all-15{
-    border-radius: 15px;
+    border-radius: 15px !important;
 }
 
 .pad-n{

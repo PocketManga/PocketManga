@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\jui\DatePicker;
 
 $this->title = 'Signup';
 ?>
@@ -20,20 +21,39 @@ $this->title = 'Signup';
 
                 <div class="col-12 p-0">
                     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class = "text-color2 font-weight-bold m-0">Username <span class="text-color6">*</span></p>
+                                    <?= $form->field($model, 'username')->textInput(['class' => 'form-control radi-all-15 border-color1 background-color1 text-color2 bold', 'autocomplete'=>"off"])->label(false) ?>
+                                </div>
+                        
+                                <div class="col-12">
+                                    <p class = "text-color2 bold m-0">Email <span class="text-color6">*</span></p>
+                                    <?= $form->field($model, 'email')->textInput(['class' => 'form-control radi-all-15 border-color1 background-color1 text-color2 bold', 'autocomplete'=>"off"])->label(false) ?>
+                                </div>
+                        
+                                <div class="col-12">
+                                    <p class = "text-color2 bold m-0">Password <span class="text-color6">*</span></p>
+                                    <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control radi-all-15 border-color1 background-color1 text-color2 bold', 'autocomplete'=>"off"])->label(false) ?>
+                                </div>
 
-                        <p class = "text-color2 font-weight-bold m-0">Username</p>
-                        <?= $form->field($model, 'username')->textInput(['class' => 'form-control background-color1 text-color2 bold', 'autocomplete'=>"off"])->label(false) ?>
+                                <div class="col-md-6">
+                                    <p class = "text-color2 bold m-0">Genre</p>
+                                    <?= $form->field($model, 'genre')->checkboxList(['F' => 'Girl','M' => 'Boy'], ['class' => 'radi-all-15 p-2 background-color1 text-color2 bold'])->label(false) ?>
+                                </div>
 
-                        <p class = "text-color2 bold m-0">Email</p>
-                        <?= $form->field($model, 'email')->textInput(['class' => 'form-control background-color1 text-color2 bold', 'autocomplete'=>"off"])->label(false) ?>
-
-                        <p class = "text-color2 bold m-0">Password</p>
-                        <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control background-color1 text-color2 bold', 'autocomplete'=>"off"])->label(false) ?>
-
-                        <div class="form-group m-0 float-right">
-                            <?= Html::submitButton('Signup', ['class' => 'btn btn-primary background-color2 text-color1 border-0 bold', 'name' => 'signup-button']) ?>
+                                <div class="col-md-6">
+                                    <p class = "text-color2 bold m-0">Birth Date <span class="text-color6">*</span></p>
+                                    <?= $form->field($model, 'birthdate')->widget(DatePicker::classname(), ['dateFormat' => 'dd-MM-yyyy','options'=>['class'=>'radi-all-15 p-2 background-color1 border-0 text-color2 bold','readonly'=>true]])->label(false) ?>
+                                </div>
+                        
+                                <div class="col-12">
+                                    <div class="form-group m-0 float-right">
+                                        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary background-color2 radi-all-15 text-color1 border-0 bold', 'name' => 'signup-button']) ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>

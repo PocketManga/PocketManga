@@ -13,6 +13,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $genre;
+    public $birthdate;
 
 
     /**
@@ -34,6 +36,11 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['genre', 'string'],
+
+            ['birthdate', 'required'],
+            ['birthdate', 'safe'],
         ];
     }
 
@@ -49,16 +56,23 @@ class SignupForm extends Model
         }
         
         $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
+        $user->Username = $this->username;
+        $user->Email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->Slug = $this->username;
         
         $auth = \Yii::$app->authManager;
-        $authorRole = $auth->getRole('author');
+        $authorRole = $auth->getRole('leitor');
         $auth->assign($authorRole, $user->getId());
-        return $user->save() && $this->sendEmail($user);
+        $user->save();
+
+        $leitor = new Leitor();
+        $leitor->MangaShow = '1';
+        $leitor->User_Id = $user->getId();
+
+        return $leitor->save() && $this->sendEmail($user);
 
     }
 

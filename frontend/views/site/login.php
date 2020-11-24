@@ -21,10 +21,10 @@ $this->title = 'Login';
                 <div class="col-12 p-0">
                     <?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['autocomplete' => 'off']]); ?>
                         <p class = "text-color2 bold m-0">Username</p>
-                        <?= $form->field($model, 'username')->textInput(['class' => 'form-control background-color1 text-color2 bold'])->label(false) ?>
+                        <?= $form->field($model, 'username')->textInput(['class' => 'form-control radi-all-15 border-color1 background-color1 text-color2 bold'])->label(false) ?>
 
                         <p class = "text-color2 bold m-0">Password</p>
-                        <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control background-color1 text-color2 bold'])->label(false) ?>
+                        <?= $form->field($model, 'password')->passwordInput(['class' => 'form-control radi-all-15 border-color1 background-color1 text-color2 bold'])->label(false) ?>
 
                         <?= $form->field($model, 'rememberMe', ['options' =>  ['class' => 'text-color2 bold text-right']])->checkbox() ?>
 
@@ -36,7 +36,7 @@ $this->title = 'Login';
                         </div>
 
                         <div class="form-group m-0 float-right">
-                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary background-color2 text-color1 border-0 bold', 'name' => 'login-button']) ?>
+                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary radi-all-15 background-color2 text-color1 border-0 bold', 'name' => 'login-button']) ?>
                         </div>
 
                     <?php ActiveForm::end(); ?>

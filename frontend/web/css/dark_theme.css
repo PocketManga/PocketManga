@@ -60,7 +60,11 @@
 
 .border-b-1px-solid-color2{
     border-bottom: 1px solid #1D88AA !important;
-}
+} 
+
+.border-color1{
+    border-color: black !important;
+} 
 
 .scroll-type1 {
     scrollbar-color: #1D88AA #333333 !important; /* red is for the thumb and yellow is for the track */
