@@ -1,19 +1,19 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
 
-use frontend\models\App;
-use frontend\models\ChapterReaded;
-use frontend\models\Chapter;
-use frontend\models\Favorite;
-use frontend\models\Manga;
-use frontend\models\LibraryList;
-use common\models\User;
-use frontend\models\Library;
+use backend\models\App;
+use common\models\Chapter;
+use common\models\ChapterReaded;
+use common\models\Favorite;
+use common\models\Library;
+use common\models\LibraryList;
+use common\models\Manga;
 use frontend\models\MangaReaded;
-use frontend\models\Report;
+use common\models\Report;
+use common\models\User;
 
 /**
  * This is the model class for table "leitor".
@@ -22,10 +22,8 @@ use frontend\models\Report;
  * @property int $Theme
  * @property string $MangaShow
  * @property int $ChapterShow
- * @property string $LibraryShow
  * @property string $LastVisit
  * @property string $Language
- * @property string $MangaLanguage
  * @property int|null $PrimaryList_Id
  * @property int $User_Id
  *
@@ -59,10 +57,10 @@ class Leitor extends \yii\db\ActiveRecord
     {
         return [
             [['Theme', 'ChapterShow', 'PrimaryList_Id', 'User_Id'], 'integer'],
-            [['MangaShow', 'LibraryShow', 'User_Id'], 'required'],
-            [['MangaShow', 'LibraryShow'], 'string'],
+            [['MangaShow', 'User_Id'], 'required'],
+            [['MangaShow'], 'string'],
             [['LastVisit'], 'safe'],
-            [['Language', 'MangaLanguage'], 'string', 'max' => 10],
+            [['Language'], 'string', 'max' => 10],
             [['User_Id'], 'unique'],
             [['PrimaryList_Id'], 'exist', 'skipOnError' => true, 'targetClass' => LibraryList::className(), 'targetAttribute' => ['PrimaryList_Id' => 'IdList']],
             [['User_Id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['User_Id' => 'IdUser']],
@@ -79,10 +77,8 @@ class Leitor extends \yii\db\ActiveRecord
             'Theme' => 'Theme',
             'MangaShow' => 'Manga Show',
             'ChapterShow' => 'Chapter Show',
-            'LibraryShow' => 'Library Show',
             'LastVisit' => 'Last Visit',
             'Language' => 'Language',
-            'MangaLanguage' => 'Manga Language',
             'PrimaryList_Id' => 'Primary List ID',
             'User_Id' => 'User ID',
         ];

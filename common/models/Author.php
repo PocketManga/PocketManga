@@ -4,12 +4,15 @@ namespace common\models;
 
 use Yii;
 
+use common\models\Manga;
+use common\models\MangaAuthor;
+
 /**
  * This is the model class for table "author".
  *
  * @property int $IdAuthor
  * @property string $FirstName
- * @property string $LastName
+ * @property string|null $LastName
  * @property string $Slug
  *
  * @property MangaAuthor[] $mangaAuthors
@@ -31,7 +34,7 @@ class Author extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['FirstName', 'LastName', 'Slug'], 'required'],
+            [['FirstName', 'Slug'], 'required'],
             [['FirstName', 'LastName'], 'string', 'max' => 20],
             [['Slug'], 'string', 'max' => 50],
         ];

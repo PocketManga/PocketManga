@@ -4,6 +4,9 @@ namespace common\models;
 
 use Yii;
 
+use common\models\Manga;
+use common\models\MangaCategory;
+
 /**
  * This is the model class for table "category".
  *

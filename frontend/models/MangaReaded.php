@@ -1,10 +1,11 @@
 <?php
 
-namespace common\models;
+namespace frontend\models;
 
 use Yii;
 
-use frontend\models\Leitor;
+use common\models\Leitor;
+use common\models\Manga;
 
 /**
  * This is the model class for table "manga_readed".

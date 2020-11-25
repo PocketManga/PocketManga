@@ -1,9 +1,11 @@
 <?php
 
-namespace frontend\models;
+namespace backend\models;
 
 use Yii;
 
+use backend\models\App;
+use common\models\Manga;
 /**
  * This is the model class for table "app_library".
  *

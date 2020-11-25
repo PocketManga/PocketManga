@@ -2,8 +2,11 @@
 namespace frontend\models;
 
 use Yii;
+use DateTime;
 use yii\base\Model;
+
 use common\models\User;
+use common\models\Leitor;
 
 /**
  * Signup form
@@ -37,7 +40,7 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            ['genre', 'string'],
+            //['genre', 'string'],
 
             ['birthdate', 'required'],
             ['birthdate', 'safe'],
@@ -62,11 +65,18 @@ class SignupForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
         $user->Slug = $this->username;
+        if($this->genre != null){
+            $user->Genre = $this->genre;
+        }else{
+            $user->Genre = 'D';
+        }
+        $user->BirthDate = (new DateTime($this->birthdate))->format('Y-m-d');
+        $user->SrcPhoto = 'PHOTO';
         
         $auth = \Yii::$app->authManager;
         $authorRole = $auth->getRole('leitor');
-        $auth->assign($authorRole, $user->getId());
         $user->save();
+        $auth->assign($authorRole, $user->getId());
 
         $leitor = new Leitor();
         $leitor->MangaShow = '1';

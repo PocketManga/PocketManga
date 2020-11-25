@@ -1,8 +1,11 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
+
+use common\models\Chapter;
+use common\models\Leitor;
 
 /**
  * This is the model class for table "chapter_readed".
@@ -10,8 +13,8 @@ use Yii;
  * @property int $Leitor_Id
  * @property int $Chapter_Id
  *
- * @property Leitor $leitor
  * @property Chapter $chapter
+ * @property Leitor $leitor
  */
 class ChapterReaded extends \yii\db\ActiveRecord
 {
@@ -32,8 +35,8 @@ class ChapterReaded extends \yii\db\ActiveRecord
             [['Leitor_Id', 'Chapter_Id'], 'required'],
             [['Leitor_Id', 'Chapter_Id'], 'integer'],
             [['Leitor_Id', 'Chapter_Id'], 'unique', 'targetAttribute' => ['Leitor_Id', 'Chapter_Id']],
-            [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
             [['Chapter_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Chapter::className(), 'targetAttribute' => ['Chapter_Id' => 'IdChapter']],
+            [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
         ];
     }
 
@@ -49,16 +52,6 @@ class ChapterReaded extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Leitor]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLeitor()
-    {
-        return $this->hasOne(Leitor::className(), ['IdLeitor' => 'Leitor_Id']);
-    }
-
-    /**
      * Gets query for [[Chapter]].
      *
      * @return \yii\db\ActiveQuery
@@ -66,5 +59,15 @@ class ChapterReaded extends \yii\db\ActiveRecord
     public function getChapter()
     {
         return $this->hasOne(Chapter::className(), ['IdChapter' => 'Chapter_Id']);
+    }
+
+    /**
+     * Gets query for [[Leitor]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLeitor()
+    {
+        return $this->hasOne(Leitor::className(), ['IdLeitor' => 'Leitor_Id']);
     }
 }

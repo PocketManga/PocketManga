@@ -9,11 +9,11 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 use frontend\models\Comment;
-use frontend\models\Leitor;
+use common\models\Leitor;
 use frontend\models\Like;
-use frontend\models\Manager;
+use backend\models\Manager;
+use common\models\Manga;
 use frontend\models\Rating;
-use frontend\models\Manga;
 
 /**
  * This is the model class for table "user".

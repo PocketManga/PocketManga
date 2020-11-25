@@ -3,7 +3,9 @@
 namespace common\models;
 
 use Yii;
-use frontend\models\Leitor;
+
+use common\models\Leitor;
+use common\models\Library;
 
 /**
  * This is the model class for table "library_list".

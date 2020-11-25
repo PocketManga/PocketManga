@@ -1,8 +1,12 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use Yii;
+
+use common\models\Chapter;
+use common\models\Leitor;
+use common\models\Manga;
 
 /**
  * This is the model class for table "report".

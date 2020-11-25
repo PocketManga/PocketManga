@@ -4,6 +4,10 @@ namespace frontend\models;
 
 use Yii;
 
+use common\models\Chapter;
+use frontend\models\Like;
+use common\models\Manga;
+use common\models\User;
 /**
  * This is the model class for table "comment".
  *

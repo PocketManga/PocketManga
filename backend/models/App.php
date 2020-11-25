@@ -1,8 +1,12 @@
 <?php
 
-namespace frontend\models;
+namespace backend\models;
 
 use Yii;
+
+use backend\models\AppLibrary;
+use common\models\Leitor;
+use common\models\Manga;
 
 /**
  * This is the model class for table "app".
@@ -12,7 +16,6 @@ use Yii;
  * @property int $MangaShow
  * @property int $ChapterShow
  * @property string $Language
- * @property string $MangaLanguage
  * @property int $Leitor_Id
  *
  * @property Leitor $leitor
@@ -37,7 +40,7 @@ class App extends \yii\db\ActiveRecord
         return [
             [['Theme', 'MangaShow', 'ChapterShow', 'Leitor_Id'], 'integer'],
             [['Leitor_Id'], 'required'],
-            [['Language', 'MangaLanguage'], 'string', 'max' => 10],
+            [['Language'], 'string', 'max' => 10],
             [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
         ];
     }
@@ -53,7 +56,6 @@ class App extends \yii\db\ActiveRecord
             'MangaShow' => 'Manga Show',
             'ChapterShow' => 'Chapter Show',
             'Language' => 'Language',
-            'MangaLanguage' => 'Manga Language',
             'Leitor_Id' => 'Leitor ID',
         ];
     }

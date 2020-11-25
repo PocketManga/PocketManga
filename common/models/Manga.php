@@ -4,6 +4,23 @@ namespace common\models;
 
 use Yii;
 
+use backend\models\App;
+use backend\models\AppLibrary;
+use common\models\Author;
+use common\models\Category;
+use common\models\Chapter;
+use frontend\models\Comment;
+use common\models\Favorite;
+use common\models\Leitor;
+use common\models\Library;
+use backend\models\Manager;
+use common\models\MangaAuthor;
+use common\models\MangaCategory;
+use frontend\models\MangaReaded;
+use frontend\models\Rating;
+use common\models\Report;
+use common\models\User;
+
 /**
  * This is the model class for table "manga".
  *
@@ -41,8 +58,6 @@ use Yii;
  * @property User[] $users
  * @property Report[] $reports
  */
-
-
 class Manga extends \yii\db\ActiveRecord
 {
     /**
@@ -84,7 +99,7 @@ class Manga extends \yii\db\ActiveRecord
             'OneShot' => 'One Shot',
             'R18' => 'R18',
             'Language' => 'Language',
-            'SrcImage' => 'Image Src',
+            'SrcImage' => 'Src Image',
             'ReleaseDate' => 'Release Date',
             'Updated' => 'Updated',
             'Description' => 'Description',

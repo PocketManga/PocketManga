@@ -4,17 +4,25 @@ namespace common\models;
 
 use Yii;
 
+use common\models\ChapterReaded;
+use frontend\models\Comment;
+use common\models\Manager;
+use common\models\Manga;
+use common\models\Leitor;
+use common\models\Report;
+
 /**
  * This is the model class for table "chapter".
  *
  * @property int $IdChapter
  * @property float $Number
+ * @property int $PagesNumber
  * @property string|null $Name
  * @property string $ReleaseDate
  * @property string $Updated
  * @property int|null $Season
  * @property int $OneShot
- * @property string $SrcFolder
+ * @property string|null $SrcFolder
  * @property string $Slug
  * @property int $Manga_Id
  * @property int $Manager_Id
@@ -42,10 +50,10 @@ class Chapter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Number', 'SrcFolder', 'Slug', 'Manga_Id', 'Manager_Id'], 'required'],
+            [['Number', 'PagesNumber', 'Slug', 'Manga_Id', 'Manager_Id'], 'required'],
             [['Number'], 'number'],
+            [['PagesNumber', 'Season', 'OneShot', 'Manga_Id', 'Manager_Id'], 'integer'],
             [['ReleaseDate', 'Updated'], 'safe'],
-            [['Season', 'OneShot', 'Manga_Id', 'Manager_Id'], 'integer'],
             [['Name'], 'string', 'max' => 100],
             [['SrcFolder', 'Slug'], 'string', 'max' => 50],
             [['Manager_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['Manager_Id' => 'IdManager']],
@@ -61,6 +69,7 @@ class Chapter extends \yii\db\ActiveRecord
         return [
             'IdChapter' => 'Id Chapter',
             'Number' => 'Number',
+            'PagesNumber' => 'Pages Number',
             'Name' => 'Name',
             'ReleaseDate' => 'Release Date',
             'Updated' => 'Updated',

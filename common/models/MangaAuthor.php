@@ -1,8 +1,11 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use Yii;
+
+use common\models\Author;
+use common\models\Manga;
 
 /**
  * This is the model class for table "manga_author".

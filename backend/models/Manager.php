@@ -1,15 +1,16 @@
 <?php
 
-namespace frontend\models;
+namespace backend\models;
 
 use Yii;
 
+use common\models\Chapter;
+use common\models\Manga;
+use common\models\User;
 /**
  * This is the model class for table "manager".
  *
  * @property int $IdManager
- * @property string $Permission
- * @property string $Language
  * @property int $Theme
  * @property int $User_Id
  *
@@ -33,10 +34,8 @@ class Manager extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Permission', 'User_Id'], 'required'],
-            [['Permission'], 'string'],
             [['Theme', 'User_Id'], 'integer'],
-            [['Language'], 'string', 'max' => 10],
+            [['User_Id'], 'required'],
             [['User_Id'], 'unique'],
             [['User_Id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['User_Id' => 'IdUser']],
         ];
@@ -49,8 +48,6 @@ class Manager extends \yii\db\ActiveRecord
     {
         return [
             'IdManager' => 'Id Manager',
-            'Permission' => 'Permission',
-            'Language' => 'Language',
             'Theme' => 'Theme',
             'User_Id' => 'User ID',
         ];
