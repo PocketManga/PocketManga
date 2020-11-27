@@ -41,92 +41,70 @@ AppAsset::register($this);
     </head>
     <body class="background-color3">
         <?php $this->beginBody() ?>
-
-        <div class="wrap">
-            <nav class="fixed-top navbar navbar-expand-lg navbar-dark background-color3">
-                <div class="container">
-                    <!-- Brand -->
-                    <a class="navbar-brand text-color2" href="<?=Yii::$app->homeUrl?>"><?=Yii::$app->name?></a>
-
-                    <!-- Links -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <form class="form-inline my-2 my-lg-0">
-                                <div class="input-group input-group-sm">
-                                    <input class="form-control border-secondary py-2" type="search" placeholder="Search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">More</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/about'?>">About</a>
-                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/contact'?>">Contact</a>
-                            </div>
-                        </li>
-                        <?php if (Yii::$app->user->isGuest) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/signup'?>">Signup</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/login') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/login'?>">Login</a>
-                        </li>
-                        <?php }else{ ?>
-                        <li class="nav-item">
-                            <form action="<?=Yii::$app->request->baseUrl.'/logout'?>" method="post">
-                                <input type="hidden" name="_csrf-frontend">
-                                <button type="submit" class="nav-link">Logout (<?=Yii::$app->user->identity->Username?>)</button>
-                            </form>
-                        </li>
-                        <?php } ?>
-                    </ul>
+        
+        
+        <div class="wrapper">
+            <!-- Sidebar -->
+            <nav class="background-color2" id="sidebar">
+                <div class="sidebar-header text-center">
+                    <a class="navbar-brand text-color1 m-0" href="<?=Yii::$app->homeUrl?>"><h3><?=Yii::$app->name?></h3></a>
                 </div>
-            </nav>
-            <div class="container">
-                <ul class="nav nav-pills nav-justified">
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index' || Yii::$app->controller->route == 'site/index2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Yii::$app->request->baseUrl.'/home_order-by=latest-updates_manga-per-page=50_page=1'?>">Home</a>
+
+                <ul class="list-unstyled components">
+                    <li>
+                        <a class="nav-item text-color6" href="#">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/allmanga') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Yii::$app->request->baseUrl.'/all-manga'?>">All Manga</a>
+                    <p>Manga Section</p>
+                    <li>
+                        <a class="nav-item text-color6" href="#">Mangas</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/ongoing') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Yii::$app->request->baseUrl.'/ongoing_order-by=latest-updates_manga-per-page=50_page=1'?>">Ongoing</a>
+                    <li>
+                        <a class="nav-item text-color6" href="#">Authors</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/completed') ? 'active background-color2 text-color3' : 'text-color2'?>"
-                            href="<?=Yii::$app->request->baseUrl.'/completed_order-by=latest-updates_manga-per-page=50_page=1'?>">Completed</a>
+                    <li>
+                        <a class="nav-item text-color6" href="#">Categories</a>
                     </li>
-                    <?php if (Yii::$app->user->isGuest) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Library</a>
+                    <li>
+                        <a class="nav-item text-color6" href="#">Language</a>
                     </li>
-                    <?php } else { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/library' || Yii::$app->controller->route == 'site/library2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
-                            href="<?=Yii::$app->request->baseUrl.'/'.'library'?>">Library</a>
+                    <p>User Section</p>
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item dropdown-toggle text-color6">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a class="nav-item text-color6" href="#">Mangas</a>
+                            </li>
+                            <li>
+                                <a class="nav-item text-color6" href="#">Home 2</a>
+                            </li>
+                            <li>
+                                <a class="nav-item text-color6" href="#">Home 3</a>
+                            </li>
+                        </ul>
                     </li>
-                    <?php } ?>
+                    <li>
+                        <a class="nav-item text-color6" href="#">Portfolio</a>
+                    </li>
+                    <li>
+                        <a class="nav-item text-color6" href="#">Contact</a>
+                    </li>
                 </ul>
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
-                <?= Alert::widget() ?>
-                <?= $content ?>
-            </div>
+
+            </nav>
+        </div>
+
+
+        <div class="main">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= Alert::widget() ?>
+            <?= $content ?>
         </div>
 
         <footer class="footer background-color3">
             <div class="container">
-                <p class="text-color1 m-0">Projet Developed By: <span class="text-color2">Edgar Oliveira Cordeiro => Nº2180640</span></p>
+                <p class="text-color1 m-0 pb-2">Projet Developed By: <span class="text-color2">Edgar Oliveira Cordeiro => Nº2180640</span></p>
             </div>
         </footer>
 
