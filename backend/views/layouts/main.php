@@ -3,78 +3,134 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Breadcrumbs;
+use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'fixed-top navbar-expand-lg navbar-dark bg-dark',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->Username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/pocketmanga.css" />
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
-</div>
+        <?php if(Yii::$app->user->isGuest){ ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
+        <?php }else{ if(Yii::$app->user->identity->leitor->Theme){ ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
+        <?php }else{ ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/light_theme.css" />
+        
+        <?php }} ?>
+        
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <?php $this->registerCsrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <?php $this->head() ?>
+    </head>
+    <body class="background-color3">
+        <?php $this->beginBody() ?>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+        <div class="wrap">
+            <nav class="fixed-top navbar navbar-expand-lg navbar-dark background-color3">
+                <div class="container">
+                    <!-- Brand -->
+                    <a class="navbar-brand text-color2" href="<?=Yii::$app->homeUrl?>"><?=Yii::$app->name?></a>
 
-<?php $this->endBody() ?>
-</body>
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <form class="form-inline my-2 my-lg-0">
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control border-secondary py-2" type="search" placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">More</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/about'?>">About</a>
+                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/contact'?>">Contact</a>
+                            </div>
+                        </li>
+                        <?php if (Yii::$app->user->isGuest) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/signup'?>">Signup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/login') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/login'?>">Login</a>
+                        </li>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                            <form action="<?=Yii::$app->request->baseUrl.'/logout'?>" method="post">
+                                <input type="hidden" name="_csrf-frontend">
+                                <button type="submit" class="nav-link">Logout (<?=Yii::$app->user->identity->Username?>)</button>
+                            </form>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/index' || Yii::$app->controller->route == 'site/index2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
+                            href="<?=Yii::$app->request->baseUrl.'/home_order-by=latest-updates_manga-per-page=50_page=1'?>">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/allmanga') ? 'active background-color2 text-color3' : 'text-color2'?>" 
+                            href="<?=Yii::$app->request->baseUrl.'/all-manga'?>">All Manga</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/ongoing') ? 'active background-color2 text-color3' : 'text-color2'?>" 
+                            href="<?=Yii::$app->request->baseUrl.'/ongoing_order-by=latest-updates_manga-per-page=50_page=1'?>">Ongoing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/completed') ? 'active background-color2 text-color3' : 'text-color2'?>"
+                            href="<?=Yii::$app->request->baseUrl.'/completed_order-by=latest-updates_manga-per-page=50_page=1'?>">Completed</a>
+                    </li>
+                    <?php if (Yii::$app->user->isGuest) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Library</a>
+                    </li>
+                    <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (Yii::$app->controller->route == 'site/library' || Yii::$app->controller->route == 'site/library2') ? 'active background-color2 text-color3' : 'text-color2'?>" 
+                            href="<?=Yii::$app->request->baseUrl.'/'.'library'?>">Library</a>
+                    </li>
+                    <?php } ?>
+                </ul>
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+                <?= $content ?>
+            </div>
+        </div>
+
+        <footer class="footer background-color3">
+            <div class="container">
+                <p class="text-color1 m-0">Projet Developed By: <span class="text-color2">Edgar Oliveira Cordeiro => Nº2180640</span></p>
+            </div>
+        </footer>
+
+        <?php $this->endBody() ?>
+    </body>
 </html>
 <?php $this->endPage() ?>
