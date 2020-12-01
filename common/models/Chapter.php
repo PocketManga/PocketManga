@@ -6,7 +6,7 @@ use Yii;
 
 use common\models\ChapterReaded;
 use frontend\models\Comment;
-use common\models\Manager;
+use backend\models\Manager;
 use common\models\Manga;
 use common\models\Leitor;
 use common\models\Report;

@@ -74,24 +74,14 @@ AppAsset::register($this);
                             <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/signup'?>"><?=Yii::$app->params['Dictionary']['signup']?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/index') echo 'login'?>" href="<?=Yii::$app->request->baseUrl.'/login'?>"><?=Yii::$app->params['Dictionary']['login']?></a>
+                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/login') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/login'?>"><?=Yii::$app->params['Dictionary']['login']?></a>
                         </li>
                         <?php }else{ ?>
-                        <?php /*echo '<li>'. Html::beginForm(['/site/logout'], 'post'). Html::submitButton('Logout (' . Yii::$app->user->identity->Username . ')',['class' => 'btn btn-link logout']). Html::endForm(). '</li>';
-                            */?>
                         <li class="nav-item">
                             <form action="<?=Yii::$app->request->baseUrl.'/logout'?>" method="post">
                                 <input type="hidden" name="_csrf-frontend">
-                                <button type="submit" class="btn btn-link logout">Logout (Nildgar)</button>
+                                <button type="submit" class="nav-link">Logout (<?=Yii::$app->user->identity->Username?>)</button>
                             </form>
-                        </li>
-                        <li class="nav-item">
-                            <form action="logout" method="POST">
-                                <input type="submit" value="Logout" class="btn btn-default navbar-btn text-color2" />
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if(Yii::$app->controller->route == 'site/logout') echo 'logout'?>" href="<?=Yii::$app->request->baseUrl.'/logout'?>"><?=Yii::$app->params['Dictionary']['logout']?></a>
                         </li>
                         <?php } ?>
                     </ul>
