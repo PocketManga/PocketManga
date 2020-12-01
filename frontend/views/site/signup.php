@@ -44,7 +44,7 @@ $this->title = 'Signup';
 
                                 <div class="col-md-6">
                                     <p class = "text-color2 bold m-0">Birth Date <span class="text-color6">*</span></p>
-                                    <?= $form->field($model, 'birthdate')->widget(DatePicker::classname(), ['dateFormat' => 'dd-MM-yyyy','options'=>['class'=>'radi-all-15 p-2 background-color1 border-0 text-color2 bold','readonly'=>true]])->label(false) ?>
+                                    <?= $form->field($model, 'birthdate')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd','options'=>['class'=>'radi-all-15 p-2 background-color1 border-0 text-color2 bold','type'=>'date','ShowDayCellToolTips'=>false],'clientOptions' => ['changeYear' => true]])->label(false) ?>
                                 </div>
                         
                                 <div class="col-12">
