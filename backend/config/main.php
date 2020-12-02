@@ -52,6 +52,20 @@ return [
                 'index' => 'site/index',
                 'logout' => 'site/logout',
                 'login' => 'site/login',
+
+                'manga_list' => 'manga/list',
+
+                'author_list' => 'author/index',
+
+                'category_list' => 'category/index',
+
+                'language_list' => 'language/index',
+
+                'manager_list' => 'user/manager',
+
+                'reader_list' => 'user/leitor',
+
+                'report_list' => 'report/index',
                 
                 [
                     'class' => 'yii\rest\UrlRule',

@@ -33,14 +33,12 @@ class MangaController extends Controller
      * Lists all Manga models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionList()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Manga::find(),
-        ]);
+        $Mangas = Manga::find()->all();
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
+        return $this->render('list', [
+            'Mangas' => $Mangas,
         ]);
     }
 

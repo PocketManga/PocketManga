@@ -26,8 +26,8 @@ AppAsset::register($this);
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/pocketmanga.css" />
 
         <?php if(Yii::$app->user->isGuest){ ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
-        <?php }else{ if(Yii::$app->user->identity->leitor->Theme){ ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/light_theme.css" />
+        <?php }else{ if(Yii::$app->user->identity->manager->Theme){ ?>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
         <?php }else{ ?>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/light_theme.css" />
@@ -52,23 +52,33 @@ AppAsset::register($this);
 
                 <ul class="list-unstyled components">
                     <li>
-                        <a class="nav-item text-color6" href="#">Home</a>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl?>">Home</a>
                     </li>
-                    <p>Manga Section</p>
+                    <p class="m-0 text-center bold">Manga Section</p>
                     <li>
-                        <a class="nav-item text-color6" href="#">Mangas</a>
-                    </li>
-                    <li>
-                        <a class="nav-item text-color6" href="#">Authors</a>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/manga_list'?>">Manga</a>
                     </li>
                     <li>
-                        <a class="nav-item text-color6" href="#">Categories</a>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/author_list'?>">Author</a>
                     </li>
                     <li>
-                        <a class="nav-item text-color6" href="#">Language</a>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/category_list'?>">Category</a>
                     </li>
-                    <p>User Section</p>
-                    <li class="active">
+                    <li>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/language_list'?>">Language</a>
+                    </li>
+                    <p class="m-0 text-center bold">User Section</p>
+                    <li>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/manager_list'?>">Manager</a>
+                    </li>
+                    <li>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/reader_list'?>">Reader</a>
+                    </li>
+                    <p class="m-0 text-center bold">Report Section</p>
+                    <li>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/report_list'?>">Report</a>
+                    </li>
+                    <?php /*<li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item dropdown-toggle text-color6">Home</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
@@ -81,13 +91,7 @@ AppAsset::register($this);
                                 <a class="nav-item text-color6" href="#">Home 3</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a class="nav-item text-color6" href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a class="nav-item text-color6" href="#">Contact</a>
-                    </li>
+                    </li>*/ ?>
                 </ul>
 
             </nav>

@@ -1,5 +1,5 @@
 .text-color1{
-    color: #000000 !important; 
+    color: black !important; 
 }
 
 .text-color2{
@@ -7,7 +7,7 @@
 }
 
 .text-color3{
-    color: #FFFFFF !important;
+    color: white !important;
 }
 
 .text-color4{
@@ -31,7 +31,7 @@
 }
 
 .background-color1{
-    background-color: #000000 !important;
+    background-color: black !important;
 }
 
 .background-color2{
@@ -39,7 +39,7 @@
 }
 
 .background-color3{
-    background-color: #333333 !important;
+    background-color: #e9ecef !important;
 }
 
 .background-color4{
@@ -62,16 +62,8 @@
     border-bottom: 1px solid #1D88AA !important;
 } 
 
-.border-b-2px-solid-color3{
-    border-bottom: 2px solid #000000 !important;
-} 
-
-.border-t-0{
-    border-top: none !important;
-}
-
 .border-color1{
-    border-color: #000000 !important;
+    border-color: black !important;
 } 
 
 .scroll-type1 {
@@ -84,10 +76,10 @@
 }
 
 .select-color2{
-    background: #000000;
+    background: black;
     border:0px;
 }
 
 .polygon-color1 {
-    fill: #000000;
+    fill: black;
 }
