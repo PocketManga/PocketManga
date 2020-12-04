@@ -44,14 +44,21 @@ class MangaController extends Controller
 
     /**
      * Displays a single Manga model.
-     * @param integer $id
+     * @param integer $idManga
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idManga)
     {
+        $Manga = $this->findModel($idManga);
+        $Authors = $Manga->getAuthors()->all();
+        $Chapters = $Manga->getChapters()->all();
+        $Genres = $Manga->getCategories()->all();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'Authors' => $Authors,
+            'Chapters' => $Chapters,
+            'Genres' => $Genres,
+            'Manga' => $Manga,
         ]);
     }
 
@@ -65,7 +72,7 @@ class MangaController extends Controller
         $model = new Manga();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdManga]);
+            return $this->redirect(['view', 'idManga' => $model->IdManga]);
         }
 
         return $this->render('create', [
@@ -76,16 +83,16 @@ class MangaController extends Controller
     /**
      * Updates an existing Manga model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idManga
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idManga)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idManga);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdManga]);
+            return $this->redirect(['view', 'idManga' => $model->IdManga]);
         }
 
         return $this->render('update', [
@@ -96,13 +103,13 @@ class MangaController extends Controller
     /**
      * Deletes an existing Manga model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idManga
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idManga)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idManga)->delete();
 
         return $this->redirect(['index']);
     }
@@ -110,13 +117,13 @@ class MangaController extends Controller
     /**
      * Finds the Manga model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idManga
      * @return Manga the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idManga)
     {
-        if (($model = Manga::findOne($id)) !== null) {
+        if (($model = Manga::findOne($idManga)) !== null) {
             return $model;
         }
 

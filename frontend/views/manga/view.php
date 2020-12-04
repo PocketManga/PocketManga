@@ -20,9 +20,9 @@ $this->title = $Manga->Title;
                                 <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@webroot').'/img'.$Manga->SrcImage)){ ?>
                                 <img src="<?php echo Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage?>" height="300" width="225">
                                 <?php }else{ ?>
-                                <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                                <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="300" width="225">
                                 <?php }}else{ ?>
-                                <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                                <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="300" width="225">
                                 <?php } ?>
                             </div>
                         </div>

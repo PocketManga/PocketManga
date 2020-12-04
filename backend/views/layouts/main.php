@@ -98,7 +98,7 @@ AppAsset::register($this);
         </div>
 
 
-        <div class="main">
+        <div class="main pb-4">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
@@ -106,7 +106,9 @@ AppAsset::register($this);
             <?= $content ?>
         </div>
 
-        <footer class="footer background-color3">
+        <div style="height:50px;"></div>
+
+        <footer class="footer background-color3 pt-2">
             <div class="container">
                 <p class="text-color1 m-0 pb-2">Projet Developed By: <span class="text-color2">Edgar Oliveira Cordeiro => Nº2180640</span></p>
             </div>

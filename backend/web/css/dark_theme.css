@@ -66,6 +66,10 @@
     border-bottom: 2px solid #000000 !important;
 } 
 
+.border-2px-solid-color3{
+    border: 2px solid #000000 !important;
+}
+
 .border-t-0{
     border-top: none !important;
 }
@@ -90,4 +94,13 @@
 
 .polygon-color1 {
     fill: #000000;
+}
+
+.tr_manga_list:hover {
+    background-color:#000000;
+}
+
+.tr_chapter_list:hover {
+    background-color:#333333;
+    border: 2px solid #000000 !important;
 }

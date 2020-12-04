@@ -54,6 +54,15 @@ return [
                 'login' => 'site/login',
 
                 'manga_list' => 'manga/list',
+                'manga/create' => 'manga/create',
+                'manga/<idManga:\d+>' => 'manga/view',
+                'manga/<idManga:\d+>/update' => 'manga/update',
+                'manga/<idManga:\d+>/delete' => 'manga/delete',
+                
+                'manga/<idManga:\d+>/chapter/create' => 'chapter/create',
+                'manga/<idManga:\d+>/chapter/<idChapter:\d+>/view' => 'chapter/view',
+                'manga/<idManga:\d+>/chapter/<idChapter:\d+>/update' => 'chapter/update',
+                'manga/<idManga:\d+>/chapter/<idChapter:\d+>/delete' => 'chapter/delete',
 
                 'author_list' => 'author/index',
 
