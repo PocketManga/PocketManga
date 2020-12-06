@@ -15,7 +15,7 @@ use common\models\Manga;
  * @property int $Theme
  * @property int $MangaShow
  * @property int $ChapterShow
- * @property string $Language
+ * @property string $Server
  * @property int $Leitor_Id
  *
  * @property Leitor $leitor
@@ -40,7 +40,7 @@ class App extends \yii\db\ActiveRecord
         return [
             [['Theme', 'MangaShow', 'ChapterShow', 'Leitor_Id'], 'integer'],
             [['Leitor_Id'], 'required'],
-            [['Language'], 'string', 'max' => 10],
+            [['Server'], 'string', 'max' => 10],
             [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
         ];
     }
@@ -55,7 +55,7 @@ class App extends \yii\db\ActiveRecord
             'Theme' => 'Theme',
             'MangaShow' => 'Manga Show',
             'ChapterShow' => 'Chapter Show',
-            'Language' => 'Language',
+            'Server' => 'Server',
             'Leitor_Id' => 'Leitor ID',
         ];
     }

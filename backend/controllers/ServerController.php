@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Category;
+use common\models\Server;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoryController implements the CRUD actions for Category model.
+ * ServerController implements the CRUD actions for Server model.
  */
-class CategoryController extends Controller
+class ServerController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,42 +30,42 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
+     * Lists all Server models.
      * @return mixed
      */
     public function actionList()
     {
-        $Categories = Category::find()->all();
+        $Servers = Server::find()->all();
 
         return $this->render('list', [
-            'Categories' => $Categories,
+            'Servers' => $Servers,
         ]);
     }
 
     /**
-     * Displays a single Category model.
-     * @param integer $idCategory
+     * Displays a single Server model.
+     * @param integer $idServer
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idCategory)
+    public function actionView($idServer)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idCategory),
+            'model' => $this->findModel($idServer),
         ]);
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new Server model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new Server();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idCategory' => $model->IdCategory]);
+            return $this->redirect(['view', 'idServer' => $model->IdServer]);
         }
 
         return $this->render('create', [
@@ -74,18 +74,18 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing Server model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $idCategory
+     * @param integer $idServer
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idCategory)
+    public function actionUpdate($idServer)
     {
-        $model = $this->findModel($idCategory);
+        $model = $this->findModel($idServer);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idCategory' => $model->IdCategory]);
+            return $this->redirect(['view', 'idServer' => $model->IdServer]);
         }
 
         return $this->render('update', [
@@ -94,29 +94,29 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing Server model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $idCategory
+     * @param integer $idServer
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idCategory)
+    public function actionDelete($idServer)
     {
-        $this->findModel($idCategory)->delete();
+        $this->findModel($idServer)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the Server model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $idCategory
-     * @return Category the loaded model
+     * @param integer $idServer
+     * @return Server the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idCategory)
+    protected function findModel($idServer)
     {
-        if (($model = Category::findOne($idCategory)) !== null) {
+        if (($model = Server::findOne($idServer)) !== null) {
             return $model;
         }
 

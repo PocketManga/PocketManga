@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'Theme',
             'MangaShow',
             'ChapterShow',
-            'Language',
+            'Server',
             //'Leitor_Id',
 
             ['class' => 'yii\grid\ActionColumn'],

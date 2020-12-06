@@ -3,11 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Manga;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use common\models\Author;
+use common\models\Category;
+use common\models\Manga;
+use common\models\MangaAuthor;
+use common\models\MangaCategory;
+use backend\models\MangaForm;
+use common\models\Server;
 
 /**
  * MangaController implements the CRUD actions for Manga model.
@@ -69,14 +76,99 @@ class MangaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Manga();
+        $model = new MangaForm();
+        $Servers = Server::find()->all();
+        $Categories = Category::find()->all();
+        $Authors = Author::find()->all();
+        $RouteType = false;
+        
+        $DDServers = null;
+        $DDCategories = null;
+        $DDAuthors = null;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idManga' => $model->IdManga]);
+        foreach($Servers as $Server){
+            $DDServers[$Server->Code] = $Server->Name;
         }
 
+        foreach($Categories as $Category){
+            $DDCategories[$Category->IdCategory] = $Category->Name;
+        }
+
+        foreach($Authors as $Author){
+            $DDAuthors[$Author->IdAuthor] = $Author->FirstName.' '.$Author->LastName;
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $Manga = new Manga();
+
+            $Manga->Title = $model->Title;
+            $Manga->AlternativeTitle = $model->AlternativeTitle;
+            $Manga->OriginalTitle = $model->OriginalTitle;
+            $Manga->Status = $model->Status;
+            $Manga->OneShot = $model->OneShot;
+            $Manga->R18 = $model->R18;
+            $Manga->Server = $model->Server;
+            $Manga->ReleaseDate = $model->ReleaseDate;
+            $Manga->Description = $model->Description;
+            $Manga->Slug = $model->Title;
+            $Manga->Manager_Id = Yii::$app->user->identity->manager->IdManager;
+
+            $Manga->save();
+
+            //var_dump($model->Category);
+            //return 'true';
+            $MangaCategories = null;
+            $MangaAuthors = null;
+
+            if($model->Category){
+                $Categories = null;
+                foreach($model->Category as $Cat){
+                    $existe = false;
+                    if($Categories){
+                        foreach($Categories as $category){
+                            if($Cat == $category){
+                                $existe = true;
+                            }
+                        }
+                    }
+                    if(!$existe){
+                        $Categories[] = $Cat;
+                        
+                        $MangaCategory = new MangaCategory();
+                        $MangaCategory->Category_Id = $Cat;
+                        $MangaCategory->Manga_Id = $Manga->IdManga;
+                        $MangaCategory->save();
+                    }
+                }
+            }
+            if($model->Author){
+                $Authors = null;
+                foreach($model->Author as $Auth){
+                    $existe = false;
+                    if($Authors){
+                        foreach($Authors as $author){
+                            if($Auth == $author){
+                                $existe = true;
+                            }
+                        }
+                    }
+                    if(!$existe){
+                        $Authors[] = $Auth;
+                        $MangaAuthor = new MangaAuthor();
+                        $MangaAuthor->Author_Id = $Auth;
+                        $MangaAuthor->Manga_Id = $Manga->IdManga;
+                        $MangaAuthor->save();
+                    }
+                }
+            }
+            return $this->redirect(['view', 'idManga' => $Manga->IdManga]);
+        }
         return $this->render('create', [
             'model' => $model,
+            'Authors' => $DDAuthors,
+            'Categories' => $DDCategories,
+            'Servers' => $DDServers,
+            'RouteType' => $RouteType,
         ]);
     }
 

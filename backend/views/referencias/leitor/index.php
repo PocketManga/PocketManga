@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'MangaShow',
             'ChapterShow',
             'LastVisit',
-            //'Language',
+            //'Server',
             //'PrimaryList_Id',
             //'User_Id',
 

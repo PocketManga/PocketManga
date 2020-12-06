@@ -20,7 +20,7 @@ class m201016_000001_create_category_table extends Migration
         $this->createTable('{{%category}}', [
             'IdCategory' => $this->primaryKey(),
             'Name' => $this->string(20)->notNull()->unique(),
-            'Language' => $this->string(20)->notNull()->defaultValue('En_us'),
+            'Server' => $this->string(20)->notNull()->defaultValue('En_us'),
             'Slug' => $this->string(20)->notNull(),
         ], $tableOptions);
     }

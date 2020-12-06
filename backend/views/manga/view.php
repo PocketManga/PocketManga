@@ -28,7 +28,7 @@ $this->title = $Manga->Title;
     </div>
     <div class="col-12 mt-4 ts-25">
         <div class="row bold">
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 <div class="d-flex justify-content-center">
                     <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@webroot').'/img'.$Manga->SrcImage)){ ?>
                     <img src="<?php echo Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage?>" height="300" width="225">
@@ -80,19 +80,19 @@ $this->title = $Manga->Title;
                 </colgroup>
                 <thead>
                     <tr>
-                        <th class="border-b-2px-solid-color3 border-t-0 text-center">Season</th>
-                        <th class="border-b-2px-solid-color3 border-t-0 text-center">Chapter</th>
-                        <th class="border-b-2px-solid-color3 border-t-0 text-center">Title</th>
-                        <th class="border-b-2px-solid-color3 border-t-0 text-center" style="max-width:100px; min-width:100px;">Options</th>
+                        <th class="border-b-2px-solid-color4 border-t-0 text-center">Season</th>
+                        <th class="border-b-2px-solid-color4 border-t-0 text-center">Chapter</th>
+                        <th class="border-b-2px-solid-color4 border-t-0 text-center">Title</th>
+                        <th class="border-b-2px-solid-color4 border-t-0 text-center" style="max-width:100px; min-width:100px;">Options</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if($Chapters){ foreach($Chapters as $Chapter){ ?>
-                        <tr class="tr_chapter_list">
-                            <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?='S'.$Chapter->Season?></div></a></td>
-                            <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?='Chapter '.$Chapter->Number?></div></a></td>
-                            <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?=$Chapter->Name?></div></a></td>
-                            <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
+                        <tr class="tr_list2">
+                            <td class="border-b-2px-solid-color4 p-0 text-center"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?='S'.$Chapter->Season?></div></a></td>
+                            <td class="border-b-2px-solid-color4 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?='Chapter '.$Chapter->Number?></div></a></td>
+                            <td class="border-b-2px-solid-color4 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?=$Chapter->Name?></div></a></td>
+                            <td class="border-b-2px-solid-color4 p-0 text-center align-middle">
                                 <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>" class="btn btn-sm btn-outline-primary" title="Ficha completa"><i class="far fa-eye"></i></a>
                                 <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter.'/edit'?>" class="btn btn-sm btn-outline-warning" title="Editar"><i class="fas fa-pencil-alt"></i></a>
                                 <button data-toggle="modal" data-target="#deleteModal" data-slug="{{$client->slug}}" class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></button>

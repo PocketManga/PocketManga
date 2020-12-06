@@ -33,27 +33,25 @@ class AuthorController extends Controller
      * Lists all Author models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionList()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Author::find(),
-        ]);
+        $Authors = Author::find()->all();
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
+        return $this->render('list', [
+            'Authors' => $Authors,
         ]);
     }
 
     /**
      * Displays a single Author model.
-     * @param integer $id
+     * @param integer $idAuthor
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idAuthor)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($idAuthor),
         ]);
     }
 
@@ -67,7 +65,7 @@ class AuthorController extends Controller
         $model = new Author();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdAuthor]);
+            return $this->redirect(['view', 'idAuthor' => $model->IdAuthor]);
         }
 
         return $this->render('create', [
@@ -78,16 +76,16 @@ class AuthorController extends Controller
     /**
      * Updates an existing Author model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idAuthor
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idAuthor)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idAuthor);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdAuthor]);
+            return $this->redirect(['view', 'idAuthor' => $model->IdAuthor]);
         }
 
         return $this->render('update', [
@@ -98,13 +96,13 @@ class AuthorController extends Controller
     /**
      * Deletes an existing Author model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idAuthor
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idAuthor)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idAuthor)->delete();
 
         return $this->redirect(['index']);
     }
@@ -112,13 +110,13 @@ class AuthorController extends Controller
     /**
      * Finds the Author model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idAuthor
      * @return Author the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idAuthor)
     {
-        if (($model = Author::findOne($id)) !== null) {
+        if (($model = Author::findOne($idAuthor)) !== null) {
             return $model;
         }
 

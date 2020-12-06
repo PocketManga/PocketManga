@@ -31,7 +31,7 @@ use common\models\User;
  * @property int $Status
  * @property int $OneShot
  * @property int $R18
- * @property string|null $Language
+ * @property string|null $Server
  * @property string|null $SrcImage
  * @property string $ReleaseDate
  * @property string $Updated
@@ -79,7 +79,7 @@ class Manga extends \yii\db\ActiveRecord
             [['ReleaseDate', 'Updated'], 'safe'],
             [['Description'], 'string'],
             [['Title', 'AlternativeTitle', 'OriginalTitle'], 'string', 'max' => 100],
-            [['Language'], 'string', 'max' => 10],
+            [['Server'], 'string', 'max' => 10],
             [['SrcImage', 'Slug'], 'string', 'max' => 50],
             [['Manager_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['Manager_Id' => 'IdManager']],
         ];
@@ -98,7 +98,7 @@ class Manga extends \yii\db\ActiveRecord
             'Status' => 'Status',
             'OneShot' => 'One Shot',
             'R18' => 'R18',
-            'Language' => 'Language',
+            'Server' => 'Server',
             'SrcImage' => 'Src Image',
             'ReleaseDate' => 'Release Date',
             'Updated' => 'Updated',

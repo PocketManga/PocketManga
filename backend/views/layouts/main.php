@@ -65,7 +65,7 @@ AppAsset::register($this);
                         <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/category_list'?>">Category</a>
                     </li>
                     <li>
-                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/language_list'?>">Language</a>
+                        <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/server_list'?>">Server</a>
                     </li>
                     <p class="m-0 text-center bold">User Section</p>
                     <li>

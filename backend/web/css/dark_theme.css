@@ -54,6 +54,10 @@
     background-color: #D52A12 !important;
 }
 
+.background-color7{
+    background-color: #005ce6 !important;
+}
+
 .border-b-1px-solid-color1{
     border-bottom: 1px solid #E35201 !important;
 }
@@ -64,6 +68,14 @@
 
 .border-b-2px-solid-color3{
     border-bottom: 2px solid #000000 !important;
+} 
+
+.border-b-2px-solid-color4{
+    border-bottom: 2px solid #333333 !important;
+} 
+
+.border-t-2px-solid-color3{
+    border-top: 2px solid #000000 !important;
 } 
 
 .border-2px-solid-color3{
@@ -96,11 +108,12 @@
     fill: #000000;
 }
 
-.tr_manga_list:hover {
+.tr_list1:hover {
     background-color:#000000;
 }
 
-.tr_chapter_list:hover {
+.tr_list2:hover {
     background-color:#333333;
-    border: 2px solid #000000 !important;
+    border-left: 2px solid #000000 !important;
+    border-right: 2px solid #000000 !important;
 }

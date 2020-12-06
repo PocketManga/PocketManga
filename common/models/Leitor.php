@@ -23,7 +23,7 @@ use common\models\User;
  * @property string $MangaShow
  * @property int $ChapterShow
  * @property string $LastVisit
- * @property string $Language
+ * @property string $Server
  * @property int|null $PrimaryList_Id
  * @property int $User_Id
  *
@@ -60,7 +60,7 @@ class Leitor extends \yii\db\ActiveRecord
             [['MangaShow', 'User_Id'], 'required'],
             [['MangaShow'], 'string'],
             [['LastVisit'], 'safe'],
-            [['Language'], 'string', 'max' => 10],
+            [['Server'], 'string', 'max' => 10],
             [['User_Id'], 'unique'],
             [['PrimaryList_Id'], 'exist', 'skipOnError' => true, 'targetClass' => LibraryList::className(), 'targetAttribute' => ['PrimaryList_Id' => 'IdList']],
             [['User_Id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['User_Id' => 'IdUser']],
@@ -78,7 +78,7 @@ class Leitor extends \yii\db\ActiveRecord
             'MangaShow' => 'Manga Show',
             'ChapterShow' => 'Chapter Show',
             'LastVisit' => 'Last Visit',
-            'Language' => 'Language',
+            'Server' => 'Server',
             'PrimaryList_Id' => 'Primary List ID',
             'User_Id' => 'User ID',
         ];

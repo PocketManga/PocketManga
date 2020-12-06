@@ -21,16 +21,16 @@ $this->title = 'Mangas';
             <thead>
                 <tr>
                     <th class="border-b-2px-solid-color3 border-t-0">Title</th>
-                    <th class="border-b-2px-solid-color3 border-t-0 text-center">Language</th>
+                    <th class="border-b-2px-solid-color3 border-t-0 text-center">Server</th>
                     <th class="border-b-2px-solid-color3 border-t-0 text-center">Released</th>
                     <th class="border-b-2px-solid-color3 border-t-0 text-center" style="max-width:100px; min-width:100px;">Options</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if($Mangas){ foreach($Mangas as $Manga){ ?>
-                    <tr class="tr_manga_list">
+                    <tr class="tr_list1">
                         <td class="border-b-2px-solid-color3 p-0"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>"><div class="w-100 h-100 p-3"><?=$Manga->Title?></div></a></td>
-                        <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>"><div class="w-100 h-100 p-3"><?=$Manga->Language?></div></a></td>
+                        <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>"><div class="w-100 h-100 p-3"><?=$Manga->Server?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>"><div class="w-100 h-100 p-3"><?=$Manga->ReleaseDate?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
                             <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>" class="btn btn-sm btn-outline-primary" title="Ficha completa"><i class="far fa-eye"></i></a>

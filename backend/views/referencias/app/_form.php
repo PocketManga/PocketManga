@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ChapterShow')->textInput() ?>
 
-    <?= $form->field($model, 'Language')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Server')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Leitor_Id')->textInput() ?>
 

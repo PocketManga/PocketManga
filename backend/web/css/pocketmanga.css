@@ -134,3 +134,16 @@ button:hover, button:focus {
 .ts-25{
     font-size: 25px;
 }
+
+.align-center{
+    text-align-last:center;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
+}
+
+.help-block{
+    color: #b32d00 !important;
+}

@@ -6,15 +6,21 @@ use yii\helpers\Html;
 /* @var $model common\models\Manga */
 
 $this->title = 'Create Manga';
-$this->params['breadcrumbs'][] = ['label' => 'Mangas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="manga-create">
+<div class="manga-create row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-12">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="col-12">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'Authors' => $Authors,
+            'Categories' => $Categories,
+            'Servers' => $Servers,
+            'RouteType' => $RouteType,
+        ]) ?>
+    </div>
 
 </div>

@@ -33,27 +33,25 @@ class ReportController extends Controller
      * Lists all Report models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionList()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Report::find(),
-        ]);
+        $Reports = Report::find()->all();
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
+        return $this->render('list', [
+            'Reports' => $Reports,
         ]);
     }
 
     /**
      * Displays a single Report model.
-     * @param integer $id
+     * @param integer $idReport
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idReport)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($idReport),
         ]);
     }
 
@@ -67,7 +65,7 @@ class ReportController extends Controller
         $model = new Report();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdReport]);
+            return $this->redirect(['view', 'idReport' => $model->IdReport]);
         }
 
         return $this->render('create', [
@@ -78,16 +76,16 @@ class ReportController extends Controller
     /**
      * Updates an existing Report model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idReport
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idReport)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idReport);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdReport]);
+            return $this->redirect(['view', 'idReport' => $model->IdReport]);
         }
 
         return $this->render('update', [
@@ -98,13 +96,13 @@ class ReportController extends Controller
     /**
      * Deletes an existing Report model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idReport
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idReport)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idReport)->delete();
 
         return $this->redirect(['index']);
     }
@@ -112,13 +110,13 @@ class ReportController extends Controller
     /**
      * Finds the Report model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idReport
      * @return Report the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idReport)
     {
-        if (($model = Report::findOne($id)) !== null) {
+        if (($model = Report::findOne($idReport)) !== null) {
             return $model;
         }
 

@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'LastVisit')->textInput() ?>
 
-    <?= $form->field($model, 'Language')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Server')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'PrimaryList_Id')->textInput() ?>
 
