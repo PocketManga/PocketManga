@@ -16,8 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Server')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Slug')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

@@ -16,32 +16,32 @@ class m201016_000007_add_data extends Migration
         //-----------------------------------------------------------------------------------------Category----------------------// 
         $this->insert('{{%category}}', [
             'Name' => 'Action',
-            'Slug' => 'Action',
+            //'Slug' => 'Action',
         ]);
 
         $this->insert('{{%category}}', [
             'Name' => 'Romance',
-            'Slug' => 'Romance',
+            //'Slug' => 'Romance',
         ]);
 
         $this->insert('{{%category}}', [
             'Name' => 'Yuri',
-            'Slug' => 'Yuri',
+            //'Slug' => 'Yuri',
         ]);
 
         $this->insert('{{%category}}', [
             'Name' => 'Adventure',
-            'Slug' => 'Adventure',
+            //'Slug' => 'Adventure',
         ]);
 
         $this->insert('{{%category}}', [
             'Name' => 'Isekai',
-            'Slug' => 'Isekai',
+            //'Slug' => 'Isekai',
         ]);
 
         $this->insert('{{%category}}', [
             'Name' => 'Fantasy',
-            'Slug' => 'Fantasy',
+            //'Slug' => 'Fantasy',
         ]);
         
         //-----------------------------------------------------------------------------------------User--------------------------// 
@@ -51,7 +51,7 @@ class m201016_000007_add_data extends Migration
             'Email' => 'nill546@hotmail.com',
             'Genre' => 'M',
             'BirthDate' => date('Y-m-d',strtotime('12/17/1997')),
-            'Slug' => 'Nildgar',
+            //'Slug' => 'Nildgar',
             'auth_key' => $password,
             'password_hash' => Yii::$app->security->generatePasswordHash('admin'),//strtoupper(Yii::$app->security->generateRandomString(5)),
         ]);
@@ -62,7 +62,7 @@ class m201016_000007_add_data extends Migration
             'Email' => 'nex543@hotmail.com',
             'Genre' => 'F',
             'BirthDate' => date('Y-m-d',strtotime('10/30/1999')),
-            'Slug' => 'Popcorn',
+            //'Slug' => 'Popcorn',
             'auth_key' => $password,
             'password_hash' => Yii::$app->security->generatePasswordHash('admin'),//strtoupper(Yii::$app->security->generateRandomString(5)),
         ]);
@@ -89,18 +89,18 @@ class m201016_000007_add_data extends Migration
         //-----------------------------------------------------------------------------------------Author------------------------// 
         $this->insert('{{%author}}', [
             'FirstName' => 'Nildgar',
-            'Slug' => 'Nildgar',
+            //'Slug' => 'Nildgar',
         ]);
         
         $this->insert('{{%author}}', [
             'FirstName' => 'Mikoto',
-            'Slug' => 'Mikoto',
+            //'Slug' => 'Mikoto',
         ]);
 
         $this->insert('{{%author}}', [
             'FirstName' => 'Mashiro',
             'LastName' => 'Shiro',
-            'Slug' => 'Mashiro',
+            //'Slug' => 'Mashiro',
         ]);
 
         //-----------------------------------------------------------------------------------------Manga+Chapter-----------------// 
@@ -114,7 +114,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => '1 X 1/2',
+            //'Slug' => '1 X 1/2',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 1,
@@ -123,7 +123,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/1',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 1',
+            //'Slug' => '1-Chapter 1',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 2,
@@ -132,7 +132,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/2',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 2',
+            //'Slug' => '1-Chapter 2',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 3,
@@ -141,7 +141,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/3',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 3',
+            //'Slug' => '1-Chapter 3',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 4,
@@ -150,7 +150,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/4',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 4',
+            //'Slug' => '1-Chapter 4',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 5,
@@ -159,7 +159,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/5',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 5',
+            //'Slug' => '1-Chapter 5',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 6,
@@ -168,7 +168,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/6',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 6',
+            //'Slug' => '1-Chapter 6',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 7,
@@ -177,7 +177,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/7',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 7',
+            //'Slug' => '1-Chapter 7',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 8,
@@ -186,7 +186,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/8',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 8',
+            //'Slug' => '1-Chapter 8',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 9,
@@ -195,7 +195,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/9',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 9',
+            //'Slug' => '1-Chapter 9',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 10,
@@ -204,7 +204,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/10',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 10',
+            //'Slug' => '1-Chapter 10',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 11,
@@ -213,7 +213,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/11',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 11',
+            //'Slug' => '1-Chapter 11',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 12,
@@ -222,7 +222,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/12',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 12',
+            //'Slug' => '1-Chapter 12',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 13,
@@ -231,7 +231,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/13',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 13',
+            //'Slug' => '1-Chapter 13',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 14,
@@ -240,7 +240,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/14',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 14',
+            //'Slug' => '1-Chapter 14',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 15,
@@ -249,7 +249,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/15',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 15',
+            //'Slug' => '1-Chapter 15',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 16,
@@ -258,7 +258,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/16',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 16',
+            //'Slug' => '1-Chapter 16',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 17,
@@ -267,7 +267,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/1/17',
             'Manga_Id' => 1,
             'Manager_Id' => 1,
-            'Slug' => '1-Chapter 17',
+            //'Slug' => '1-Chapter 17',
         ]);
         $this->insert('{{%manga_author}}', [
             'Author_Id' => 3,
@@ -285,7 +285,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => "Ane Naru Mono",
+            //'Slug' => "Ane Naru Mono",
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 24,
@@ -294,7 +294,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/2/24',
             'Manga_Id' => 2,
             'Manager_Id' => 1,
-            'Slug' => '2-Chapter 24',
+            //'Slug' => '2-Chapter 24',
         ]);
         $this->insert('{{%manga_author}}', [
             'Author_Id' => 2,
@@ -311,7 +311,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Asagao To Kase-san',
+            //'Slug' => 'Asagao To Kase-san',
         ]);
         for($i = 11; $i <= 30; $i++){
             $this->insert('{{%chapter}}', [
@@ -321,7 +321,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/3/'.$i,
                 'Manga_Id' => 3,
                 'Manager_Id' => 1,
-                'Slug' => '3-Chapter '.$i,
+                //'Slug' => '3-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -341,7 +341,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Asa Made Jugyou Chu',
+            //'Slug' => 'Asa Made Jugyou Chu',
         ]);
         for($i = 1; $i <= 26; $i++){
             $this->insert('{{%chapter}}', [
@@ -351,7 +351,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/4/'.$i,
                 'Manga_Id' => 4,
                 'Manager_Id' => 1,
-                'Slug' => '4-Chapter '.$i,
+                //'Slug' => '4-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -370,7 +370,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Berserk Of Gluttony',
+            //'Slug' => 'Berserk Of Gluttony',
         ]);
         for($i = 11; $i <= 12; $i++){
             $this->insert('{{%chapter}}', [
@@ -380,7 +380,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/5/'.$i,
                 'Manga_Id' => 5,
                 'Manager_Id' => 1,
-                'Slug' => '5-Chapter '.$i,
+                //'Slug' => '5-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -398,7 +398,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Bocchi Na Bokura No Renai Jijou',
+            //'Slug' => 'Bocchi Na Bokura No Renai Jijou',
         ]);
         for($i = 1; $i <= 14; $i++){
             $this->insert('{{%chapter}}', [
@@ -408,7 +408,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/6/'.$i,
                 'Manga_Id' => 6,
                 'Manager_Id' => 1,
-                'Slug' => '6-Chapter '.$i,
+                //'Slug' => '6-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -426,7 +426,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Hana-kun To Koisuru Watashi',
+            //'Slug' => 'Hana-kun To Koisuru Watashi',
         ]);
         for($i = 1; $i <= 42; $i++){
             $this->insert('{{%chapter}}', [
@@ -436,7 +436,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/7/'.$i,
                 'Manga_Id' => 7,
                 'Manager_Id' => 1,
-                'Slug' => '7-Chapter '.$i,
+                //'Slug' => '7-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -454,7 +454,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Handsome And Cute',
+            //'Slug' => 'Handsome And Cute',
         ]);
         for($i = 11; $i <= 12; $i++){
             $this->insert('{{%chapter}}', [
@@ -464,7 +464,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/8/'.$i,
                 'Manga_Id' => 8,
                 'Manager_Id' => 1,
-                'Slug' => '8-Chapter '.$i,
+                //'Slug' => '8-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -483,7 +483,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Her Shim-Cheong',
+            //'Slug' => 'Her Shim-Cheong',
         ]);
         for($i = 52; $i <= 54; $i++){
             $this->insert('{{%chapter}}', [
@@ -493,7 +493,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/9/'.$i,
                 'Manga_Id' => 9,
                 'Manager_Id' => 1,
-                'Slug' => '9-Chapter '.$i,
+                //'Slug' => '9-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -511,7 +511,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Honzuki No Gekokujou',
+            //'Slug' => 'Honzuki No Gekokujou',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 14,
@@ -520,7 +520,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/10/14',
             'Manga_Id' => 10,
             'Manager_Id' => 1,
-            'Slug' => '10-Chapter 14',
+            //'Slug' => '10-Chapter 14',
         ]);
         $this->insert('{{%chapter}}', [
             'Number' => 15,
@@ -529,7 +529,7 @@ class m201016_000007_add_data extends Migration
             'SrcFolder' => '/mangas/10/15',
             'Manga_Id' => 10,
             'Manager_Id' => 1,
-            'Slug' => '10-Chapter 15',
+            //'Slug' => '10-Chapter 15',
         ]);
         $this->insert('{{%manga_author}}', [
             'Author_Id' => 3,
@@ -547,7 +547,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
+            //'Slug' => 'Isekai De Kuro No Iyashi Te Tte Yobarete Imasu',
         ]);
         for($i = 1; $i <= 11; $i++){
             $this->insert('{{%chapter}}', [
@@ -557,7 +557,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/11/'.$i,
                 'Manga_Id' => 11,
                 'Manager_Id' => 1,
-                'Slug' => '11-Chapter '.$i,
+                //'Slug' => '11-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [
@@ -575,7 +575,7 @@ class m201016_000007_add_data extends Migration
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
             'Manager_Id' => 1,
-            'Slug' => 'Its My Life',
+            //'Slug' => 'Its My Life',
         ]);
         for($i = 1; $i <= 43; $i++){
             $this->insert('{{%chapter}}', [
@@ -585,7 +585,7 @@ class m201016_000007_add_data extends Migration
                 'SrcFolder' => '/mangas/12/'.$i,
                 'Manga_Id' => 12,
                 'Manager_Id' => 1,
-                'Slug' => '12-Chapter '.$i,
+                //'Slug' => '12-Chapter '.$i,
             ]);
         }
         $this->insert('{{%manga_author}}', [

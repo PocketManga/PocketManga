@@ -6,16 +6,21 @@ use yii\helpers\Html;
 /* @var $model common\models\Manga */
 
 $this->title = 'Update Manga: ' . $model->Title;
-$this->params['breadcrumbs'][] = ['label' => 'Mangas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Title, 'url' => ['view', 'id' => $model->IdManga]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="manga-update">
+<div class="manga-update row">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-12">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="col-12">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'Authors' => $Authors,
+            'Categories' => $Categories,
+            'Servers' => $Servers,
+            'RouteType' => $RouteType,
+        ]) ?>
+    </div>
 
 </div>

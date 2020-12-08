@@ -36,7 +36,6 @@ use common\models\User;
  * @property string $ReleaseDate
  * @property string $Updated
  * @property string $Description
- * @property string $Slug
  * @property int $Manager_Id
  *
  * @property AppLibrary[] $appLibraries
@@ -74,13 +73,13 @@ class Manga extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Title', 'OriginalTitle', 'ReleaseDate', 'Description', 'Slug', 'Manager_Id'], 'required'],
+            [['Title', 'OriginalTitle', 'ReleaseDate', 'Description', 'Manager_Id'], 'required'],
             [['Status', 'OneShot', 'R18', 'Manager_Id'], 'integer'],
             [['ReleaseDate', 'Updated'], 'safe'],
             [['Description'], 'string'],
             [['Title', 'AlternativeTitle', 'OriginalTitle'], 'string', 'max' => 100],
             [['Server'], 'string', 'max' => 10],
-            [['SrcImage', 'Slug'], 'string', 'max' => 50],
+            [['SrcImage'], 'string', 'max' => 50],
             [['Manager_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['Manager_Id' => 'IdManager']],
         ];
     }
@@ -103,7 +102,6 @@ class Manga extends \yii\db\ActiveRecord
             'ReleaseDate' => 'Release Date',
             'Updated' => 'Updated',
             'Description' => 'Description',
-            'Slug' => 'Slug',
             'Manager_Id' => 'Manager ID',
         ];
     }

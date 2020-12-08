@@ -62,7 +62,7 @@ use yii\jui\DatePicker;
                 <div class="col-2">
                     <p class = "text-color2 m-0 text-center">Categories</p>
                 </div>
-                <?php $num=0; if($RouteType){ foreach($Category as $Cat){ ?>
+                <?php $num=0; if($RouteType){ foreach($model->Category as $Cat){ ?>
                     <div class="col-2 category-div d-flex">
                         <?= $form->field($model, 'Category['.$num.']')->dropDownList($Categories,['class'=>'radi-tl-15 radi-bl-15 pl-1 py-1 w-100 background-color1 border-0 text-color2 align-center'],['options' =>[$Cat => ['selected' => true]]])->label(false) ?>
                     <button type='button' class="radi-tr-15 radi-br-15 pr-1 py-n2 mb-3 pl-0 background-color6 w-25 border-0 text-color1 bold align-center" onClick="Remove($(this).closest('.category-div'))">-</button>
@@ -84,7 +84,7 @@ use yii\jui\DatePicker;
                 <div class="col-2">
                     <p class = "text-color2 m-0 text-center">Authors</p>
                 </div>
-                <?php $num=0; if($RouteType){ foreach($Author as $Auth){ ?>
+                <?php $num=0; if($RouteType){ foreach($model->Author as $Auth){ ?>
                     <div class="col-2 author-div d-flex">
                         <?= $form->field($model, 'Author['.$num.']')->dropDownList($Authors,['class'=>'radi-tl-15 radi-bl-15 pl-1 py-1 w-100 background-color1 border-0 text-color2 align-center'],['options' =>[$Auth => ['selected' => true]]])->label(false) ?>
                     <button type='button' class="radi-tr-15 radi-br-15 pr-1 py-n2 mb-3 pl-0 background-color6 w-25 border-0 text-color1 bold align-center" onClick="Remove($(this).closest('.author-div'))">-</button>

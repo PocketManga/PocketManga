@@ -7,39 +7,25 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Report */
 
 $this->title = $model->IdReport;
-$this->params['breadcrumbs'][] = ['label' => 'Reports', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="report-view">
+<div class="report-view row p-4">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-8">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->IdReport], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->IdReport], [
-            'class' => 'btn btn-danger',
+    <div class="col-2">
+        <?= Html::a('Update', Yii::$app->request->baseUrl.'/'.'report/'.$model->IdReport.'/'.'update', ['class' => 'btn btn-primary w-100']) ?>
+    </div>
+    <div class="col-2">
+        <?= Html::a('Delete', Yii::$app->request->baseUrl.'/'.'report/'.$model->IdReport.'/'.'delete', [
+            'class' => 'btn btn-danger w-100 background-color6',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'IdReport',
-            'SubjectMatter:ntext',
-            'Description',
-            'SrcImage',
-            'Resolved',
-            'Created',
-            'Slug',
-            'Manga_Id',
-            'Chapter_Id',
-            'Leitor_Id',
-        ],
-    ]) ?>
+    </div>
 
 </div>

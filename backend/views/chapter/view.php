@@ -7,41 +7,24 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Chapter */
 
 $this->title = $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Chapters', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="chapter-view">
+<div class="chapter-view row p-4">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-8">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->IdChapter], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->IdChapter], [
-            'class' => 'btn btn-danger',
+    <div class="col-2">
+        <?= Html::a('Update', Yii::$app->request->baseUrl.'/'.'chapter/'.$model->IdChapter.'/'.'update', ['class' => 'btn btn-primary w-100']) ?>
+    </div>
+    <div class="col-2">
+        <?= Html::a('Delete', Yii::$app->request->baseUrl.'/'.'chapter/'.$model->IdChapter.'/'.'delete', [
+            'class' => 'btn btn-danger w-100 background-color6',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'IdChapter',
-            'Number',
-            'PagesNumber',
-            'Name',
-            'ReleaseDate',
-            'Updated',
-            'Season',
-            'OneShot',
-            'SrcFolder',
-            'Slug',
-            'Manga_Id',
-            'Manager_Id',
-        ],
-    ]) ?>
-
+    </div>
 </div>

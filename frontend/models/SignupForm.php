@@ -64,7 +64,6 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $user->Slug = $this->username;
         if($this->genre != null){
             $user->Genre = $this->genre;
         }else{

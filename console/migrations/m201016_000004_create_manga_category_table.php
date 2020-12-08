@@ -22,8 +22,8 @@ class m201016_000004_create_manga_category_table extends Migration
             'Manga_Id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_manga_category_category', 'manga_category', 'Category_Id', 'category', 'IdCategory');
-        $this->addForeignKey('fk_manga_category_manga', 'manga_category', 'Manga_Id', 'manga', 'IdManga');
+        $this->addForeignKey('fk_manga_category_category', 'manga_category', 'Category_Id', 'category', 'IdCategory', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_manga_category_manga', 'manga_category', 'Manga_Id', 'manga', 'IdManga', 'CASCADE', 'CASCADE');
         
         $this->addPrimaryKey('pk_manga_category', 'manga_category', ['Category_Id', 'Manga_Id']);
     }

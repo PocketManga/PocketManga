@@ -13,7 +13,6 @@ use common\models\MangaCategory;
  * @property int $IdCategory
  * @property string $Name
  * @property string $Server
- * @property string $Slug
  *
  * @property MangaCategory[] $mangaCategories
  * @property Manga[] $mangas
@@ -34,8 +33,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Name', 'Slug'], 'required'],
-            [['Name', 'Server', 'Slug'], 'string', 'max' => 20],
+            [['Name'], 'required'],
+            [['Name', 'Server'], 'string', 'max' => 20],
             [['Name'], 'unique'],
         ];
     }
@@ -49,7 +48,6 @@ class Category extends \yii\db\ActiveRecord
             'IdCategory' => 'Id Category',
             'Name' => 'Name',
             'Server' => 'Server',
-            'Slug' => 'Slug',
         ];
     }
 

@@ -49,4 +49,35 @@ class MangaForm extends Model
         
         return false;
     }
+
+    public function getVariables($Manga)
+    {
+        if($Manga){
+            $this->Title = $Manga->Title;
+            $this->AlternativeTitle = $Manga->AlternativeTitle;
+            $this->OriginalTitle = $Manga->OriginalTitle;
+            $this->Status = $Manga->Status;
+            $this->OneShot = $Manga->OneShot;
+            $this->R18 = $Manga->R18;
+            $this->Server = $Manga->Server;
+            $this->SrcImage = $Manga->SrcImage;
+            $this->ReleaseDate = $Manga->ReleaseDate;
+            $this->Description = $Manga->Description;
+            $existingCategories = $Manga->categories;
+            $existingAuthors = $Manga->authors;
+            
+            if($existingCategories){
+                foreach($existingCategories as $Cat){
+                    $this->Category[] = $Cat->IdCategory;
+                }
+            }
+        
+            if($existingAuthors){
+                foreach($existingAuthors as $auth){
+                    $this->Author[] = $auth->IdAuthor;
+                }
+            }
+    
+        }
+    }
 }

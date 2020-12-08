@@ -28,8 +28,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'SrcFolder')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Slug')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'Manga_Id')->textInput() ?>
 
     <?= $form->field($model, 'Manager_Id')->textInput() ?>

@@ -23,8 +23,8 @@ class m201016_000004_create_library_table extends Migration
             'List_Id' => $this->integer(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_library_author', 'library', 'Leitor_Id', 'leitor', 'IdLeitor');
-        $this->addForeignKey('fk_library_manga', 'library', 'Manga_Id', 'manga', 'IdManga');
+        $this->addForeignKey('fk_library_leitor', 'library', 'Leitor_Id', 'leitor', 'IdLeitor');
+        $this->addForeignKey('fk_library_manga', 'library', 'Manga_Id', 'manga', 'IdManga', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_library_library_list', 'library', 'List_Id', 'library_list', 'IdList');
         
         $this->addPrimaryKey('pk_library', 'library', ['Leitor_Id', 'Manga_Id']);

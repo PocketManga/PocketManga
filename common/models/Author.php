@@ -13,7 +13,6 @@ use common\models\MangaAuthor;
  * @property int $IdAuthor
  * @property string $FirstName
  * @property string|null $LastName
- * @property string $Slug
  *
  * @property MangaAuthor[] $mangaAuthors
  * @property Manga[] $mangas
@@ -34,9 +33,8 @@ class Author extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['FirstName', 'Slug'], 'required'],
+            [['FirstName'], 'required'],
             [['FirstName', 'LastName'], 'string', 'max' => 20],
-            [['Slug'], 'string', 'max' => 50],
         ];
     }
 
@@ -49,7 +47,6 @@ class Author extends \yii\db\ActiveRecord
             'IdAuthor' => 'Id Author',
             'FirstName' => 'First Name',
             'LastName' => 'Last Name',
-            'Slug' => 'Slug',
         ];
     }
 

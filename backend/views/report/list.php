@@ -8,7 +8,7 @@ use yii\grid\GridView;
 
 $this->title = 'Reports';
 ?>
-<div class="report-index row">
+<div class="report-index row p-4">
     <div class="col-10">
         <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
     </div>
@@ -32,9 +32,9 @@ $this->title = 'Reports';
                         <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'report/'.$Report->IdReport?>"><div class="w-100 h-100 p-3"><?=$Report->Created?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'report/'.$Report->IdReport?>"><div class="w-100 h-100 p-3"><?=$Report->Resolved?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
-                            <a href="<?=Yii::$app->request->baseUrl.'/'.'report/'.$Report->IdReport?>" class="btn btn-sm btn-outline-primary" title="Show"><i class="far fa-eye"></i></a>
-                            <a href="<?=Yii::$app->request->baseUrl.'/'.'report/'.$Report->IdReport.'/edit'?>" class="btn btn-sm btn-outline-warning" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <button data-toggle="modal" data-target="#deleteModal" data-slug="{{$client->slug}}" class="btn btn-sm btn-outline-danger" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                            <a href="<?=Yii::$app->request->baseUrl.'/'.'report/'.$Report->IdReport?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>
+                            <a href="<?=Yii::$app->request->baseUrl.'/'.'report/'.$Report->IdReport.'/edit'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>
+                            <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 <?php }} ?>

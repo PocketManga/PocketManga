@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'SrcPhoto',
             'Created',
             'Updated',
-            'Slug',
             'SoftDelete',
             'auth_key',
             'password_hash',

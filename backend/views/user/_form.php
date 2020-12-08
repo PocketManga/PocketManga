@@ -26,8 +26,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Updated')->textInput() ?>
 
-    <?= $form->field($model, 'Slug')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'SoftDelete')->textInput() ?>
 
     <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>

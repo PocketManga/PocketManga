@@ -26,7 +26,6 @@ use frontend\models\Rating;
  * @property string $SrcPhoto
  * @property string $Created
  * @property string $Updated
- * @property string $Slug
  * @property int $SoftDelete
  * @property string $auth_key
  * @property string $password_hash
@@ -64,11 +63,11 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['Username', 'Email', 'Genre', 'BirthDate', 'SrcPhoto', 'Slug', 'auth_key', 'password_hash'], 'required'],
+            [['Username', 'Email', 'Genre', 'BirthDate', 'SrcPhoto', 'auth_key', 'password_hash'], 'required'],
             [['Genre'], 'string'],
             [['BirthDate', 'Created', 'Updated'], 'safe'],
             [['SoftDelete', 'status'], 'integer'],
-            [['Username', 'SrcPhoto', 'Slug'], 'string', 'max' => 50],
+            [['Username', 'SrcPhoto'], 'string', 'max' => 50],
             [['Email','auth_key'], 'string', 'max' => 100],
             [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
             [['Username'], 'unique'],
@@ -91,7 +90,6 @@ class User extends ActiveRecord implements IdentityInterface
             'SrcPhoto' => 'Src Photo',
             'Created' => 'Created',
             'Updated' => 'Updated',
-            'Slug' => 'Slug',
             'SoftDelete' => 'Soft Delete',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',

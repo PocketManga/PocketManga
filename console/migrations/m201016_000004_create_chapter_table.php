@@ -27,12 +27,11 @@ class m201016_000004_create_chapter_table extends Migration
             'Season' => $this->integer(),
             'OneShot' => $this->boolean()->notNull()->defaultValue(0),
             'SrcFolder' => $this->string(50),
-            'Slug' => $this->string(50)->notNull(),
             'Manga_Id' => $this->integer()->notNull(),
             'Manager_Id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_chapter_manga', 'chapter', 'Manga_Id', 'manga', 'IdManga');
+        $this->addForeignKey('fk_chapter_manga', 'chapter', 'Manga_Id', 'manga', 'IdManga', 'CASCADE', 'CASCADE');
         $this->addForeignKey('fk_chapter_manager', 'chapter', 'Manager_Id', 'manager', 'IdManager');
     }
 

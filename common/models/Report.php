@@ -17,7 +17,6 @@ use common\models\Manga;
  * @property string $SrcImage
  * @property int $Resolved
  * @property string $Created
- * @property string $Slug
  * @property int|null $Manga_Id
  * @property int|null $Chapter_Id
  * @property int $Leitor_Id
@@ -42,12 +41,12 @@ class Report extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['SubjectMatter', 'Description', 'SrcImage', 'Slug', 'Leitor_Id'], 'required'],
+            [['SubjectMatter', 'Description', 'SrcImage', 'Leitor_Id'], 'required'],
             [['SubjectMatter'], 'string'],
             [['Resolved', 'Manga_Id', 'Chapter_Id', 'Leitor_Id'], 'integer'],
             [['Created'], 'safe'],
             [['Description'], 'string', 'max' => 100],
-            [['SrcImage', 'Slug'], 'string', 'max' => 50],
+            [['SrcImage'], 'string', 'max' => 50],
             [['Chapter_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Chapter::className(), 'targetAttribute' => ['Chapter_Id' => 'IdChapter']],
             [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
             [['Manga_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manga::className(), 'targetAttribute' => ['Manga_Id' => 'IdManga']],
@@ -66,7 +65,6 @@ class Report extends \yii\db\ActiveRecord
             'SrcImage' => 'Src Image',
             'Resolved' => 'Resolved',
             'Created' => 'Created',
-            'Slug' => 'Slug',
             'Manga_Id' => 'Manga ID',
             'Chapter_Id' => 'Chapter ID',
             'Leitor_Id' => 'Leitor ID',

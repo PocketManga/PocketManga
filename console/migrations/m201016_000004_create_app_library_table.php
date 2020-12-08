@@ -24,7 +24,7 @@ class m201016_000004_create_app_library_table extends Migration
         ], $tableOptions);
 
         $this->addForeignKey('fk_app_library_app', 'app_library', 'App_Id', 'app', 'IdApp');
-        $this->addForeignKey('fk_app_library_manga', 'app_library', 'Manga_Id', 'manga', 'IdManga');
+        $this->addForeignKey('fk_app_library_manga', 'app_library', 'Manga_Id', 'manga', 'IdManga', 'CASCADE', 'CASCADE');
         
         $this->addPrimaryKey('pk_app_library', 'app_library', ['App_Id', 'Manga_Id']);
     }

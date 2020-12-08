@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $Manga->Title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="manga-view row">
+<div class="manga-view row p-4">
     <div class="col-8">
         <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
     </div>
@@ -46,6 +46,7 @@ $this->title = $Manga->Title;
 
                 <p class="text-color1">Authors: 
                     <?php if($Authors) { foreach($Authors as $Author) { ?>
+                    <span class="text-color2 no-bold"><?=($Authors[0] != $Author)?', ':''?></span>
                     <a href="#"><span class="text-color2 no-bold"><?=$Author->FirstName?><?php echo ($Author->LastName) ? ' '.$Author->LastName:''?></span></a>
                     <?php }} ?>
                 </p>
@@ -93,9 +94,9 @@ $this->title = $Manga->Title;
                             <td class="border-b-2px-solid-color4 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?='Chapter '.$Chapter->Number?></div></a></td>
                             <td class="border-b-2px-solid-color4 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?=$Chapter->Name?></div></a></td>
                             <td class="border-b-2px-solid-color4 p-0 text-center align-middle">
-                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>" class="btn btn-sm btn-outline-primary" title="Ficha completa"><i class="far fa-eye"></i></a>
-                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter.'/edit'?>" class="btn btn-sm btn-outline-warning" title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                <button data-toggle="modal" data-target="#deleteModal" data-slug="{{$client->slug}}" class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>
+                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter.'/edit'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                     <?php }} ?>

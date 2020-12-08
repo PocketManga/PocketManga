@@ -30,7 +30,6 @@ class m201016_000003_create_manga_table extends Migration
             'ReleaseDate' => $this->date()->notNull(),
             'Updated' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',
             'Description' => $this->text()->notNull(),
-            'Slug' => $this->string(50)->notNull(),
             'Manager_Id' => $this->integer()->notNull(),
         ], $tableOptions);
 

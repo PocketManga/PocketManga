@@ -21,7 +21,6 @@ class m201016_000001_create_author_table extends Migration
             'IdAuthor' => $this->primaryKey(),
             'FirstName' => $this->string(20)->notNull(),
             'LastName' => $this->string(20),
-            'Slug' => $this->string(50)->notNull(),
         ], $tableOptions);
     }
 

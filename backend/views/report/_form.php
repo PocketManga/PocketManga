@@ -22,8 +22,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Created')->textInput() ?>
 
-    <?= $form->field($model, 'Slug')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'Manga_Id')->textInput() ?>
 
     <?= $form->field($model, 'Chapter_Id')->textInput() ?>

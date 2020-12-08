@@ -8,7 +8,7 @@ use yii\grid\GridView;
 
 $this->title = 'Authors';
 ?>
-<div class="author-index row">
+<div class="author-index row p-4">
 
     <div class="col-10">
         <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
@@ -29,9 +29,9 @@ $this->title = 'Authors';
                     <tr class="tr_list1">
                         <td class="border-b-2px-solid-color3 p-0"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor?>"><div class="w-100 h-100 p-3"><?=$Author->FirstName.' '.$Author->LastName?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
-                            <a href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor?>" class="btn btn-sm btn-outline-primary" title="Ficha completa"><i class="far fa-eye"></i></a>
-                            <a href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor.'/edit'?>" class="btn btn-sm btn-outline-warning" title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                            <button data-toggle="modal" data-target="#deleteModal" data-slug="{{$client->slug}}" class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                            <a href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>
+                            <a href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor.'/edit'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>
+                            <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 <?php }} ?>

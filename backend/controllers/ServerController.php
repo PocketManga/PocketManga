@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Server;
+use common\models\Manga;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -50,8 +51,12 @@ class ServerController extends Controller
      */
     public function actionView($idServer)
     {
+        $model = $this->findModel($idServer);
+        $Mangas = Manga::find()->where('Server like "'.$model->Code.'"')->all();
+
         return $this->render('view', [
-            'model' => $this->findModel($idServer),
+            'model' => $model,
+            'Mangas' => $Mangas,
         ]);
     }
 

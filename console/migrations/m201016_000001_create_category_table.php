@@ -21,7 +21,6 @@ class m201016_000001_create_category_table extends Migration
             'IdCategory' => $this->primaryKey(),
             'Name' => $this->string(20)->notNull()->unique(),
             'Server' => $this->string(20)->notNull()->defaultValue('En_us'),
-            'Slug' => $this->string(20)->notNull(),
         ], $tableOptions);
     }
 

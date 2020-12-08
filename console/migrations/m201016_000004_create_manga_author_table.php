@@ -22,8 +22,8 @@ class m201016_000004_create_manga_author_table extends Migration
             'Manga_Id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->addForeignKey('fk_manga_author_author', 'manga_author', 'Author_Id', 'author', 'IdAuthor');
-        $this->addForeignKey('fk_manga_author_manga', 'manga_author', 'Manga_Id', 'manga', 'IdManga');
+        $this->addForeignKey('fk_manga_author_author', 'manga_author', 'Author_Id', 'author', 'IdAuthor', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_manga_author_manga', 'manga_author', 'Manga_Id', 'manga', 'IdManga', 'CASCADE', 'CASCADE');
         
         $this->addPrimaryKey('pk_manga_author', 'manga_author', ['Author_Id', 'Manga_Id']);
     }

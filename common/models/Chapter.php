@@ -23,7 +23,6 @@ use common\models\Report;
  * @property int|null $Season
  * @property int $OneShot
  * @property string|null $SrcFolder
- * @property string $Slug
  * @property int $Manga_Id
  * @property int $Manager_Id
  *
@@ -50,12 +49,12 @@ class Chapter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Number', 'PagesNumber', 'Slug', 'Manga_Id', 'Manager_Id'], 'required'],
+            [['Number', 'PagesNumber', 'Manga_Id', 'Manager_Id'], 'required'],
             [['Number'], 'number'],
             [['PagesNumber', 'Season', 'OneShot', 'Manga_Id', 'Manager_Id'], 'integer'],
             [['ReleaseDate', 'Updated'], 'safe'],
             [['Name'], 'string', 'max' => 100],
-            [['SrcFolder', 'Slug'], 'string', 'max' => 50],
+            [['SrcFolder'], 'string', 'max' => 50],
             [['Manager_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['Manager_Id' => 'IdManager']],
             [['Manga_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manga::className(), 'targetAttribute' => ['Manga_Id' => 'IdManga']],
         ];
@@ -76,7 +75,6 @@ class Chapter extends \yii\db\ActiveRecord
             'Season' => 'Season',
             'OneShot' => 'One Shot',
             'SrcFolder' => 'Src Folder',
-            'Slug' => 'Slug',
             'Manga_Id' => 'Manga ID',
             'Manager_Id' => 'Manager ID',
         ];
