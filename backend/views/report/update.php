@@ -6,11 +6,8 @@ use yii\helpers\Html;
 /* @var $model common\models\Report */
 
 $this->title = 'Update Report: ' . $model->IdReport;
-$this->params['breadcrumbs'][] = ['label' => 'Reports', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->IdReport, 'url' => ['view', 'id' => $model->IdReport]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="report-update">
+<div class="report-update p-4">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

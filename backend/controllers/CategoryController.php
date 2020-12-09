@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Category;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use common\models\Category;
+use common\models\Server;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -63,13 +65,20 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
+        $Servers = Server::find()->all();
 
+        $DDServers = null;
+
+        foreach($Servers as $Server){
+            $DDServers[$Server->Code] = $Server->Name;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'idCategory' => $model->IdCategory]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'Servers' => $DDServers,
         ]);
     }
 
@@ -83,13 +92,20 @@ class CategoryController extends Controller
     public function actionUpdate($idCategory)
     {
         $model = $this->findModel($idCategory);
+        $Servers = Server::find()->all();
 
+        $DDServers = null;
+
+        foreach($Servers as $Server){
+            $DDServers[$Server->Code] = $Server->Name;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'idCategory' => $model->IdCategory]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'Servers' => $DDServers,
         ]);
     }
 
@@ -104,7 +120,7 @@ class CategoryController extends Controller
     {
         $this->findModel($idCategory)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/category_list');
     }
 
     /**

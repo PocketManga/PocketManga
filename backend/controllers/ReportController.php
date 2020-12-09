@@ -56,24 +56,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Creates a new Report model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Report();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idReport' => $model->IdReport]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Updates an existing Report model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $idReport
@@ -104,7 +86,7 @@ class ReportController extends Controller
     {
         $this->findModel($idReport)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/report_list');
     }
 
     /**

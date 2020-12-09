@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $IdServer
  * @property string $Name
- * @property string $Server
+ * @property string $Code
  */
 class Server extends \yii\db\ActiveRecord
 {
@@ -27,10 +27,10 @@ class Server extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Name', 'Server'], 'required'],
-            [['Name', 'Server'], 'string', 'max' => 10],
+            [['Name', 'Code'], 'required'],
+            [['Name', 'Code'], 'string', 'max' => 10],
             [['Name'], 'unique'],
-            [['Server'], 'unique'],
+            [['Code'], 'unique'],
         ];
     }
 
@@ -42,7 +42,7 @@ class Server extends \yii\db\ActiveRecord
         return [
             'IdServer' => 'Id Server',
             'Name' => 'Name',
-            'Server' => 'Server',
+            'Code' => 'Code',
         ];
     }
 }

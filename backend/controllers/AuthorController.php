@@ -104,7 +104,7 @@ class AuthorController extends Controller
     {
         $this->findModel($idAuthor)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/author_list');
     }
 
     /**

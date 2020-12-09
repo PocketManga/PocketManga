@@ -6,16 +6,18 @@ use yii\helpers\Html;
 /* @var $model common\models\Category */
 
 $this->title = 'Update Category: ' . $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Name, 'url' => ['view', 'id' => $model->IdCategory]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="category-update">
+<div class="category-update row p-4">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-12">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="col-12">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'Servers' => $Servers,
+        ]) ?>
+    </div>
 
 </div>

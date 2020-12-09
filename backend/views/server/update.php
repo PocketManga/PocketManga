@@ -6,16 +6,17 @@ use yii\helpers\Html;
 /* @var $model common\models\Server */
 
 $this->title = 'Update Server: ' . $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Servers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Name, 'url' => ['view', 'id' => $model->IdServer]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="server-update">
+<div class="server-update row p-4">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-12">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="col-12">
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
+    </div>
 
 </div>

@@ -6,11 +6,8 @@ use yii\helpers\Html;
 /* @var $model common\models\Chapter */
 
 $this->title = 'Update Chapter: ' . $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Chapters', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->Name, 'url' => ['view', 'id' => $model->IdChapter]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="chapter-update">
+<div class="chapter-update p-4">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -109,7 +109,7 @@ class ServerController extends Controller
     {
         $this->findModel($idServer)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/server_list');
     }
 
     /**

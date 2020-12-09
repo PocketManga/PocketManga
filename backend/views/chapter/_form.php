@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="chapter-form">
+<div class="chapter-form mt-4 pt-4 border-t-2px-solid-color3">
 
     <?php $form = ActiveForm::begin(); ?>
 
