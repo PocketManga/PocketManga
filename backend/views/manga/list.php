@@ -35,7 +35,7 @@ $this->title = 'Mangas';
                         <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
                             <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>
                             <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/update'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>
-                            <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                            <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/delete'?>" class="btn btn-sm btn-outline-danger" data-confirm="Are you sure you want to delete this item?" data-method="post"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 <?php }} ?>

@@ -87,11 +87,11 @@ class ChapterController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idChapter, $idManga)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idChapter)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga);
     }
 
     /**

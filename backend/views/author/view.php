@@ -27,7 +27,7 @@ $this->title = $model->FirstName.' '.$model->LastName;
             ],
         ]) ?>
     </div>
-    <div class="col-12 mt-4 ts-25">
+    <div class="col-12 ts-25 mt-4 pt-4 border-t-2px-solid-color3">
         <div class="row bold">
             <div class="col-6 mb-4">
                 <p class="text-color1">First Name: <span class="text-color2 no-bold"><?=$model->FirstName?></span></p>

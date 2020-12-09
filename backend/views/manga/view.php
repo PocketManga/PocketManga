@@ -26,7 +26,7 @@ $this->title = $Manga->Title;
             ],
         ]) ?>
     </div>
-    <div class="col-12 mt-4 ts-25">
+    <div class="col-12 mt-4 ts-25 pt-4 border-t-2px-solid-color3">
         <div class="row bold">
             <div class="col-12 mb-4">
                 <div class="d-flex justify-content-center">
@@ -95,7 +95,7 @@ $this->title = $Manga->Title;
                             <td class="border-b-2px-solid-color4 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>"><div class="w-100 h-100 p-3"><?=$Chapter->Name?></div></a></td>
                             <td class="border-b-2px-solid-color4 p-0 text-center align-middle">
                                 <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>
-                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter.'/edit'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/'.$Chapter->IdChapter.'/update'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>
                                 <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>

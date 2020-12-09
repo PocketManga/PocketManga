@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Create Manga';
 ?>
-<div class="manga-create row">
+<div class="manga-create row p-4">
 
     <div class="col-12">
         <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>

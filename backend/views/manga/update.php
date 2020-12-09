@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Manga: ' . $model->Title;
 ?>
-<div class="manga-update row">
+<div class="manga-update row p-4">
 
     <div class="col-12">
         <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>

@@ -27,7 +27,7 @@ $this->title = $model->Name;
             ],
         ]) ?>
     </div>
-    <div class="col-12 mt-4 mb-4 ts-25 bold">
+    <div class="col-12 mt-4 mb-4 ts-25 bold pt-4 border-t-2px-solid-color3">
         <p class="text-color1">Name: <span class="text-color2 no-bold"><?=$model->Name?></span></p>
     </div>
     

@@ -894,6 +894,15 @@ class m201016_000007_add_data extends Migration
             'List_Id' => 2,
         ]);
 
+        //-----------------------------------------------------------------------------------------Report--------------------------// 
+        $this->insert('{{%report}}', [
+            'SubjectMatter' => 'Image Translation',
+            'Description' => "I don't like this fucking image, the translation is all wrong, do your fucking job right",
+            'SrcImage' => '/mangas/1/17/0003.jpg',
+            'Chapter_Id' => 17,
+            'Leitor_Id' => 1,
+        ]);
+
         /**/
     }
 

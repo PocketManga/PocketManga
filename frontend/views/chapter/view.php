@@ -15,7 +15,7 @@
                         <?php }else{ ?>
                         <img class="chapter-image" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>">
                         <?php } ?>
-                    <li>
+                    </li>
                     <?php } ?>
                 </div>
             </ul>

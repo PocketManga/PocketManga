@@ -106,7 +106,7 @@ class LeitorController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/leitor_list');
     }
 
     /**
