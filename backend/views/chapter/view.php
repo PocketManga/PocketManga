@@ -52,7 +52,7 @@ $this->title = 'Chapter '.$model->Number;
         </div>
     </div>
     <div class="col-12">
-        <div class="row">
+        <div class="row justify-content-start">
             <?php for($Page = 0; $Page < $model->PagesNumber; $Page++){ ?>
             <div class="col p-1">
                 <p class="text-color1 no-bold p-0 m-0 text-center">Image <?=$Page?></p>

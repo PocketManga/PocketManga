@@ -33,13 +33,13 @@ class ManagerController extends Controller
      * Lists all Manager models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionList()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Manager::find(),
         ]);
 
-        return $this->render('index', [
+        return $this->render('list', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -106,7 +106,7 @@ class ManagerController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(Yii::$app->request->baseUrl.'/manager_list');
+        return $this->redirect(['index']);
     }
 
     /**

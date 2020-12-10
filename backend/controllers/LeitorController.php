@@ -33,13 +33,13 @@ class LeitorController extends Controller
      * Lists all Leitor models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionList()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Leitor::find(),
         ]);
 
-        return $this->render('index', [
+        return $this->render('list', [
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -106,7 +106,7 @@ class LeitorController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(Yii::$app->request->baseUrl.'/leitor_list');
+        return $this->redirect(['index']);
     }
 
     /**
