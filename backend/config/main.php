@@ -82,19 +82,20 @@ return [
                 'server/<idServer:\d+>/update' => 'server/update',
                 'server/<idServer:\d+>/delete' => 'server/delete',
 
-                'manager_list' => 'user/manager',
-                'manager/create' => 'user/create',
-                'manager/<idManager:\d+>' => 'user/view',
-                'manager/<idManager:\d+>/update' => 'user/update',
-                'manager/<idManager:\d+>/delete' => 'user/delete',
+                'manager_list' => 'manager/list',
+                'manager/create' => 'manager/create',
+                'manager/<idManager:\d+>' => 'manager/view',
+                'manager/<idManager:\d+>/update' => 'manager/update',
+                'manager/<idManager:\d+>/delete' => 'manager/delete',
 
-                'reader_list' => 'user/leitor',
-                'reader/<idLeitor:\d+>' => 'user/view',
-                'reader/<idLeitor:\d+>/delete' => 'user/delete',
+                'reader_list' => 'leitor/list',
+                'reader/<idLeitor:\d+>' => 'leitor/view',
+                'reader/<idLeitor:\d+>/delete' => 'leitor/delete',
 
                 'report_list' => 'report/list',
                 'report/<idReport:\d+>' => 'report/view',
-                'report/<idReport:\d+>/update' => 'report/update',
+                'report/<idReport:\d+>/resolved' => 'report/resolved',
+                'report/<idReport:\d+>/unresolved' => 'report/unresolved',
                 'report/<idReport:\d+>/delete' => 'report/delete',
                 
                 [

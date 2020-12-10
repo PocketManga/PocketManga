@@ -56,23 +56,35 @@ class ReportController extends Controller
     }
 
     /**
-     * Updates an existing Report model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Deletes an existing Report model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $idReport
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idReport)
+    public function actionResolved($idReport)
     {
-        $model = $this->findModel($idReport);
+        $report = $this->findModel($idReport);
+        $report->Resolved = 1;
+        $report->save();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idReport' => $model->IdReport]);
-        }
+        return $this->redirect(Yii::$app->request->baseUrl.'/'.'report/'.$idReport);
+    }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+    /**
+     * Deletes an existing Report model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $idReport
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUnresolved($idReport)
+    {
+        $report = $this->findModel($idReport);
+        $report->Resolved = 0;
+        $report->save();
+
+        return $this->redirect(Yii::$app->request->baseUrl.'/'.'report/'.$idReport);
     }
 
     /**
