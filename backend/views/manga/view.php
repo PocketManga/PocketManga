@@ -71,6 +71,13 @@ $this->title = $Manga->Title;
                 <p class="text-color1">Description:  <span class="text-color2 no-bold"><?=$Manga->Description?></span></p>
             </div>
         </div>
+    </div>
+    <div class="col-12 ts-25">
+        <div class="m-3 text-center float-right">
+            <?= Html::a('Create New Chapter', Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga.'/'.'chapter/create', ['class' => 'btn btn-success w-100 background-color5']) ?>
+        </div>
+    </div>
+    <div class="col-12 ts-25">
         <div class="background-color1 radi-all-15 pb-1">
             <table class="table border-0 text-color2" id="table" width="100%">
                 <colgroup>

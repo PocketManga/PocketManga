@@ -5,17 +5,18 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Manager */
 
-$this->title = 'Update Manager: ' . $model->IdManager;
-$this->params['breadcrumbs'][] = ['label' => 'Managers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->IdManager, 'url' => ['view', 'id' => $model->IdManager]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Update Manager: ' . $model->user->Username;
 ?>
-<div class="manager-update">
+<div class="manager-update row p-4">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-12">
+        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="col-12">
+        <?= $this->render('_form', [
+            'model' => $model,
+        ]) ?>
+    </div>
 
 </div>

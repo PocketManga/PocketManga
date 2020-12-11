@@ -148,7 +148,7 @@ class m201016_000001_init_rbac extends Migration
 
         /************************************************************/
 
-        $fMangager = $auth->createRole('f_manager');
+        $fMangager = $auth->createRole('full_manager');
         $auth->add($fMangager);
         $auth->addChild($fMangager, $UserViewPost);
         $auth->addChild($fMangager, $UserUpdatePost);
@@ -175,7 +175,7 @@ class m201016_000001_init_rbac extends Migration
 
         /************************************************************/
 
-        $mMangager = $auth->createRole('m_manager');
+        $mMangager = $auth->createRole('medium_manager');
         $auth->add($mMangager);
         $auth->addChild($mMangager, $UserViewPost);
         $auth->addChild($mMangager, $UserUpdatePost);
@@ -195,7 +195,7 @@ class m201016_000001_init_rbac extends Migration
 
         /************************************************************/
 
-        $lMangager = $auth->createRole('l_manager');
+        $lMangager = $auth->createRole('low_manager');
         $auth->add($lMangager);
         $auth->addChild($lMangager, $UserViewPost);
         $auth->addChild($lMangager, $UserUpdatePost);
@@ -221,7 +221,6 @@ class m201016_000001_init_rbac extends Migration
         $auth->addChild($leitor, $CommentCreatePost);
         $auth->addChild($leitor, $CommentDeletePost);
 
-        /************************************************************/
         /************************************************************/
 
         $auth->assign($admin, 1);
