@@ -11,7 +11,7 @@ return [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['admin', 'manager_n1', 'manager_n2', 'leitor'],
+            'defaultRoles' => ['admin', 'full_manager', 'medium_manager', 'low_manager'],
             // uncomment if you want to cache RBAC items hierarchy
             // 'cache' => 'cache',
         ],

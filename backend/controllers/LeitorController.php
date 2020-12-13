@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Leitor;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use common\models\Leitor;
+use common\models\LibraryList;
 
 /**
  * LeitorController implements the CRUD actions for Leitor model.
@@ -35,25 +37,32 @@ class LeitorController extends Controller
      */
     public function actionList()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Leitor::find(),
-        ]);
+        $Readers = Leitor::find()->all();
 
         return $this->render('list', [
-            'dataProvider' => $dataProvider,
+            'Readers' => $Readers,
         ]);
     }
 
     /**
      * Displays a single Leitor model.
-     * @param integer $id
+     * @param integer $idLeitor
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idLeitor)
     {
+        $model = $this->findModel($idLeitor);
+        
+        $Lists = LibraryList::find()
+            ->leftJoin('library li', $on='li.List_Id = library_list.IdList')
+            ->leftJoin('leitor le', $on='le.IdLeitor = li.Leitor_Id')
+            ->where('le.IdLeitor ='.$idLeitor)
+            ->all();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'Lists' => $Lists,
         ]);
     }
 
@@ -67,7 +76,7 @@ class LeitorController extends Controller
         $model = new Leitor();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdLeitor]);
+            return $this->redirect(['view', 'idLeitor' => $model->IdLeitor]);
         }
 
         return $this->render('create', [
@@ -78,16 +87,16 @@ class LeitorController extends Controller
     /**
      * Updates an existing Leitor model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idLeitor
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idLeitor)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idLeitor);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdLeitor]);
+            return $this->redirect(['view', 'idLeitor' => $model->IdLeitor]);
         }
 
         return $this->render('update', [
@@ -98,27 +107,27 @@ class LeitorController extends Controller
     /**
      * Deletes an existing Leitor model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idLeitor
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idLeitor)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idLeitor)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->baseUrl.'/reader_list');
     }
 
     /**
      * Finds the Leitor model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idLeitor
      * @return Leitor the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idLeitor)
     {
-        if (($model = Leitor::findOne($id)) !== null) {
+        if (($model = Leitor::findOne($idLeitor)) !== null) {
             return $model;
         }
 

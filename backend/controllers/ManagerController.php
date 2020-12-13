@@ -38,9 +38,12 @@ class ManagerController extends Controller
     public function actionList()
     {
         $Managers = Manager::find()->all();
-
+        $auth = Yii::$app->authManager;
+        $UserRoles = $auth->getRolesByUser(Yii::$app->user->identity->IdUser);
+        
         return $this->render('list', [
             'Managers' => $Managers,
+            'Roles' => $UserRoles,
         ]);
     }
 
@@ -53,11 +56,23 @@ class ManagerController extends Controller
     public function actionView($idManager)
     {
         $model = $this->findModel($idManager);
-        $Roles = Yii::$app->authManager->getRolesByUser($model->user->IdUser);
-        var_dump($Roles);
-        return 'true';
+        $auth = Yii::$app->authManager;
+        $roleModel = Yii::$app->db
+            ->createCommand("Select * from auth_assignment where user_id='".$idManager."'")
+            ->queryOne();
+        $UserRoles = $auth->getRolesByUser(Yii::$app->user->identity->IdUser);
+
+        $Role = null;
+
+        foreach ($UserRoles as $URole){
+            if($URole->name == $roleModel['item_name']){
+                $Role = $URole;
+            }
+        }
         return $this->render('view', [
             'model' => $model,
+            'Role' => $Role,
+            'Roles' => $UserRoles,
         ]);
     }
 
@@ -79,6 +94,10 @@ class ManagerController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $auth = Yii::$app->authManager;
+            $role=$auth->getRole('low_manager');
+            
+            $auth->assign($role, $model->user->getId());
             return $this->redirect(['view', 'idManager' => $model->IdManager]);
         }
 
@@ -95,17 +114,17 @@ class ManagerController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idManager)
+    public function actionUpdate($idManager, $roleName)
     {
         $model = $this->findModel($idManager);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idManager' => $model->IdManager]);
-        }
+        $auth = Yii::$app->authManager;
+        $role=$auth->getRole($roleName);
+        
+        $auth->revokeAll($model->user->getId());
+        $auth->assign($role, $model->user->getId());
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->redirect(Yii::$app->request->baseUrl.'/'.'manager/'.$idManager);
     }
 
     /**
@@ -117,9 +136,13 @@ class ManagerController extends Controller
      */
     public function actionDelete($idManager)
     {
-        $this->findModel($idManager)->delete();
+        $model = $this->findModel($idManager);
+        $auth = Yii::$app->authManager;
+        $auth->revokeAll($model->user->getId());
 
-        return $this->redirect(['index']);
+        $model->delete();
+
+        return $this->redirect(Yii::$app->request->baseUrl.'/manager_list');
     }
 
     /**

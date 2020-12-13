@@ -85,7 +85,7 @@ return [
                 'manager_list' => 'manager/list',
                 'manager/create' => 'manager/create',
                 'manager/<idManager:\d+>' => 'manager/view',
-                'manager/<idManager:\d+>/update' => 'manager/update',
+                'manager/<idManager:\d+>/update/<roleName>' => 'manager/update',
                 'manager/<idManager:\d+>/delete' => 'manager/delete',
 
                 'reader_list' => 'leitor/list',

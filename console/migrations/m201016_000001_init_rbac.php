@@ -209,7 +209,7 @@ class m201016_000001_init_rbac extends Migration
 
         $auth->addChild($lMangager, $ViewPost);
 
-        /************************************************************/
+        /************************************************************//*
 
         $leitor = $auth->createRole('leitor');
         $auth->add($leitor);
@@ -222,9 +222,10 @@ class m201016_000001_init_rbac extends Migration
         $auth->addChild($leitor, $CommentDeletePost);
 
         /************************************************************/
+        /************************************************************/
 
         $auth->assign($admin, 1);
-        $auth->assign($leitor, 1);
+        //$auth->assign($leitor, 1);
     }
     
     public function down()
