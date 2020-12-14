@@ -25,14 +25,7 @@ AppAsset::register($this);
 
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/pocketmanga.css" />
 
-        <?php if(Yii::$app->user->isGuest){ ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/light_theme.css" />
-        <?php }else{ if(Yii::$app->user->identity->manager->Theme){ ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/dark_theme.css" />
-        <?php }else{ ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/light_theme.css" />
-        
-        <?php }} ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::$app->request->baseUrl; ?>/css/<?=(Yii::$app->user->identity->manager->Theme)?'dark_theme':'light_theme'?>.css" />
         
 
         <?php $this->registerCsrfMetaTags() ?>

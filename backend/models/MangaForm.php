@@ -50,7 +50,7 @@ class MangaForm extends Model
         return false;
     }
 
-    public function getVariables($Manga)
+    public function setVariables($Manga)
     {
         if($Manga){
             $this->Title = $Manga->Title;

@@ -32,6 +32,24 @@ use yii\widgets\ActiveForm;
             <p class = "text-color2 m-0 text-center">Oneshot</p>
             <?= $form->field($model, 'OneShot')->dropDownList(['0' => 'No', '1' => 'Yes'],['class'=>'radi-all-15 p-1 background-color6 border-0 w-100 text-color1 align-center','id'=>'input-oneshot','onChange' => 'PressOneshotButton($(this).closest(".col"))'])->label(false) ?>
         </div>
+        
+        <div class="col-12 background-color1 p-4 radi-all-15">
+            <p class = "text-color2 m-0 text-center">Only jpg files!!</p>
+            <div class="row mb-n3">
+                <div class="col-auto">
+                    <a href="#" id="taga1" onclick="return ClickChange(0)">
+                        <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
+                    </a>
+                    <?= $form->field($model, 'Images[0]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
+                </div>
+                <div class="col-auto">
+                    <a href="#" id="taga1" onclick="return ClickChange(0)">
+                        <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
+                    </a>
+                    <?= $form->field($model, 'Images[0]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
+                </div>
+            </div>
+        </div>
 
         <div class="col-12 text-center mt-4 pt-4 border-t-2px-solid-color3">
             <div class="form-group">
@@ -44,7 +62,7 @@ use yii\widgets\ActiveForm;
 
 </div>
 
-<script>
+<script type="text/javascript">
     function PressOneshotButton(div){
         var div = document.getElementById("input-oneshot");
         ChangeColor(div,6);
@@ -57,4 +75,25 @@ use yii\widgets\ActiveForm;
             div.className = div.className.replace("background-color"+color, "background-color5");
         }
     }
+
+    function ClickChange(num){
+        var Butt = document.querySelectorAll(".uploadImage");
+        Butt[num].click();
+    };
+
+    function PreviewImage(num) {
+        var oFReader = new FileReader();
+
+        var Butt = document.querySelectorAll(".uploadImage");
+        var Img = document.querySelectorAll(".uploadPreview");
+        try{
+            oFReader.readAsDataURL(Butt[num].files[0]);
+            
+            oFReader.onload = function (oFREvent) {
+                Img[num].src = oFREvent.target.result;
+            };
+        }catch(NullPointerException){
+            Img[num].src = "imagens/AdicionaImagem.png";
+        }
+    };
 </script>

@@ -3,11 +3,14 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Chapter;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+
+use common\models\Chapter;
+use backend\models\ChapterForm;
 
 /**
  * ChapterController implements the CRUD actions for Chapter model.
@@ -47,12 +50,40 @@ class ChapterController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($idManga)
     {
-        $model = new Chapter();
+        $model = new ChapterForm();
+        $model->Season = 1;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdChapter]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $Chapter = new Chapter();
+
+            $Chapter->Number = $model->Number;
+            $Chapter->Name = $model->Name;
+            $Chapter->Season = ($model->Season)?$model->Season:1;
+            $Chapter->OneShot = $model->OneShot;
+            $Chapter->PagesNumber = 0;
+            
+            $Chapter->Manga_Id = $idManga;
+            $Chapter->Manager_Id = Yii::$app->user->identity->manager->IdManager;
+
+            $Chapter->save();
+
+            $Images = UploadedFile::getInstances($model, 'Images');
+            $pathFolder = '/'.'mangas/'.$idManga.'/'.$Chapter->IdChapter;
+            $num = 0;
+            foreach($Images as $Image){
+                $path = $pathFolder.'/'.str_pad($num, 4, '0',false).'.jpg';
+                $Image->saveAs($path);
+                $num++;
+            }
+
+            $Chapter->PagesNumber = count($Images);
+            $Chapter->SrcFolder = $pathFolder;
+            return $pathFolder;
+            $Chapter->save();
+
+            return $this->redirect(['view', 'idChapter' => $Chapter->IdChapter]);
         }
 
         return $this->render('create', [

@@ -183,7 +183,7 @@ class MangaController extends Controller
         
         $model = new MangaForm();
 
-        $model->getVariables($Manga);
+        $model->setVariables($Manga);
 
 
         $Servers = Server::find()->all();
