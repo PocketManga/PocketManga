@@ -46,7 +46,7 @@ class ChapterController extends Controller
 
     /**
      * Displays a single Chapter model.
-     * @param integer $id
+     * @param integer $idChapter
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -79,23 +79,26 @@ class ChapterController extends Controller
             $Chapter->Manga_Id = $idManga;
             $Chapter->Manager_Id = Yii::$app->user->identity->manager->IdManager;
 
-            $Chapter->save();
+            //$Chapter->save();
 
             $Images = UploadedFile::getInstances($model, 'Images');
-            $pathFolder = '/'.'mangas/'.$idManga.'/'.$Chapter->IdChapter;
+            $pathFolder = '/'.'mangas/'.$idManga.'/'.$Chapter->Number;
+            $fullPath = Yii::getAlias('@webroot').'/img'.$pathFolder;
+            if (!file_exists($fullPath)) {
+                mkdir($fullPath, 0777, true);
+            }
             $num = 0;
             foreach($Images as $Image){
-                $path = $pathFolder.'/'.str_pad($num, 4, '0',false).'.jpg';
+                $path = $fullPath.'/'.str_pad($num, 4, '0',false).'.jpg';
                 $Image->saveAs($path);
                 $num++;
             }
-
+            
             $Chapter->PagesNumber = count($Images);
             $Chapter->SrcFolder = $pathFolder;
-            return $pathFolder;
             $Chapter->save();
 
-            return $this->redirect(['view', 'idChapter' => $Chapter->IdChapter]);
+            return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga.'/'.'chapter/'.$Chapter->IdChapter);
         }
 
         return $this->render('create', [
@@ -106,16 +109,16 @@ class ChapterController extends Controller
     /**
      * Updates an existing Chapter model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idChapter
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idManga, $idChapter)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idChapter);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->IdChapter]);
+            return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga.'/'.'chapter/'.$Chapter->IdChapter);
         }
 
         return $this->render('update', [
@@ -126,7 +129,7 @@ class ChapterController extends Controller
     /**
      * Deletes an existing Chapter model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idChapter
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -140,13 +143,13 @@ class ChapterController extends Controller
     /**
      * Finds the Chapter model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idChapter
      * @return Chapter the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idChapter)
     {
-        if (($model = Chapter::findOne($id)) !== null) {
+        if (($model = Chapter::findOne($idChapter)) !== null) {
             return $model;
         }
 

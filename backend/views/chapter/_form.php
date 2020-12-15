@@ -34,20 +34,27 @@ use yii\widgets\ActiveForm;
         </div>
         
         <div class="col-12 background-color1 p-4 radi-all-15">
-            <p class = "text-color2 m-0 text-center">Only jpg files!!</p>
+            <div class="row">
+                <div class="col-6">
+                    <p class = "text-color2 m-0 text-center">Only jpg files!!</p>
+                </div>
+                <div class="col-6">
+                    <button class="uploadPreview" onclick="return ClickChange()" type="button">Upload</button>
+                    <input type="file" id='uploadImage' name="Images[]" style="display:none;" onchange="PreviewImage();" multiple><br>
+                </div>
+            </div>
             <div class="row mb-n3">
+                <!--
                 <div class="col-auto">
-                    <a href="#" id="taga1" onclick="return ClickChange(0)">
+                <form method='post' action='' enctype="multipart/form-data">
+                    <input type="file" id='files' name="Images[]" multiple><br>
+                    <input type="button" id="submit" value='Upload'>
+                </form>
+                    <a href="#" onclick="return ClickChange(0)">
                         <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
                     </a>
                     <?= $form->field($model, 'Images[0]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
-                </div>
-                <div class="col-auto">
-                    <a href="#" id="taga1" onclick="return ClickChange(0)">
-                        <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
-                    </a>
-                    <?= $form->field($model, 'Images[0]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
-                </div>
+                </div>-->
             </div>
         </div>
 
@@ -76,6 +83,59 @@ use yii\widgets\ActiveForm;
         }
     }
 
+    function ClickChange(){
+        var inputUpload = document.getElementById("uploadImage");
+        inputUpload.click();
+    };
+
+    function PreviewImage() {
+        var oFReader = new FileReader();
+
+        var inputUpload = document.getElementById("uploadImage");
+        //var Img = document.querySelectorAll(".uploadPreview");
+        for(var num=0; num<inputUpload.length;num++){
+            try{
+                oFReader.readAsDataURL(inputUpload.files[num]);
+                
+                oFReader.onload = function (oFREvent) {
+                    Img[num].src = oFREvent.target.result;
+                };
+            }catch(NullPointerException){
+                Img[num].src = "imagens/AdicionaImagem.png";
+            }
+        }
+    };
+    
+    /*$('#submit').click(function(){
+
+        var form_data = new FormData();
+
+        // Read selected files
+        var totalfiles = document.getElementById('files').files.length;
+        for (var index = 0; index < totalfiles; index++) {
+            form_data.append("files[]", document.getElementById('files').files[index]);
+        }
+
+        // AJAX request
+        $.ajax({
+            url: 'ajaxfile.php', 
+            type: 'post',
+            data: form_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                for(var index = 0; index < response.length; index++) {
+                    var src = response[index];
+
+                    // Add img element in <div id='preview'>
+                    $('#preview').append('<img src="'+src+'" width="200px;" height="200px">');
+                }
+            }
+        });
+
+    });
+/*
     function ClickChange(num){
         var Butt = document.querySelectorAll(".uploadImage");
         Butt[num].click();
@@ -95,5 +155,5 @@ use yii\widgets\ActiveForm;
         }catch(NullPointerException){
             Img[num].src = "imagens/AdicionaImagem.png";
         }
-    };
+    };*/
 </script>
