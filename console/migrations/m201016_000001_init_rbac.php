@@ -81,7 +81,7 @@ class m201016_000001_init_rbac extends Migration
         $ChapterDeletePost->description = 'Permission to delete chapter';
         $auth->add($ChapterDeletePost);
 
-        /************************************************************/
+        /************************************************************//*
 
         $CommentViewPost = $auth->createPermission('CommentViewPost');
         $CommentViewPost->description = 'Permission to view comment';
@@ -138,8 +138,8 @@ class m201016_000001_init_rbac extends Migration
         $auth->addChild($admin, $ChapterCreatePost);
         $auth->addChild($admin, $ChapterDeletePost);
         
-        $auth->addChild($admin, $CommentViewPost);
-        $auth->addChild($admin, $CommentDeletePost);
+        //$auth->addChild($admin, $CommentViewPost);
+        //$auth->addChild($admin, $CommentDeletePost);
 
         $auth->addChild($admin, $ViewPost);
         $auth->addChild($admin, $UpdatePost);
@@ -165,8 +165,8 @@ class m201016_000001_init_rbac extends Migration
         $auth->addChild($fMangager, $ChapterCreatePost);
         $auth->addChild($fMangager, $ChapterDeletePost);
         
-        $auth->addChild($fMangager, $CommentViewPost);
-        $auth->addChild($fMangager, $CommentDeletePost);
+        //$auth->addChild($fMangager, $CommentViewPost);
+        //$auth->addChild($fMangager, $CommentDeletePost);
 
         $auth->addChild($fMangager, $ViewPost);
         $auth->addChild($fMangager, $UpdatePost);
@@ -188,7 +188,7 @@ class m201016_000001_init_rbac extends Migration
         $auth->addChild($mMangager, $ChapterUpdatePost);
         $auth->addChild($mMangager, $ChapterCreatePost);
         
-        $auth->addChild($mMangager, $CommentViewPost);
+        //$auth->addChild($mMangager, $CommentViewPost);
 
         $auth->addChild($mMangager, $ViewPost);
         $auth->addChild($mMangager, $CreatePost);
@@ -205,7 +205,7 @@ class m201016_000001_init_rbac extends Migration
         $auth->addChild($lMangager, $ChapterViewPost);
         $auth->addChild($lMangager, $ChapterCreatePost);
         
-        $auth->addChild($lMangager, $CommentViewPost);
+        //$auth->addChild($lMangager, $CommentViewPost);
 
         $auth->addChild($lMangager, $ViewPost);
 
@@ -224,7 +224,7 @@ class m201016_000001_init_rbac extends Migration
         /************************************************************/
         /************************************************************/
 
-        $auth->assign($admin, 1);
+        $auth->assign($lMangager, 1);
         //$auth->assign($leitor, 1);
     }
     

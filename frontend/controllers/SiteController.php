@@ -9,6 +9,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -34,7 +35,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'logout', 'signup', 'library'],
+                'only' => ['login', 'logout', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['login', 'signup'],
@@ -42,7 +43,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'library'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -371,61 +372,6 @@ class SiteController extends Controller
         $Categories = Category::find()->all();
         return $this->render('all_manga', [
             'Categories' => $Categories,
-        ]);
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
-    public function actionLibrary()
-    {
-        $primaryList = Yii::$app->user->identity->leitor->PrimaryList_Id;
-        $List = null;
-        if($primaryList){
-            $List = $primaryList;
-        }
-        if($primaryList == null){
-            $List = Yii::$app->params['Dictionary']['uncategorized'];
-        }
-        if($primaryList == 1){
-            $List = Yii::$app->params['Dictionary']['all_manga'];
-        }
-        $Lists = null;
-        
-        $Lists = LibraryList::find()
-            ->leftJoin('library li', $on='li.List_Id = library_list.IdList')
-            ->leftJoin('leitor le', $on='le.IdLeitor = li.Leitor_Id')
-            ->where('le.IdLeitor ='.Yii::$app->user->identity->leitor->IdLeitor)
-            ->all();
-
-            
-        $UncatList = LibraryList::find()->where('IdList = 1')->one();
-        
-        $CountAllMangas = count(Manga::find()->all());
-        /*$CountUncatMangas = count(Manga::find()
-                                    ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
-                                    ->where('l.Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor.' and l.List_Id is null')
-                                    ->all());*/
-
-        return $this->render('library',[
-            'List' => $List,
-            'Lists' => $Lists,
-            'CountAM' => $CountAllMangas,
-            'UncatList' => $UncatList,
-        ]);
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
-    public function actionLibrary2($List)
-    {
-        return $this->render('library',[
-            'List' => $List,
         ]);
     }
     
