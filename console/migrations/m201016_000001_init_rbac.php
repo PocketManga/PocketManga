@@ -148,66 +148,63 @@ class m201016_000001_init_rbac extends Migration
 
         /************************************************************/
 
-        $fMangager = $auth->createRole('full_manager');
-        $auth->add($fMangager);
-        $auth->addChild($fMangager, $UserViewPost);
-        $auth->addChild($fMangager, $UserUpdatePost);
-        $auth->addChild($fMangager, $UserCreatePost);
-        $auth->addChild($fMangager, $UserDeletePost);
+        $fManager = $auth->createRole('full_manager');
+        $auth->add($fManager);
+        $auth->addChild($fManager, $UserViewPost);
+        $auth->addChild($fManager, $UserCreatePost);
+        $auth->addChild($fManager, $UserUpdatePost);
+        $auth->addChild($fManager, $UserDeletePost);
 
-        $auth->addChild($fMangager, $MangaViewPost);
-        $auth->addChild($fMangager, $MangaUpdatePost);
-        $auth->addChild($fMangager, $MangaCreatePost);
-        $auth->addChild($fMangager, $MangaDeletePost);
+        $auth->addChild($fManager, $MangaViewPost);
+        $auth->addChild($fManager, $MangaUpdatePost);
+        $auth->addChild($fManager, $MangaCreatePost);
+        $auth->addChild($fManager, $MangaDeletePost);
 
-        $auth->addChild($fMangager, $ChapterViewPost);
-        $auth->addChild($fMangager, $ChapterUpdatePost);
-        $auth->addChild($fMangager, $ChapterCreatePost);
-        $auth->addChild($fMangager, $ChapterDeletePost);
+        $auth->addChild($fManager, $ChapterViewPost);
+        $auth->addChild($fManager, $ChapterUpdatePost);
+        $auth->addChild($fManager, $ChapterCreatePost);
+        $auth->addChild($fManager, $ChapterDeletePost);
         
-        //$auth->addChild($fMangager, $CommentViewPost);
-        //$auth->addChild($fMangager, $CommentDeletePost);
+        //$auth->addChild($fManager, $CommentViewPost);
+        //$auth->addChild($fManager, $CommentDeletePost);
 
-        $auth->addChild($fMangager, $ViewPost);
-        $auth->addChild($fMangager, $UpdatePost);
-        $auth->addChild($fMangager, $CreatePost);
-        $auth->addChild($fMangager, $DeletePost);
+        $auth->addChild($fManager, $ViewPost);
+        $auth->addChild($fManager, $UpdatePost);
+        $auth->addChild($fManager, $CreatePost);
+        $auth->addChild($fManager, $DeletePost);
 
         /************************************************************/
 
-        $mMangager = $auth->createRole('medium_manager');
-        $auth->add($mMangager);
-        $auth->addChild($mMangager, $UserViewPost);
-        $auth->addChild($mMangager, $UserUpdatePost);
+        $mManager = $auth->createRole('medium_manager');
+        $auth->add($mManager);
+        $auth->addChild($mManager, $UserViewPost);
 
-        $auth->addChild($mMangager, $MangaViewPost);
-        $auth->addChild($mMangager, $MangaUpdatePost);
-        $auth->addChild($mMangager, $MangaCreatePost);
+        $auth->addChild($mManager, $MangaViewPost);
+        $auth->addChild($mManager, $MangaUpdatePost);
+        $auth->addChild($mManager, $MangaCreatePost);
 
-        $auth->addChild($mMangager, $ChapterViewPost);
-        $auth->addChild($mMangager, $ChapterUpdatePost);
-        $auth->addChild($mMangager, $ChapterCreatePost);
+        $auth->addChild($mManager, $ChapterViewPost);
+        $auth->addChild($mManager, $ChapterUpdatePost);
+        $auth->addChild($mManager, $ChapterCreatePost);
         
-        //$auth->addChild($mMangager, $CommentViewPost);
+        //$auth->addChild($mManager, $CommentViewPost);
 
-        $auth->addChild($mMangager, $ViewPost);
-        $auth->addChild($mMangager, $CreatePost);
+        $auth->addChild($mManager, $ViewPost);
+        $auth->addChild($mManager, $CreatePost);
 
         /************************************************************/
 
-        $lMangager = $auth->createRole('low_manager');
-        $auth->add($lMangager);
-        $auth->addChild($lMangager, $UserViewPost);
-        $auth->addChild($lMangager, $UserUpdatePost);
+        $lManager = $auth->createRole('low_manager');
+        $auth->add($lManager);
         
-        $auth->addChild($lMangager, $MangaViewPost);
+        $auth->addChild($lManager, $MangaViewPost);
 
-        $auth->addChild($lMangager, $ChapterViewPost);
-        $auth->addChild($lMangager, $ChapterCreatePost);
+        $auth->addChild($lManager, $ChapterViewPost);
+        $auth->addChild($lManager, $ChapterCreatePost);
         
-        //$auth->addChild($lMangager, $CommentViewPost);
+        //$auth->addChild($lManager, $CommentViewPost);
 
-        $auth->addChild($lMangager, $ViewPost);
+        $auth->addChild($lManager, $ViewPost);
 
         /************************************************************//*
 

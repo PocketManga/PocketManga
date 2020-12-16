@@ -30,12 +30,26 @@ class MangaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
+                        'actions' => ['list'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['admin','full_manager','medium_manager','low_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],
@@ -54,6 +68,10 @@ class MangaController extends Controller
      */
     public function actionList()
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Mangas = Manga::find()->all();
 
         return $this->render('list', [
@@ -69,6 +87,10 @@ class MangaController extends Controller
      */
     public function actionView($idManga)
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Manga = $this->findModel($idManga);
         $Authors = $Manga->getAuthors()->all();
         $Chapters = $Manga->getChapters()->all();
@@ -88,6 +110,10 @@ class MangaController extends Controller
      */
     public function actionCreate()
     {
+        if(!Yii::$app->user->can('CreatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = new MangaForm();
         $Servers = Server::find()->all();
         $Categories = Category::find()->all();
@@ -191,6 +217,10 @@ class MangaController extends Controller
      */
     public function actionUpdate($idManga)
     {
+        if(!Yii::$app->user->can('UpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Manga = $this->findModel($idManga);
         
         $model = new MangaForm();
@@ -302,6 +332,10 @@ class MangaController extends Controller
      */
     public function actionDelete($idManga)
     {
+        if(!Yii::$app->user->can('DeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $this->findModel($idManga)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/manga_list');

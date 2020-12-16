@@ -23,11 +23,10 @@ class ReportController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
+                        'actions' => ['list','view','resolved','unresolved','delete'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -47,6 +46,10 @@ class ReportController extends Controller
      */
     public function actionList()
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Reports = Report::find()->all();
 
         return $this->render('list', [
@@ -62,6 +65,10 @@ class ReportController extends Controller
      */
     public function actionView($idReport)
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($idReport),
         ]);
@@ -76,6 +83,10 @@ class ReportController extends Controller
      */
     public function actionResolved($idReport)
     {
+        if(!Yii::$app->user->can('UpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $report = $this->findModel($idReport);
         $report->Resolved = 1;
         $report->save();
@@ -92,6 +103,10 @@ class ReportController extends Controller
      */
     public function actionUnresolved($idReport)
     {
+        if(!Yii::$app->user->can('UpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $report = $this->findModel($idReport);
         $report->Resolved = 0;
         $report->save();
@@ -108,6 +123,10 @@ class ReportController extends Controller
      */
     public function actionDelete($idReport)
     {
+        if(!Yii::$app->user->can('DeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $this->findModel($idReport)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/report_list');

@@ -25,12 +25,26 @@ class CategoryController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
+                        'actions' => ['list'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['admin','full_manager','medium_manager','low_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],
@@ -49,6 +63,10 @@ class CategoryController extends Controller
      */
     public function actionList()
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Categories = Category::find()->all();
 
         return $this->render('list', [
@@ -64,6 +82,10 @@ class CategoryController extends Controller
      */
     public function actionView($idCategory)
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($idCategory),
         ]);
@@ -76,6 +98,10 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
+        if(!Yii::$app->user->can('CreatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = new Category();
         $Servers = Server::find()->all();
 
@@ -103,6 +129,10 @@ class CategoryController extends Controller
      */
     public function actionUpdate($idCategory)
     {
+        if(!Yii::$app->user->can('UpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idCategory);
         $Servers = Server::find()->all();
 
@@ -130,6 +160,10 @@ class CategoryController extends Controller
      */
     public function actionDelete($idCategory)
     {
+        if(!Yii::$app->user->can('DeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $this->findModel($idCategory)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/category_list');

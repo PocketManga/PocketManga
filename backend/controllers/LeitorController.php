@@ -25,12 +25,16 @@ class LeitorController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
-                        'roles' => ['@'],
+                        'actions' => ['list','view'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],
@@ -49,6 +53,10 @@ class LeitorController extends Controller
      */
     public function actionList()
     {
+        if(!Yii::$app->user->can('UserViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Readers = Leitor::find()->all();
 
         return $this->render('list', [
@@ -64,6 +72,10 @@ class LeitorController extends Controller
      */
     public function actionView($idLeitor)
     {
+        if(!Yii::$app->user->can('UserViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idLeitor);
         
         $Lists = LibraryList::find()
@@ -79,24 +91,6 @@ class LeitorController extends Controller
     }
 
     /**
-     * Creates a new Leitor model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Leitor();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idLeitor' => $model->IdLeitor]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Updates an existing Leitor model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $idLeitor
@@ -105,6 +99,10 @@ class LeitorController extends Controller
      */
     public function actionUpdate($idLeitor)
     {
+        if(!Yii::$app->user->can('UserUpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idLeitor);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -125,6 +123,10 @@ class LeitorController extends Controller
      */
     public function actionDelete($idLeitor)
     {
+        if(!Yii::$app->user->can('UserDeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $this->findModel($idLeitor)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/reader_list');

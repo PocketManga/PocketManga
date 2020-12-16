@@ -26,12 +26,21 @@ class ChapterController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
-                        'roles' => ['@'],
+                        'actions' => ['view'],
+                        'roles' => ['admin','full_manager','medium_manager','low_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create','update'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],
@@ -52,6 +61,10 @@ class ChapterController extends Controller
      */
     public function actionView($idManga, $idChapter)
     {
+        if(!Yii::$app->user->can('ChapterViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($idChapter),
         ]);
@@ -64,6 +77,10 @@ class ChapterController extends Controller
      */
     public function actionCreate($idManga)
     {
+        if(!Yii::$app->user->can('ChapterCreatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = new ChapterForm();
         $model->Season = 1;
 
@@ -115,6 +132,10 @@ class ChapterController extends Controller
      */
     public function actionUpdate($idManga, $idChapter)
     {
+        if(!Yii::$app->user->can('ChapterUpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idChapter);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -135,6 +156,10 @@ class ChapterController extends Controller
      */
     public function actionDelete($idChapter, $idManga)
     {
+        if(!Yii::$app->user->can('ChapterDeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $this->findModel($idChapter)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga);

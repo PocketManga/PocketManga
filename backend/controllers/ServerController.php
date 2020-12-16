@@ -24,12 +24,26 @@ class ServerController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
+                        'actions' => ['list'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['admin','full_manager','medium_manager','low_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],
@@ -48,6 +62,10 @@ class ServerController extends Controller
      */
     public function actionList()
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Servers = Server::find()->all();
 
         return $this->render('list', [
@@ -63,6 +81,10 @@ class ServerController extends Controller
      */
     public function actionView($idServer)
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idServer);
         $Mangas = Manga::find()->where('Server like "'.$model->Code.'"')->all();
 
@@ -79,6 +101,10 @@ class ServerController extends Controller
      */
     public function actionCreate()
     {
+        if(!Yii::$app->user->can('CreatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = new Server();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -99,6 +125,10 @@ class ServerController extends Controller
      */
     public function actionUpdate($idServer)
     {
+        if(!Yii::$app->user->can('UpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idServer);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -119,6 +149,10 @@ class ServerController extends Controller
      */
     public function actionDelete($idServer)
     {
+        if(!Yii::$app->user->can('DeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $this->findModel($idServer)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/server_list');

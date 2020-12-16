@@ -25,12 +25,26 @@ class ManagerController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'index2'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','index2'],
+                        'actions' => ['list'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['admin','full_manager','medium_manager','low_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],
@@ -49,6 +63,10 @@ class ManagerController extends Controller
      */
     public function actionList()
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $Managers = Manager::find()->all();
         $auth = Yii::$app->authManager;
         $UserRoles = $auth->getRolesByUser(Yii::$app->user->identity->IdUser);
@@ -67,15 +85,18 @@ class ManagerController extends Controller
      */
     public function actionView($idManager)
     {
+        if(!Yii::$app->user->can('ViewPost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idManager);
         $auth = Yii::$app->authManager;
         $roleModel = Yii::$app->db
             ->createCommand("Select * from auth_assignment where user_id='".$idManager."'")
             ->queryOne();
-        $UserRoles = $auth->getRolesByUser(Yii::$app->user->identity->IdUser);
+        $UserRoles = $auth->getRoles(Yii::$app->user->identity->IdUser);
 
         $Role = null;
-
         foreach ($UserRoles as $URole){
             if($URole->name == $roleModel['item_name']){
                 $Role = $URole;
@@ -95,6 +116,10 @@ class ManagerController extends Controller
      */
     public function actionCreate()
     {
+        if(!Yii::$app->user->can('CreatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = new Manager();
         $Users = User::find()->all();
         $DDUsers = null;
@@ -128,6 +153,10 @@ class ManagerController extends Controller
      */
     public function actionUpdate($idManager, $roleName)
     {
+        if(!Yii::$app->user->can('UpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idManager);
 
         $auth = Yii::$app->authManager;
@@ -148,6 +177,10 @@ class ManagerController extends Controller
      */
     public function actionDelete($idManager)
     {
+        if(!Yii::$app->user->can('DeletePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
         $model = $this->findModel($idManager);
         $auth = Yii::$app->authManager;
         $auth->revokeAll($model->user->getId());
