@@ -12,21 +12,6 @@ class m201016_000001_init_rbac extends Migration
      */
     public function safeUp()
     {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
-    {
-        echo "m201016_141315_init_rbac cannot be reverted.\n";
-
-        return false;
-    }
-
-    public function up()
-    {
         $auth = Yii::$app->authManager;
 
         $UserViewPost = $auth->createPermission('UserViewPost');
@@ -223,6 +208,21 @@ class m201016_000001_init_rbac extends Migration
 
         $auth->assign($lMangager, 1);
         //$auth->assign($leitor, 1);
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function safeDown()
+    {
+        echo "m201016_141315_init_rbac cannot be reverted.\n";
+
+        return false;
+    }
+
+    public function up()
+    {
     }
     
     public function down()

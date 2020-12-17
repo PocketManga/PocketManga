@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\Chapter */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <div class="chapter-form mt-4 pt-4 border-t-2px-solid-color3">
 
@@ -40,10 +41,13 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="col-6">
                     <button class="uploadPreview" onclick="return ClickChange()" type="button">Upload</button>
-                    <input type="file" id='uploadImage' name="Images[]" style="display:none;" onchange="PreviewImage();" multiple><br>
+                    <input type="file" id='uploadImage' name="Images[]" style="display:none;" onchange="PreviewImages()" multiple><br>
                 </div>
             </div>
-            <div class="row mb-n3">
+            <div class="row mb-n3" id="list-images">
+                <div class="col-auto to-clone">
+                    <img style="max-width:200px;" src=""/>
+                </div>
                 <!--
                 <div class="col-auto">
                 <form method='post' action='' enctype="multipart/form-data">
@@ -53,7 +57,7 @@ use yii\widgets\ActiveForm;
                     <a href="#" onclick="return ClickChange(0)">
                         <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
                     </a>
-                    <?= $form->field($model, 'Images[0]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
+                    <?= $form->field($model, 'Images[]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
                 </div>-->
             </div>
         </div>
@@ -70,6 +74,9 @@ use yii\widgets\ActiveForm;
 </div>
 
 <script type="text/javascript">
+    var clone = $('.to-clone').clone();
+    $('.to-clone').remove();
+
     function PressOneshotButton(div){
         var div = document.getElementById("input-oneshot");
         ChangeColor(div,6);
@@ -87,73 +94,38 @@ use yii\widgets\ActiveForm;
         var inputUpload = document.getElementById("uploadImage");
         inputUpload.click();
     };
+    function PreviewImages() {
 
-    function PreviewImage() {
-        var oFReader = new FileReader();
+        var divListImages = document.querySelector('#list-images');
+        var Images = document.querySelector('#uploadImage').files;
+        $('.to-clone').remove();
 
-        var inputUpload = document.getElementById("uploadImage");
-        //var Img = document.querySelectorAll(".uploadPreview");
-        for(var num=0; num<inputUpload.length;num++){
-            try{
-                oFReader.readAsDataURL(inputUpload.files[num]);
-                
-                oFReader.onload = function (oFREvent) {
-                    Img[num].src = oFREvent.target.result;
-                };
-            }catch(NullPointerException){
-                Img[num].src = "imagens/AdicionaImagem.png";
-            }
+        function readAndPreview(img) {
+
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+            var div = document.createElement('div'); 
+            var image = new Image();
+
+            div.className="col-auto p-3";
+
+            image.style="max-width:250px;";
+            image.title = img.name;
+            image.src = this.result;
+
+            div.appendChild(image);
+
+            divListImages.appendChild(div);
+            }, false);
+
+            reader.readAsDataURL(img);
+
         }
-    };
+
+        if (Images) {
+            [].forEach.call(Images, readAndPreview);
+        }
+
+    }
     
-    /*$('#submit').click(function(){
-
-        var form_data = new FormData();
-
-        // Read selected files
-        var totalfiles = document.getElementById('files').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.append("files[]", document.getElementById('files').files[index]);
-        }
-
-        // AJAX request
-        $.ajax({
-            url: 'ajaxfile.php', 
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                for(var index = 0; index < response.length; index++) {
-                    var src = response[index];
-
-                    // Add img element in <div id='preview'>
-                    $('#preview').append('<img src="'+src+'" width="200px;" height="200px">');
-                }
-            }
-        });
-
-    });
-/*
-    function ClickChange(num){
-        var Butt = document.querySelectorAll(".uploadImage");
-        Butt[num].click();
-    };
-
-    function PreviewImage(num) {
-        var oFReader = new FileReader();
-
-        var Butt = document.querySelectorAll(".uploadImage");
-        var Img = document.querySelectorAll(".uploadPreview");
-        try{
-            oFReader.readAsDataURL(Butt[num].files[0]);
-            
-            oFReader.onload = function (oFREvent) {
-                Img[num].src = oFREvent.target.result;
-            };
-        }catch(NullPointerException){
-            Img[num].src = "imagens/AdicionaImagem.png";
-        }
-    };*/
 </script>

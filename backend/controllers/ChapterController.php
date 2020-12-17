@@ -96,6 +96,8 @@ class ChapterController extends Controller
             $Chapter->Manga_Id = $idManga;
             $Chapter->Manager_Id = Yii::$app->user->identity->manager->IdManager;
 
+            var_dump($model->Images);
+            return 0;
             //$Chapter->save();
 
             $Images = UploadedFile::getInstances($model, 'Images');

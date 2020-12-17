@@ -16,7 +16,7 @@ class LoginCest
      * @see \Codeception\Module\Yii2::_before()
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
-     */
+     *//*
     public function _fixtures()
     {
         return [
@@ -29,7 +29,7 @@ class LoginCest
     
     /**
      * @param FunctionalTester $I
-     */
+     *//*
     public function loginUser(FunctionalTester $I)
     {
         $I->amOnPage('/site/login');
@@ -40,5 +40,5 @@ class LoginCest
         $I->see('Logout (erau)', 'form button[type=submit]');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
-    }
+    }/** */
 }
