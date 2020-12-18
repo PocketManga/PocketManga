@@ -1,0 +1,17 @@
+suite_namespace: frontend\tests\acceptance
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+             url: 'http://localhost/'
+            browser: chrome
+        - Yii2:
+            part: orm
+            entryScript: index-test.php
+            cleanup: false
+#extensions:
+#    enabled:
+#        - Codeception\Extension\RunProcess:
+#            0: java -jar ~/selenium-server.jar
+#            1: mailcatcher
+#            sleep: 5 # wait 5 seconds for processes to boot

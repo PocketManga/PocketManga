@@ -14,7 +14,7 @@ class VerifyEmailCest
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
      */
-    public function _fixtures()
+    /*public function _fixtures()
     {
         return [
             'user' => [
@@ -64,5 +64,5 @@ class VerifyEmailCest
            'email' => 'test@mail.com',
            'status' => \common\models\User::STATUS_ACTIVE
         ]);
-    }
+    }/** */
 }

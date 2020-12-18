@@ -11,6 +11,7 @@ class HomeCest
         $I->amOnPage(Url::toRoute('/site/index'));
         $I->see('PocketManga');
 
+        $I->click('More');
         $I->seeLink('About');
         $I->click('About');
         $I->wait(2); // wait for page to be opened

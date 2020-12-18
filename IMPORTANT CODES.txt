@@ -4,5 +4,17 @@ To update database:
 ./yii migrate/fresh --migrationPath=@yii/rbac/migrations --interactive=0 ; ./yii  migrate --interactive=0
 
 
-to see error
-../vendor/bin/codecept run/ (unit or function)
+to run unit Tests
+../vendor/bin/codecept run unit
+
+to run functional Tests
+../vendor/bin/codecept run functional
+
+to run acceptance Tests
+../vendor/bin/codecept run acceptance
+
+to get Tests page
+
+
+
+https://codeception.com/docs/modules/WebDriver#Local-Testing
