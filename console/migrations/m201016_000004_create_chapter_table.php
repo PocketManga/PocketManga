@@ -19,7 +19,7 @@ class m201016_000004_create_chapter_table extends Migration
 
         $this->createTable('{{%chapter}}', [
             'IdChapter' => $this->primaryKey(),
-            'Number' => $this->float(5,5)->notNull(),
+            'Number' => $this->float(7,4)->notNull(),
             'PagesNumber' => $this->integer()->notNull(),
             'Name' => $this->string(100),
             'ReleaseDate' => 'DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',

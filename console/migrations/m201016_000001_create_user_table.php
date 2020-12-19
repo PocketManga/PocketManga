@@ -20,7 +20,6 @@ class m201016_000001_create_user_table extends Migration
             'SrcPhoto' => $this->string(50),
             'Created' => 'DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',
             'Updated' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',
-            'SoftDelete' => $this->boolean()->notNull()->defaultValue(0),
 
 
             'auth_key' => $this->string(100)->notNull(),

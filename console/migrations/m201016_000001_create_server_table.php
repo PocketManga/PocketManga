@@ -26,7 +26,7 @@ class m201016_000001_create_server_table extends Migration
         
         $this->insert('{{%server}}', [
             'Name' => 'English',
-            'Code' => 'En_us',
+            'Code' => 'en_US',
         ]);
     }
 

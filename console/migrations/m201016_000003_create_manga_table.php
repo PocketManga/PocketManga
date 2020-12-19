@@ -25,7 +25,7 @@ class m201016_000003_create_manga_table extends Migration
             'Status' => $this->boolean()->notNull()->defaultValue(0),
             'OneShot' => $this->boolean()->notNull()->defaultValue(0),
             'R18' => $this->boolean()->notNull()->defaultValue(0),
-            'Server' => $this->string(10)->defaultValue('En_us'),
+            'Server' => $this->string(10)->defaultValue('en_US'),
             'SrcImage' => $this->string(50),
             'ReleaseDate' => $this->date()->notNull(),
             'Updated' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',

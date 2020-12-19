@@ -24,8 +24,9 @@ class m201016_000002_create_leitor_table extends Migration
             'ChapterShow' => $this->boolean()->notNull()->defaultValue(1),
             //'LibraryShow' => "ENUM('1','2','3') NOT NULL",
             'LastVisit' => 'DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',
-            'Server' => $this->string(10)->notNull()->defaultValue('En_us'),
-            'PrimaryList_Id' => $this->integer()->defaultValue(1),
+            'Server' => $this->string(10)->notNull()->defaultValue('en_US'),
+            'Status' => $this->boolean()->notNull()->defaultValue(1),
+            'PrimaryList_Id' => $this->integer()->notNull()->defaultValue(1),
             'User_Id' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
 

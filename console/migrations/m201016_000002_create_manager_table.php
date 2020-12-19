@@ -20,6 +20,7 @@ class m201016_000002_create_manager_table extends Migration
         $this->createTable('{{%manager}}', [
             'IdManager' => $this->primaryKey(),
             'Theme' => $this->boolean()->notNull()->defaultValue(0),
+            'Status' => $this->boolean()->notNull()->defaultValue(1),
             'User_Id' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
 

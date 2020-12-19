@@ -12,7 +12,7 @@ use yii\web\Controller;
 class DictionaryController extends Controller
 {
     
-    public static function getDictionary_En_us()
+    public static function getDictionary_en_US()
     {
         $Dictionary = null;
         $Dictionary = [
