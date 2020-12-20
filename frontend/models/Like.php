@@ -4,6 +4,9 @@ namespace frontend\models;
 
 use Yii;
 
+use frontend\models\Comment;
+use common\models\User;
+
 /**
  * This is the model class for table "like".
  *

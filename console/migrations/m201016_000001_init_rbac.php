@@ -163,6 +163,7 @@ class m201016_000001_init_rbac extends Migration
         $mManager = $auth->createRole('medium_manager');
         $auth->add($mManager);
         $auth->addChild($mManager, $UserViewPost);
+        $auth->addChild($mManager, $UserUpdatePost);
 
         $auth->addChild($mManager, $MangaViewPost);
         $auth->addChild($mManager, $MangaUpdatePost);
@@ -182,6 +183,8 @@ class m201016_000001_init_rbac extends Migration
         $lManager = $auth->createRole('low_manager');
         $auth->add($lManager);
         
+        $auth->addChild($lManager, $UserUpdatePost);
+
         $auth->addChild($lManager, $MangaViewPost);
 
         $auth->addChild($lManager, $ChapterViewPost);

@@ -4,8 +4,8 @@ namespace common\models;
 
 use Yii;
 
-use common\models\Chapter;
 use common\models\Leitor;
+use common\models\Chapter;
 
 /**
  * This is the model class for table "chapter_readed".

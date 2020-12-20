@@ -38,12 +38,12 @@ class CategoryController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['create'],
+                        'actions' => ['create', 'update'],
                         'roles' => ['admin','full_manager','medium_manager'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['update','delete'],
+                        'actions' => ['delete'],
                         'roles' => ['admin','full_manager'],
                     ],
                 ],

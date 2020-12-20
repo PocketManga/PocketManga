@@ -42,11 +42,11 @@ class Report extends \yii\db\ActiveRecord
     {
         return [
             [['SubjectMatter', 'Description', 'SrcImage', 'Leitor_Id'], 'required'],
-            [['SubjectMatter'], 'string'],
+            [['Description'], 'string'],
             [['Resolved', 'Manga_Id', 'Chapter_Id', 'Leitor_Id'], 'integer'],
             [['Created'], 'safe'],
-            [['Description'], 'string', 'max' => 100],
-            [['SrcImage'], 'string', 'max' => 50],
+            [['SubjectMatter'], 'string', 'max' => 50],
+            [['SrcImage'], 'string', 'max' => 30],
             [['Chapter_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Chapter::className(), 'targetAttribute' => ['Chapter_Id' => 'IdChapter']],
             [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
             [['Manga_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Manga::className(), 'targetAttribute' => ['Manga_Id' => 'IdManga']],

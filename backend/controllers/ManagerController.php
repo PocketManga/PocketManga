@@ -33,18 +33,18 @@ class ManagerController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['view'],
+                        'actions' => ['view', 'myUpdate'],
                         'roles' => ['admin','full_manager','medium_manager','low_manager'],
                     ],
                     [
                         'allow' => true,
                         'actions' => ['create'],
-                        'roles' => ['admin','full_manager','medium_manager'],
+                        'roles' => ['admin','full_manager'],
                     ],
                     [
                         'allow' => true,
                         'actions' => ['update','delete'],
-                        'roles' => ['admin','full_manager'],
+                        'roles' => ['admin'],
                     ],
                 ],
             ],
@@ -63,7 +63,7 @@ class ManagerController extends Controller
      */
     public function actionList()
     {
-        if(!Yii::$app->user->can('ViewPost')){
+        if(!Yii::$app->user->can('UserViewPost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -85,7 +85,7 @@ class ManagerController extends Controller
      */
     public function actionView($idManager)
     {
-        if(!Yii::$app->user->can('ViewPost')){
+        if(!Yii::$app->user->can('UserViewPost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -116,7 +116,7 @@ class ManagerController extends Controller
      */
     public function actionCreate()
     {
-        if(!Yii::$app->user->can('CreatePost')){
+        if(!Yii::$app->user->can('UserCreatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -153,7 +153,31 @@ class ManagerController extends Controller
      */
     public function actionUpdate($idManager, $roleName)
     {
-        if(!Yii::$app->user->can('UpdatePost')){
+        if(!Yii::$app->user->can('UserUpdatePost')){
+            throw new HttpException(403,'You are not allowed to perform this action.');
+        }
+
+        $model = $this->findModel($idManager);
+
+        $auth = Yii::$app->authManager;
+        $role=$auth->getRole($roleName);
+        
+        $auth->revokeAll($model->user->getId());
+        $auth->assign($role, $model->user->getId());
+
+        return $this->redirect(Yii::$app->request->baseUrl.'/'.'manager/'.$idManager);
+    }
+
+    /**
+     * Updates an existing Manager model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $idManager
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionMyUpdate($idManager, $roleName)
+    {
+        if(!Yii::$app->user->can('UserUpdatePost' && $idManager != Yii::$app->user->identity->manager->IdManager)){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -177,7 +201,7 @@ class ManagerController extends Controller
      */
     public function actionDelete($idManager)
     {
-        if(!Yii::$app->user->can('DeletePost')){
+        if(!Yii::$app->user->can('UserDeletePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 

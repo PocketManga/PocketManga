@@ -155,9 +155,6 @@ class DBChapterTest extends \Codeception\Test\Unit
     // tests
     public function testInsert()
     {
-        // Create new Chapter
-        $Chapter = new Chapter;
-        
         // Put all fields with acceptable values and save
         $this->tester->haveRecord('common\models\Chapter', ['Number' => 3, 'PagesNumber' => 10, 'Name' => 'When she smiled', 'ReleaseDate' => '1998-11-12', 'Updated' => '2020-11-12 22:23:50', 'Season' => 1, 'OneShot' => false, 'SrcFolder' => '/manga/1/3', 'Manga_Id' => 1, 'Manager_Id' => 1]);
 

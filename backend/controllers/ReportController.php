@@ -26,8 +26,23 @@ class ReportController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list','view','resolved','unresolved','delete'],
+                        'actions' => ['list'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['admin','full_manager','medium_manager','low_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['resolved','unresolved'],
+                        'roles' => ['admin','full_manager','medium_manager'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin','full_manager'],
                     ],
                 ],
             ],

@@ -68,7 +68,7 @@ class MangaController extends Controller
      */
     public function actionList()
     {
-        if(!Yii::$app->user->can('ViewPost')){
+        if(!Yii::$app->user->can('MangaViewPost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -87,7 +87,7 @@ class MangaController extends Controller
      */
     public function actionView($idManga)
     {
-        if(!Yii::$app->user->can('ViewPost')){
+        if(!Yii::$app->user->can('MangaViewPost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -110,7 +110,7 @@ class MangaController extends Controller
      */
     public function actionCreate()
     {
-        if(!Yii::$app->user->can('CreatePost')){
+        if(!Yii::$app->user->can('MangaCreatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -217,7 +217,7 @@ class MangaController extends Controller
      */
     public function actionUpdate($idManga)
     {
-        if(!Yii::$app->user->can('UpdatePost')){
+        if(!Yii::$app->user->can('MangaUpdatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
@@ -332,7 +332,7 @@ class MangaController extends Controller
      */
     public function actionDelete($idManga)
     {
-        if(!Yii::$app->user->can('DeletePost')){
+        if(!Yii::$app->user->can('MangaDeletePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 

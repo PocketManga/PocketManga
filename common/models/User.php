@@ -23,16 +23,14 @@ use frontend\models\Rating;
  * @property string $Email
  * @property string $Genre
  * @property string $BirthDate
- * @property string $SrcPhoto
+ * @property string|null $SrcPhoto
  * @property string $Created
  * @property string $Updated
- * @property int $SoftDelete
  * @property string $auth_key
  * @property string $password_hash
  * @property string|null $password_reset_token
  * @property int $status
  * @property string|null $verification_token
- * @property string $password write-only password
  *
  * @property Comment[] $comments
  * @property Leitor $leitor
@@ -47,12 +45,13 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -61,14 +60,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['Username', 'Email', 'Genre', 'BirthDate', 'SrcPhoto', 'auth_key', 'password_hash'], 'required'],
+            [['Username', 'Email', 'Genre', 'BirthDate', 'auth_key', 'password_hash'], 'required'],
             [['Genre'], 'string'],
             [['BirthDate', 'Created', 'Updated'], 'safe'],
-            [['SoftDelete', 'status'], 'integer'],
+            [['status'], 'integer'],
             [['Username', 'SrcPhoto'], 'string', 'max' => 50],
-            [['Email','auth_key'], 'string', 'max' => 100],
+            [['Email', 'auth_key'], 'string', 'max' => 100],
             [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
             [['Username'], 'unique'],
             [['Email'], 'unique'],
@@ -90,7 +87,6 @@ class User extends ActiveRecord implements IdentityInterface
             'SrcPhoto' => 'Src Photo',
             'Created' => 'Created',
             'Updated' => 'Updated',
-            'SoftDelete' => 'Soft Delete',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
@@ -168,6 +164,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Manga::className(), ['IdManga' => 'Manga_Id'])->viaTable('rating', ['User_Id' => 'IdUser']);
     }
+
     /**
      * {@inheritdoc}
      */

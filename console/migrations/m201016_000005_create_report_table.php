@@ -19,9 +19,9 @@ class m201016_000005_create_report_table extends Migration
 
         $this->createTable('{{%report}}', [
             'IdReport' => $this->primaryKey(),
-            'SubjectMatter' => $this->text()->notNull(),
-            'Description' => $this->string(100)->notNull(),
-            'SrcImage' => $this->string(50)->notNull(),
+            'SubjectMatter' => $this->string(50)->notNull(),
+            'Description' => $this->text()->notNull(),
+            'SrcImage' => $this->string(30)->notNull(),
             'Resolved' => $this->boolean()->notNull()->defaultValue(0),
             'Created' => 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL',
             'Manga_Id' => $this->integer(),

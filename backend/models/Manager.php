@@ -7,11 +7,13 @@ use Yii;
 use common\models\Chapter;
 use common\models\Manga;
 use common\models\User;
+
 /**
  * This is the model class for table "manager".
  *
  * @property int $IdManager
  * @property int $Theme
+ * @property int $Status
  * @property int $User_Id
  *
  * @property Chapter[] $chapters
@@ -34,7 +36,7 @@ class Manager extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Theme', 'User_Id'], 'integer'],
+            [['Theme', 'Status', 'User_Id'], 'integer'],
             [['User_Id'], 'required'],
             [['User_Id'], 'unique'],
             [['User_Id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['User_Id' => 'IdUser']],
@@ -49,6 +51,7 @@ class Manager extends \yii\db\ActiveRecord
         return [
             'IdManager' => 'Id Manager',
             'Theme' => 'Theme',
+            'Status' => 'Status',
             'User_Id' => 'User ID',
         ];
     }

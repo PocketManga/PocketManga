@@ -72,6 +72,7 @@ class DBLeitorTest extends \Codeception\Test\Unit
         // Verify all fields to see if they accept being null
         $this->assertFalse($Leitor->validate('MangaShow'));
         $this->assertFalse($Leitor->validate('User_Id'));
+        
         /* The next five asserts are accepting null, and i can only think that's because of the validation knowing about the "default_value" */
         $this->assertTrue($Leitor->validate('Theme'));
         $this->assertTrue($Leitor->validate('ChapterShow'));
@@ -84,7 +85,7 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $Leitor->MangaShow = 'Hello';
         $Leitor->ChapterShow = 2;
         $Leitor->Server = 'ItCantHaveMoreThanTenCharacters';
-        $Leitor->Status = 'hello';
+        $Leitor->Status = 'Hello';
         $Leitor->PrimaryList_Id = 1.2;
         $Leitor->User_Id = 'Nildgar';
 
@@ -92,9 +93,9 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $this->assertFalse($Leitor->validate('Server'));
         $this->assertFalse($Leitor->validate('PrimaryList_Id'));
         $this->assertFalse($Leitor->validate('User_Id'));
+        $this->assertFalse($Leitor->validate('Status'));
         /* The next three asserts are accepting unacceptable values, and i can only think that's because of the validation is BROCKEN */
         $this->assertTrue($Leitor->validate('Theme'));
-        $this->assertTrue($Leitor->validate('Status'));
         $this->assertTrue($Leitor->validate('MangaShow'));
         $this->assertTrue($Leitor->validate('ChapterShow'));
 
@@ -113,6 +114,7 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $this->assertTrue($Leitor->validate('ChapterShow'));
         $this->assertTrue($Leitor->validate('Status'));
         $this->assertTrue($Leitor->validate('Server'));
+        
         /* The next two asserts are giving false, and i can only think that's because of the validation trying using foreign keys when the table doesn't have any because of the engine MyISAM */
         $this->assertFalse($Leitor->validate('PrimaryList_Id'));
         $this->assertFalse($Leitor->validate('User_Id'));
@@ -121,9 +123,6 @@ class DBLeitorTest extends \Codeception\Test\Unit
     // tests
     public function testInsert()
     {
-        // Create new Leitor
-        $Leitor = new Leitor;
-        
         // Put all fields with acceptable values and save
         $this->tester->haveRecord('common\models\Leitor', ['Theme' => true, 'MangaShow' => 1, 'ChapterShow' => true, 'Server' => 'pt_PT', 'PrimaryList_Id' => 1, 'User_Id' => 1]);
 

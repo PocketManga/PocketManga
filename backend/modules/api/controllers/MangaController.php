@@ -5,7 +5,7 @@ namespace backend\modules\api\controllers;
 use yii\rest\ActiveController;
 //use common\models\Manga;
 use common\models\User;
-use common\models\MangaReaded;
+use frontend\models\MangaReaded;
 use common\models\LibraryList;
 use common\models\Library;
 use DateTime;

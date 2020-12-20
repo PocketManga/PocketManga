@@ -60,9 +60,9 @@ class DBUserTest extends \Codeception\Test\Unit
         $this->assertFalse($User->validate('Email'));
         $this->assertFalse($User->validate('Genre'));
         $this->assertFalse($User->validate('BirthDate'));
-        $this->assertFalse($User->validate('SrcPhoto'));
         $this->assertFalse($User->validate('auth_key'));
         $this->assertFalse($User->validate('password_hash'));
+        $this->assertTrue($User->validate('SrcPhoto'));
 
         $this->assertTrue($User->validate('password_reset_token'));
         /* The next assert is accepting null, and i can only think that's because of the validation knowing about the "default_value" */

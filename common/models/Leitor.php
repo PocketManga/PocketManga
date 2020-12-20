@@ -24,7 +24,8 @@ use common\models\User;
  * @property int $ChapterShow
  * @property string $LastVisit
  * @property string $Server
- * @property int|null $PrimaryList_Id
+ * @property int $Status
+ * @property int $PrimaryList_Id
  * @property int $User_Id
  *
  * @property App[] $apps
@@ -56,7 +57,7 @@ class Leitor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Theme', 'ChapterShow', 'PrimaryList_Id', 'User_Id'], 'integer'],
+            [['Theme', 'ChapterShow', 'Status', 'PrimaryList_Id', 'User_Id'], 'integer'],
             [['MangaShow', 'User_Id'], 'required'],
             [['MangaShow'], 'string'],
             [['LastVisit'], 'safe'],
@@ -79,6 +80,7 @@ class Leitor extends \yii\db\ActiveRecord
             'ChapterShow' => 'Chapter Show',
             'LastVisit' => 'Last Visit',
             'Server' => 'Server',
+            'Status' => 'Status',
             'PrimaryList_Id' => 'Primary List ID',
             'User_Id' => 'User ID',
         ];
