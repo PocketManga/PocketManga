@@ -29,18 +29,7 @@ $this->title = 'Managers';
                 </tr>
             </thead>
             <tbody>
-                <?php if($Managers){ foreach($Managers as $Manager){ 
-                    $roleModel = Yii::$app->db
-                        ->createCommand("Select * from auth_assignment where user_id='".$Manager->IdManager."'")
-                        ->queryOne();
-
-                    $Role = null;
-                    foreach ($Roles as $URole){
-                        if($URole->name == $roleModel['item_name']){
-                            $Role = $URole;
-                        }
-                    }
-                ?>
+                <?php if($Managers){ foreach($Managers as $Manager){ $Role = $Manager->user->role; ?>
                     <tr class="tr_list1">
                         <td class="border-b-2px-solid-color3 p-0"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manager/'.$Manager->IdManager?>"><div class="w-100 h-100 p-3"><?=$Manager->user->Username?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'manager/'.$Manager->IdManager?>"><div class="w-100 h-100 p-3"><?=$Manager->user->Email?></div></a></td>

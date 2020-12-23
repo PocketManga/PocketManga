@@ -18,17 +18,19 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-</head>
-<body class="blank">
-<?php $this->beginBody() ?>
+    <link rel="stylesheet" type="text/css" href="<?=Yii::$app->request->baseUrl?>/css/pocketmanga.css" />
 
-    <div class="wrap">
+    <link rel="stylesheet" type="text/css" href="<?=Yii::$app->request->baseUrl?>/css/dark_theme.css" />
+
+</head>
+<body class="blank background-image">
+    <?php $this->beginBody() ?>
+
+    <div class="wrap m-0 p-0">
         <?= $content ?>
     </div>
 
-</div>
-
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

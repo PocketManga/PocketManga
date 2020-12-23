@@ -16,9 +16,23 @@ use yii\jui\DatePicker;
 
     <div class="row">
 
-        <div class="col-4">
-            <p class = "text-color2 m-0 text-center">Image</p>
-            <?= $form->field($model, 'SrcImage')->textInput(['maxlength' => true])->label(false) ?>
+        <div class="col-4 align-center">
+            <?php if($model->SrcImage){ if (file_exists(Yii::getAlias('@webroot').'/img'.$model->SrcImage)){ ?>
+            <a href="#" onclick="return ClickChange()">
+                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img'.$model->SrcImage?>"/>
+            </a>
+            <?= $form->field($model, 'Image')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img'.$model->SrcImage.'");', 'style'=>'display:none;'])->label(false);?>
+            <?php }else{ ?>
+            <a href="#" onclick="return ClickChange()">
+                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img'.$model->SrcImage?>"/>
+            </a>
+            <?= $form->field($model, 'Image')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg");', 'style'=>'display:none;'])->label(false);?>
+            <?php }}else{ ?>
+            <a href="#" onclick="return ClickChange()">
+                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img'.$model->SrcImage?>"/>
+            </a>
+            <?= $form->field($model, 'Image')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img/default/addImg2.png");', 'style'=>'display:none;'])->label(false);?>
+            <?php } ?>
         </div>
 
         <div class="col-8">
@@ -178,4 +192,24 @@ use yii\jui\DatePicker;
     function Remove(div){
         div.remove();
     }
+    
+    function ClickChange(){
+        var inputUpload = document.getElementById("uploadImage");
+        inputUpload.click();
+    };
+    function PreviewImage(SrcImage) {
+        var oFReader = new FileReader();
+
+        var Butt = document.getElementById("uploadImage");
+        var Img = document.getElementById("uploadPreview");
+        try{
+            oFReader.readAsDataURL(Butt.files[0]);
+            
+            oFReader.onload = function (oFREvent) {
+                Img.src = oFREvent.target.result;
+            };
+        }catch(NullPointerException){
+            Img.src = SrcImage;
+        }
+    };
 </script>

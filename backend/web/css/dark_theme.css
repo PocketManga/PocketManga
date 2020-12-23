@@ -70,6 +70,10 @@
     border-bottom: 2px solid #000000 !important;
 } 
 
+.border-t-2px-solid-color3{
+    border-top: 2px solid #000000 !important;
+} 
+
 .border-b-2px-solid-color4{
     border-bottom: 2px solid #333333 !important;
 } 

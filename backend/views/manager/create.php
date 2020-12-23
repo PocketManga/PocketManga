@@ -21,13 +21,19 @@ $this->title = 'Create Manager';
 
             <div class="row">
                 <div class="col-md-6">
+                    <?php if($Users) { ?>
                     <p class = "text-color2 bold m-0">Chose the new Manager</p>
                     <?= $form->field($model, 'User_Id')->dropDownList($Users,['class'=>'radi-all-15 p-1 background-color1 border-0 w-100 text-color2'])->label(false) ?>
+                    <?php }else{ ?>
+                    <p class = "text-color2 bold m-0">There are who aren't managers</p>
+                    <?php } ?>
                 </div>
                 <div class="col-12 text-center mt-4 pt-4 border-t-2px-solid-color3">
+                    <?php if($Users) { ?>
                     <div class="form-group">
                         <?= Html::submitButton('Create Manager', ['class' => 'btn btn-success w-50 background-color5 text-color1 bold']) ?>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
 

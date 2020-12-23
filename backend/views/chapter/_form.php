@@ -57,7 +57,6 @@ use yii\widgets\ActiveForm;
                     <a href="#" onclick="return ClickChange(0)">
                         <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
                     </a>
-                    <?= $form->field($model, 'Images[]')->fileInput(['class' => 'uploadImage', 'onchange'=>'PreviewImage(0);', 'style'=>'display:none;'])->label(false);?>
                 </div>-->
             </div>
         </div>

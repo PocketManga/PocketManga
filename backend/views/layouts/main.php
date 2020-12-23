@@ -71,20 +71,26 @@ AppAsset::register($this);
                     <li>
                         <a class="nav-item text-color6" href="<?=Yii::$app->request->baseUrl.'/report_list'?>">Report</a>
                     </li>
-                    <?php /*<li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item dropdown-toggle text-color6">Home</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a class="nav-item text-color6" href="#">Mangas</a>
-                            </li>
-                            <li>
-                                <a class="nav-item text-color6" href="#">Home 2</a>
-                            </li>
-                            <li>
-                                <a class="nav-item text-color6" href="#">Home 3</a>
-                            </li>
-                        </ul>
-                    </li>*/ ?>
+
+                    <p class="mx-0 text-center bold">My Account</p>
+                    <li class="align-center">
+                        <a class="nav-item pl-2 text-color6" href="<?=Yii::$app->request->baseUrl.'/my_account'?>">
+                            <div class="row">
+                                <div class="col-12">
+                                    <?php if(Yii::$app->user->identity->SrcPhoto){ if (file_exists(Yii::getAlias('@webroot').'/img'.Yii::$app->user->identity->SrcPhoto)){ ?>
+                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img'.Yii::$app->user->identity->SrcPhoto?>" height="150" width="150">
+                                    <?php }else{ ?>
+                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Genre == "F")?'F':'M').'.jpg'?>" height="150" width="150">
+                                    <?php }}else{ ?>
+                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Genre == "F")?'F':'M').'.jpg'?>" height="150" width="150">
+                                    <?php } ?>
+                                </div>
+                                <div class="col-12">
+                                    <?=Yii::$app->user->identity->Username?>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
 
             </nav>

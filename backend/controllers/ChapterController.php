@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
+use yii\web\HttpException;
 
 use common\models\Chapter;
 use backend\models\ChapterForm;

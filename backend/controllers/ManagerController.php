@@ -8,8 +8,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\HttpException;
+use yii\web\UploadedFile;
 
 use backend\models\Manager;
+use backend\models\MyAccountForm;
 use common\models\User;
 
 /**
@@ -33,7 +36,7 @@ class ManagerController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['view', 'myUpdate'],
+                        'actions' => ['view', 'myaccount'],
                         'roles' => ['admin','full_manager','medium_manager','low_manager'],
                     ],
                     [
@@ -67,7 +70,7 @@ class ManagerController extends Controller
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
-        $Managers = Manager::find()->all();
+        $Managers = Manager::find()->where('Status = 1')->all();
         $auth = Yii::$app->authManager;
         $UserRoles = $auth->getRolesByUser(Yii::$app->user->identity->IdUser);
         
@@ -91,17 +94,9 @@ class ManagerController extends Controller
 
         $model = $this->findModel($idManager);
         $auth = Yii::$app->authManager;
-        $roleModel = Yii::$app->db
-            ->createCommand("Select * from auth_assignment where user_id='".$idManager."'")
-            ->queryOne();
         $UserRoles = $auth->getRoles(Yii::$app->user->identity->IdUser);
 
-        $Role = null;
-        foreach ($UserRoles as $URole){
-            if($URole->name == $roleModel['item_name']){
-                $Role = $URole;
-            }
-        }
+        $Role = $model->user->role;
         return $this->render('view', [
             'model' => $model,
             'Role' => $Role,
@@ -151,16 +146,17 @@ class ManagerController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idManager, $roleName)
+    public function actionUpdate($idManager)
     {
         if(!Yii::$app->user->can('UserUpdatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
+        $request = Yii::$app->request->post();
         $model = $this->findModel($idManager);
 
         $auth = Yii::$app->authManager;
-        $role=$auth->getRole($roleName);
+        $role=$auth->getRole($request['Role']);
         
         $auth->revokeAll($model->user->getId());
         $auth->assign($role, $model->user->getId());
@@ -171,25 +167,53 @@ class ManagerController extends Controller
     /**
      * Updates an existing Manager model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $idManager
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionMyUpdate($idManager, $roleName)
+    public function actionMyaccount()
     {
-        if(!Yii::$app->user->can('UserUpdatePost' && $idManager != Yii::$app->user->identity->manager->IdManager)){
+        if(!Yii::$app->user->can('UserUpdatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
+        $Manager = $this->findModel(Yii::$app->user->identity->manager->IdManager);
+        $model = new MyAccountForm();
+        $model->setVariables($Manager);
 
-        $model = $this->findModel($idManager);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-        $auth = Yii::$app->authManager;
-        $role=$auth->getRole($roleName);
-        
-        $auth->revokeAll($model->user->getId());
-        $auth->assign($role, $model->user->getId());
+            $User = User::find()->where('Username like "%'.$model->Username.'%" and IdUser != '.Yii::$app->user->identity->IdUser)->one();
+    
+            $Image = UploadedFile::getInstance($model, 'Photo');
+            if($Image){
+                $pathFolder = '/'.'users/'.Yii::$app->user->identity->IdUser;
+                $fullPath = Yii::getAlias('@webroot').'/img'.$pathFolder;
 
-        return $this->redirect(Yii::$app->request->baseUrl.'/'.'manager/'.$idManager);
+                if (!file_exists($fullPath)) {
+                    mkdir($fullPath, 0777, true);
+                }
+
+                $path = $fullPath.'/photo.'.$Image->extension;
+                $Image->saveAs($path);
+                $Manager->user->SrcPhoto = $pathFolder.'/photo.'.$Image->extension;
+            }
+    
+            if($User){
+                Yii::$app->session->setFlash('Error', "Username already exists!!");
+            }else{
+                $Manager->user->Username = $model->Username;
+            }
+            $Manager->Theme = $model->Theme;
+            $Manager->user->BirthDate = $model->BirthDate;
+            $Manager->user->Genre = $model->Genre;
+            $Manager->user->save();
+            $Manager->save();
+    
+            return $this->redirect(Yii::$app->request->baseUrl.'/my_account');
+        }
+
+        return $this->render('myaccount',[
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -209,7 +233,8 @@ class ManagerController extends Controller
         $auth = Yii::$app->authManager;
         $auth->revokeAll($model->user->getId());
 
-        $model->delete();
+        $model->Status = 0;
+        $model->save();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/manager_list');
     }

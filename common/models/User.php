@@ -168,6 +168,26 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
+    public function getRole()
+    {
+        $auth = Yii::$app->authManager;
+        $roleModel = Yii::$app->db
+            ->createCommand("Select * from auth_assignment where user_id='".$this->IdUser."'")
+            ->queryOne();
+        $UserRoles = $auth->getRoles(Yii::$app->user->identity->IdUser);
+
+        $Role = null;
+        foreach ($UserRoles as $URole){
+            if($URole->name == $roleModel['item_name']){
+                $Role = $URole;
+            }
+        }
+        return $Role;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public static function findIdentity($id)
     {
         return static::findOne(['IdUser' => $id, 'status' => self::STATUS_ACTIVE]);

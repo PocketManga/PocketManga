@@ -18,6 +18,7 @@ class MangaForm extends Model
     public $OneShot;
     public $R18;
     public $Server;
+    public $Image;
     public $SrcImage;
     public $ReleaseDate;
     public $Description;
@@ -35,19 +36,10 @@ class MangaForm extends Model
             [['Description'], 'string'],
             [['Title', 'AlternativeTitle', 'OriginalTitle'], 'string', 'max' => 100],
             [['Server'], 'string', 'max' => 10],
-            [['SrcImage'], 'string', 'max' => 50],
+            [['Image'], 'file'],
             ['Category', 'each', 'rule' => ['integer']],
             ['Author', 'each', 'rule' => ['integer']],
         ];
-    }
-
-    public function mangaForm()
-    {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-        }
-        
-        return false;
     }
 
     public function setVariables($Manga)
@@ -77,7 +69,6 @@ class MangaForm extends Model
                     $this->Author[] = $auth->IdAuthor;
                 }
             }
-    
         }
     }
 }

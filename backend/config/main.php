@@ -85,8 +85,9 @@ return [
                 'manager_list' => 'manager/list',
                 'manager/create' => 'manager/create',
                 'manager/<idManager:\d+>' => 'manager/view',
-                'manager/<idManager:\d+>/update/<roleName>' => 'manager/update',
+                'manager/<idManager:\d+>/update' => 'manager/update',
                 'manager/<idManager:\d+>/delete' => 'manager/delete',
+                'my_account' => 'manager/myaccount',
 
                 'reader_list' => 'leitor/list',
                 'reader/<idLeitor:\d+>' => 'leitor/view',
@@ -103,6 +104,8 @@ return [
                     'controller' => 'api/manga',
                     'pluralize' => false,
                     'extraPatterns' => [
+                        'GET all/{option}/{idUser}' => 'all',
+                        'GET chapters/{idManga}/{idUser}' => 'chapters',
                         'GET allmanga/{filters}' => 'allmanga',
                         'GET allmanga/total/{filters}' => 'totalmanga',
                         'GET library/{filters}' => 'library',
@@ -111,6 +114,21 @@ return [
                     ],
                     'tokens' => [
                         '{filters}' => '<filters:\\w+>',
+                        '{option}' => '<option:\\w+>',
+                        '{idManga}' => '<idManga:\d+>',
+                        '{idUser}' => '<idUser:\d+>',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET login/{username}/{passwordHash}' => 'login',
+                    ],
+                    'tokens' => [
+                        '{username}' => '<username:\\w+>',
+                        '{passwordHash}' => '<passwordHash:\\w+>',
                     ],
                 ],
             ],

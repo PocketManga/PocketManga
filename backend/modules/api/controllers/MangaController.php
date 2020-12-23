@@ -2,6 +2,7 @@
 
 namespace backend\modules\api\controllers;
 
+use Yii;
 use yii\rest\ActiveController;
 //use common\models\Manga;
 use common\models\User;
@@ -13,6 +14,95 @@ use DateTime;
 class MangaController extends ActiveController
 {
     public $modelClass = 'common\models\Manga';
+
+    public function actionAll($option, $idUser){
+        $Otpion = str_replace(' ','-',strtolower(preg_replace('~([a-z])([A-Z])~', '\\1 \\2',  $option)));
+
+        $User = User::find($idUser)->one();
+
+        $BirthDate = new DateTime($User->BirthDate);
+        $TodayDate = new DateTime(date('Y-m-d', strtotime('now')));
+        $diff = date_diff($BirthDate, $TodayDate);
+        
+        $R18 = ($diff->y >= 18) ? true:false;
+
+        $Favorites = $User->leitor->mangas;
+        $Mangas = $this->GetManga($Otpion, null, $R18, null, null);
+        $MangasToApp = null;
+
+        if($Mangas){
+            foreach($Mangas as $Manga){
+                $newManga = null;
+
+                $newManga["IdManga"] = $Manga->IdManga;
+                $newManga["Title"] = $Manga->Title;
+                $newManga["AlternativeTitle"] = $Manga->AlternativeTitle;
+                $newManga["OriginalTitle"] = $Manga->OriginalTitle;
+                $newManga["ReleaseDate"] = $Manga->ReleaseDate;
+                $newManga["Server"] = $Manga->Server;
+                $newManga["Description"] = $Manga->Description;
+                $newManga["Status"] = $Manga->Status;
+                $newManga["Oneshot"] = $Manga->OneShot;
+                $newManga["R18"] = $Manga->R18;
+
+                $newManga["Image"] = Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
+
+                $newManga["List"] = null;
+                $newManga["Favorite"] = false;
+                if($Favorites){
+                    foreach($Favorites as $Favorite){
+                        if($Manga == $Favorite){
+                            $newManga["Favorite"] = true;
+                        }
+                    }
+                }
+                $MangasToApp[] = $newManga;
+            }
+        }
+        return ['mangas' => ($MangasToApp)?$MangasToApp:null];
+    }
+
+    public function actionChapters($idManga, $idUser){
+        $MangaModel = new $this->modelClass;
+
+        $User = User::find($idUser)->one();
+
+        $Manga = $MangaModel->find()->where('IdManga = '.$idManga)->one();
+
+        $Chapters = $Manga->chapters;
+        $ChaptersReaded = $User->leitor->chapters;
+        $ChaptersToApp = null;
+
+        if($Chapters){
+            foreach($Chapters as $Chapter){
+                $newChapter = null;
+
+                $newChapter["IdChapter"] = $Chapter->IdChapter;
+                $newChapter["PagesNumber"] = $Chapter->PagesNumber;
+                $newChapter["Season"] = $Chapter->Season;
+                $newChapter["Number"] = $Chapter->Number;
+                $newChapter["MangaId"] = $idManga;
+                $newChapter["Name"] = $Chapter->Name;
+                $newChapter["ReleaseDate"] = $Chapter->ReleaseDate;
+                $newChapter["OneShot"] = $Chapter->OneShot;
+                $newChapter["UrlImage"] = Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder;
+
+
+                $newChapter["SrcFolder"] = null;
+                $newChapter["Readed"] = false;
+                if($ChaptersReaded){
+                    foreach($ChaptersReaded as $Readed){
+                        if($Chapter == $Readed){
+                            $newChapter["Readed"] = true;
+                        }
+                    }
+                }
+                $ChaptersToApp[] = $newChapter;
+            }
+        }
+        
+        return ['chapters' => ($ChaptersToApp)?$ChaptersToApp:null];
+    }
 
     public function actionAllmanga($filters)
     {
