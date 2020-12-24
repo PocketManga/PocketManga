@@ -45,7 +45,7 @@ class MangaController extends ActiveController
                 $newManga["Oneshot"] = $Manga->OneShot;
                 $newManga["R18"] = $Manga->R18;
 
-                $newManga["Image"] = Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
+                $newManga["Image"] = 'http://localhost'.Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
 
                 $newManga["List"] = null;
                 $newManga["Favorite"] = false;
@@ -85,7 +85,7 @@ class MangaController extends ActiveController
                 $newChapter["Name"] = $Chapter->Name;
                 $newChapter["ReleaseDate"] = $Chapter->ReleaseDate;
                 $newChapter["OneShot"] = $Chapter->OneShot;
-                $newChapter["UrlImage"] = Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder;
+                $newChapter["UrlImage"] = 'http://localhost'.Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder;
 
 
                 $newChapter["SrcFolder"] = null;
