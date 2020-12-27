@@ -6,6 +6,7 @@ use Yii;
 use yii\rest\ActiveController;
 //use common\models\Manga;
 use common\models\User;
+use common\models\Server;
 use frontend\models\MangaReaded;
 use common\models\LibraryList;
 use common\models\Library;
@@ -13,6 +14,8 @@ use DateTime;
 
 class MangaController extends ActiveController
 {
+    private $localUrl = 'http://192.168.137.1';
+
     public $modelClass = 'common\models\Manga';
 
     public function actionAll($option, $idUser){
@@ -32,6 +35,7 @@ class MangaController extends ActiveController
 
         if($Mangas){
             foreach($Mangas as $Manga){
+                $Server = Server::find()->where('Code like "'.$Manga->Server.'"')->one();
                 $newManga = null;
 
                 $newManga["IdManga"] = $Manga->IdManga;
@@ -39,13 +43,13 @@ class MangaController extends ActiveController
                 $newManga["AlternativeTitle"] = $Manga->AlternativeTitle;
                 $newManga["OriginalTitle"] = $Manga->OriginalTitle;
                 $newManga["ReleaseDate"] = $Manga->ReleaseDate;
-                $newManga["Server"] = $Manga->Server;
+                $newManga["Server"] = ($Server->Name)?$Server->Name:$Manga->Server;
                 $newManga["Description"] = $Manga->Description;
-                $newManga["Status"] = $Manga->Status;
-                $newManga["Oneshot"] = $Manga->OneShot;
-                $newManga["R18"] = $Manga->R18;
+                $newManga["Status"] = ($Manga->Status==1)?true:false;
+                $newManga["Oneshot"] = ($Manga->OneShot==1)?true:false;
+                $newManga["R18"] = ($Manga->R18==1)?true:false;
 
-                $newManga["Image"] = 'http://localhost'.Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
+                $newManga["Image"] = $this->localUrl.Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
 
                 $newManga["List"] = null;
                 $newManga["Favorite"] = false;
@@ -56,10 +60,31 @@ class MangaController extends ActiveController
                         }
                     }
                 }
+
+                $Authors = null;
+                $Categories = null;
+
+                $MangaAuthors = $Manga->authors;
+                $MangaCategories = $Manga->categories;
+
+                if($MangaAuthors){
+                    foreach($MangaAuthors as $Author){
+                        $Authors = $Authors.(($Authors)?' , ':'').$Author->FirstName.(($Author->LastName)?' '.$Author->LastName:'');
+                    }
+                }
+                $newManga["Authors"] = $Authors;
+
+                if($MangaCategories){
+                    foreach($MangaCategories as $Category){
+                        $Categories = $Categories.(($Categories)?' , ':'').$Category->Name;
+                    }
+                }
+                $newManga["Categories"] = $Categories;
+
                 $MangasToApp[] = $newManga;
             }
         }
-        return ['mangas' => ($MangasToApp)?$MangasToApp:null];
+        return ($MangasToApp)?$MangasToApp:null;
     }
 
     public function actionChapters($idManga, $idUser){
@@ -84,8 +109,8 @@ class MangaController extends ActiveController
                 $newChapter["MangaId"] = $idManga;
                 $newChapter["Name"] = $Chapter->Name;
                 $newChapter["ReleaseDate"] = $Chapter->ReleaseDate;
-                $newChapter["OneShot"] = $Chapter->OneShot;
-                $newChapter["UrlImage"] = 'http://localhost'.Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder;
+                $newChapter["OneShot"] = ($Chapter->OneShot==1)?true:false;
+                $newChapter["UrlImage"] = $this->localUrl.Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder;
 
 
                 $newChapter["SrcFolder"] = null;
@@ -101,7 +126,7 @@ class MangaController extends ActiveController
             }
         }
         
-        return ['chapters' => ($ChaptersToApp)?$ChaptersToApp:null];
+        return ($ChaptersToApp)?$ChaptersToApp:null;
     }
 
     public function actionAllmanga($filters)

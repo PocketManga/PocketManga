@@ -105,7 +105,7 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET all/{option}/{idUser}' => 'all',
-                        'GET chapters/{idManga}/{idUser}' => 'chapters',
+                        'GET {idManga}/chapters/{idUser}' => 'chapters',
                         'GET allmanga/{filters}' => 'allmanga',
                         'GET allmanga/total/{filters}' => 'totalmanga',
                         'GET library/{filters}' => 'library',
@@ -124,11 +124,11 @@ return [
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET login/{username}/{passwordHash}' => 'login',
+                        'POST login' => 'login',
                     ],
                     'tokens' => [
                         '{username}' => '<username:\\w+>',
-                        '{passwordHash}' => '<passwordHash:\\w+>',
+                        '{password}' => '<password:\\w+>',
                     ],
                 ],
             ],
