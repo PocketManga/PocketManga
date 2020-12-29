@@ -121,14 +121,23 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/category',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET all/{idUser}' => 'all',
+                        'GET {idCategory}/mangas/{idUser}' => 'mangas',
+                    ],
+                    'tokens' => [
+                        '{idCategory}' => '<idCategory:\d+>',
+                        '{idUser}' => '<idUser:\d+>',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST login' => 'login',
-                    ],
-                    'tokens' => [
-                        '{username}' => '<username:\\w+>',
-                        '{password}' => '<password:\\w+>',
                     ],
                 ],
             ],

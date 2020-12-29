@@ -18,8 +18,6 @@ class UserController extends ActiveController
     {
         $params = $_REQUEST;
 
-        $UserModel = new $this->modelClass;
-
         $User = User::find()->where('Username like "%'.$params['username'].'%"')->one();
         
         if(!$User){
