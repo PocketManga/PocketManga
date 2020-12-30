@@ -44,7 +44,7 @@ $this->title = 'My Account';
                         <p class="text-color1">Email: <span class="text-color2 no-bold"><?=Yii::$app->user->identity->Email?></span></p>
                     </div>
                     <div class="col-6 mb-4">
-                        <p class="text-color1">Genre: <span class="text-color2 no-bold"><?php if(Yii::$app->user->identity->Genre == 'M'){ echo 'Man';}else{if(Yii::$app->user->identity->Genre == 'F'){echo 'Woman';}else{echo 'Unknow';}}?></span></p>
+                        <p class="text-color1">Gender: <span class="text-color2 no-bold"><?php if(Yii::$app->user->identity->Gender == 'M'){ echo 'Man';}else{if(Yii::$app->user->identity->Gender == 'F'){echo 'Woman';}else{echo 'Unknow';}}?></span></p>
                     </div>
                     <div class="col-6 mb-4">
                         <p class="text-color1">Birth Date: <span class="text-color2 no-bold"><?=(new DateTime(Yii::$app->user->identity->BirthDate))->format('d/m/Y')?></span></p>
@@ -64,9 +64,9 @@ $this->title = 'My Account';
                 <?php if(Yii::$app->user->identity->SrcPhoto){ if (file_exists(Yii::getAlias('@webroot').'/img'.Yii::$app->user->identity->SrcPhoto)){ ?>
                 <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img'.Yii::$app->user->identity->SrcPhoto?>" height="300" width="300">
                 <?php }else{ ?>
-                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Genre == "F")?'F':'M').'.jpg'?>" height="300" width="300">
+                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Gender == "F")?'F':'M').'.jpg'?>" height="300" width="300">
                 <?php }}else{ ?>
-                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Genre == "F")?'F':'M').'.jpg'?>" height="300" width="300">
+                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Gender == "F")?'F':'M').'.jpg'?>" height="300" width="300">
                 <?php } ?>
             </div>
         </div>
@@ -113,12 +113,12 @@ $this->title = 'My Account';
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label class="text-gray-900">Genre <sup class="text-danger small">&#10033;</sup></label>
-                                    <div class="form-group field-myaccount-genre">
-                                        <select id="myaccount-genre" class="radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center" name="MyAccountForm[Genre]">
-                                            <option value="D" <?=(Yii::$app->user->identity->Genre == "D")?'selected':''?>>Unknow</option>
-                                            <option value="M" <?=(Yii::$app->user->identity->Genre == "M")?'selected':''?>>Male</option>
-                                            <option value="F" <?=(Yii::$app->user->identity->Genre == "F")?'selected':''?>>Female</option>
+                                    <label class="text-gray-900">Gender <sup class="text-danger small">&#10033;</sup></label>
+                                    <div class="form-group field-myaccount-gender">
+                                        <select id="myaccount-gender" class="radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center" name="MyAccountForm[Gender]">
+                                            <option value="D" <?=(Yii::$app->user->identity->Gender == "D")?'selected':''?>>Unknow</option>
+                                            <option value="M" <?=(Yii::$app->user->identity->Gender == "M")?'selected':''?>>Male</option>
+                                            <option value="F" <?=(Yii::$app->user->identity->Gender == "F")?'selected':''?>>Female</option>
                                         </select>
                                     </div>
                                 </div>

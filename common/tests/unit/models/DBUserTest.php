@@ -32,8 +32,8 @@ class DBUserTest extends \Codeception\Test\Unit
         }
         
         // Add two records for tests
-        $this->tester->haveRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com', 'Genre' => 'F', 'BirthDate' => '1998-10-30', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
-        $this->tester->haveRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com', 'Genre' => 'M', 'BirthDate' => '2007-12-15', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
+        $this->tester->haveRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com', 'Gender' => 'F', 'BirthDate' => '1998-10-30', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
+        $this->tester->haveRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com', 'Gender' => 'M', 'BirthDate' => '2007-12-15', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
     }
 
     // tests
@@ -45,7 +45,7 @@ class DBUserTest extends \Codeception\Test\Unit
         // Put all fields null
         $User->Username = null;
         $User->Email = null;
-        $User->Genre = null;
+        $User->Gender = null;
         $User->BirthDate = null;
         $User->SrcPhoto = null;
         $User->Created = null;
@@ -58,7 +58,7 @@ class DBUserTest extends \Codeception\Test\Unit
         // Verify all fields to see if they accept being null
         $this->assertFalse($User->validate('Username'));
         $this->assertFalse($User->validate('Email'));
-        $this->assertFalse($User->validate('Genre'));
+        $this->assertFalse($User->validate('Gender'));
         $this->assertFalse($User->validate('BirthDate'));
         $this->assertFalse($User->validate('auth_key'));
         $this->assertFalse($User->validate('password_hash'));
@@ -74,7 +74,7 @@ class DBUserTest extends \Codeception\Test\Unit
         // Put all fields with unacceptable values
         $User->Username = 'It Cant Have More Than Fifty Characters. So, I Will Speak Until I Use More Than That. Ohh I Already Used All :(';
         $User->Email = 'It Cant Have More Than On Hundred Characters. So, I Will Speak Until I Use More Than That. Like, This Test Is Tanking Too Long, Thank You';
-        $User->Genre = 'U';
+        $User->Gender = 'U';
         $User->BirthDate = '12-11-1998 dont';
         $User->SrcPhoto = 'It Cant Have More Than Fifty Characters. So, I Will Speak Until I Use More Than That. Ohh I Already Used All :(';
         $User->Created = '18-12-2020 22:23:50';
@@ -99,13 +99,13 @@ class DBUserTest extends \Codeception\Test\Unit
         $this->assertTrue($User->validate('Updated'));
         $this->assertTrue($User->validate('Created'));
         /* The next three asserts are accepting unacceptable values, and i can only think that's because of the validation is BROCKEN */
-        $this->assertTrue($User->validate('Genre'));
+        $this->assertTrue($User->validate('Gender'));
         $this->assertTrue($User->validate('BirthDate'));
 
         // Put all fields with acceptable values
         $User->Username = 'Nildar';
         $User->Email = 'nill546@hotmail.com';
-        $User->Genre = 'M';
+        $User->Gender = 'M';
         $User->BirthDate = '1997-12-17';
         $User->SrcPhoto = '/users/1/myimage.jpg';
         $User->Created = '18-12-2020 22:23:50';
@@ -118,7 +118,7 @@ class DBUserTest extends \Codeception\Test\Unit
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($User->validate('Username'));
         $this->assertTrue($User->validate('Email'));
-        $this->assertTrue($User->validate('Genre'));
+        $this->assertTrue($User->validate('Gender'));
         $this->assertTrue($User->validate('BirthDate'));
         $this->assertTrue($User->validate('SrcPhoto'));
         $this->assertTrue($User->validate('Created'));
@@ -138,7 +138,7 @@ class DBUserTest extends \Codeception\Test\Unit
         // Put all fields with acceptable values
         $User->Username = 'Nildar';
         $User->Email = 'nill546@hotmail.com';
-        $User->Genre = 'M';
+        $User->Gender = 'M';
         $User->BirthDate = '1997-12-17';
         $User->SrcPhoto = '/users/1/myimage.jpg';
         $User->auth_key = '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK';

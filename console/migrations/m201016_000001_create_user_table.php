@@ -15,7 +15,7 @@ class m201016_000001_create_user_table extends Migration
             'IdUser' => $this->primaryKey(),
             'Username' => $this->string(50)->notNull()->unique(),
             'Email' => $this->string(100)->notNull()->unique(),
-            'Genre' => "ENUM('F','M','D') NOT NULL",
+            'Gender' => "ENUM('F','M','D') NOT NULL",
             'BirthDate' => $this->date()->notNull(),
             'SrcPhoto' => $this->string(50),
             'Created' => 'DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',

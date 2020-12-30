@@ -80,9 +80,9 @@ AppAsset::register($this);
                                     <?php if(Yii::$app->user->identity->SrcPhoto){ if (file_exists(Yii::getAlias('@webroot').'/img'.Yii::$app->user->identity->SrcPhoto)){ ?>
                                     <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img'.Yii::$app->user->identity->SrcPhoto?>" height="150" width="150">
                                     <?php }else{ ?>
-                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Genre == "F")?'F':'M').'.jpg'?>" height="150" width="150">
+                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Gender == "F")?'F':'M').'.jpg'?>" height="150" width="150">
                                     <?php }}else{ ?>
-                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Genre == "F")?'F':'M').'.jpg'?>" height="150" width="150">
+                                    <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.((Yii::$app->user->identity->Gender == "F")?'F':'M').'.jpg'?>" height="150" width="150">
                                     <?php } ?>
                                 </div>
                                 <div class="col-12">

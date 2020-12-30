@@ -45,7 +45,7 @@ class MyAccountCestTest extends \Codeception\Test\Unit
         //on click, is redirecting to home page, when it should have opened model
         /*$this->tester->see('Cancel');
         $this->tester->fillField('MyAccountForm[Username]', 'Edgar');
-        $this->tester->fillField('MyAccountForm[Genre]', 'Unknow');
+        $this->tester->fillField('MyAccountForm[Gender]', 'Unknow');
         $this->tester->fillField('MyAccountForm[BirthDate]', '20/11/2000');
         $this->tester->fillField('MyAccountForm[Theme]', 'Light');
         $this->tester->click('submit-update-button');

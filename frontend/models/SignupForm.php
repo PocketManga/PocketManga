@@ -16,7 +16,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-    public $genre;
+    public $gender;
     public $birthdate;
 
 
@@ -40,7 +40,7 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            //['genre', 'string'],
+            //['gender', 'string'],
 
             ['birthdate', 'required'],
             ['birthdate', 'safe'],
@@ -64,10 +64,10 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        if($this->genre != null){
-            $user->Genre = $this->genre;
+        if($this->gender != null){
+            $user->Gender = $this->gender;
         }else{
-            $user->Genre = 'D';
+            $user->Gender = 'D';
         }
         $user->BirthDate = (new DateTime($this->birthdate))->format('Y-m-d');
         $user->SrcPhoto = 'PHOTO';

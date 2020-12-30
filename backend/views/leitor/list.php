@@ -19,7 +19,7 @@ $this->title = 'Leitors';
                 <tr>
                     <th class="border-b-2px-solid-color3 border-t-0">Username</th>
                     <th class="border-b-2px-solid-color3 border-t-0 text-center">Email</th>
-                    <th class="border-b-2px-solid-color3 border-t-0 text-center">Genre</th>
+                    <th class="border-b-2px-solid-color3 border-t-0 text-center">Gender</th>
                     <th class="border-b-2px-solid-color3 border-t-0 text-center">Status</th>
                     <th class="border-b-2px-solid-color3 border-t-0 text-center" style="max-width:100px; min-width:100px;">Options</th>
                 </tr>
@@ -29,7 +29,7 @@ $this->title = 'Leitors';
                     <tr class="tr_list1">
                         <td class="border-b-2px-solid-color3 p-0"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'reader/'.$Reader->IdLeitor?>"><div class="w-100 h-100 p-3"><?=$Reader->user->Username?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'reader/'.$Reader->IdLeitor?>"><div class="w-100 h-100 p-3"><?=$Reader->user->Email?></div></a></td>
-                        <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'reader/'.$Reader->IdLeitor?>"><div class="w-100 h-100 p-3"><?php if($Reader->user->Genre == 'M'){ echo 'Man';}else{if($Reader->user->Genre == 'F'){echo 'Woman';}else{echo 'Unknow';}}?></div></a></td>
+                        <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'reader/'.$Reader->IdLeitor?>"><div class="w-100 h-100 p-3"><?php if($Reader->user->Gender == 'M'){ echo 'Man';}else{if($Reader->user->Gender == 'F'){echo 'Woman';}else{echo 'Unknow';}}?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center"><a class="text-color2 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'reader/'.$Reader->IdLeitor?>"><div class="w-100 h-100 p-3"><?=($Reader->user->status == 10)?'Active':'Inactive'?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
                             <a href="<?=Yii::$app->request->baseUrl.'/'.'reader/'.$Reader->IdLeitor?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>

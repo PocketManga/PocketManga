@@ -11,7 +11,7 @@ use yii\base\Model;
 class MyAccountForm extends Model
 {
     public $Username;
-    public $Genre;
+    public $Gender;
     public $BirthDate;
     public $Theme;
     public $Photo;
@@ -20,11 +20,11 @@ class MyAccountForm extends Model
     public function rules()
     {
         return [
-            [['Username','Genre','BirthDate','Theme'], 'required'],
+            [['Username','Gender','BirthDate','Theme'], 'required'],
             [['Photo'], 'file'],
             [['BirthDate'], 'safe'],
             [['Theme'], 'boolean'],
-            [['Username','Genre'], 'string', 'max' => 20],
+            [['Username','Gender'], 'string', 'max' => 20],
         ];
     }
 
@@ -32,7 +32,7 @@ class MyAccountForm extends Model
     {
         if($Manager){
             $this->Username = $Manager->user->Username;
-            $this->Genre = $Manager->user->Genre;
+            $this->Gender = $Manager->user->Gender;
             $this->BirthDate = $Manager->user->BirthDate;
             $this->Theme = $Manager->Theme;
         }

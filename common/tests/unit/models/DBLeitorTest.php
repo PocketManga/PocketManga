@@ -40,13 +40,13 @@ class DBLeitorTest extends \Codeception\Test\Unit
         }
         
         // Add necessary records for tests
-        $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Genre' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
+        $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
         
-        $this->tester->haveRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com', 'Genre' => 'F', 'BirthDate' => '1998-10-30', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
+        $this->tester->haveRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com', 'Gender' => 'F', 'BirthDate' => '1998-10-30', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User2 = $this->tester->grabRecord('common\models\User', ['Username' => 'Popcorn']);
         
-        $this->tester->haveRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com', 'Genre' => 'M', 'BirthDate' => '2007-12-15', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
+        $this->tester->haveRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com', 'Gender' => 'M', 'BirthDate' => '2007-12-15', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User3 = $this->tester->grabRecord('common\models\User', ['Username' => 'SamCom']);
         
         // Add two records for tests

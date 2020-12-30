@@ -138,6 +138,10 @@ return [
                     'pluralize' => false,
                     'extraPatterns' => [
                         'POST login' => 'login',
+                        'GET get/{idUser}' => 'user',
+                    ],
+                    'tokens' => [
+                        '{idUser}' => '<idUser:\d+>',
                     ],
                 ],
             ],

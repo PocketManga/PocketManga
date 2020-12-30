@@ -204,7 +204,7 @@ class ManagerController extends Controller
             }
             $Manager->Theme = $model->Theme;
             $Manager->user->BirthDate = $model->BirthDate;
-            $Manager->user->Genre = $model->Genre;
+            $Manager->user->Gender = $model->Gender;
             $Manager->user->save();
             $Manager->save();
     

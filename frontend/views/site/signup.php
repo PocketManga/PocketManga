@@ -38,8 +38,8 @@ $this->title = 'Signup';
                                 </div>
 
                                 <div class="col-md-6">
-                                    <p class = "text-color2 bold m-0">Genre</p>
-                                    <?= $form->field($model, 'genre')->checkboxList(['F' => 'Girl','M' => 'Boy'], ['class' => 'radi-all-15 p-2 background-color1 text-color2 bold'])->label(false) ?>
+                                    <p class = "text-color2 bold m-0">Gender</p>
+                                    <?= $form->field($model, 'gender')->checkboxList(['F' => 'Girl','M' => 'Boy'], ['class' => 'radi-all-15 p-2 background-color1 text-color2 bold'])->label(false) ?>
                                 </div>
 
                                 <div class="col-md-6">

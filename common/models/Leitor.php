@@ -28,7 +28,7 @@ use common\models\User;
  * @property int $PrimaryList_Id
  * @property int $User_Id
  *
- * @property App[] $apps
+ * @property App $app
  * @property ChapterReaded[] $chapterReadeds
  * @property Chapter[] $chapters
  * @property Favorite[] $favorites
@@ -87,13 +87,13 @@ class Leitor extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Apps]].
+     * Gets query for [[App]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getApps()
+    public function getApp()
     {
-        return $this->hasMany(App::className(), ['Leitor_Id' => 'IdLeitor']);
+        return $this->hasOne(App::className(), ['Leitor_Id' => 'IdLeitor']);
     }
 
     /**

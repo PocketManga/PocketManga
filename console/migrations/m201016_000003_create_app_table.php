@@ -23,7 +23,7 @@ class m201016_000003_create_app_table extends Migration
             'MangaShow' => $this->boolean()->notNull()->defaultValue(0),
             'ChapterShow' => $this->boolean()->notNull()->defaultValue(1),
             'Server' => $this->string(10)->notNull()->defaultValue('en_US'),
-            'Leitor_Id' => $this->integer()->notNull(),
+            'Leitor_Id' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
 
         $this->addForeignKey('fk_app_leitor', 'app', 'Leitor_Id', 'leitor', 'IdLeitor');

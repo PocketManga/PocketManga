@@ -21,7 +21,7 @@ use frontend\models\Rating;
  * @property int $IdUser
  * @property string $Username
  * @property string $Email
- * @property string $Genre
+ * @property string $Gender
  * @property string $BirthDate
  * @property string|null $SrcPhoto
  * @property string $Created
@@ -60,8 +60,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['Username', 'Email', 'Genre', 'BirthDate', 'auth_key', 'password_hash'], 'required'],
-            [['Genre'], 'string'],
+            [['Username', 'Email', 'Gender', 'BirthDate', 'auth_key', 'password_hash'], 'required'],
+            [['Gender'], 'string'],
             [['BirthDate', 'Created', 'Updated'], 'safe'],
             [['status'], 'integer'],
             [['Username', 'SrcPhoto'], 'string', 'max' => 50],
@@ -82,7 +82,7 @@ class User extends ActiveRecord implements IdentityInterface
             'IdUser' => 'Id User',
             'Username' => 'Username',
             'Email' => 'Email',
-            'Genre' => 'Genre',
+            'Gender' => 'Gender',
             'BirthDate' => 'Birth Date',
             'SrcPhoto' => 'Src Photo',
             'Created' => 'Created',

@@ -49,7 +49,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%user}}', [
             'Username' => 'Nildgar',
             'Email' => 'nill546@hotmail.com',
-            'Genre' => 'M',
+            'Gender' => 'M',
             'BirthDate' => date('Y-m-d',strtotime('12/17/1997')),
             //'Slug' => 'Nildgar',
             'auth_key' => $password,
@@ -60,7 +60,7 @@ class m201016_000007_add_data extends Migration
         $this->insert('{{%user}}', [
             'Username' => 'Popcorn',
             'Email' => 'nex543@hotmail.com',
-            'Genre' => 'F',
+            'Gender' => 'F',
             'BirthDate' => date('Y-m-d',strtotime('10/30/1999')),
             //'Slug' => 'Popcorn',
             'auth_key' => $password,

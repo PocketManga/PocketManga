@@ -41,6 +41,7 @@ class App extends \yii\db\ActiveRecord
             [['Theme', 'MangaShow', 'ChapterShow', 'Leitor_Id'], 'integer'],
             [['Leitor_Id'], 'required'],
             [['Server'], 'string', 'max' => 10],
+            [['Leitor_Id'], 'unique'],
             [['Leitor_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Leitor::className(), 'targetAttribute' => ['Leitor_Id' => 'IdLeitor']],
         ];
     }
