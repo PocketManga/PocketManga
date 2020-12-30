@@ -38,7 +38,7 @@ $this->title = $model->user->Username;
                         <p class="text-color1">Email: <span class="text-color2 no-bold"><?=$model->user->Email?></span></p>
                     </div>
                     <div class="col-6 mb-4">
-                        <p class="text-color1">Genre: <span class="text-color2 no-bold"><?php if($model->user->Genre == 'M'){ echo 'Man';}else{if($model->user->Genre == 'F'){echo 'Woman';}else{echo 'Unknow';}}?></span></p>
+                        <p class="text-color1">Gender: <span class="text-color2 no-bold"><?php if($model->user->Gender == 'M'){ echo 'Man';}else{if($model->user->Gender == 'F'){echo 'Woman';}else{echo 'Unknow';}}?></span></p>
                     </div>
                     <div class="col-6 mb-4">
                         <p class="text-color1">Birth Date: <span class="text-color2 no-bold"><?=(new DateTime($model->user->BirthDate))->format('d/m/Y')?></span></p>
@@ -58,9 +58,9 @@ $this->title = $model->user->Username;
                 <?php if($model->user->SrcPhoto){ if (file_exists(Yii::getAlias('@webroot').'/img'.$model->user->SrcPhoto)){ ?>
                 <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img'.$model->user->SrcPhoto?>" height="300" width="300">
                 <?php }else{ ?>
-                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.(($model->user->Genre == "F")?'F':'M').'.jpg'?>" height="300" width="300">
+                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.(($model->user->Gender == "F")?'F':'M').'.jpg'?>" height="300" width="300">
                 <?php }}else{ ?>
-                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.(($model->user->Genre == "F")?'F':'M').'.jpg'?>" height="300" width="300">
+                <img class="radi-all-50p" src="<?=Yii::$app->request->baseUrl.'/img/default/'.(($model->user->Gender == "F")?'F':'M').'.jpg'?>" height="300" width="300">
                 <?php } ?>
             </div>
         </div>
