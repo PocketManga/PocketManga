@@ -111,6 +111,7 @@ return [
                         'GET library/{filters}' => 'library',
                         'GET readed/{filters}' => 'readed',
                         'GET changelist/{filters}' => 'changelist',
+                        'POST update' => 'favorite',
                     ],
                     'tokens' => [
                         '{filters}' => '<filters:\\w+>',
@@ -139,10 +140,16 @@ return [
                     'extraPatterns' => [
                         'POST login' => 'login',
                         'GET get/{idUser}' => 'user',
+                        'POST update' => 'change',
                     ],
                     'tokens' => [
                         '{idUser}' => '<idUser:\d+>',
                     ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/server',
+                    'pluralize' => false,
                 ],
             ],
         ],

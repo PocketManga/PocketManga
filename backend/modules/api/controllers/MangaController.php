@@ -6,6 +6,7 @@ use Yii;
 use yii\rest\ActiveController;
 //use common\models\Manga;
 use common\models\User;
+use common\models\Favorite;
 use common\models\Server;
 use frontend\models\MangaReaded;
 use common\models\LibraryList;
@@ -14,8 +15,6 @@ use DateTime;
 
 class MangaController extends ActiveController
 {
-    private $localUrl = 'http://192.168.137.1';
-
     public $modelClass = 'common\models\Manga';
 
     public function actionAll($option, $idUser){
@@ -49,9 +48,8 @@ class MangaController extends ActiveController
                 $newManga["Oneshot"] = ($Manga->OneShot==1)?true:false;
                 $newManga["R18"] = ($Manga->R18==1)?true:false;
 
-                $newManga["Image"] = $this->localUrl.Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
+                $newManga["Image"] = 'img'.$Manga->SrcImage;
 
-                $newManga["List"] = null;
                 $newManga["Favorite"] = false;
                 if($Favorites){
                     foreach($Favorites as $Favorite){
@@ -110,7 +108,7 @@ class MangaController extends ActiveController
                 $newChapter["Name"] = $Chapter->Name;
                 $newChapter["ReleaseDate"] = $Chapter->ReleaseDate;
                 $newChapter["OneShot"] = ($Chapter->OneShot==1)?true:false;
-                $newChapter["UrlImage"] = $this->localUrl.Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder;
+                $newChapter["UrlImage"] = 'img'.$Chapter->SrcFolder;
 
 
                 $newChapter["SrcFolder"] = null;
@@ -127,6 +125,55 @@ class MangaController extends ActiveController
         }
         
         return ($ChaptersToApp)?$ChaptersToApp:null;
+    }
+    
+    public function actionFavorite()
+    {
+        $params = $_REQUEST;
+
+        $MangaModel = new $this->modelClass;
+
+        $User = User::find($params["IdUser"])->one();
+
+        if(!$User){
+            return "Something Got Wrong";
+        }
+
+        $Favorites = $User->leitor->favorites;
+
+        $Manga = $MangaModel->find()->where('IdManga = '.$params["IdManga"])->one();
+
+        $Favorite = null;
+
+        if($Favorites){
+            foreach($Favorites as $Fav){
+                if($Fav->Manga_Id == $Manga->IdManga){
+                    $Favorite = $Fav;
+                }
+            }
+        }
+
+        if($params["Favorite"] == "true"){
+            if($Favorite){
+                return "Already in Favorites";
+            }else{
+                $Favorite = new Favorite();
+                $Favorite->Manga_Id = $Manga->IdManga;
+                $Favorite->Leitor_Id = $User->leitor->IdLeitor;
+                $Favorite->save();
+    
+                return "Added to Favorites";
+            }
+        }else{
+            if($Favorite){
+                $Fav = Favorite::find()->where("Leitor_Id = ".$Favorite->Leitor_Id." and Manga_Id = ".$Favorite->Manga_Id)->one();
+                $Fav->delete();
+                
+                return "Removed from Favorites";
+            }else{
+                return "It Wasn´t on Favorites";
+            }
+        }
     }
 
     public function actionAllmanga($filters)

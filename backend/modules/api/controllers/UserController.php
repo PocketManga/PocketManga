@@ -14,8 +14,6 @@ use backend\models\App;
  */
 class UserController extends ActiveController
 {
-    private $localUrl = 'http://192.168.137.1';
-
     public $modelClass = 'common\models\User';
     
     public function actionLogin()
@@ -67,17 +65,48 @@ class UserController extends ActiveController
         }else{
             $Photo = "/default/M.jpg";
         }
+        
+        $UrlPhoto = null;
+        if($User->SrcPhoto){
+            $UrlPhoto = 'img'.$User->SrcPhoto;
+        }else{
+            $UrlPhoto = 'img'.$Photo;
+        }
 
         $UserToApp["IdUser"] = $User->IdUser;
         $UserToApp["Username"] = $User->Username;
         $UserToApp["Email"] = $User->Email;
-        $UserToApp["UrlPhoto"] = $this->localUrl.Yii::$app->request->baseUrl.'/img'.($User->SrcPhoto)?$User->SrcPhoto:$Photo;
+        $UserToApp["UrlPhoto"] = $UrlPhoto;
         $UserToApp["Server_Id"] = $Server->IdServer;
         $UserToApp["ChapterShow"] = ($App->ChapterShow==1)?true:false;
         $UserToApp["MangaShow"] = ($App->MangaShow==1)?true:false;
         $UserToApp["Theme"] = ($App->Theme==1)?true:false;
 
         return $UserToApp;
+
+    }
+    
+    public function actionChange()
+    {
+        $params = $_REQUEST;
+
+        $User = User::find()->where('IdUser = '.$params['IdUser'])->one();
+        $Server = Server::find()->where('IdServer = '.$params['Server_Id'])->one();
+        
+        if(!$User || !$Server){
+            return "Something Got Wrong";
+        }
+
+        $App = $User->leitor->app;
+
+        $App->MangaShow = ($params['MangaShow'] == "true")?1:0;
+        $App->ChapterShow = ($params['ChapterShow'] == "true")?1:0;
+        $App->Theme = ($params['Theme'] == "true")?1:0;
+        $App->Server = $Server->Code;
+        
+        $App->save();
+
+        return "Saved With Success";
 
     }
 }

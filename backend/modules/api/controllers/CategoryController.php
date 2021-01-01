@@ -13,8 +13,6 @@ use common\models\Server;
  */
 class CategoryController extends ActiveController
 {
-    private $localUrl = 'http://192.168.137.1';
-
     public $modelClass = 'common\models\Category';
     
     public function actionAll($idUser)
@@ -77,7 +75,7 @@ class CategoryController extends ActiveController
                 $newManga["Oneshot"] = ($Manga->OneShot==1)?true:false;
                 $newManga["R18"] = ($Manga->R18==1)?true:false;
 
-                $newManga["Image"] = $this->localUrl.Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage;
+                $newManga["Image"] = 'img'.$Manga->SrcImage;
 
                 $newManga["List"] = null;
                 $newManga["Favorite"] = false;
