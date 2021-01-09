@@ -20,30 +20,10 @@ class DBMangaTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testMangaDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
-
-        // Delete all data from the database table
-        $Users = User::find()->all();
-        if($Users){
-            foreach ($Users as $User){
-                $User->delete();
-            }
-        }
-        $Managers = Manager::find()->all();
-        if($Managers){
-            foreach ($Managers as $Manager){
-                $Manager->delete();
-            }
-        }
-        $Mangas = Manga::find()->all();
-        if($Mangas){
-            foreach ($Mangas as $Manga){
-                $Manga->delete();
-            }
-        }
         
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
@@ -55,11 +35,11 @@ class DBMangaTest extends \Codeception\Test\Unit
         // Add two records for tests
         $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 1', 'OriginalTitle' => 'Original Title number 1', 'ReleaseDate' => '1998-11-12', 'Description' => 'Description number 1', 'Manager_Id' => $Manager->IdManager]);
         $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 2', 'OriginalTitle' => 'Original Title number 2', 'ReleaseDate' => '1998-11-12', 'Description' => 'Description number 2', 'Manager_Id' => $Manager->IdManager]);
-    }
+    
 
-    // tests
-    public function testValidation()
-    {
+
+
+        
         // Create new Manga
         $Manga = new Manga;
 
@@ -98,9 +78,9 @@ class DBMangaTest extends \Codeception\Test\Unit
         $Manga->Title = 'It Cant Have More Than On Hundred Characters. So, I Will Speak Until I Use More Than That. Like, This Test Is Tanking Too Long, Thank You';
         $Manga->AlternativeTitle = 'It Cant Have More Than On Hundred Characters. So, I Will Speak Until I Use More Than That. Like, This Test Is Tanking Too Long, Thank You';
         $Manga->OriginalTitle = 'It Cant Have More Than On Hundred Characters. So, I Will Speak Until I Use More Than That. Like, This Test Is Tanking Too Long, Thank You';
-        $Manga->Status = 3;
-        $Manga->OneShot = 3;
-        $Manga->R18 = 3;
+        $Manga->Status = 'Hello';
+        $Manga->OneShot = 'Hello';
+        $Manga->R18 = 'Hello';
         $Manga->Server = 'ItCantHaveMoreThanTenCharacters';
         $Manga->SrcImage = 'It Cant Have More Than Fifty Characters. So, I Will Speak Until I Use More Than That. Ohh I Already Used All :(';
         $Manga->ReleaseDate = 'Hello';
@@ -115,13 +95,12 @@ class DBMangaTest extends \Codeception\Test\Unit
         $this->assertFalse($Manga->validate('Server'));
         $this->assertFalse($Manga->validate('SrcImage'));
         $this->assertFalse($Manga->validate('Manager_Id'));
+        $this->assertFalse($Manga->validate('Status'));
+        $this->assertFalse($Manga->validate('OneShot'));
+        $this->assertFalse($Manga->validate('R18'));
         
         /* The next assert is accepting unacceptable values because i do not know the limits of text */
         $this->assertTrue($Manga->validate('Description'));
-        /* The next three asserts are accepting unacceptable values, and i can only think that's because of the validation knowing about the "default_value" */
-        $this->assertTrue($Manga->validate('Status'));
-        $this->assertTrue($Manga->validate('OneShot'));
-        $this->assertTrue($Manga->validate('R18'));
         /* The next assert is accepting null, and i can only think that's because of the validation knowing about the "current_timestamp" */
         $this->assertTrue($Manga->validate('Updated'));
         /* The next assert is accepting unacceptable values, and i can only think that's because of the validation is BROCKEN */
@@ -138,7 +117,7 @@ class DBMangaTest extends \Codeception\Test\Unit
         $Manga->SrcImage = 'source 3';
         $Manga->ReleaseDate = '1998-11-12';
         $Manga->Description = "Description number 3";
-        $Manga->Manager_Id = 1;
+        $Manga->Manager_Id = $Manager->IdManager;
 
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Manga->validate('Title'));
@@ -152,24 +131,21 @@ class DBMangaTest extends \Codeception\Test\Unit
         $this->assertTrue($Manga->validate('ReleaseDate'));
         $this->assertTrue($Manga->validate('Updated'));
         $this->assertTrue($Manga->validate('Description'));
+        $this->assertTrue($Manga->validate('Manager_Id'));
 
-        /* The next assert is giving false, and i can only think that's because of the validation trying using foreign keys when the table doesn't have any because of the engine MyISAM */
-        $this->assertFalse($Manga->validate('Manager_Id'));
-    }
 
-    // tests
-    public function testInsert()
-    {        
+
+
+        
         // Put all fields with acceptable values and save
-        $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 3', 'AlternativeTitle' => 'Alternative Title number 3', 'OriginalTitle' => 'Original Title number 3', 'Status' => 1, 'OneShot' => 0, 'R18' => 0, 'Server' => 'pt_PT', 'SrcImage' => 'source 3', 'ReleaseDate' => '1998-11-12', 'Description' => "Description number 3", 'Manager_Id' => 1]);
+        $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 3', 'AlternativeTitle' => 'Alternative Title number 3', 'OriginalTitle' => 'Original Title number 3', 'Status' => 1, 'OneShot' => 0, 'R18' => 0, 'Server' => 'pt_PT', 'SrcImage' => 'source 3', 'ReleaseDate' => '1998-11-12', 'Description' => "Description number 3", 'Manager_Id' => $Manager->IdManager]);
 
         // Verify if Manga was successfully inserted
         $this->tester->seeRecord('common\models\Manga', ['Title' => 'Title number 3', 'OriginalTitle' => 'Original Title number 3']);
-    }
 
-    // tests
-    public function testUpdate()
-    {
+
+
+        
         // Verify if Manga to be updated exists
         $this->tester->seeRecord('common\models\Manga', ['Title' => 'Title number 2', 'OriginalTitle' => 'Original Title number 2']);
         
@@ -191,11 +167,11 @@ class DBMangaTest extends \Codeception\Test\Unit
         
         // Verify if Manga with old values does not exists
         $this->tester->dontSeeRecord('common\models\Manga', ['Title' => 'Title number 2', 'OriginalTitle' => 'Original Title number 2']);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+
+        
         // Verify if Manga to be deleted exists
         $this->tester->seeRecord('common\models\Manga', ['Title' => 'Title number 1', 'OriginalTitle' => 'Original Title number 1']);
         

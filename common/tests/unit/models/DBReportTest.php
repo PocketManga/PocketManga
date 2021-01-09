@@ -20,46 +20,31 @@ class DBReportTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testReportDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
-
-        // Delete all data from the database table
-        $Users = User::find()->all();
-        if($Users){
-            foreach ($Users as $User){
-                $User->delete();
-            }
-        }
-        $Leitores = Leitor::find()->all();
-        if($Leitores){
-            foreach ($Leitores as $Leitor){
-                $Leitor->delete();
-            }
-        }
-        $Reports = Report::find()->all();
-        if($Reports){
-            foreach ($Reports as $Report){
-                $Report->delete();
-            }
-        }
         
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
+        
+        $this->tester->haveRecord('common\models\LibraryList', ['Name' => 'Uncategorized']);
+        $List = $this->tester->grabRecord('common\models\LibraryList', ['Name' => 'Uncategorized']);
 
-        $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 1, 'User_Id' => $User->IdUser]);
-        $Leitor = $this->tester->grabRecord('common\models\Leitor', ['User_Id' => $User->IdUser]);
+        $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 1, 'User_Id' => $User->IdUser, 'PrimaryList_Id' => $List->IdList]);
+        $Leitor = $this->tester->grabRecord('common\models\Leitor', ['User_Id' => $User->IdUser, 'PrimaryList_Id' => $List->IdList]);
         
         // Add two records for tests
         $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 1', 'Description' => 'This is just the description', 'SrcImage' => 'source', 'Leitor_Id' => $Leitor->IdLeitor]);
         $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 2', 'Description' => 'This is just the description 2', 'SrcImage' => 'source2', 'Leitor_Id' => $Leitor->IdLeitor]);
-    }
+    
+    
 
-    // tests
-    public function testValidation()
-    {
+
+
+
+        
         // Create new Report
         $Report = new Report;
 
@@ -90,8 +75,8 @@ class DBReportTest extends \Codeception\Test\Unit
         $Report->SubjectMatter = 'It Cant Have More Than Fifty Characters. So, I Will Speak Until I Use More Than That. Ohh I Already Used All :(';
         $Report->Description = "I don't know the limites of text";
         $Report->SrcImage = 'It Cant Have More Than Thirty Characters. So, I Will Speak Until I Use More Than That. Ohh I Already Used All :(';
-        $Report->Resolved = 3;
-        $Report->Created = '18-12-2020 22:23:50';
+        $Report->Resolved = "Hello";
+        $Report->Created = '18-12-2020 22:23:50 324fdew';
         $Report->Manga_Id = 'Hello';
         $Report->Chapter_Id = 'Hello';
         $Report->Leitor_Id = 'Hello';
@@ -102,11 +87,11 @@ class DBReportTest extends \Codeception\Test\Unit
         $this->assertFalse($Report->validate('Manga_Id'));
         $this->assertFalse($Report->validate('Chapter_Id'));
         $this->assertFalse($Report->validate('Leitor_Id'));
+        $this->assertFalse($Report->validate('Resolved'));
+        
         
         /* The next assert is accepting unacceptable values because i do not know the limits of text */
         $this->assertTrue($Report->validate('Description'));
-        /* The next assert is accepting unacceptable values, and i can only think that's because of the validation knowing about the "default_value" */
-        $this->assertTrue($Report->validate('Resolved'));
         /* The next assert is accepting null, and i can only think that's because of the validation knowing about the "current_timestamp" */
         $this->assertTrue($Report->validate('Created'));
 
@@ -117,7 +102,7 @@ class DBReportTest extends \Codeception\Test\Unit
         $Report->Resolved = 1;
         $Report->Manga_Id = null;
         $Report->Chapter_Id = null;
-        $Report->Leitor_Id = 1;
+        $Report->Leitor_Id = $Leitor->IdLeitor;
 
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Report->validate('SubjectMatter'));
@@ -127,24 +112,21 @@ class DBReportTest extends \Codeception\Test\Unit
         $this->assertTrue($Report->validate('Created'));
         $this->assertTrue($Report->validate('Manga_Id'));
         $this->assertTrue($Report->validate('Chapter_Id'));
+        $this->assertTrue($Report->validate('Leitor_Id'));
 
-        /* The next assert is giving false, and i can only think that's because of the validation trying using foreign keys when the table doesn't have any because of the engine MyISAM */
-        $this->assertFalse($Report->validate('Leitor_Id'));
-    }
 
-    // tests
-    public function testInsert()
-    {        
+
+
+
         // Put all fields with acceptable values and save
-        $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 3', 'Description' => 'This is just the description 3', 'SrcImage' => 'source3', 'Resolved' => true, 'Leitor_Id' => 1]);
+        $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 3', 'Description' => 'This is just the description 3', 'SrcImage' => 'source3', 'Resolved' => true, 'Leitor_Id' => $Leitor->IdLeitor]);
 
         // Verify if Report was successfully inserted
         $this->tester->seeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 3', 'SrcImage' => 'source3', 'Resolved' => true]);
-    }
 
-    // tests
-    public function testUpdate()
-    {
+
+
+
         // Verify if Report to be updated exists
         $this->tester->seeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 1', 'SrcImage' => 'source']);
         
@@ -165,11 +147,11 @@ class DBReportTest extends \Codeception\Test\Unit
         
         // Verify if Report with old values does not exists
         $this->tester->dontSeeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 1', 'SrcImage' => 'source']);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+
+
         // Verify if Report to be deleted exists
         $this->tester->seeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 2', 'SrcImage' => 'source2']);
         
@@ -181,5 +163,7 @@ class DBReportTest extends \Codeception\Test\Unit
 
         // Verify if Report was successfully deleted
         $this->tester->dontSeeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 2', 'SrcImage' => 'source2']);
+
+
     }
 }

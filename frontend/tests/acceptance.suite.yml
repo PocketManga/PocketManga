@@ -3,7 +3,8 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-             url: 'http://localhost/'
+            url: 'http://localhost/PocketManga/frontend/web'
+            #url: 'http://192.168.1.68/PocketManga/frontend/web'
             browser: chrome
         - Yii2:
             part: orm

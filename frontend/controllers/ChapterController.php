@@ -31,31 +31,49 @@ class ChapterController extends Controller
 
     /**
      * Displays a single Chapter model.
-     * @param integer $id
+     * @param integer $idChapter
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idManga, $id)
+    public function actionView($idManga, $idChapter)
     {
         $Manga = Manga::find()->where('IdManga = '.$idManga)->one();
-        $Chapter = $this->findModel($id);
+        $Chapters = Chapter::find()->where('Manga_Id = '.$idManga)->orderBy('Number')->all();
+        
+        $Chapter = $this->findModel($idChapter);
+
+        $Previous = null;
+        $Next = null;
+
+        for($i = 0; $i < count($Chapters); $i++){
+            if($Chapters[$i]->IdChapter == $idChapter){
+                if($i!=0){
+                    $Previous = $Chapters[$i-1]->IdChapter;
+                }
+                if($i<count($Chapters)-1){
+                    $Next = $Chapters[$i+1]->IdChapter;
+                }
+            }
+        }
 
         return $this->render('view', [
             'Chapter' => $Chapter,
             'Manga' => $Manga,
+            'Previous' => $Previous,
+            'Next' => $Next,
         ]);
     }
 
     /**
      * Finds the Chapter model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idChapter
      * @return Chapter the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idChapter)
     {
-        if (($model = Chapter::findOne($id)) !== null) {
+        if (($model = Chapter::findOne($idChapter)) !== null) {
             return $model;
         }
 

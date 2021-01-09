@@ -24,12 +24,12 @@ use yii\jui\DatePicker;
             <?= $form->field($model, 'Image')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img'.$model->SrcImage.'");', 'style'=>'display:none;'])->label(false);?>
             <?php }else{ ?>
             <a href="#" onclick="return ClickChange()">
-                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img'.$model->SrcImage?>"/>
+                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img/default/addImg2.png'?>"/>
             </a>
             <?= $form->field($model, 'Image')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg");', 'style'=>'display:none;'])->label(false);?>
             <?php }}else{ ?>
             <a href="#" onclick="return ClickChange()">
-                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img'.$model->SrcImage?>"/>
+                <img id="uploadPreview" style="max-width:250px;" src="<?=Yii::$app->request->baseUrl.'/img/default/addImg2.png'?>"/>
             </a>
             <?= $form->field($model, 'Image')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img/default/addImg2.png");', 'style'=>'display:none;'])->label(false);?>
             <?php } ?>
@@ -63,7 +63,11 @@ use yii\jui\DatePicker;
 
         <div class="col">
             <p class = "text-color2 m-0 text-center">Server</p>
+            <?php if($Servers) { ?>
             <?= $form->field($model, 'Server')->dropDownList($Servers,['class'=>'radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center'],['options' =>[$model->Server => ['selected' => true]]])->label(false) ?>
+            <?php }else{ ?>
+            <p class = "text-color7 m-0 text-center">There is none</p>
+            <?php } ?>
         </div>
 
         <div class="col">
@@ -76,19 +80,23 @@ use yii\jui\DatePicker;
                 <div class="col-2">
                     <p class = "text-color2 m-0 text-center">Categories</p>
                 </div>
-                <?php $num=0; if($RouteType){ foreach($model->Category as $Cat){ ?>
+                <?php $num=0; if($RouteType){ if($Categories){ foreach($model->Category as $Cat){ ?>
                     <div class="col-2 category-div d-flex">
                         <?= $form->field($model, 'Category['.$num.']')->dropDownList($Categories,['class'=>'radi-tl-15 radi-bl-15 pl-1 py-1 w-100 background-color1 border-0 text-color2 align-center'],['options' =>[$Cat => ['selected' => true]]])->label(false) ?>
                     <button type='button' class="radi-tr-15 radi-br-15 pr-1 py-n2 mb-3 pl-0 background-color6 w-25 border-0 text-color1 bold align-center" onClick="Remove($(this).closest('.category-div'))">-</button>
                     </div>
-                <?php $num++;}}?>
+                <?php $num++;}}}?>
                 <span id="num-category" style="display:none;"><?=$num?></span>
                 <div class="col-2 category-div clone-category d-flex">
+                    <?php if($Categories) { ?>
                     <?= $form->field($model, 'Category')->dropDownList($Categories,['class'=>'radi-tl-15 radi-bl-15 pl-1 py-1 w-100 background-color1 border-0 text-color2 align-center'])->label(false) ?>
+                    <?php }else{ ?>
+                    <p class = "text-color7 m-0 text-center">There is none</p>
+                    <?php } ?>
                     <button type='button' class="radi-tr-15 radi-br-15 pr-1 py-n2 mb-3 pl-0 background-color6 w-25 border-0 text-color1 bold align-center" onClick="Remove($(this).closest('.category-div'))">-</button>
                 </div>
                 <div class="col-1 button-add-category">
-                    <button type='button' class="radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center" onClick="AddCategory()">+</button>
+                    <button type='button' id="btn-add-category" class="radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center" onClick="AddCategory()">+</button>
                 </div>
             </div>
         </div>
@@ -98,19 +106,23 @@ use yii\jui\DatePicker;
                 <div class="col-2">
                     <p class = "text-color2 m-0 text-center">Authors</p>
                 </div>
-                <?php $num=0; if($RouteType){ foreach($model->Author as $Auth){ ?>
+                <?php $num=0; if($RouteType){ if($Authors){ foreach($model->Author as $Auth){ ?>
                     <div class="col-2 author-div d-flex">
                         <?= $form->field($model, 'Author['.$num.']')->dropDownList($Authors,['class'=>'radi-tl-15 radi-bl-15 pl-1 py-1 w-100 background-color1 border-0 text-color2 align-center'],['options' =>[$Auth => ['selected' => true]]])->label(false) ?>
                     <button type='button' class="radi-tr-15 radi-br-15 pr-1 py-n2 mb-3 pl-0 background-color6 w-25 border-0 text-color1 bold align-center" onClick="Remove($(this).closest('.author-div'))">-</button>
                     </div>
-                <?php $num++;}}?>
+                <?php $num++;}}}?>
                 <span id="num-author" style="display:none;"><?=$num?></span>
                 <div class="col-2 author-div clone-author d-flex">
+                    <?php if($Authors) { ?>
                     <?= $form->field($model, 'Author')->dropDownList($Authors,['class'=>'radi-tl-15 radi-bl-15 pl-1 py-1 w-100 background-color1 border-0 text-color2 align-center'])->label(false) ?>
+                    <?php }else{ ?>
+                    <p class = "text-color7 m-0 text-center">There is none</p>
+                    <?php } ?>
                     <button type='button' class="radi-tr-15 radi-br-15 pr-1 py-n2 mb-3 pl-0 background-color6 w-25 border-0 text-color1 bold align-center" onClick="Remove($(this).closest('.author-div'))">-</button>
                 </div>
                 <div class="col-1 button-add-author">
-                    <button type='button' class="radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center" onClick="AddAuthor()">+</button>
+                    <button type='button' id="btn-add-author" class="radi-all-15 p-1 background-color1 border-0 w-100 text-color2 align-center" onClick="AddAuthor()">+</button>
                 </div>
             </div>
         </div>

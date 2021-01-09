@@ -14,7 +14,7 @@
         <ul class="p-0 mr-0 mt-2 remove-bullet manga-list">
             <li class="pt-2 mr-0 row to-clone">
                 
-                        <div class="col-sm-6 col-md-6 col-lg-5 col-xl-5 br-word"><a id="link" href=""><span class="text-color2" id="title">Manga Title</span></a></div>
+                <div class="col-sm-6 col-md-6 col-lg-5 col-xl-5 br-word"><a id="link" href=""><span class="text-color2" id="title">Manga Title</span></a></div>
                 
                 <div class="col-sm-6 col-md-6 col-lg-2 col-xl-2 text-center"><span class="text-color2" id="status">Ongoing</span></div>
                 <div class="col-sm-6 col-md-6 col-lg-2 col-xl-2 text-center">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                     <select class="select-color2 text-color2 class-select-list" id="select-list">
-                        <option class="option-color1 text-color2" id="option-Uncategorized" value="Uncategorized"><?=Yii::$app->params['Dictionary']['uncategorized']?></option>
+                        <option class="option-color1 text-color2" id="option-Uncategorized" value="Uncategorized">Uncategorized</option>
                         <?php if($Lists){ foreach($Lists as $list){ ?>
                         <option class="option-color1 text-color2" id="option-<?=$list->Name?>" value="<?=$list->Name?>"><?=$list->Name?></option>
                         <?php }} ?>

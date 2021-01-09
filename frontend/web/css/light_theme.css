@@ -1,0 +1,85 @@
+.text-color1{
+    color: black !important; 
+}
+
+.text-color2{
+    color: #1D88AA !important;
+}
+
+.text-color3{
+    color: white !important;
+}
+
+.text-color4{
+    color: #E35201 !important;
+}
+
+.text-color5{
+    color: #3C8900 !important;
+}
+
+.text-color6{
+    color: #333333 !important;
+}
+
+.text-color7{
+    color: #D52A12 !important;
+}
+
+.text-color8{
+    color: #999 !important;
+}
+
+.background-color1{
+    background-color: black !important;
+}
+
+.background-color2{
+    background-color: #1D88AA !important;
+}
+
+.background-color3{
+    background-color: #e9ecef !important;
+}
+
+.background-color4{
+    background-color: #E35201 !important;
+}
+
+.background-color5{
+    background-color: #3C8900 !important;
+}
+
+.background-color6{
+    background-color: #D52A12 !important;
+}
+
+.border-b-1px-solid-color1{
+    border-bottom: 1px solid #E35201 !important;
+}
+
+.border-b-1px-solid-color2{
+    border-bottom: 1px solid #1D88AA !important;
+} 
+
+.border-color1{
+    border-color: black !important;
+} 
+
+.scroll-type1 {
+    scrollbar-color: #1D88AA #333333 !important; /* red is for the thumb and yellow is for the track */
+}
+
+.select-color1{
+    background: #1D88AA;
+    border:0px;
+}
+
+.select-color2{
+    background: black;
+    border:0px;
+}
+
+.polygon-color1 {
+    fill: black;
+}

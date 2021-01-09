@@ -37,6 +37,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManagerBackend' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => 'http://localhost/PocketManga/backend/web',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
@@ -50,7 +56,7 @@ return [
                 'login' => 'site/login',
 
                 'manga/<id:\d+>' => 'manga/view',
-                'manga/<idManga:\d+>/chapter/<id:\d+>' => 'chapter/view',
+                'manga/<idManga:\d+>/chapter/<idChapter:\d+>' => 'chapter/view',
                 'home_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/index2',
                 'all-manga' => 'site/allmanga',
                 'ongoing_order-by=<Option>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/ongoing',
@@ -59,6 +65,7 @@ return [
                 'library/<List>' => 'library/index2',
                 'search=<Search>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/search',
                 'search-for=<Genre:\d+>_manga-per-page=<NumberPerPage>_page=<PageNumber>' => 'site/search2',
+                'my_account' => 'leitor/myaccount',
 
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

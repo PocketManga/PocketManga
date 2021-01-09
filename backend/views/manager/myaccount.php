@@ -13,7 +13,7 @@ $this->title = 'My Account';
 <div class="manager-view row p-4">
 
     <div class="col-8">
-        <h1 class="text-color2"><?= Html::encode($this->title) ?></h1>
+        <h1 class="text-color2" id="title-myaccount"><?= Html::encode($this->title) ?></h1>
     </div>
 
     <div class="col-2">

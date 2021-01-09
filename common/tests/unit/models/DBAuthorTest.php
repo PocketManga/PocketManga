@@ -18,27 +18,17 @@ class DBAuthorTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testAuthorDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
-
-        // Delete all data from the database table
-        $Authors = Author::find()->all();
-        if($Authors){
-            foreach ($Authors as $Author){
-                $Author->delete();
-            }
-        }
         
         // Add two records for tests
         $this->tester->haveRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'Cordeiro']);
         $this->tester->haveRecord('common\models\Author', ['FirstName' => 'Samuel', 'LastName' => 'Cordeiro']);
-    }
 
-    // tests
-    public function testValidation()
-    {
+
+        
         // Create new Author
         $Author = new Author;
 
@@ -66,11 +56,11 @@ class DBAuthorTest extends \Codeception\Test\Unit
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Author->validate('FirstName'));
         $this->assertTrue($Author->validate('LastName'));
-    }
 
-    // tests
-    public function testInsert()
-    {
+
+
+
+        
         // Create new Author
         $Author = new Author;
         
@@ -83,11 +73,10 @@ class DBAuthorTest extends \Codeception\Test\Unit
 
         // Verify if Author was successfully inserted
         $this->tester->seeRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'First']);
-    }
 
-    // tests
-    public function testUpdate()
-    {
+
+
+        
         // Verify if Author to be updated exists
         $this->tester->seeRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'Cordeiro']);
         
@@ -108,11 +97,10 @@ class DBAuthorTest extends \Codeception\Test\Unit
         
         // Verify if Author with old values does not exists
         $this->tester->dontSeeRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'Cordeiro']);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+        
         // Verify if Author to be deleted exists
         $this->tester->seeRecord('common\models\Author', ['FirstName' => 'Samuel', 'LastName' => 'Cordeiro']);
         

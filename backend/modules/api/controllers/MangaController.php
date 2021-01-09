@@ -110,7 +110,6 @@ class MangaController extends ActiveController
                 $newChapter["OneShot"] = ($Chapter->OneShot==1)?true:false;
                 $newChapter["UrlImage"] = 'img'.$Chapter->SrcFolder;
 
-
                 $newChapter["SrcFolder"] = null;
                 $newChapter["Readed"] = false;
                 if($ChaptersReaded){
@@ -125,55 +124,6 @@ class MangaController extends ActiveController
         }
         
         return ($ChaptersToApp)?$ChaptersToApp:null;
-    }
-    
-    public function actionFavorite()
-    {
-        $params = $_REQUEST;
-
-        $MangaModel = new $this->modelClass;
-
-        $User = User::find($params["IdUser"])->one();
-
-        if(!$User){
-            return "Something Got Wrong";
-        }
-
-        $Favorites = $User->leitor->favorites;
-
-        $Manga = $MangaModel->find()->where('IdManga = '.$params["IdManga"])->one();
-
-        $Favorite = null;
-
-        if($Favorites){
-            foreach($Favorites as $Fav){
-                if($Fav->Manga_Id == $Manga->IdManga){
-                    $Favorite = $Fav;
-                }
-            }
-        }
-
-        if($params["Favorite"] == "true"){
-            if($Favorite){
-                return "Already in Favorites";
-            }else{
-                $Favorite = new Favorite();
-                $Favorite->Manga_Id = $Manga->IdManga;
-                $Favorite->Leitor_Id = $User->leitor->IdLeitor;
-                $Favorite->save();
-    
-                return "Added to Favorites";
-            }
-        }else{
-            if($Favorite){
-                $Fav = Favorite::find()->where("Leitor_Id = ".$Favorite->Leitor_Id." and Manga_Id = ".$Favorite->Manga_Id)->one();
-                $Fav->delete();
-                
-                return "Removed from Favorites";
-            }else{
-                return "It Wasn´t on Favorites";
-            }
-        }
     }
 
     public function actionAllmanga($filters)
@@ -337,7 +287,7 @@ class MangaController extends ActiveController
     }
 
     
-    public function GetManga($Otpion, $Status, $R18, $Genres, $NotGenres){
+    private function GetManga($Otpion, $Status, $R18, $Genres, $NotGenres){
         $MangaModel = new $this->modelClass;
         $where=null;
         $orderby=null;

@@ -44,24 +44,24 @@ $this->title = 'PocketManga';
                                             <div class="col-4">
                                                 <select class="select-color1 radi-all-15 w-100 p-2 ml-n2" id="filter_order" 
                                                     onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))">
-                                                    <option class="option-color1" value="latestUpdates" selected="selected"><?=Yii::$app->params['Dictionary']['latest-updates']?></option>
-                                                    <option class="option-color1" value="ranking"><?=Yii::$app->params['Dictionary']['ranking']?></option>
-                                                    <option class="option-color1" value="popular"><?=Yii::$app->params['Dictionary']['popular']?></option>
-                                                    <option class="option-color1" value="asc"><?=Yii::$app->params['Dictionary']['asc']?></option>
-                                                    <option class="option-color1" value="desc"><?=Yii::$app->params['Dictionary']['desc']?></option>
+                                                    <option class="option-color1" value="latestUpdates" selected="selected">Latest Updates</option>
+                                                    <option class="option-color1" value="ranking">Ranking</option>
+                                                    <option class="option-color1" value="popular">Popular</option>
+                                                    <option class="option-color1" value="asc">Alfabetic Asc</option>
+                                                    <option class="option-color1" value="desc">Alfabetic Desc</option>
                                                 </select>
                                             </div>
                                             <div class="col-4">
                                                 <select class="select-color1 radi-all-15 w-100 p-2" id="filter_status"
                                                     onchange="(ChangeButtonSearch(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))">
-                                                    <option class="option-color1" value="1"><?=Yii::$app->params['Dictionary']['completed']?></option>
-                                                    <option class="option-color1" value="0"><?=Yii::$app->params['Dictionary']['ongoing']?></option>
-                                                    <option class="option-color1" value="all" selected="selected"><?=Yii::$app->params['Dictionary']['both_c_o']?></option>
+                                                    <option class="option-color1" value="1">Completed</option>
+                                                    <option class="option-color1" value="0">Ongoing</option>
+                                                    <option class="option-color1" value="all" selected="selected">Completed and Ongoing</option>
                                                 </select>
                                             </div>
                                             <div class="col-4">
                                                 <button class="text-color2 background-color3 border-0 radi-all-15 w-100 py-2 ml-2" id="button-search"
-                                                    onclick="(ReloadMangas(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))"><?=Yii::$app->params['Dictionary']['search']?></button>
+                                                    onclick="(ReloadMangas(<?=(Yii::$app->user->isGuest)?0:Yii::$app->user->identity->IdUser?>))">Search</button>
                                             </div>
                                         </div>
                                     </div>
@@ -73,8 +73,8 @@ $this->title = 'PocketManga';
                         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 to-clone">
                             <div class="d-flex justify-content-center">
                                 <a class="text-center tag-a" id="link" href="">
-                                    <img class="tag-img" id="image" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
-                                    <p class="text-color2 tag-p" id="title"> Title </p>
+                                    <img class="tag-img" id="image" src="<?= Yii::$app->urlManagerBackend->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                                    <p class="text-color2 tag-p br-word width-150" id="title"> Title </p>
                                 </a>
                             </div>
                         </div>
@@ -91,6 +91,7 @@ $this->title = 'PocketManga';
 </div>
 
 <script>
+    var urlBackend = "<?= Yii::$app->urlManagerBackend->baseUrl?>/";
     var clone = $('.to-clone').clone();
     document.getElementById("filters").style.display = "none";
     var btnClass = document.getElementById('button-filter');
@@ -141,7 +142,7 @@ $this->title = 'PocketManga';
     }
 
     function ChangeButtonSearch(user_id){
-        var link = "http://localhost/PocketManga/backend/web/api/manga/allmanga/total/" + GetFilters(user_id);
+        var link = urlBackend+"api/manga/allmanga/total/" + GetFilters(user_id);
         
         $.ajax({
             method:"GET",
@@ -160,7 +161,7 @@ $this->title = 'PocketManga';
     function ReloadMangas(user_id){
         $('.manga-list').html('');
 
-        var link = "http://localhost/PocketManga/backend/web/api/manga/allmanga/" + GetFilters(user_id);
+        var link = urlBackend+"api/manga/allmanga/" + GetFilters(user_id);
         $.ajax({
             method:"GET",
             url:link
@@ -171,7 +172,7 @@ $this->title = 'PocketManga';
                 for (i=0; i<response.mangas.length; i++) {
                     var manga_clone = clone.clone();
                     if(response.mangas[i].SrcImage != null){	
-                        $('#image', manga_clone).attr('src','<?=Yii::$app->request->baseUrl.'/'.'img/'?>'+response.mangas[i].SrcImage);
+                        $('#image', manga_clone).attr('src',urlBackend+'/img'+response.mangas[i].SrcImage);
                     }
                     $('#title', manga_clone).text(response.mangas[i].Title);
                     $("#link", manga_clone).attr("href", '<?=Yii::$app->request->baseUrl.'/'.'manga/'?>'+response.mangas[i].IdManga);

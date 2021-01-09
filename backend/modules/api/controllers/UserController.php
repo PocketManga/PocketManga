@@ -37,8 +37,10 @@ class UserController extends ActiveController
             return ['success' => false];
         }
 
-        $User->generateEmailVerificationToken();
-        $User->save();
+        if($User->verification_token){
+            $User->generateEmailVerificationToken();
+            $User->save();
+        }
 
         return ['success' => $validation, 'username' => $User->Username, 'token' => $User->verification_token, 'idUser' => $User->IdUser];
 

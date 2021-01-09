@@ -4,6 +4,6 @@ bootstrap: false
 modules:
     enabled:
         - Yii2:
-            cleanup: false
             part: ORM
+            cleanup: false
         - Asserts

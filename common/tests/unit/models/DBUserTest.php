@@ -18,27 +18,19 @@ class DBUserTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testUserDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
-
-        // Delete all data from the database table
-        $Users = User::find()->all();
-        if($Users){
-            foreach ($Users as $User){
-                $User->delete();
-            }
-        }
         
         // Add two records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com', 'Gender' => 'F', 'BirthDate' => '1998-10-30', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $this->tester->haveRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com', 'Gender' => 'M', 'BirthDate' => '2007-12-15', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
-    }
+    
 
-    // tests
-    public function testValidation()
-    {
+
+
+        
         // Create new User
         $User = new User;
 
@@ -103,7 +95,7 @@ class DBUserTest extends \Codeception\Test\Unit
         $this->assertTrue($User->validate('BirthDate'));
 
         // Put all fields with acceptable values
-        $User->Username = 'Nildar';
+        $User->Username = 'Nildgar';
         $User->Email = 'nill546@hotmail.com';
         $User->Gender = 'M';
         $User->BirthDate = '1997-12-17';
@@ -127,16 +119,16 @@ class DBUserTest extends \Codeception\Test\Unit
         $this->assertTrue($User->validate('password_hash'));
         $this->assertTrue($User->validate('password_reset_token'));
         $this->assertTrue($User->validate('status'));
-    }
 
-    // tests
-    public function testInsert()
-    {
+
+
+
+
         // Create new User
         $User = new User;
         
         // Put all fields with acceptable values
-        $User->Username = 'Nildar';
+        $User->Username = 'Nildgar';
         $User->Email = 'nill546@hotmail.com';
         $User->Gender = 'M';
         $User->BirthDate = '1997-12-17';
@@ -150,12 +142,12 @@ class DBUserTest extends \Codeception\Test\Unit
         $User->save();
 
         // Verify if User was successfully inserted
-        $this->tester->seeRecord('common\models\User', ['Username' => 'Nildar', 'Email' => 'nill546@hotmail.com']);
-    }
+        $this->tester->seeRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com']);
 
-    // tests
-    public function testUpdate()
-    {
+
+
+
+
         // Verify if User to be updated exists
         $this->tester->seeRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com']);
         
@@ -177,11 +169,11 @@ class DBUserTest extends \Codeception\Test\Unit
         
         // Verify if User with old values does not exists
         //$this->tester->dontSeeRecord('common\models\User', ['Username' => 'Popcorn', 'Email' => 'nex543@hotmail.com']);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+
+
         // Verify if User to be deleted exists
         $this->tester->seeRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com']);
         
@@ -193,5 +185,6 @@ class DBUserTest extends \Codeception\Test\Unit
 
         // Verify if User was successfully deleted
         $this->tester->dontSeeRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com']);
+
     }
 }

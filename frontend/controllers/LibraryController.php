@@ -53,10 +53,10 @@ class LibraryController extends Controller
             $List = $primaryList;
         }
         if($primaryList == null){
-            $List = Yii::$app->params['Dictionary']['uncategorized'];
+            $List = "Uncategorized";
         }
         if($primaryList == 1){
-            $List = Yii::$app->params['Dictionary']['all_manga'];
+            $List = "All Manga";
         }
         $Lists = null;
         

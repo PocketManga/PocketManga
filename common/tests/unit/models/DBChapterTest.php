@@ -21,41 +21,19 @@ class DBChapterTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testChapterDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
 
-        // Delete all data from the database tables
-        $Users = User::find()->all();
-        if($Users){
-            foreach ($Users as $User){
-                $User->delete();
-            }
-        }
-        $Managers = Manager::find()->all();
-        if($Managers){
-            foreach ($Managers as $Manager){
-                $Manager->delete();
-            }
-        }
-        $Mangas = Manga::find()->all();
-        if($Mangas){
-            foreach ($Mangas as $Manga){
-                $Manga->delete();
-            }
-        }
-        $Chapters = Chapter::find()->all();
-        if($Chapters){
-            foreach ($Chapters as $Chapter){
-                $Chapter->delete();
-            }
-        }
-        
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
-        
+        $this->tester->assertNotNull($User);
+
+        $this->assertTrue($User->validate('Username'));
+        $this->assertTrue($User->validate('Email'));
+
         $this->tester->haveRecord('backend\models\Manager', ['User_Id' => $User->IdUser]);
         $Manager = $this->tester->grabRecord('backend\models\Manager', ['User_Id' => $User->IdUser]);
         
@@ -65,11 +43,11 @@ class DBChapterTest extends \Codeception\Test\Unit
         // Add two records for tests
         $this->tester->haveRecord('common\models\Chapter', ['Number' => 1, 'PagesNumber' => 10, 'Season' => 1, 'Manga_Id' => $Manga->IdManga, 'Manager_Id' => $Manager->IdManager]);
         $this->tester->haveRecord('common\models\Chapter', ['Number' => 2, 'PagesNumber' => 11, 'Season' => 1, 'Manga_Id' => $Manga->IdManga, 'Manager_Id' => $Manager->IdManager]);
-    }
+    
 
-    // tests
-    public function testValidation()
-    {
+
+
+
         // Create new Chapter
         $Chapter = new Chapter;
 
@@ -135,8 +113,8 @@ class DBChapterTest extends \Codeception\Test\Unit
         $Chapter->Season = 1;
         $Chapter->OneShot = 0;
         $Chapter->SrcFolder = '/manga/1/3';
-        $Chapter->Manga_Id = 1;
-        $Chapter->Manager_Id = 1;
+        $Chapter->Manga_Id = $Manga->IdManga;
+        $Chapter->Manager_Id = $Manager->IdManager;
 
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Chapter->validate('Number'));
@@ -147,24 +125,23 @@ class DBChapterTest extends \Codeception\Test\Unit
         $this->assertTrue($Chapter->validate('Season'));
         $this->assertTrue($Chapter->validate('OneShot'));
         $this->assertTrue($Chapter->validate('SrcFolder'));
-        /* The next two asserts are giving false, and i can only think that's because of the validation trying using foreign keys when the table doesn't have any because of the engine MyISAM */
-        $this->assertFalse($Chapter->validate('Manga_Id'));
-        $this->assertFalse($Chapter->validate('Manager_Id'));
-    }
+        $this->assertTrue($Chapter->validate('Manga_Id'));
+        $this->assertTrue($Chapter->validate('Manager_Id'));
 
-    // tests
-    public function testInsert()
-    {
+
+
+
+
         // Put all fields with acceptable values and save
-        $this->tester->haveRecord('common\models\Chapter', ['Number' => 3, 'PagesNumber' => 10, 'Name' => 'When she smiled', 'ReleaseDate' => '1998-11-12', 'Updated' => '2020-11-12 22:23:50', 'Season' => 1, 'OneShot' => false, 'SrcFolder' => '/manga/1/3', 'Manga_Id' => 1, 'Manager_Id' => 1]);
+        $this->tester->haveRecord('common\models\Chapter', ['Number' => 3, 'PagesNumber' => 10, 'Name' => 'When she smiled', 'ReleaseDate' => '1998-11-12', 'Updated' => '2020-11-12 22:23:50', 'Season' => 1, 'OneShot' => false, 'SrcFolder' => '/manga/1/3', 'Manga_Id' => $Manga->IdManga, 'Manager_Id' => $Manager->IdManager]);
 
         // Verify if Chapter was successfully inserted
         $this->tester->seeRecord('common\models\Chapter', ['Number' => 3, 'Name' => 'When she smiled','SrcFolder' => '/manga/1/3']);
-    }
 
-    // tests
-    public function testUpdate()
-    {
+
+
+
+        
         // Verify if Chapter to be updated exists
         $this->tester->seeRecord('common\models\Chapter', ['Number' => 1, 'Name' => null, 'SrcFolder' => null]);
         
@@ -186,11 +163,10 @@ class DBChapterTest extends \Codeception\Test\Unit
         
         // Verify if Chapter with old values does not exists
         $this->tester->dontSeeRecord('common\models\Chapter', ['Number' => 1, 'Name' => null,'SrcFolder' => null]);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+        
         // Verify if Chapter to be deleted exists
         $this->tester->seeRecord('common\models\Chapter', ['Number' => 2, 'Name' => null, 'SrcFolder' => null]);
         

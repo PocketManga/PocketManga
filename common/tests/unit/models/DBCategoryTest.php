@@ -18,27 +18,18 @@ class DBCategoryTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable() 
+    public function testCategoryDBIntegration() 
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
 
-        // Delete all data from the database table
-        $Categories = Category::find()->all();
-        if($Categories){
-            foreach ($Categories as $Category){
-                $Category->delete();
-            }
-        }
-
         // Add two records for tests
         $this->tester->haveRecord('common\models\Category', ['Name' => 'English', 'Server' => 'en_US']);
         $this->tester->haveRecord('common\models\Category', ['Name' => 'Portuguese', 'Server' => 'pt_PT']);
-    }
 
-    // tests
-    public function testValidation()
-    {
+
+
+        
         // Create new Category
         $Category = new Category;
 
@@ -66,11 +57,11 @@ class DBCategoryTest extends \Codeception\Test\Unit
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Category->validate('Name'));
         $this->assertTrue($Category->validate('Server'));
-    }
 
-    // tests
-    public function testInsert()
-    {
+
+
+
+
         // Create new Category
         $Category = new Category;
         
@@ -83,11 +74,12 @@ class DBCategoryTest extends \Codeception\Test\Unit
 
         // Verify if Category was successfully inserted
         $this->tester->seeRecord('common\models\Category', ['Name' => 'Japanese', 'Server' => 'ja_JP']);
-    }
 
-    // tests
-    public function testUpdate()
-    {
+
+
+
+
+        
         // Verify if Category to be updated exists
         $this->tester->seeRecord('common\models\Category', ['Name' => 'Portuguese', 'Server' => 'pt_PT']);
         
@@ -108,11 +100,12 @@ class DBCategoryTest extends \Codeception\Test\Unit
 
         // Verify if Category with old values does not exists
         $this->tester->dontSeeRecord('common\models\Category', ['Name' => 'Portuguese', 'Server' => 'pt_PT']);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+
+
+
         // Verify if Category to be deleted exists
         $this->tester->seeRecord('common\models\Category', ['Name' => 'English', 'Server' => 'en_US']);
         

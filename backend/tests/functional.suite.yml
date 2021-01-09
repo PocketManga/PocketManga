@@ -2,4 +2,10 @@ suite_namespace: backend\tests\functional
 actor: FunctionalTester
 modules:
     enabled:
+        - Filesystem
         - Yii2
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=pmanga_t'
+            user: 'root'
+            password: ''
+            cleanup: false

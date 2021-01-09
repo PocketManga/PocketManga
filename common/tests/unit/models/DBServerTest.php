@@ -18,27 +18,19 @@ class DBServerTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testServerDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
-
-        // Delete all data from the database table
-        $Servers = Server::find()->all();
-        if($Servers){
-            foreach ($Servers as $Server){
-                $Server->delete();
-            }
-        }
         
         // Add two records for tests
         $this->tester->haveRecord('common\models\Server', ['Name' => 'English', 'Code' => 'en_US']);
         $this->tester->haveRecord('common\models\Server', ['Name' => 'Portuguese', 'Code' => 'pt_PT']);
-    }
 
-    // tests
-    public function testValidation()
-    {
+        
+
+
+
         // Create new Server
         $Server = new Server;
 
@@ -65,11 +57,11 @@ class DBServerTest extends \Codeception\Test\Unit
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Server->validate('Name'));
         $this->assertTrue($Server->validate('Code'));
-    }
 
-    // tests
-    public function testInsert()
-    {
+
+
+
+        
         // Create new Server
         $Server = new Server;
         
@@ -82,11 +74,11 @@ class DBServerTest extends \Codeception\Test\Unit
 
         // Verify if Server was successfully inserted
         $this->tester->seeRecord('common\models\Server', ['Name' => 'Japanese', 'Code' => 'ja_JP']);
-    }
 
-    // tests
-    public function testUpdate()
-    {
+
+
+
+        
         // Verify if Server to be updated exists
         $this->tester->seeRecord('common\models\Server', ['Name' => 'Portuguese', 'Code' => 'pt_PT']);
         
@@ -107,11 +99,11 @@ class DBServerTest extends \Codeception\Test\Unit
         
         // Verify if Server with old values does not exists
         $this->tester->dontSeeRecord('common\models\Server', ['Name' => 'Portuguese', 'Code' => 'pt_PT']);
-    }
 
-    // tests
-    public function testDelete()
-    {
+
+
+
+        
         // Verify if Server to be deleted exists
         $this->tester->seeRecord('common\models\Server', ['Name' => 'English', 'Code' => 'en_US']);
         

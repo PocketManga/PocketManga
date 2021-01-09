@@ -12,7 +12,7 @@
             <p class="text-color1 mb-0 br-word bold"><?=$UncatList->Name?> (<?=count($UncatList->GetLibraries()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->all())?>)</p>
         </button>
         <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(null);">
-            <p class="text-color1 mb-0 br-word bold"><?=Yii::$app->params['Dictionary']['all_manga']?> (<?=$CountAM?>)</p>
+            <p class="text-color1 mb-0 br-word bold">All Manga (<?=$CountAM?>)</p>
         </button>
         <?php if($Lists) { foreach($Lists as $list) { if($list->IdList!=1){?>
             <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(<?=$list->IdList?>);">

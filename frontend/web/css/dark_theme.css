@@ -1,5 +1,5 @@
 .text-color1{
-    color: black !important; 
+    color: #000000 !important; 
 }
 
 .text-color2{
@@ -7,7 +7,7 @@
 }
 
 .text-color3{
-    color: white !important;
+    color: #FFFFFF !important;
 }
 
 .text-color4{
@@ -31,7 +31,7 @@
 }
 
 .background-color1{
-    background-color: black !important;
+    background-color: #000000 !important;
 }
 
 .background-color2{
@@ -54,6 +54,10 @@
     background-color: #D52A12 !important;
 }
 
+.background-color7{
+    background-color: #005ce6 !important;
+}
+
 .border-b-1px-solid-color1{
     border-bottom: 1px solid #E35201 !important;
 }
@@ -62,8 +66,37 @@
     border-bottom: 1px solid #1D88AA !important;
 } 
 
+.border-y-1px-solid-color2{
+    border-bottom: 1px solid #1D88AA !important;
+    border-top: 1px solid #1D88AA !important;
+} 
+
+.border-b-2px-solid-color3{
+    border-bottom: 2px solid #000000 !important;
+} 
+
+.border-t-2px-solid-color3{
+    border-top: 2px solid #000000 !important;
+} 
+
+.border-b-2px-solid-color4{
+    border-bottom: 2px solid #333333 !important;
+} 
+
+.border-t-2px-solid-color3{
+    border-top: 2px solid #000000 !important;
+} 
+
+.border-2px-solid-color3{
+    border: 2px solid #000000 !important;
+}
+
+.border-t-0{
+    border-top: none !important;
+}
+
 .border-color1{
-    border-color: black !important;
+    border-color: #000000 !important;
 } 
 
 .scroll-type1 {
@@ -76,10 +109,24 @@
 }
 
 .select-color2{
-    background: black;
+    background: #000000;
     border:0px;
 }
 
 .polygon-color1 {
-    fill: black;
+    fill: #000000;
+}
+
+.tr_list1:hover {
+    background-color:#000000;
+}
+
+.tr_list2:hover {
+    background-color:#333333;
+    border-left: 2px solid #000000 !important;
+    border-right: 2px solid #000000 !important;
+}
+
+.tr_list3:hover {
+    background-color:#333333;
 }

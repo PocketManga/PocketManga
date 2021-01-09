@@ -40,7 +40,9 @@ AppAsset::register($this);
             <!-- Sidebar -->
             <nav class="background-color2" id="sidebar">
                 <div class="sidebar-header text-center">
-                    <a class="navbar-brand text-color1 m-0" href="<?=Yii::$app->homeUrl?>"><h3><?=Yii::$app->name?></h3></a>
+                    <a class="navbar-brand text-color1 m-0" href="<?=Yii::$app->homeUrl?>">
+                        <img width="190px" src="<?=Yii::$app->request->baseUrl.'/img/default/PocketManga.png'?>" placeholder="PocketManga" />
+                    </a>
                 </div>
 
                 <ul class="list-unstyled components">
@@ -74,7 +76,7 @@ AppAsset::register($this);
 
                     <p class="mx-0 text-center bold">My Account</p>
                     <li class="align-center">
-                        <a class="nav-item pl-2 text-color6" href="<?=Yii::$app->request->baseUrl.'/my_account'?>">
+                        <a class="nav-item pl-2 text-color6" id="button-myaccount" href="<?=Yii::$app->request->baseUrl.'/my_account'?>">
                             <div class="row">
                                 <div class="col-12">
                                     <?php if(Yii::$app->user->identity->SrcPhoto){ if (file_exists(Yii::getAlias('@webroot').'/img'.Yii::$app->user->identity->SrcPhoto)){ ?>

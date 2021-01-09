@@ -27,7 +27,7 @@ $this->title = 'Authors';
             <tbody>
                 <?php if($Authors){ foreach($Authors as $Author){ ?>
                     <tr class="tr_list1">
-                        <td class="border-b-2px-solid-color3 p-0"><a class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor?>"><div class="w-100 h-100 p-3"><?=$Author->FirstName.' '.$Author->LastName?></div></a></td>
+                        <td class="border-b-2px-solid-color3 p-0"><a id="tag-a-<?=$Author->FirstName?>" class="text-color2 w-100 h-100 no-hover" href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor?>"><div class="w-100 h-100 p-3"><?=$Author->FirstName.' '.$Author->LastName?></div></a></td>
                         <td class="border-b-2px-solid-color3 p-0 text-center align-middle">
                             <a href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor?>" class="btn btn-sm btn-outline-primary"><i class="far fa-eye"></i></a>
                             <a href="<?=Yii::$app->request->baseUrl.'/'.'author/'.$Author->IdAuthor.'/update'?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i></a>

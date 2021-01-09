@@ -8,14 +8,16 @@ class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/site/index'));
-        $I->see('PocketManga');
+        $I->amOnPage('/');
+        $I->see('Home');
+        $I->see('All Manga');
+        $I->see('Ongoing');
+        $I->see('Completed');
 
-        $I->click('More');
         $I->seeLink('About');
         $I->click('About');
-        $I->wait(2); // wait for page to be opened
+        $I->wait(2);
 
-        $I->see('This is the About page.');
+        $I->see('Projet Developed by: Edgar Oliveira Cordeiro => Nº2180640');
     }
 }

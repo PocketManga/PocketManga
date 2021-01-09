@@ -20,24 +20,10 @@ class DBLeitorTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testPrepareTable()
+    public function testLeitorDBIntegration()
     {
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
-
-        // Delete all data from the database table
-        $Users = User::find()->all();
-        if($Users){
-            foreach ($Users as $User){
-                $User->delete();
-            }
-        }
-        $Leitores = Leitor::find()->all();
-        if($Leitores){
-            foreach ($Leitores as $Leitor){
-                $Leitor->delete();
-            }
-        }
         
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
@@ -49,14 +35,20 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $this->tester->haveRecord('common\models\User', ['Username' => 'SamCom', 'Email' => 'sam745@hotmail.com', 'Gender' => 'M', 'BirthDate' => '2007-12-15', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User3 = $this->tester->grabRecord('common\models\User', ['Username' => 'SamCom']);
         
+        $this->tester->haveRecord('common\models\LibraryList', ['Name' => 'Uncategorized']);
+        $List = $this->tester->grabRecord('common\models\LibraryList', ['Name' => 'Uncategorized']);
+        
+        $this->tester->haveRecord('common\models\LibraryList', ['Name' => 'Reading']);
+        $List2 = $this->tester->grabRecord('common\models\LibraryList', ['Name' => 'Reading']);
+        
         // Add two records for tests
-        $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 1, 'User_Id' => 2]);
-        $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => 3]);
-    }
+        $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 1, 'User_Id' => $User2->IdUser, 'PrimaryList_Id' => $List->IdList]);
+        $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => $User3->IdUser, 'PrimaryList_Id' => $List->IdList]);
 
-    // tests
-    public function testValidation()
-    {
+
+
+
+        
         // Create new Leitor
         $Leitor = new Leitor;
 
@@ -105,8 +97,8 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $Leitor->ChapterShow = 1;
         $Leitor->Server = 'pt_PT';
         $Leitor->Status = 1;
-        $Leitor->PrimaryList_Id = 1;
-        $Leitor->User_Id = 1;
+        $Leitor->PrimaryList_Id = $List->IdList;
+        $Leitor->User_Id = $User->IdUser;
 
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($Leitor->validate('Theme'));
@@ -114,61 +106,55 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $this->assertTrue($Leitor->validate('ChapterShow'));
         $this->assertTrue($Leitor->validate('Status'));
         $this->assertTrue($Leitor->validate('Server'));
-        
-        /* The next two asserts are giving false, and i can only think that's because of the validation trying using foreign keys when the table doesn't have any because of the engine MyISAM */
-        $this->assertFalse($Leitor->validate('PrimaryList_Id'));
-        $this->assertFalse($Leitor->validate('User_Id'));
-    }
+        $this->assertTrue($Leitor->validate('PrimaryList_Id'));
+        $this->assertTrue($Leitor->validate('User_Id'));
 
-    // tests
-    public function testInsert()
-    {
+
+
+        
         // Put all fields with acceptable values and save
-        $this->tester->haveRecord('common\models\Leitor', ['Theme' => true, 'MangaShow' => 1, 'ChapterShow' => true, 'Server' => 'pt_PT', 'PrimaryList_Id' => 1, 'User_Id' => 1]);
+        $this->tester->haveRecord('common\models\Leitor', ['Theme' => true, 'MangaShow' => 1, 'ChapterShow' => true, 'Server' => 'pt_PT', 'PrimaryList_Id' => $List->IdList, 'User_Id' => $User->IdUser]);
 
         // Verify if Leitor was successfully inserted
-        $this->tester->seeRecord('common\models\Leitor', ['Theme' => true, 'User_Id' => 1]);
-    }
+        $this->tester->seeRecord('common\models\Leitor', ['Theme' => true, 'User_Id' => $User->IdUser]);
 
-    // tests
-    public function testUpdate()
-    {
+
+
+        
         // Verify if Leitor to be updated exists
-        $this->tester->seeRecord('common\models\Leitor', ['PrimaryList_Id' => 1, 'User_Id' => 2]);
+        $this->tester->seeRecord('common\models\Leitor', ['PrimaryList_Id' => $List->IdList, 'User_Id' => $User2->IdUser]);
         
         // Verify if Leitor with new values does not exists
-        $this->tester->dontSeeRecord('common\models\Leitor', ['PrimaryList_Id' => 2, 'User_Id' => 2]);
+        $this->tester->dontSeeRecord('common\models\Leitor', ['PrimaryList_Id' => $List2->IdList, 'User_Id' => $User2->IdUser]);
 
         // Get Leitor to be updated
-        $Leitor = $this->tester->grabRecord('common\models\Leitor', ['PrimaryList_Id' => 1, 'User_Id' => 2]);
+        $Leitor = $this->tester->grabRecord('common\models\Leitor', ['PrimaryList_Id' => $List->IdList, 'User_Id' => $User2->IdUser]);
         
         // Change fields with acceptable values
-        $Leitor->PrimaryList_Id = 2;
+        $Leitor->PrimaryList_Id = $List2->IdList;
         
         // Save Leitor
-        /* For some reason is not saving */
         $Leitor->save();
         
         // Verify if Leitor was successfully updated
-        //$this->tester->seeRecord('common\models\Leitor', ['PrimaryList_Id' => 2, 'User_Id' => 2]);
+        $this->tester->seeRecord('common\models\Leitor', ['PrimaryList_Id' => $List2->IdList, 'User_Id' => $User2->IdUser]);
         
         // Verify if Leitor with old values does not exists
-        //$this->tester->dontSeeRecord('common\models\Leitor', ['PrimaryList_Id' => 1, 'User_Id' => 2]);
-    }
+        $this->tester->dontSeeRecord('common\models\Leitor', ['PrimaryList_Id' => $List->IdList, 'User_Id' => $User2->IdUser]);
 
-    // tests
-    public function testDelete()
-    {
+
+
+        
         // Verify if Leitor to be deleted exists
-        $this->tester->seeRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => 3]);
+        $this->tester->seeRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => $User3->IdUser]);
         
         // Get Leitor to be deleted
-        $Leitor = $this->tester->grabRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => 3]);
+        $Leitor = $this->tester->grabRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => $User3->IdUser]);
 
         // Delete Leitor
         $Leitor->delete();
 
         // Verify if Leitor was successfully deleted
-        $this->tester->dontSeeRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => 3]);
+        $this->tester->dontSeeRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => $User3->IdUser]);
     }
 }

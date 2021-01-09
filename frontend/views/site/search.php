@@ -17,9 +17,9 @@ $this->title = 'PocketManga';
                     </div>
                     <div class="col-auto">
                         <select class="float-right select-color1 mt-4" id="show-per-page" onchange="changePage('<?=Yii::$app->request->baseUrl.'/'?>',<?=$PageNumber?>)">
-                            <option class="option-color1" value="25" <?php echo (25 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-25']?></option>
-                            <option class="option-color1" value="50" <?php echo (50 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-50']?></option>
-                            <option class="option-color1" value="100" <?php echo (100 == $NumberPerPage) ? 'selected="selected"' : ''?>><?=Yii::$app->params['Dictionary']['show-100']?></option>
+                            <option class="option-color1" value="25" <?php echo (25 == $NumberPerPage) ? 'selected="selected"' : ''?>>Show mangas: 25 per page</option>
+                            <option class="option-color1" value="50" <?php echo (50 == $NumberPerPage) ? 'selected="selected"' : ''?>>Show mangas: 50 per page</option>
+                            <option class="option-color1" value="100" <?php echo (100 == $NumberPerPage) ? 'selected="selected"' : ''?>>Show mangas: 100 per page</option>
                         </select>
                     </div>
                 </div>
@@ -32,20 +32,20 @@ $this->title = 'PocketManga';
                             foreach($Mangas as $Manga){ 
                                 if($numberOnPage <= $NumberPerPage){
                                     if($numberOfManga>($NumberPerPage*($PageNumber-1)) && $numberOfManga<=($NumberPerPage*$PageNumber)){?>
-                                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                                            <div class="d-flex justify-content-center">
-                                                <a class="text-center" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>">
-                                                    <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@webroot').'/img'.$Manga->SrcImage)){ ?>
-                                                    <img src="<?php echo Yii::$app->request->baseUrl.'/img'.$Manga->SrcImage?>" height="200" width="150">
-                                                    <?php }else{ ?>
-                                                    <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
-                                                    <?php }}else{ ?>
-                                                    <img src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
-                                                    <?php } ?>
-                                                    <p class="text-color2"> <?=$Manga->Title?> </p>
-                                                </a>
-                                            </div>
-                                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                            <div class="d-flex justify-content-center">
+                                <a class="text-center" href="<?=Yii::$app->request->baseUrl.'/'.'manga/'.$Manga->IdManga?>">
+                                    <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@backend').'/web/img'.$Manga->SrcImage)){ ?>
+                                    <img src="<?php echo Yii::$app->urlManagerBackend->baseUrl.'/img'.$Manga->SrcImage?>" height="200" width="150">
+                                    <?php }else{ ?>
+                                    <img src="<?php echo Yii::$app->urlManagerBackend->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                                    <?php }}else{ ?>
+                                    <img src="<?php echo Yii::$app->urlManagerBackend->baseUrl.'/img/default/manga_alternative.jpg'?>" height="200" width="150">
+                                    <?php } ?>
+                                    <p class="text-color2 br-word width-150"> <?=$Manga->Title?> </p>
+                                </a>
+                            </div>
+                        </div>
                         <?php $numberOnPage++; } $numberOfManga++;
                         $Link = Yii::$app->request->baseUrl.'/'.'search='.$Search.'_manga-per-page='.$NumberPerPage.'_page=';
                         if($SearchId){

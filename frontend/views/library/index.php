@@ -11,7 +11,7 @@ $this->title = 'PocketManga';
     <div class="container-fluid pb-4 px-4">
         <div class="row">
             <div class="col-md-3 mt-4">
-                <?php echo $this->render('//layouts/list_library_lists',['List' => $List,'Lists' => $Lists, 'CountAM' => $CountAM,'UncatList' => $UncatList]); ?>
+                <?php echo $this->render('partials/list_library_lists',['List' => $List,'Lists' => $Lists, 'CountAM' => $CountAM,'UncatList' => $UncatList]); ?>
             </div>
             <div class="col">                
                 <div class="mb-4">
@@ -26,7 +26,32 @@ $this->title = 'PocketManga';
         </div>
     </div>
 </div>
+<!-- Modal for change of role -->
+<div class="modal fade" id="updateRole" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content background-color2">
+            <div class="modal-header pl-4 pb-1 pt-4 border-b-2px-solid-color3">
+                <h5 class="modal-title text-gray-800 bold">Insere new list name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-gray-800 pl-4 pr-5">
+                <label class="text-gray-900">List Name <sup class="text-danger small">&#10033;</sup></label>
+                <div class="form-group field-list-name required">
+                    <input type="text" value="<?=(Yii::$app->user->identity->Username)?Yii::$app->user->identity->Username:''?>" id="list-name" class="p-1 w-100 radi-all-15 border-color1 background-color1 text-color2 bold text-center" maxlength="100" autocomplete="off" aria-required="true">
+                </div>
+            </div>
+            <div class="modal-footer mt-3 border-t-2px-solid-color3">
+                <a style="cursor: pointer;" data-dismiss="modal" class="mr-4 bold text-color1" id="close-option">Cancel</a>
+                <a style="cursor: pointer;" data-dismiss="modal" id="create-list-button" class="btn btn-primary bold mr-2 background-color3 text-color2">Create List</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal for add new document -->
 <script>
+    var urlBackend = "<?= Yii::$app->urlManagerBackend->baseUrl?>/";
     var clone = $('.to-clone').clone();
     
     ReloadMangas(<?=Yii::$app->user->identity->leitor->PrimaryList_Id?>);
@@ -54,7 +79,7 @@ $this->title = 'PocketManga';
             list = 'all';
         }
 
-        var link = "http://localhost/PocketManga/backend/web/api/manga/library/" + leitor_id + '_' + list;
+        var link = urlBackend+"api/manga/library/" + leitor_id + '_' + list;
         
         $.ajax({
             method:"GET",
@@ -84,7 +109,7 @@ $this->title = 'PocketManga';
     }
     function Readed_Unreaded(clone, manga_id){
         var leitor_id = <?=Yii::$app->user->identity->leitor->IdLeitor?>;
-        var link = "http://localhost/PocketManga/backend/web/api/manga/readed/" + leitor_id + '_' + manga_id;
+        var link = urlBackend+"api/manga/readed/" + leitor_id + '_' + manga_id;
         var spanReaded = clone.find('#readed').first();
         $.ajax({
             method:"GET",
@@ -105,7 +130,27 @@ $this->title = 'PocketManga';
     function ChangeList(clone, manga_id){
         var leitor_id = <?=Yii::$app->user->identity->leitor->IdLeitor?>;
         var list_name = clone.find('.class-select-list').first().val();
-        var link = "http://localhost/PocketManga/backend/web/api/manga/changelist/" + leitor_id + '__' + manga_id+'__'+ list_name;
+        //if()
+        //requestChangeList();
+        var link = urlBackend+"api/manga/changelist/" + leitor_id + '__' + manga_id+'__'+ list_name;
+        alert(link);
+        $.ajax({
+            method:"GET",
+            url:link
+        })
+        .done(function(response){
+            if(response.Changed != null){
+                if(response.Changed == true){
+                    clone.remove();
+                }
+            }
+        })
+    }
+    function requestChangeList(clone, manga_id){
+        var leitor_id = <?=Yii::$app->user->identity->leitor->IdLeitor?>;
+        var list_name = clone.find('.class-select-list').first().val();
+        //if()
+        var link = urlBackend+"api/manga/changelist/" + leitor_id + '__' + manga_id+'__'+ list_name;
         alert(link);
         $.ajax({
             method:"GET",
