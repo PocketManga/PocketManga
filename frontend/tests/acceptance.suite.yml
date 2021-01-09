@@ -1,18 +1,14 @@
 suite_namespace: frontend\tests\acceptance
 actor: AcceptanceTester
+#extensions:
+#    enabled:
+#        - Codeception\Extension\RunProcess:
+#            - java -jar -Dwebdriver.chrome.driver=./chromedriver -Dwebdriver.gecko.driver=./geckodriver
 modules:
     enabled:
         - WebDriver:
             url: 'http://localhost/PocketManga/frontend/web'
-            #url: 'http://192.168.1.68/PocketManga/frontend/web'
+            port: 9515
             browser: chrome
         - Yii2:
-            part: orm
-            entryScript: index-test.php
-            cleanup: false
-#extensions:
-#    enabled:
-#        - Codeception\Extension\RunProcess:
-#            0: java -jar ~/selenium-server.jar
-#            1: mailcatcher
-#            sleep: 5 # wait 5 seconds for processes to boot
+            part: init

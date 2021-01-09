@@ -52,7 +52,7 @@ AppAsset::register($this);
 
                     <!-- Links -->
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <form class="form-inline my-2 my-lg-0">
                                 <div class="input-group input-group-sm m-2">
                                     <input class="form-control border-secondary py-2" type="search" placeholder="Search">
@@ -63,7 +63,7 @@ AppAsset::register($this);
                                     </div>
                                 </div>
                             </form>
-                        </li>
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link <?php if(Yii::$app->controller->route == 'site/about') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/about'?>">About</a>
                         </li>

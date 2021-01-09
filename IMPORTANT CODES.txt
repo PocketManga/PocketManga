@@ -13,8 +13,3 @@ to run functional Tests
 to run acceptance Tests
 ../vendor/bin/codecept run acceptance
 
-to get Tests page
-
-
-
-https://codeception.com/docs/modules/WebDriver#Local-Testing
