@@ -797,7 +797,7 @@ class m201016_000007_add_data extends Migration
         ]);
         
         //-----------------------------------------------------------------------------------------Library-List---------------------// 
-        $this->insert('{{%library_list}}', [
+        /*$this->insert('{{%library_list}}', [
             'Name' => 'Wish',
         ]);
 
@@ -807,7 +807,7 @@ class m201016_000007_add_data extends Migration
 
         $this->insert('{{%library_list}}', [
             'Name' => 'Following',
-        ]);
+        ]);*/
         
         //-----------------------------------------------------------------------------------------Library--------------------------// 
         $this->insert('{{%library}}', [

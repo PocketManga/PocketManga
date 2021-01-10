@@ -5,6 +5,7 @@ use yii\helpers\Url;
 
 $this->title = $Manga->Title;
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div class="background-color2 radi-all-15">
     <div class="container-fluid pb-4 pr-4 pl-4">
@@ -12,9 +13,29 @@ $this->title = $Manga->Title;
             <div class="col">
                 <div class="background-color3 radi-all-15 pt-4 px-4 pb-2 mt-4">
                     <div class="row">
-                        <div class="col-12 mb-4">
+                        <div class="col-8 mb-4">
                             <h4 class="text-color2"><?=$Manga->OriginalTitle?></h4>
                         </div>
+                        <?php if(!Yii::$app->user->isGuest){ ?>
+                        <div class="col-3 mb-4">
+                            <?php if($Library){ ?>
+                            <a id="library-tag-a" style="cursor: pointer;" onClick="removeLibrary(<?=$Manga->IdManga?>)" class="btn btn-error px-1 w-100 background-color6"><span class="text">Remove from Library</span></a>
+                            <?php }else{ ?>
+                            <a id="library-tag-a" style="cursor: pointer;" onClick="addLibrary(<?=$Manga->IdManga?>)" class="btn btn-success px-1 w-100 background-color5"><span id="library-span" class="text">Add to Library</span></a>
+                            <?php } ?>
+                        </div>
+                        <div class="col-1 mb-4">
+                            <?php if($Favorite){ ?>
+                            <a id="img-tag-a" style="cursor: pointer;" onClick="removeFavorite(<?=$Manga->IdManga?>)">
+                                <img id="img-fav" src="<?= Yii::$app->urlManagerBackend->baseUrl.'/img/default/favorite.png'?>" width="38">
+                            </a>
+                            <?php }else{ ?>
+                            <a id="img-tag-a" style="cursor: pointer;" onClick="addFavorite(<?=$Manga->IdManga?>)">
+                                <img id="img-fav" src="<?= Yii::$app->urlManagerBackend->baseUrl.'/img/default/unfavorite.png'?>" width="38">
+                            </a>
+                            <?php } ?>
+                        </div>
+                        <?php } ?>
                         <div class="col-sm-12 col-md-12 col-lg-4">
                             <div class="d-flex justify-content-center">
                                 <?php if($Manga->SrcImage){ if (file_exists(Yii::getAlias('@backend').'/web/img'.$Manga->SrcImage)){ ?>
@@ -89,3 +110,93 @@ $this->title = $Manga->Title;
         </div>
     </div>
 </div>
+
+<script>
+    var urlBackend = "<?= Yii::$app->urlManagerBackend->baseUrl?>/";
+    var user_id = <?=(!Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:null?>;
+
+    function addFavorite(manga_id){
+        var link = urlBackend+"api/favorite/create";
+        $.post(link,
+        {
+            IdUser: user_id,
+            IdManga: manga_id,
+        },
+        function(response){
+            if(response != null){
+                var img = $("#img-fav");
+                var tag_a = $("#img-tag-a");
+                var src = img.attr('src');
+                var onclick = tag_a.attr('onClick');
+                if(response == "Added to Favorites" || response == "Already in Favorites"){
+                    img.attr('src', src.replace("unfavorite", "favorite"));
+                    tag_a.attr('onClick', onclick.replace("add", "remove"));
+                }
+            }
+        });
+    }
+
+    function removeFavorite(manga_id){
+        var link = urlBackend+"api/favorite/delete/user/"+user_id+"/manga/"+manga_id;
+        $.ajax({
+            method:"DELETE",
+            url:link
+        })
+        .done(function(response){
+            if(response != null){
+                var img = $("#img-fav");
+                var tag_a = $("#img-tag-a");
+                var src = img.attr('src');
+                var onclick = tag_a.attr('onClick');
+                if(response == "Removed from Favorites" || response == "It Wasn´t on Favorites"){
+                    img.attr('src', src.replace("favorite", "unfavorite"));
+                    tag_a.attr('onClick', onclick.replace("remove", "add"));
+                }
+            }
+        })
+    }
+    function addLibrary(manga_id){
+        var link = urlBackend+"api/library/create";
+        $.post(link,
+        {
+            IdUser: user_id,
+            IdManga: manga_id,
+        },
+        function(response){
+            if(response != null){
+                var span = $("#library-span");
+                var tag_a = $("#library-tag-a");
+                var text = span.text();
+                var onclick = tag_a.attr('onClick');
+                var className = tag_a.attr('class');
+                if(response == "Added to Library" || response == "Already in Library"){
+                    tag_a.attr('onClick', onclick.replace("add", "remove"));
+                    tag_a.attr('class', className.replace("background-color5", "background-color6").replace("success", "error"));
+                    span.text(text.replace("Add to", "Remove from"));
+                }
+            }
+        });
+    }
+
+    function removeLibrary(manga_id){
+        var link = urlBackend+"api/library/delete/user/"+user_id+"/manga/"+manga_id;
+        $.ajax({
+            method:"DELETE",
+            url:link
+        })
+        .done(function(response){
+            if(response != null){
+                var span = $("#library-span");
+                var tag_a = $("#library-tag-a");
+                var text = span.text();
+                var onclick = tag_a.attr('onClick');
+                var className = tag_a.attr('class');
+                if(response == "Removed from Library" || response == "It Wasn´t on Library"){
+                    tag_a.attr('onClick', onclick.replace("remove", "add"));
+                    tag_a.attr('class', className.replace("background-color6", "background-color5").replace("error", "success"));
+                    span.text(text.replace("Remove from", "Add to"));
+                }
+            }
+        })
+    }
+</script>

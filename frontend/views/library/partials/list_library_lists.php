@@ -11,6 +11,9 @@
         <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(<?=$UncatList->IdList?>);">
             <p class="text-color1 mb-0 br-word bold"><?=$UncatList->Name?> (<?=count($UncatList->GetLibraries()->where('Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)->all())?>)</p>
         </button>
+        <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(0);">
+            <p class="text-color1 mb-0 br-word bold">Favorites (<?=count(Yii::$app->user->identity->leitor->favorites)?>)</p>
+        </button>
         <button class="background-color3 mx-4 border-0 mb-1" onclick="ReloadMangas(null);">
             <p class="text-color1 mb-0 br-word bold">All Manga (<?=$CountAM?>)</p>
         </button>

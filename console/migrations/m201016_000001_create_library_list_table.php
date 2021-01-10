@@ -25,6 +25,18 @@ class m201016_000001_create_library_list_table extends Migration
         $this->insert('{{%library_list}}', [
             'Name' => 'Uncategorized',
         ]);
+
+        $this->insert('{{%library_list}}', [
+            'Name' => 'To Read',
+        ]);
+
+        $this->insert('{{%library_list}}', [
+            'Name' => 'Reading',
+        ]);
+
+        $this->insert('{{%library_list}}', [
+            'Name' => 'Completed',
+        ]);
     }
 
     /**

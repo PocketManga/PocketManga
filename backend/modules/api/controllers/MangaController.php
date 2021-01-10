@@ -190,6 +190,7 @@ class MangaController extends ActiveController
         if(count($filters_split)>=2){
             $User_Id = $filters_split[0];
             $List = $filters_split[1];
+
             $MangaModel = new $this->modelClass;
             $mangas = null;
 
@@ -224,6 +225,35 @@ class MangaController extends ActiveController
             return ['mangas' => $mangas];
         }
         return ['Erro' => 'There are missing parameters', 'Count' => count($filters_split), 'Filters' => $filters_split];
+    }
+    
+    public function actionFavorites($idUser)
+    {        
+        if($idUser){
+
+            $MangaModel = new $this->modelClass;
+            $mangas = null;
+
+            $User = User::find($idUser)->one();
+            $Leitor = $User->leitor;
+            $Mangas = $Leitor->mangas;
+            
+            foreach($Mangas as $Manga){
+                $MangaReaded = $Manga->getMangaReadeds()->where('Leitor_Id = '.$Leitor->IdLeitor)->one();
+                $Library = $Manga->getLibraries()->where('Leitor_Id = '.$Leitor->IdLeitor)->one();
+                $manga = [
+                    'IdManga' => $Manga->IdManga,
+                    'Title' => $Manga->Title,
+                    'Status' => ($Manga->Status)?true:false,
+                    'List' => ($Library->list)?$Library->list->Name:'Uncategorized',
+                    'Readed' => ($MangaReaded)?true:false,
+                ];
+                $mangas[] = $manga;
+            }
+            
+            return ['mangas' => $mangas];
+        }
+        return ['Erro' => 'There are missing parameters', 'Count' => count($idUser), 'User_Id' => $idUser];
     }
 
     public function actionReaded($filters)
@@ -263,8 +293,13 @@ class MangaController extends ActiveController
             $ListName = $filters_split[2];
             $MangaModel = new $this->modelClass;
 
+            //Exeption
+            if($ListName == "ToRead"){
+                $ListName = "To Read";
+            }
+
             $Manga = $MangaModel->find()->where('IdManga = '.$Manga_Id)->one();
-            $List = LibraryList::find()->where('Name like "'.$ListName.'"')->one();
+            $List = LibraryList::find()->where('Name like "%'.$ListName.'%"')->one();
             $Library = $Manga->getLibraries()->where('Leitor_Id = '.$Leitor_Id)->one();
 
             if(!$List){

@@ -109,6 +109,7 @@ return [
                         'GET allmanga/{filters}' => 'allmanga',
                         'GET allmanga/total/{filters}' => 'totalmanga',
                         'GET library/{filters}' => 'library',
+                        'GET favorites/{idUser}' => 'favorites',
                         'GET readed/{filters}' => 'readed',
                         'GET changelist/{filters}' => 'changelist',
                     ],
@@ -152,6 +153,19 @@ return [
                     'extraPatterns' => [
                         'POST create' => 'favcreate',
                         'DELETE delete/user/<idUser>/manga/<idManga>' => 'favdelete',
+                    ],
+                    'tokens' => [
+                        '{idUser}' => '<idUser:\d+>',
+                        '{idManga}' => '<idManga:\d+>',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/library',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST create' => 'libcreate',
+                        'DELETE delete/user/<idUser>/manga/<idManga>' => 'libdelete',
                     ],
                     'tokens' => [
                         '{idUser}' => '<idUser:\d+>',

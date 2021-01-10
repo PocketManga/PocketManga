@@ -42,8 +42,27 @@ class MangaController extends Controller
         $Chapters = $Manga->getChapters()->all();
         $Genres = $Manga->getCategories()->all();
         $ChapterReadeds = null;
+        $Favorite = false;
+        $Library = false;
+
         if(!Yii::$app->user->isGuest){
             $ChapterReadeds = Yii::$app->user->identity->leitor->chapterReadeds;
+            $Favorites = Yii::$app->user->identity->leitor->favorites;
+            $Libraries = Yii::$app->user->identity->leitor->libraries;
+            if($Favorites){
+                foreach($Favorites as $Fav){
+                    if($Fav->Manga_Id == $Manga->IdManga){
+                        $Favorite = true;
+                    }
+                }
+            }
+            if($Libraries){
+                foreach($Libraries as $Lib){
+                    if($Lib->Manga_Id == $Manga->IdManga){
+                        $Library = true;
+                    }
+                }
+            }
         }
         
         return $this->render('view', [
@@ -53,6 +72,8 @@ class MangaController extends Controller
             'Chapters' => $Chapters,
             'Categories' => $Categories,
             'ChapterReadeds' => $ChapterReadeds,
+            'Favorite' => $Favorite,
+            'Library' => $Library,
         ]);
     }
 

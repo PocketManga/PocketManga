@@ -25,11 +25,10 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                     <select class="select-color2 text-color2 class-select-list" id="select-list">
-                        <option class="option-color1 text-color2" id="option-Uncategorized" value="Uncategorized">Uncategorized</option>
                         <?php if($Lists){ foreach($Lists as $list){ ?>
-                        <option class="option-color1 text-color2" id="option-<?=$list->Name?>" value="<?=$list->Name?>"><?=$list->Name?></option>
+                        <option class="option-color1 text-color2" id="option-<?=str_replace(' ', '', $list->Name)?>" value="<?=str_replace(' ', '', $list->Name)?>"><?=$list->Name?></option>
                         <?php }} ?>
-                        <option class="option-color1 text-color2" value="new_list">+ New List</option>
+                        <!--<option class="option-color1 text-color2" value="atsil_avon">+ New List</option>-->
                     </select>
                 </div>
             </li>

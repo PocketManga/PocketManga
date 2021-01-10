@@ -78,6 +78,7 @@ class SignupForm extends Model
         $auth->assign($authorRole, $user->getId());
 
         $leitor = new Leitor();
+        $leitor->PrimaryList_Id = 1;
         $leitor->MangaShow = '1';
         $leitor->User_Id = $user->getId();
 

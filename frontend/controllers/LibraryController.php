@@ -50,12 +50,9 @@ class LibraryController extends Controller
         $primaryList = Yii::$app->user->identity->leitor->PrimaryList_Id;
         $List = null;
         if($primaryList){
-            $List = $primaryList;
+            $List = LibraryList::find()->where("IdList = ".$primaryList)->one()->Name;
         }
         if($primaryList == null){
-            $List = "Uncategorized";
-        }
-        if($primaryList == 1){
             $List = "All Manga";
         }
         $Lists = null;
