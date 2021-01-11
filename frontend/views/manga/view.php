@@ -13,7 +13,7 @@ $this->title = $Manga->Title;
             <div class="col">
                 <div class="background-color3 radi-all-15 pt-4 px-4 pb-2 mt-4">
                     <div class="row">
-                        <div class="col-8 mb-4">
+                        <div class="<?=(Yii::$app->user->isGuest)?'col-12':'col-8'?> mb-4">
                             <h4 class="text-color2"><?=$Manga->OriginalTitle?></h4>
                         </div>
                         <?php if(!Yii::$app->user->isGuest){ ?>
@@ -113,7 +113,7 @@ $this->title = $Manga->Title;
 
 <script>
     var urlBackend = "<?= Yii::$app->urlManagerBackend->baseUrl?>/";
-    var user_id = <?=(!Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:null?>;
+    var user_id = "<?=(!Yii::$app->user->isGuest)?Yii::$app->user->identity->IdUser:null?>";
 
     function addFavorite(manga_id){
         var link = urlBackend+"api/favorite/create";

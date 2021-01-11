@@ -25,6 +25,7 @@ class DBReportTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
         
+        echo "Extra: Adding necessary records for tests\n";
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
@@ -38,13 +39,10 @@ class DBReportTest extends \Codeception\Test\Unit
         // Add two records for tests
         $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 1', 'Description' => 'This is just the description', 'SrcImage' => 'source', 'Leitor_Id' => $Leitor->IdLeitor]);
         $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 2', 'Description' => 'This is just the description 2', 'SrcImage' => 'source2', 'Leitor_Id' => $Leitor->IdLeitor]);
-    
-    
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Validate Report Fields\n";
         // Create new Report
         $Report = new Report;
 
@@ -114,19 +112,18 @@ class DBReportTest extends \Codeception\Test\Unit
         $this->assertTrue($Report->validate('Chapter_Id'));
         $this->assertTrue($Report->validate('Leitor_Id'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-
+        echo "Test: Create Report Record\n";
         // Put all fields with acceptable values and save
         $this->tester->haveRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 3', 'Description' => 'This is just the description 3', 'SrcImage' => 'source3', 'Resolved' => true, 'Leitor_Id' => $Leitor->IdLeitor]);
 
         // Verify if Report was successfully inserted
         $this->tester->seeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 3', 'SrcImage' => 'source3', 'Resolved' => true]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
+        echo "Test: Update Report Record\n";
         // Verify if Report to be updated exists
         $this->tester->seeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 1', 'SrcImage' => 'source']);
         
@@ -148,10 +145,9 @@ class DBReportTest extends \Codeception\Test\Unit
         // Verify if Report with old values does not exists
         $this->tester->dontSeeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 1', 'SrcImage' => 'source']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-
+        echo "Test: Delete Report Record\n";
         // Verify if Report to be deleted exists
         $this->tester->seeRecord('common\models\Report', ['SubjectMatter' => 'My subject matter number 2', 'SrcImage' => 'source2']);
         

@@ -26,6 +26,7 @@ class DBChapterTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
 
+        echo "Extra: Adding necessary records for tests\n";
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
@@ -43,11 +44,10 @@ class DBChapterTest extends \Codeception\Test\Unit
         // Add two records for tests
         $this->tester->haveRecord('common\models\Chapter', ['Number' => 1, 'PagesNumber' => 10, 'Season' => 1, 'Manga_Id' => $Manga->IdManga, 'Manager_Id' => $Manager->IdManager]);
         $this->tester->haveRecord('common\models\Chapter', ['Number' => 2, 'PagesNumber' => 11, 'Season' => 1, 'Manga_Id' => $Manga->IdManga, 'Manager_Id' => $Manager->IdManager]);
-    
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
+        echo "Test: Validate Chapter Fields\n";
         // Create new Chapter
         $Chapter = new Chapter;
 
@@ -128,20 +128,18 @@ class DBChapterTest extends \Codeception\Test\Unit
         $this->assertTrue($Chapter->validate('Manga_Id'));
         $this->assertTrue($Chapter->validate('Manager_Id'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-
+        echo "Test: Create Chapter Record\n";
         // Put all fields with acceptable values and save
         $this->tester->haveRecord('common\models\Chapter', ['Number' => 3, 'PagesNumber' => 10, 'Name' => 'When she smiled', 'ReleaseDate' => '1998-11-12', 'Updated' => '2020-11-12 22:23:50', 'Season' => 1, 'OneShot' => false, 'SrcFolder' => '/manga/1/3', 'Manga_Id' => $Manga->IdManga, 'Manager_Id' => $Manager->IdManager]);
 
         // Verify if Chapter was successfully inserted
         $this->tester->seeRecord('common\models\Chapter', ['Number' => 3, 'Name' => 'When she smiled','SrcFolder' => '/manga/1/3']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Update Chapter Record\n";
         // Verify if Chapter to be updated exists
         $this->tester->seeRecord('common\models\Chapter', ['Number' => 1, 'Name' => null, 'SrcFolder' => null]);
         
@@ -164,9 +162,9 @@ class DBChapterTest extends \Codeception\Test\Unit
         // Verify if Chapter with old values does not exists
         $this->tester->dontSeeRecord('common\models\Chapter', ['Number' => 1, 'Name' => null,'SrcFolder' => null]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Delete Chapter Record\n";
         // Verify if Chapter to be deleted exists
         $this->tester->seeRecord('common\models\Chapter', ['Number' => 2, 'Name' => null, 'SrcFolder' => null]);
         

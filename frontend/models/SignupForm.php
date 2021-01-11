@@ -40,7 +40,8 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            //['gender', 'string'],
+            ['gender', 'required'],
+            ['gender', 'safe'],
 
             ['birthdate', 'required'],
             ['birthdate', 'safe'],
@@ -72,10 +73,10 @@ class SignupForm extends Model
         $user->BirthDate = (new DateTime($this->birthdate))->format('Y-m-d');
         $user->SrcPhoto = 'PHOTO';
         
-        $auth = \Yii::$app->authManager;
-        $authorRole = $auth->getRole('leitor');
+        //$auth = \Yii::$app->authManager;
+        //$authorRole = $auth->getRole('leitor');
         $user->save();
-        $auth->assign($authorRole, $user->getId());
+        //$auth->assign($authorRole, $user->getId());
 
         $leitor = new Leitor();
         $leitor->PrimaryList_Id = 1;

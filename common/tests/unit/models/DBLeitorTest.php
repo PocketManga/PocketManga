@@ -25,6 +25,7 @@ class DBLeitorTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
         
+        echo "Extra: Adding necessary records for tests\n";
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
@@ -45,10 +46,9 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 1, 'User_Id' => $User2->IdUser, 'PrimaryList_Id' => $List->IdList]);
         $this->tester->haveRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => $User3->IdUser, 'PrimaryList_Id' => $List->IdList]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Validate Leitor Fields\n";
         // Create new Leitor
         $Leitor = new Leitor;
 
@@ -109,18 +109,18 @@ class DBLeitorTest extends \Codeception\Test\Unit
         $this->assertTrue($Leitor->validate('PrimaryList_Id'));
         $this->assertTrue($Leitor->validate('User_Id'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Create Leitor Record\n";
         // Put all fields with acceptable values and save
         $this->tester->haveRecord('common\models\Leitor', ['Theme' => true, 'MangaShow' => 1, 'ChapterShow' => true, 'Server' => 'pt_PT', 'PrimaryList_Id' => $List->IdList, 'User_Id' => $User->IdUser]);
 
         // Verify if Leitor was successfully inserted
         $this->tester->seeRecord('common\models\Leitor', ['Theme' => true, 'User_Id' => $User->IdUser]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Update Leitor Record\n";
         // Verify if Leitor to be updated exists
         $this->tester->seeRecord('common\models\Leitor', ['PrimaryList_Id' => $List->IdList, 'User_Id' => $User2->IdUser]);
         
@@ -142,9 +142,9 @@ class DBLeitorTest extends \Codeception\Test\Unit
         // Verify if Leitor with old values does not exists
         $this->tester->dontSeeRecord('common\models\Leitor', ['PrimaryList_Id' => $List->IdList, 'User_Id' => $User2->IdUser]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Delete Leitor Record\n";
         // Verify if Leitor to be deleted exists
         $this->tester->seeRecord('common\models\Leitor', ['MangaShow' => 2, 'User_Id' => $User3->IdUser]);
         

@@ -96,9 +96,9 @@ $this->title = 'My Account';
                                         <?= $form->field($model, 'Photo')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img'.Yii::$app->user->identity->SrcPhoto.'");', 'style'=>'display:none;'])->label(false);?>
                                     <?php }else{ ?>
                                         <a href="#" onclick="return ClickChange()">
-                                            <img class="radi-all-50p" id="uploadPreview" width="250px" height="250px" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
+                                            <img class="radi-all-50p" id="uploadPreview" width="250px" height="250px" src="<?=Yii::$app->request->baseUrl.'/img/default/addImg.png'?>"/>
                                         </a>
-                                        <?= $form->field($model, 'Photo')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'.'");', 'style'=>'display:none;'])->label(false);?>
+                                        <?= $form->field($model, 'Photo')->fileInput(['id' => 'uploadImage', 'onchange'=>'PreviewImage("'.Yii::$app->request->baseUrl.'/img/default/addImg.png'.'");', 'style'=>'display:none;'])->label(false);?>
                                     <?php }}else{ ?>
                                         <a href="#" onclick="return ClickChange()">
                                             <img class="radi-all-50p" id="uploadPreview" width="250px" height="250px" src="<?=Yii::$app->request->baseUrl.'/img/default/addImg2.png'?>"/>

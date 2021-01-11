@@ -23,14 +23,14 @@ class DBServerTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
         
+        echo "Extra: Adding necessary records for tests\n";
         // Add two records for tests
         $this->tester->haveRecord('common\models\Server', ['Name' => 'English', 'Code' => 'en_US']);
         $this->tester->haveRecord('common\models\Server', ['Name' => 'Portuguese', 'Code' => 'pt_PT']);
 
-        
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
+        echo "Test: Validate Server Fields\n";
         // Create new Server
         $Server = new Server;
 
@@ -58,10 +58,9 @@ class DBServerTest extends \Codeception\Test\Unit
         $this->assertTrue($Server->validate('Name'));
         $this->assertTrue($Server->validate('Code'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Create Server Record\n";
         // Create new Server
         $Server = new Server;
         
@@ -75,10 +74,9 @@ class DBServerTest extends \Codeception\Test\Unit
         // Verify if Server was successfully inserted
         $this->tester->seeRecord('common\models\Server', ['Name' => 'Japanese', 'Code' => 'ja_JP']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Update Server Record\n";
         // Verify if Server to be updated exists
         $this->tester->seeRecord('common\models\Server', ['Name' => 'Portuguese', 'Code' => 'pt_PT']);
         
@@ -100,10 +98,9 @@ class DBServerTest extends \Codeception\Test\Unit
         // Verify if Server with old values does not exists
         $this->tester->dontSeeRecord('common\models\Server', ['Name' => 'Portuguese', 'Code' => 'pt_PT']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Delete Server Record\n";
         // Verify if Server to be deleted exists
         $this->tester->seeRecord('common\models\Server', ['Name' => 'English', 'Code' => 'en_US']);
         

@@ -171,3 +171,11 @@ input[type="date"]::-webkit-inner-spin-button{
     pointer-events: none;
     cursor: default;
 }
+
+.btn-on-img {
+    position: absolute;
+    top: 8%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

@@ -38,6 +38,7 @@ class DBManagerTest extends \Codeception\Test\Unit
         $this->tester->haveRecord('backend\models\Manager', ['Theme' => true, 'User_Id' => $User2->IdUser]);
         $this->tester->haveRecord('backend\models\Manager', ['User_Id' => $User3->IdUser]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
         echo "Test: Validate Manager Fiels\n";
         // Create new Manager
@@ -75,6 +76,7 @@ class DBManagerTest extends \Codeception\Test\Unit
         $this->assertTrue($Manager->validate('Status'));
         $this->assertTrue($Manager->validate('User_Id'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
         echo "Test: Insert Manager Record\n";
         // Put all fields with acceptable values and save
@@ -83,6 +85,7 @@ class DBManagerTest extends \Codeception\Test\Unit
         // Verify if Manager was successfully inserted
         $this->tester->seeRecord('backend\models\Manager', ['Theme' => true, 'User_Id' => $User->IdUser]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
         echo "Test: Update Manager Record\n";
         // Verify if Manager to be updated exists
@@ -107,6 +110,7 @@ class DBManagerTest extends \Codeception\Test\Unit
         // Verify if Manager with old values does not exists
         //$this->tester->dontSeeRecord('backend\models\Manager', ['Theme' => true, 'User_Id' => $User2->IdUser]);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
         echo "Test: Delete Manager Record\n";
         // Verify if Manager to be deleted exists

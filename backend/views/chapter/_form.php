@@ -36,28 +36,38 @@ use yii\widgets\ActiveForm;
         
         <div class="col-12 background-color1 p-4 radi-all-15">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <p class = "text-color2 m-0 text-center">Only jpg files!!</p>
-                </div>
-                <div class="col-6">
-                    <button class="uploadPreview" onclick="return ClickChange()" type="button">Upload</button>
-                    <input type="file" id='uploadImage' name="Images[]" style="display:none;" onchange="PreviewImages()" multiple><br>
                 </div>
             </div>
             <div class="row mb-n3" id="list-images">
-                <div class="col-auto to-clone">
-                    <img style="max-width:200px;" src=""/>
-                </div>
-                <!--
-                <div class="col-auto">
-                <form method='post' action='' enctype="multipart/form-data">
-                    <input type="file" id='files' name="Images[]" multiple><br>
-                    <input type="button" id="submit" value='Upload'>
-                </form>
-                    <a href="#" onclick="return ClickChange(0)">
-                        <img class="uploadPreview" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>"/>
+                <?php $num = 1; if($Imgs){ foreach($Imgs as $Img) { ?>
+                <div class="col-auto" id="div-clone-<?=$num?>">
+                    <a id="tag-a-prev-<?=$num?>" style="cursor: pointer;" onclick="return ClickChange(<?=$num?>)">
+                        <img id="uploadPreview-<?=$num?>" class="border-all-1px-solid-color2" style="max-width:200px;" src="<?=$Img?>"/>
                     </a>
-                </div>-->
+                    <?= $form->field($model, 'Images[]')->fileInput(['id' => 'uploadImage-'.$num, 'onchange'=>'PreviewImage('.$num.',"'.$Img.'");', 'style'=>'display:none;'])->label(false);?>
+                    
+                    <!-- Removido para evitar problemas desnecessários, e por não ter tido tempo para arranjar uma forma de evitar esses problemas-->
+                    <!--<a id="tag-a-delete-<?=$num?>" style="cursor: pointer;" onClick="removeImage(<?=$num?>)" class="no-hover text-color3 radi-all-50p background-color6 btn-on-img"><span class="m-2">X</span></a>-->
+                </div>
+                <?php $num++;}} ?>
+                <div class="col-auto" id="div-clone-<?=$num?>">
+                    <a id="tag-a-prev-<?=$num?>" style="cursor: pointer;" onclick="return ClickChange(<?=$num?>)">
+                        <img id="uploadPreview-<?=$num?>" class="border-all-1px-solid-color2" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/addImg2.png'?>"/>
+                    </a>
+                    <?= $form->field($model, 'Images[]')->fileInput(['id' => 'uploadImage-'.$num, 'onchange'=>'PreviewImage('.$num.',"'.Yii::$app->request->baseUrl.'/img/default/addImg2.png'.'");', 'style'=>'display:none;'])->label(false);?>
+                    
+                    <a id="tag-a-delete-<?=$num?>" style="cursor: pointer; display:none;" onClick="removeImage(<?=$num?>)" class="no-hover text-color3 radi-all-50p background-color6 btn-on-img"><span class="m-2">X</span></a>
+                </div>
+                <div class="col-auto to-clone" id="div-clone-0">
+                    <a id="tag-a-prev-0" style="cursor: pointer;" onclick="return ClickChange(0)">
+                        <img id="uploadPreview-0" class="border-all-1px-solid-color2" style="max-width:200px;" src="<?=Yii::$app->request->baseUrl.'/img/default/addImg2.png'?>"/>
+                    </a>
+                    <?= $form->field($model, 'Images[]')->fileInput(['id' => 'uploadImage-0', 'onchange'=>'PreviewImage(0,"'.Yii::$app->request->baseUrl.'/img/default/addImg2.png'.'");', 'style'=>'display:none;'])->label(false);?>
+                    
+                    <a id="tag-a-delete-0" style="cursor: pointer; display:none;" onClick="removeImage(0)" class="no-hover text-color3 radi-all-50p background-color6 btn-on-img"><span class="m-2">X</span></a>
+                </div>
             </div>
         </div>
 
@@ -88,43 +98,62 @@ use yii\widgets\ActiveForm;
             div.className = div.className.replace("background-color"+color, "background-color5");
         }
     }
-
-    function ClickChange(){
-        var inputUpload = document.getElementById("uploadImage");
+    
+    function removeImage(thisNum){
+        $("#div-clone-"+thisNum).remove();
+    };
+    function ClickChange(thisNum){
+        var inputUpload = document.getElementById("uploadImage-"+thisNum);
         inputUpload.click();
     };
-    function PreviewImages() {
+    function PreviewImage(thisNum,SrcImage) {
+        var oFReader = new FileReader();
 
-        var divListImages = document.querySelector('#list-images');
-        var Images = document.querySelector('#uploadImage').files;
-        $('.to-clone').remove();
+        var Butt = document.getElementById("uploadImage-"+thisNum);
+        var Img = document.getElementById("uploadPreview-"+thisNum);
 
-        function readAndPreview(img) {
-
-            var reader = new FileReader();
-            reader.addEventListener("load", function () {
-            var div = document.createElement('div'); 
-            var image = new Image();
-
-            div.className="col-auto p-3";
-
-            image.style="max-width:250px;";
-            image.title = img.name;
-            image.src = this.result;
-
-            div.appendChild(image);
-
-            divListImages.appendChild(div);
-            }, false);
-
-            reader.readAsDataURL(img);
-
+        try{
+            oFReader.readAsDataURL(Butt.files[0]);
+            
+            oFReader.onload = function (oFREvent) {
+                Img.src = oFREvent.target.result;
+            };
+            $("#tag-a-delete-"+thisNum).show();
+        }catch(NullPointerException){
+            Img.src = SrcImage;
+            $("#tag-a-delete-"+thisNum).hide();
         }
 
-        if (Images) {
-            [].forEach.call(Images, readAndPreview);
-        }
+        var newNum = thisNum+1;
+        var divClone = document.getElementById("div-clone-"+newNum);
 
-    }
-    
+        if(typeof(divClone) == 'undefined' || divClone == null){
+            var newClone = clone.clone();
+
+            var idUplImg = "uploadImage-"+newNum;
+            var idIplPrev = "uploadPreview-"+newNum;
+            var idTagAPrev = "tag-a-prev-"+newNum;
+            var idTagADel = "tag-a-delete-"+newNum;
+            var idDiv = "div-clone-"+newNum;
+
+            var onclick_TagAPrev = $("#tag-a-prev-0",newClone).attr('onclick').replace("0",newNum);
+            var onchange_UplImg = $("#uploadImage-0",newClone).attr('onchange').replace("0",newNum);
+            var onclick_TagADel = $("#tag-a-delete-0",newClone).attr('onclick').replace("0",newNum);
+
+            $("#uploadImage-0",newClone).attr('onchange', onchange_UplImg);
+            $("#uploadImage-0",newClone).attr('id', idUplImg);
+
+            $("#uploadPreview-0",newClone).attr('id', idIplPrev);
+
+            $("#tag-a-prev-0",newClone).attr('onclick', onclick_TagAPrev);
+            $("#tag-a-prev-0",newClone).attr('id', idTagAPrev);
+
+            $("#tag-a-delete-0",newClone).attr('onclick', onclick_TagADel);
+            $("#tag-a-delete-0",newClone).attr('id', idTagADel);
+
+            newClone.attr('id', idDiv);
+            
+            $('#list-images').append(newClone);
+        }
+    };
 </script>

@@ -68,6 +68,7 @@ class ChapterController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($idChapter),
+            "IdManga" => $idManga,
         ]);
     }
 
@@ -97,25 +98,21 @@ class ChapterController extends Controller
             $Chapter->Manga_Id = $idManga;
             $Chapter->Manager_Id = Yii::$app->user->identity->manager->IdManager;
 
-            var_dump($model->Images);
-            return 0;
-            //$Chapter->save();
-
-            $Images = UploadedFile::getInstances($model, 'Images');
             $pathFolder = '/'.'mangas/'.$idManga.'/'.$Chapter->Number;
             $fullPath = Yii::getAlias('@webroot').'/img'.$pathFolder;
             if (!file_exists($fullPath)) {
                 mkdir($fullPath, 0777, true);
             }
-            $num = 0;
-            foreach($Images as $Image){
-                $path = $fullPath.'/'.str_pad($num, 4, '0',false).'.jpg';
-                $Image->saveAs($path);
-                $num++;
+
+            if($model->Images){
+                for($i = 0; $i < count($model->Images)-1; $i++){
+                    $Img = UploadedFile::getInstance($model, 'Images['.$i.']');
+                    $path = $fullPath.'/'.str_pad($i, 4, '0',false).'.jpg';
+                    $Img->saveAs($path);
+                }
             }
-            
-            $Chapter->PagesNumber = count($Images);
             $Chapter->SrcFolder = $pathFolder;
+            $Chapter->PagesNumber = count($model->Images)-1;
             $Chapter->save();
 
             return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga.'/'.'chapter/'.$Chapter->IdChapter);
@@ -138,31 +135,78 @@ class ChapterController extends Controller
         if(!Yii::$app->user->can('ChapterUpdatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
+        //throw new HttpException(403,'Update page not finished');
 
-        $model = $this->findModel($idChapter);
+        $Chapter = $this->findModel($idChapter);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model = new ChapterForm();
+        $model->setVariables($Chapter);
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $Chapter = new Chapter();
+
+            $Chapter->Number = $model->Number;
+            $Chapter->Name = $model->Name;
+            $Chapter->Season = ($model->Season)?$model->Season:1;
+            $Chapter->OneShot = $model->OneShot;
+            $Chapter->PagesNumber = 0;
+            
+            $Chapter->Manga_Id = $idManga;
+            $Chapter->Manager_Id = Yii::$app->user->identity->manager->IdManager;
+
+            $pathFolder = '/'.'mangas/'.$idManga.'/'.$Chapter->Number;
+            $fullPath = Yii::getAlias('@webroot').'/img'.$pathFolder;
+            if (!file_exists($fullPath)) {
+                mkdir($fullPath, 0777, true);
+            }
+
+            if($model->Images){
+                for($i = 0; $i < count($model->Images)-1; $i++){
+                    $Img = UploadedFile::getInstance($model, 'Images['.$i.']');
+                    if($Img){
+                        $path = $fullPath.'/'.str_pad($i, 4, '0',false).'.jpg';
+                        $Img->saveAs($path);
+                    }
+                }
+            }
+            $Chapter->SrcFolder = $pathFolder;
+            $Chapter->PagesNumber = count($model->Images)-1;
+            $Chapter->save();
+
             return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga.'/'.'chapter/'.$Chapter->IdChapter);
+        }
+        $Imagens = null;
+
+        for($i = 0; $i < $Chapter->PagesNumber; $i++){
+            $path = Yii::$app->request->baseUrl.'/img'.$Chapter->SrcFolder.'/'.str_pad($i, 4, '0',false).'.jpg';
+            if(file_exists($path)) {
+                $Imagens[] = $path;
+            }else{
+                $Imagens[] = Yii::$app->request->baseUrl.'/img/default/error_no_image.jpg';
+            }
+            
         }
 
         return $this->render('update', [
             'model' => $model,
+            'Imgs' => $Imagens,
         ]);
     }
 
     /**
      * Deletes an existing Chapter model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $idManga
      * @param integer $idChapter
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idChapter, $idManga)
+    public function actionDelete($idManga, $idChapter)
     {
         if(!Yii::$app->user->can('ChapterDeletePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
-
+        
         $this->findModel($idChapter)->delete();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/'.'manga/'.$idManga);

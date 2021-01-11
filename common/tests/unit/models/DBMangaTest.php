@@ -25,6 +25,7 @@ class DBMangaTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
         
+        echo "Extra: Adding necessary records for tests\n";
         // Add necessary records for tests
         $this->tester->haveRecord('common\models\User', ['Username' => 'Nildgar', 'Email' => 'nill546@hotmail.com', 'Gender' => 'M', 'BirthDate' => '1997-12-17', 'auth_key' => '$2y$13$crNmcPz/9DHK66V/nMyEi.IJxnEdrhDlbNReprRk3YdklIPkgT/pK', 'password_hash' => '$2y$13$7IUgFpJg3aXTHKv7.RRcrOdgQfXaXek61sSZb4A0TVuxy0KByw87e']);
         $User = $this->tester->grabRecord('common\models\User', ['Username' => 'Nildgar']);
@@ -35,11 +36,10 @@ class DBMangaTest extends \Codeception\Test\Unit
         // Add two records for tests
         $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 1', 'OriginalTitle' => 'Original Title number 1', 'ReleaseDate' => '1998-11-12', 'Description' => 'Description number 1', 'Manager_Id' => $Manager->IdManager]);
         $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 2', 'OriginalTitle' => 'Original Title number 2', 'ReleaseDate' => '1998-11-12', 'Description' => 'Description number 2', 'Manager_Id' => $Manager->IdManager]);
-    
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Validate Manga Fields\n";
         // Create new Manga
         $Manga = new Manga;
 
@@ -133,19 +133,18 @@ class DBMangaTest extends \Codeception\Test\Unit
         $this->assertTrue($Manga->validate('Description'));
         $this->assertTrue($Manga->validate('Manager_Id'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Create Manga Record\n";
         // Put all fields with acceptable values and save
         $this->tester->haveRecord('common\models\Manga', ['Title' => 'Title number 3', 'AlternativeTitle' => 'Alternative Title number 3', 'OriginalTitle' => 'Original Title number 3', 'Status' => 1, 'OneShot' => 0, 'R18' => 0, 'Server' => 'pt_PT', 'SrcImage' => 'source 3', 'ReleaseDate' => '1998-11-12', 'Description' => "Description number 3", 'Manager_Id' => $Manager->IdManager]);
 
         // Verify if Manga was successfully inserted
         $this->tester->seeRecord('common\models\Manga', ['Title' => 'Title number 3', 'OriginalTitle' => 'Original Title number 3']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Update Manga Record\n";
         // Verify if Manga to be updated exists
         $this->tester->seeRecord('common\models\Manga', ['Title' => 'Title number 2', 'OriginalTitle' => 'Original Title number 2']);
         
@@ -168,10 +167,9 @@ class DBMangaTest extends \Codeception\Test\Unit
         // Verify if Manga with old values does not exists
         $this->tester->dontSeeRecord('common\models\Manga', ['Title' => 'Title number 2', 'OriginalTitle' => 'Original Title number 2']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Delete Manga Record\n";
         // Verify if Manga to be deleted exists
         $this->tester->seeRecord('common\models\Manga', ['Title' => 'Title number 1', 'OriginalTitle' => 'Original Title number 1']);
         

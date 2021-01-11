@@ -66,6 +66,17 @@
     border-bottom: 1px solid #1D88AA !important;
 } 
 
+.border-y-1px-solid-color2{
+    border-bottom: 1px solid #1D88AA !important;
+    border-top: 1px solid #1D88AA !important;
+} 
+.border-all-1px-solid-color2{
+    border-top: 1px solid #1D88AA !important;
+    border-bottom: 1px solid #1D88AA !important;
+    border-left: 1px solid #1D88AA !important;
+    border-right: 1px solid #1D88AA !important;
+} 
+
 .border-b-2px-solid-color3{
     border-bottom: 2px solid #000000 !important;
 } 
@@ -124,4 +135,9 @@
 
 .tr_list3:hover {
     background-color:#333333;
+}
+
+.btn-on-img:hover {
+    background-color: #1D88AA !important;
+    color: #000000 !important;
 }

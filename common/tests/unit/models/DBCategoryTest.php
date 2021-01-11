@@ -23,13 +23,14 @@ class DBCategoryTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
 
+        echo "Extra: Adding necessary records for tests\n";
         // Add two records for tests
         $this->tester->haveRecord('common\models\Category', ['Name' => 'English', 'Server' => 'en_US']);
         $this->tester->haveRecord('common\models\Category', ['Name' => 'Portuguese', 'Server' => 'pt_PT']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Validate Category Fields\n";
         // Create new Category
         $Category = new Category;
 
@@ -58,10 +59,9 @@ class DBCategoryTest extends \Codeception\Test\Unit
         $this->assertTrue($Category->validate('Name'));
         $this->assertTrue($Category->validate('Server'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-
+        echo "Test: Create Category Record\n";
         // Create new Category
         $Category = new Category;
         
@@ -75,11 +75,9 @@ class DBCategoryTest extends \Codeception\Test\Unit
         // Verify if Category was successfully inserted
         $this->tester->seeRecord('common\models\Category', ['Name' => 'Japanese', 'Server' => 'ja_JP']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-
-        
+        echo "Test: Update Category Record\n";
         // Verify if Category to be updated exists
         $this->tester->seeRecord('common\models\Category', ['Name' => 'Portuguese', 'Server' => 'pt_PT']);
         
@@ -101,11 +99,9 @@ class DBCategoryTest extends \Codeception\Test\Unit
         // Verify if Category with old values does not exists
         $this->tester->dontSeeRecord('common\models\Category', ['Name' => 'Portuguese', 'Server' => 'pt_PT']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-
-
+        echo "Test: Delete Category Record\n";
         // Verify if Category to be deleted exists
         $this->tester->seeRecord('common\models\Category', ['Name' => 'English', 'Server' => 'en_US']);
         

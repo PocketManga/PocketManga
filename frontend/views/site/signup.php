@@ -39,7 +39,13 @@ $this->title = 'Signup';
 
                                 <div class="col-md-6">
                                     <p class = "text-color2 bold m-0">Gender</p>
-                                    <?= $form->field($model, 'gender')->checkboxList(['F' => 'Girl','M' => 'Boy'], ['class' => 'radi-all-15 p-2 background-color1 text-color2 bold'])->label(false) ?>
+                                    <div class="form-group field-myaccount-gender">
+                                        <select id="myaccount-gender" class="radi-all-15 p-2 background-color1 border-0 w-100 text-color2 align-center bold" name="SignupForm[gender]">
+                                            <option value="D" selected>Unknow</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">

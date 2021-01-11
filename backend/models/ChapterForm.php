@@ -23,13 +23,13 @@ class ChapterForm extends Model
         return [
             [['Number'], 'required'],
             [['Number'], 'number'],
-            [['Images'], 'file'],
+            [['Images'], 'file', 'extensions' => 'jpg'],
             [['Season', 'OneShot'], 'integer'],
             [['Name'], 'string', 'max' => 100],
         ];
     }
 
-    public function setVariables($Chapter, $ImagesChapter)
+    public function setVariables($Chapter)
     {
         if($Chapter){
             $this->Number = $Chapter->Number;

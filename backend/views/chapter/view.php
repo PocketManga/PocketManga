@@ -16,10 +16,10 @@ $this->title = 'Chapter '.$model->Number;
     </div>
 
     <div class="col-2">
-        <?= Html::a('Update', Yii::$app->request->baseUrl.'/'.'chapter/'.$model->IdChapter.'/'.'update', ['class' => 'btn btn-primary w-100']) ?>
+        <?= Html::a('Update', Yii::$app->request->baseUrl.'/'.'manga/'.$IdManga.'/'.'chapter/'.$model->IdChapter.'/'.'update', ['class' => 'btn btn-primary w-100']) ?>
     </div>
     <div class="col-2">
-        <?= Html::a('Delete', Yii::$app->request->baseUrl.'/'.'chapter/'.$model->IdChapter.'/'.'delete', [
+        <?= Html::a('Delete', Yii::$app->request->baseUrl.'/'.'manga/'.$IdManga.'/'.'chapter/'.$model->IdChapter.'/'.'delete', [
             'class' => 'btn btn-danger w-100 background-color6',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -59,7 +59,7 @@ $this->title = 'Chapter '.$model->Number;
                 <?php if (file_exists(Yii::getAlias('@webroot').'/img'.$model->SrcFolder.'/'.str_pad($Page, 4, '0',false).'.jpg')){ ?>
                 <img class="chapter-image" style="min-width:200px;" src="<?php echo Yii::$app->request->baseUrl.'/img'.$model->SrcFolder.'/'.str_pad($Page, 4, '0',false).'.jpg'?>">
                 <?php }else{ ?>
-                <img class="chapter-image" src="<?php echo Yii::$app->request->baseUrl.'/img/default/manga_alternative.jpg'?>">
+                <img class="chapter-image" src="<?php echo Yii::$app->request->baseUrl.'/img/default/error_no_image.jpg'?>">
                 <?php } ?>
             </div>
             <?php } ?>

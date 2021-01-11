@@ -23,14 +23,14 @@ class DBLibraryListTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
         
+        echo "Extra: Adding necessary records for tests\n";
         // Add two records for tests
         $this->tester->haveRecord('common\models\LibraryList', ['Name' => 'To See']);
         $this->tester->haveRecord('common\models\LibraryList', ['Name' => 'Completed']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Validate List Fields\n";
         // Create new LibraryList
         $LibraryList = new LibraryList;
 
@@ -52,10 +52,9 @@ class DBLibraryListTest extends \Codeception\Test\Unit
         // Verify all fields to see if they are really acceptable
         $this->assertTrue($LibraryList->validate('Name'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Create LibraryList Record\n";
         // Create new LibraryList
         $LibraryList = new LibraryList;
         
@@ -68,9 +67,9 @@ class DBLibraryListTest extends \Codeception\Test\Unit
         // Verify if LibraryList was successfully inserted
         $this->tester->seeRecord('common\models\LibraryList', ['Name' => 'Folowing']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Update LibraryList Record\n";
         // Verify if LibraryList to be updated exists
         $this->tester->seeRecord('common\models\LibraryList', ['Name' => 'To See']);
         
@@ -92,10 +91,9 @@ class DBLibraryListTest extends \Codeception\Test\Unit
         // Verify if LibraryList with old values does not exists
         $this->tester->dontSeeRecord('common\models\LibraryList', ['Name' => 'To See']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Delete LibraryList Record\n";
         // Verify if LibraryList to be deleted exists
         $this->tester->seeRecord('common\models\LibraryList', ['Name' => 'Completed']);
         

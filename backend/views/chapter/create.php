@@ -16,6 +16,7 @@ $this->title = 'Create Chapter';
     <div class="col-12">
         <?= $this->render('_form', [
             'model' => $model,
+            'Imgs' => $Imgs,
         ]) ?>
     </div>
 

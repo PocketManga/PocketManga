@@ -58,7 +58,7 @@ class LeitorController extends Controller
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
-        $Readers = Leitor::find()->all();
+        $Readers = Leitor::find()->where("Status = 1")->all();
 
         return $this->render('list', [
             'Readers' => $Readers,
@@ -128,7 +128,9 @@ class LeitorController extends Controller
             throw new HttpException(403,'You are not allowed to perform this action.');
         }
 
-        $this->findModel($idLeitor)->delete();
+        $model = $this->findModel($idLeitor);
+        $model->Status = 0;
+        $model->save();
 
         return $this->redirect(Yii::$app->request->baseUrl.'/reader_list');
     }

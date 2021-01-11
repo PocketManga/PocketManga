@@ -67,13 +67,6 @@ AppAsset::register($this);
                         <li class="nav-item">
                             <a class="nav-link <?php if(Yii::$app->controller->route == 'site/about') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/about'?>">About</a>
                         </li>
-                        <!--<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-color8 bold" href="#" id="navbardrop" data-toggle="dropdown">More</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/about'?>">About</a>
-                                <a class="dropdown-item" href="<?=Yii::$app->request->baseUrl.'/contact'?>">Contact</a>
-                            </div>
-                        </li>-->
                         <?php if (Yii::$app->user->isGuest) { ?>
                         <li class="nav-item">
                             <a class="nav-link <?php if(Yii::$app->controller->route == 'site/signup') echo 'active'?>" href="<?=Yii::$app->request->baseUrl.'/signup'?>">Signup</a>
@@ -100,12 +93,6 @@ AppAsset::register($this);
                                 </div>
                             </a>
                         </li>
-                        <!--<li class="nav-item">
-                            <form action="<?=Yii::$app->request->baseUrl.'/logout'?>" method="post">
-                                <input type="hidden" name="_csrf-frontend">
-                                <button type="submit" class="background-color3 border-0 p-2 text-color8 bold">Logout (<?=Yii::$app->user->identity->Username?>)</button>
-                            </form>
-                        </li>-->
                         <?php } ?>
                     </ul>
                 </div>

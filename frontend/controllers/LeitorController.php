@@ -6,7 +6,9 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\HttpException;
+use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 use frontend\models\MyAccountForm;
 use common\models\Leitor;
@@ -25,7 +27,14 @@ class LeitorController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['myaccount'],
+                        'roles' => ['@'],
+                    ],
+                ],
             ],
         ];
     }
@@ -38,9 +47,9 @@ class LeitorController extends Controller
      */
     public function actionMyaccount()
     {
-        if(!Yii::$app->user->can('UserUpdatePost')){
+        /*if(!Yii::$app->user->can('UserUpdatePost')){
             throw new HttpException(403,'You are not allowed to perform this action.');
-        }
+        }*/
         $Leitor = $this->findModel(Yii::$app->user->identity->leitor->IdLeitor);
 
         $Servers = Server::find()->orderBy('Name')->all();
@@ -55,7 +64,7 @@ class LeitorController extends Controller
             $Image = UploadedFile::getInstance($model, 'Photo');
             if($Image){
                 $pathFolder = '/'.'users/'.Yii::$app->user->identity->IdUser;
-                $fullPath = Yii::getAlias('@webroot').'/img'.$pathFolder;
+                $fullPath = Yii::getAlias('@backend').'/web/img'.$pathFolder;
 
                 if (!file_exists($fullPath)) {
                     mkdir($fullPath, 0777, true);
@@ -69,7 +78,7 @@ class LeitorController extends Controller
             if($User){
                 Yii::$app->session->setFlash('Error', "Username already exists!!");
             }else{
-                $Manager->user->Username = $model->Username;
+                $Leitor->user->Username = $model->Username;
             }
             $Leitor->Theme = $model->Theme;
             $Leitor->user->BirthDate = $model->BirthDate;

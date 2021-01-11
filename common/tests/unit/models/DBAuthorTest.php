@@ -23,12 +23,14 @@ class DBAuthorTest extends \Codeception\Test\Unit
         // Function created to avoid conflicts with previous tests and data
         // And to make it possible to see the differences that happen with the test
         
+        echo "Extra: Adding necessary records for tests\n";
         // Add two records for tests
         $this->tester->haveRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'Cordeiro']);
         $this->tester->haveRecord('common\models\Author', ['FirstName' => 'Samuel', 'LastName' => 'Cordeiro']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-        
+        echo "Test: Validate Author Fields\n";
         // Create new Author
         $Author = new Author;
 
@@ -57,10 +59,9 @@ class DBAuthorTest extends \Codeception\Test\Unit
         $this->assertTrue($Author->validate('FirstName'));
         $this->assertTrue($Author->validate('LastName'));
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-
-        
+        echo "Test: Create Author Record\n";
         // Create new Author
         $Author = new Author;
         
@@ -74,9 +75,9 @@ class DBAuthorTest extends \Codeception\Test\Unit
         // Verify if Author was successfully inserted
         $this->tester->seeRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'First']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Update Author Record\n";
         // Verify if Author to be updated exists
         $this->tester->seeRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'Cordeiro']);
         
@@ -98,9 +99,9 @@ class DBAuthorTest extends \Codeception\Test\Unit
         // Verify if Author with old values does not exists
         $this->tester->dontSeeRecord('common\models\Author', ['FirstName' => 'Edgar', 'LastName' => 'Cordeiro']);
 
+        //_______________________________________________________________________________________________________________________________________________________________//
 
-
-        
+        echo "Test: Delete Author Record\n";
         // Verify if Author to be deleted exists
         $this->tester->seeRecord('common\models\Author', ['FirstName' => 'Samuel', 'LastName' => 'Cordeiro']);
         

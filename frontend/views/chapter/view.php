@@ -42,7 +42,7 @@
                         <?php if (file_exists(Yii::getAlias('@backend').'/web/img'.$Chapter->SrcFolder.'/'.str_pad($Page, 4, '0',false).'.jpg')){ ?>
                         <img class="chapter-image" src="<?= Yii::$app->urlManagerBackend->baseUrl.'/img'.$Chapter->SrcFolder.'/'.str_pad($Page, 4, '0',false).'.jpg'?>">
                         <?php }else{ ?>
-                        <img class="chapter-image" src="<?= Yii::$app->urlManagerBackend->baseUrl.'/img/default/manga_alternative.jpg'?>">
+                        <img class="chapter-image" src="<?= Yii::$app->urlManagerBackend->baseUrl.'/img/default/error_no_image.jpg'?>">
                         <?php } ?>
                     </li>
                     <?php } ?>
