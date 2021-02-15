@@ -20,7 +20,7 @@ class MangaController extends ActiveController
     public function actionAll($option, $idUser){
         $Otpion = str_replace(' ','-',strtolower(preg_replace('~([a-z])([A-Z])~', '\\1 \\2',  $option)));
 
-        $User = User::find($idUser)->one();
+        $User = User::find()->where('IdUser = '.$idUser)->one();
 
         $BirthDate = new DateTime($User->BirthDate);
         $TodayDate = new DateTime(date('Y-m-d', strtotime('now')));
@@ -88,7 +88,7 @@ class MangaController extends ActiveController
     public function actionChapters($idManga, $idUser){
         $MangaModel = new $this->modelClass;
 
-        $User = User::find($idUser)->one();
+        $User = User::find()->where('IdUser = '.$idUser)->one();
 
         $Manga = $MangaModel->find()->where('IdManga = '.$idManga)->one();
 
@@ -139,7 +139,7 @@ class MangaController extends ActiveController
             $R18 = false;
 
             if($User_Id != '0'){
-                $User = User::find($User_Id)->one();
+                $User = User::find()->where('IdUser = '.$User_Id)->one();
 
                 $BirthDate = new DateTime($User->BirthDate);
                 $TodayDate = new DateTime(date('Y-m-d', strtotime('now')));
@@ -167,7 +167,7 @@ class MangaController extends ActiveController
             $R18 = false;
 
             if($User_Id != '0'){
-                $User = User::find($User_Id)->one();
+                $User = User::find()->where('IdUser = '.$User_Id)->one();
 
                 $BirthDate = new DateTime($User->BirthDate);
                 $TodayDate = new DateTime(date('Y-m-d', strtotime('now')));
@@ -194,7 +194,7 @@ class MangaController extends ActiveController
             $MangaModel = new $this->modelClass;
             $mangas = null;
 
-            $User = User::find($User_Id)->one();
+            $User = User::find()->where('IdUser = '.$User_Id)->one();
             $Leitor = $User->leitor;
             $where = 'l.Leitor_Id = '.$Leitor->IdLeitor;
 
@@ -234,10 +234,11 @@ class MangaController extends ActiveController
             $MangaModel = new $this->modelClass;
             $mangas = null;
 
-            $User = User::find($idUser)->one();
+            $User = User::find()->where('IdUser = '.$idUser)->one();
+            if(!$User)
+                return ['Erro' => "User doesn't exists"];
             $Leitor = $User->leitor;
             $Mangas = $Leitor->mangas;
-            
             foreach($Mangas as $Manga){
                 $MangaReaded = $Manga->getMangaReadeds()->where('Leitor_Id = '.$Leitor->IdLeitor)->one();
                 $Library = $Manga->getLibraries()->where('Leitor_Id = '.$Leitor->IdLeitor)->one();

@@ -81,9 +81,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if(!Yii::$app->user->identity->manager){
                 Yii::$app->user->logout();
-            }
-            if(Yii::$app->user->identity->manager->Status == 0){
-                Yii::$app->user->logout();
+            }else{
+                if(Yii::$app->user->identity->manager->Status == 0){
+                    Yii::$app->user->logout();
+                }
             }
             return $this->goBack();
         } else {

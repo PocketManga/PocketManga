@@ -53,9 +53,12 @@ class UserController extends ActiveController
         if(!$User){
             return null;
         }
+        
         $App = $User->leitor->app;
         if(!$App){
-            return null;
+            $newApp = new App;
+            $newApp->Leitor_Id = $User->leitor->IdLeitor;
+            $newApp->save();
         }
         $UserToApp = null;
 

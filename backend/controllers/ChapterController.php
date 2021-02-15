@@ -120,6 +120,7 @@ class ChapterController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'Imgs' => null,
         ]);
     }
 

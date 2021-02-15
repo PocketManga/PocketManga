@@ -18,7 +18,7 @@ class FavoriteController extends ActiveController
 
     public function actionFavdelete($idUser, $idManga)
     {
-        $User = User::find($idUser)->one();
+        $User = User::find()->where('IdUser = '.$idUser)->one();
 
         if(!$User){
             return "Something Got Wrong";
@@ -37,7 +37,7 @@ class FavoriteController extends ActiveController
     {
         $params = $_REQUEST;
 
-        $User = User::find($params["IdUser"])->one();
+        $User = User::find()->where('IdUser = '.$params["IdUser"])->one();
 
         if(!$User){
             return "Something Got Wrong";

@@ -181,7 +181,7 @@ class ManagerController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            $User = User::find()->where('Username like "%'.$model->Username.'%" and IdUser != '.Yii::$app->user->identity->IdUser)->one();
+            $User = User::find()->where('Username like "'.$model->Username.'" and IdUser != '.Yii::$app->user->identity->IdUser)->one();
 
             $Image = UploadedFile::getInstance($model, 'Photo');
             if($Image){

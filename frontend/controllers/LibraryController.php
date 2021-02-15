@@ -66,7 +66,11 @@ class LibraryController extends Controller
             
         $UncatList = LibraryList::find()->where('IdList = 1')->one();
         
-        $CountAllMangas = count(Manga::find()->all());
+        //$CountAllMangas = count(Manga::find()->all());
+        $CountAllMangas = count(Manga::find()
+                                    ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
+                                    ->where('l.Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor)
+                                    ->all());
         /*$CountUncatMangas = count(Manga::find()
                                     ->leftJoin('library l', $on='manga.IdManga = l.Manga_Id')
                                     ->where('l.Leitor_Id = '.Yii::$app->user->identity->leitor->IdLeitor.' and l.List_Id is null')
